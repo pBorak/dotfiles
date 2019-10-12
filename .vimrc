@@ -46,7 +46,8 @@ set signcolumn=no
 "   preview: show more info in menu
 :set completeopt=menu,preview
 set cursorline
-
+" Enable built-in matchit plugin
+runtime macros/matchit.vim
 " CUSTOM KEY MAPPINGS
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
