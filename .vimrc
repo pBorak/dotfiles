@@ -120,3 +120,23 @@ map <leader>n :call RenameFile()<cr>
 map <Leader>e :e <C-R>=escape(expand("%:p:h"),' ') . '/'<CR>
 map <Leader>s :split <C-R>=escape(expand("%:p:h"), ' ') . '/'<CR>
 map <Leader>v :vnew <C-R>=escape(expand("%:p:h"), ' ') . '/'<CR>
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" MULTIPURPOSE TAB KEY
+" Indent if we're at the beginning of a line. Else, do completion.
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+function! InsertTabWrapper()
+    let col = col('.') - 1
+    if !col
+        return "\<tab>"
+    endif
+
+    let char = getline('.')[col - 1]
+    if char =~ '\k'
+        " There's an identifier before the cursor, so complete the identifier.
+        return "\<c-p>"
+    else
+        return "\<tab>"
+    endif
+endfunction
+inoremap <expr> <tab> InsertTabWrapper()
+inoremap <s-tab> <c-n>
