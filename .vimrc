@@ -21,7 +21,6 @@ set relativenumber
 set list listchars=tab:»·,trail:·,nbsp:·
 filetype plugin indent on
 set wildmode=longest,list,full
-" make tab completion for files/buffers act like bash
 set wildmenu
 " Softtabs, 2 spaces
 set expandtab
@@ -48,6 +47,11 @@ set signcolumn=no
 set cursorline
 " Enable built-in matchit plugin
 runtime macros/matchit.vim
+" Open new split panes to right and bottom, which feels more natural
+set splitbelow
+set splitright
+" Ignore stuff that can't be opened
+set wildignore+=tmp/**
 " CUSTOM KEY MAPPINGS
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
@@ -60,6 +64,10 @@ nnoremap K <Nop>
 
 map <leader>y "+y
 map <leader>p "+p
+
+nmap 0 ^
+nmap k gk
+nmap j gj
 
 " C-s saves and go to normal mode
 map <C-s> <esc>:w<CR>
@@ -80,9 +88,21 @@ command! E e
 command! W w
 command! Wq wq
 
-" Don't automatically continue comments after newline
-autocmd BufNewFile,BufRead * setlocal formatoptions-=cro
-
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" CUSTOM AUTOCMDS
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+augroup vimrcEx
+  " Clear all autocmds in the group
+  autocmd!
+  autocmd FileType text setlocal textwidth=78
+  " Jump to last cursor position unless it's invalid or in an event handler
+  autocmd BufReadPost *
+        \ if line("'\"") > 0 && line("'\"") <= line("$") |
+        \   exe "normal g`\"" |
+        \ endif
+  " Don't automatically continue comments after newline
+  autocmd BufNewFile,BufRead * setlocal formatoptions-=cro
+augroup end
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " COLOR
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -94,12 +114,12 @@ autocmd BufNewFile,BufRead * setlocal formatoptions-=cro
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 :set statusline=%<%f\ (%{&ft})\ %-4(%m%)%=%-19(%3l,%02c%03V%)
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Squash all commits into the first one
+" SQUASH ALL COMMITS INTO THE FIRST ONE
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 function! SquashAll()
   normal ggj}klllcf:w
 endfunction
-
+command! SquashAll :call SquashAll()
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " RENAME CURRENT FILE
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -115,14 +135,14 @@ endfunction
 map <leader>n :call RenameFile()<cr>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Edit another file in the same dir
+" EDIT ANOTHER FILE IN THE SAME DIR
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-map <Leader>e :e <C-R>=escape(expand("%:p:h"),' ') . '/'<CR>
-map <Leader>s :split <C-R>=escape(expand("%:p:h"), ' ') . '/'<CR>
-map <Leader>v :vnew <C-R>=escape(expand("%:p:h"), ' ') . '/'<CR>
+map <Leader>e :e <C-R>=escape(expand("%:p:h"),' ') . '/'<cr>
+map <Leader>s :split <C-R>=escape(expand("%:p:h"), ' ') . '/'<cr>
+map <Leader>v :vnew <C-R>=escape(expand("%:p:h"), ' ') . '/'<cr>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " MULTIPURPOSE TAB KEY
-" Indent if we're at the beginning of a line. Else, do completion.
+" iNDENT IF WE'RE AT THE BEGINNING OF A LINE. eLSE, DO COMPLETION.
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 function! InsertTabWrapper()
     let col = col('.') - 1
@@ -140,3 +160,17 @@ function! InsertTabWrapper()
 endfunction
 inoremap <expr> <tab> InsertTabWrapper()
 inoremap <s-tab> <c-n>
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" OpenChangedFiles COMMAND
+" Open a split for each dirty file in git
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+function! OpenChangedFiles()
+  only " Close all windows, unless they're modified
+  let status = system('git status -s | grep "^ \?\(M\|A\|UU\)" | sed "s/^.\{3\}//"')
+  let filenames = split(status, "\n")
+  exec "edit " . filenames[0]
+  for filename in filenames[1:]
+    exec "sp " . filename
+  endfor
+endfunction
+command! OpenChangedFiles :call OpenChangedFiles()
