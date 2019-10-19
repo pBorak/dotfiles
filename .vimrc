@@ -52,6 +52,8 @@ set splitbelow
 set splitright
 " Ignore stuff that can't be opened
 set wildignore+=tmp/**
+" Run specs in vim dispatch
+let g:rspec_command = "Dispatch rspec {spec}"
 " Use The Silver Searcher https://github.com/ggreer/the_silver_searcher
 if executable('ag')
   " Use Ag over Grep
@@ -95,6 +97,12 @@ nnoremap <c-l> <c-w>l
 " Switch between the last two files
 nnoremap <Leader><Leader> <C-^>
 
+" Rspec.vim mappings
+map <Leader>t :call RunCurrentSpecFile()<cr>
+map <Leader>l :call RunLastSpec()<cr>
+map <Leader>a :call RunAllSpecs()<cr>
+map <Leader>s :call RunNearestSpec()<cr>
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " PARDON, My bad
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -115,6 +123,7 @@ augroup vimrcEx
         \ if line("'\"") > 0 && line("'\"") <= line("$") |
         \   exe "normal g`\"" |
         \ endif
+  autocmd FileType ruby,eruby,yaml setlocal path+=lib
   " Don't automatically continue comments after newline
   autocmd BufNewFile,BufRead * setlocal formatoptions-=cro
 augroup end
@@ -153,7 +162,7 @@ map <leader>n :call RenameFile()<cr>
 " EDIT ANOTHER FILE IN THE SAME DIR
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 map <Leader>e :e <C-R>=escape(expand("%:p:h"),' ') . '/'<cr>
-map <Leader>s :split <C-R>=escape(expand("%:p:h"), ' ') . '/'<cr>
+map <Leader>sp :split <C-R>=escape(expand("%:p:h"), ' ') . '/'<cr>
 map <Leader>v :vnew <C-R>=escape(expand("%:p:h"), ' ') . '/'<cr>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " MULTIPURPOSE TAB KEY
@@ -200,6 +209,10 @@ Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-endwise'
 Plug 'tpope/vim-bundler'
+Plug 'tpope/vim-unimpaired'
+Plug 'tpope/vim-rails'
+Plug 'tpope/vim-dispatch'
+Plug 'thoughtbot/vim-rspec'
 Plug 'vim-ruby/vim-ruby'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
