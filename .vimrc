@@ -52,6 +52,8 @@ set splitbelow
 set splitright
 " Ignore stuff that can't be opened
 set wildignore+=tmp/**
+let g:netrw_banner = 0
+let g:netrw_liststyle = 3
 " CUSTOM KEY MAPPINGS
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
@@ -124,13 +126,13 @@ command! SquashAll :call SquashAll()
 " RENAME CURRENT FILE
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 function! RenameFile()
-    let old_name = expand('%')
-    let new_name = input('New file name: ', expand('%'), 'file')
-    if new_name != '' && new_name != old_name
-        exec ':saveas ' . new_name
-        exec ':silent !rm ' . old_name
-        redraw!
-    endif
+  let old_name = expand('%')
+  let new_name = input('New file name: ', expand('%'), 'file')
+  if new_name != '' && new_name != old_name
+    exec ':saveas ' . new_name
+    exec ':silent !rm ' . old_name
+    redraw!
+  endif
 endfunction
 map <leader>n :call RenameFile()<cr>
 
@@ -142,21 +144,21 @@ map <Leader>s :split <C-R>=escape(expand("%:p:h"), ' ') . '/'<cr>
 map <Leader>v :vnew <C-R>=escape(expand("%:p:h"), ' ') . '/'<cr>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " MULTIPURPOSE TAB KEY
-" iNDENT IF WE'RE AT THE BEGINNING OF A LINE. eLSE, DO COMPLETION.
+" INDENT IF WE'RE AT THE BEGINNING OF A LINE. ELSE, DO COMPLETION.
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 function! InsertTabWrapper()
-    let col = col('.') - 1
-    if !col
-        return "\<tab>"
-    endif
+  let col = col('.') - 1
+  if !col
+    return "\<tab>"
+  endif
 
-    let char = getline('.')[col - 1]
-    if char =~ '\k'
-        " There's an identifier before the cursor, so complete the identifier.
-        return "\<c-p>"
-    else
-        return "\<tab>"
-    endif
+  let char = getline('.')[col - 1]
+  if char =~ '\k'
+    " There's an identifier before the cursor, so complete the identifier.
+    return "\<c-p>"
+  else
+    return "\<tab>"
+  endif
 endfunction
 inoremap <expr> <tab> InsertTabWrapper()
 inoremap <s-tab> <c-n>
@@ -174,3 +176,10 @@ function! OpenChangedFiles()
   endfor
 endfunction
 command! OpenChangedFiles :call OpenChangedFiles()
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" PLUGINS
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+call plug#begin('~/.vim/plugged')
+Plug 'tpope/vim-surround'
+call plug#end()
