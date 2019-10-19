@@ -103,6 +103,9 @@ map <Leader>l :call RunLastSpec()<cr>
 map <Leader>a :call RunAllSpecs()<cr>
 map <Leader>s :call RunNearestSpec()<cr>
 
+" Quickfix
+map <Leader>Q :cc<cr>
+map <Leader>q :copen<cr><cr>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " PARDON, My bad
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
