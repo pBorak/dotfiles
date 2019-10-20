@@ -54,6 +54,9 @@ set splitright
 set wildignore+=tmp/**
 " Run specs in vim dispatch
 let g:rspec_command = "Dispatch bundle exec rspec {spec}"
+"Store ctags in .git folder
+
+set tags =.git/tags
 " Use The Silver Searcher https://github.com/ggreer/the_silver_searcher
 if executable('ag')
   " Use Ag over Grep
