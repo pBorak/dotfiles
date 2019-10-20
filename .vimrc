@@ -53,7 +53,7 @@ set splitright
 " Ignore stuff that can't be opened
 set wildignore+=tmp/**
 " Run specs in vim dispatch
-let g:rspec_command = "Dispatch rspec {spec}"
+let g:rspec_command = "Dispatch bundle exec rspec {spec}"
 " Use The Silver Searcher https://github.com/ggreer/the_silver_searcher
 if executable('ag')
   " Use Ag over Grep
