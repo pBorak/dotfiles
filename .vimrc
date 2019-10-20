@@ -228,6 +228,7 @@ Plug 'tpope/vim-bundler'
 Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-rails'
 Plug 'tpope/vim-dispatch'
+Plug 'tpope/vim-fugitive'
 Plug 'thoughtbot/vim-rspec'
 Plug 'vim-ruby/vim-ruby'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
