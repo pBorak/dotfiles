@@ -66,6 +66,13 @@ if executable('ag')
     nnoremap \ :Ag<SPACE>
   endif
 endif
+
+
+" Ruby-vim configuration
+:let g:ruby_indent_block_style = 'do'
+:let g:ruby_indent_assigment_style = 'veriable'
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " CUSTOM KEY MAPPINGS
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
@@ -113,7 +120,17 @@ command! Q q " Bind :Q to :q
 command! E e
 command! W w
 command! Wq wq
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"RAILS-VIM FAST ACCESS MAPPINGS
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+map <Leader>vc :Vcontroller<cr>
+map <Leader>vm :Vmodel<cr>
+map <Leader>vv :Vview<cr>
 
+" EDIT ANOTHER FILE IN THE SAME DIR
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+map <Leader>e :e <C-R>=escape(expand("%:p:h"),' ') . '/'<cr>
+map <Leader>v :vnew <C-R>=escape(expand("%:p:h"), ' ') . '/'<cr>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " CUSTOM AUTOCMDS
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -121,6 +138,8 @@ augroup vimrcEx
   " Clear all autocmds in the group
   autocmd!
   autocmd FileType text setlocal textwidth=78
+  "for ruby, autoindent with two spaces, always expand tabs
+  autocmd FileType ruby,haml,eruby,yaml,html,sass,cucumber set ai sw=2 sts=2 et
   " Jump to last cursor position unless it's invalid or in an event handler
   autocmd BufReadPost *
         \ if line("'\"") > 0 && line("'\"") <= line("$") |
@@ -161,12 +180,6 @@ function! RenameFile()
 endfunction
 map <leader>n :call RenameFile()<cr>
 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" EDIT ANOTHER FILE IN THE SAME DIR
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-map <Leader>e :e <C-R>=escape(expand("%:p:h"),' ') . '/'<cr>
-map <Leader>sp :split <C-R>=escape(expand("%:p:h"), ' ') . '/'<cr>
-map <Leader>v :vnew <C-R>=escape(expand("%:p:h"), ' ') . '/'<cr>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " MULTIPURPOSE TAB KEY
 " INDENT IF WE'RE AT THE BEGINNING OF A LINE. ELSE, DO COMPLETION.
