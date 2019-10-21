@@ -61,7 +61,8 @@ set tags =.git/tags
 if executable('ag')
   " Use Ag over Grep
   set grepprg=ag\ --nogroup\ --nocolor
-
+  " User ag for ack.vim
+  let g:ackprg = 'ag --nogroup --nocolor --column'
   " Use ag in fzf for listing files. Lightning fast and respects .gitignore
   let $FZF_DEFAULT_COMMAND = 'ag --literal --files-with-matches --nocolor --hidden -g ""'
   if !exists(":Ag")
@@ -113,6 +114,8 @@ map <Leader>l :call RunLastSpec()<cr>
 map <Leader>a :call RunAllSpecs()<cr>
 map <Leader>s :call RunNearestSpec()<cr>
 
+" Ack.vim
+map <Leader>f :Ack!<space>
 " Quickfix
 map <Leader>Q :cc<cr>
 map <space><space> :ccl<cr>
@@ -237,4 +240,5 @@ Plug 'thoughtbot/vim-rspec'
 Plug 'vim-ruby/vim-ruby'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
+Plug 'mileszs/ack.vim'
 call plug#end()
