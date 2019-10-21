@@ -115,6 +115,7 @@ map <Leader>s :call RunNearestSpec()<cr>
 
 " Quickfix
 map <Leader>Q :cc<cr>
+map <space><space> :ccl<cr>
 map <Leader>q :copen<cr><cr>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " PARDON, My bad
