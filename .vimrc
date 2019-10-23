@@ -1,10 +1,13 @@
 " BASICS
 
+set encoding=utf-8
+
 " remove all existings autocmds
 autocmd!
 
 set nocompatible
-set nobackup
+set backupdir=~/.tmp
+set directory=~/.tmp            " Don't clutter my dirs up with swp and tmp files
 set backspace=indent,eol,start  " allow backspacing over everything in insert mode
 set history=10000               " keep 10000 lines of command line history
 set showcmd                     " display incomplete commands
@@ -86,6 +89,8 @@ let mapleader = ','
 :set timeout timeoutlen=1000 ttimeoutlen=100
 " Unmap K dosc entirely
 nnoremap K <Nop>
+" unmap ex mode: 'Type visual to go into Normal mode.'
+nnoremap Q <nop>
 
 map <leader>y "+y
 map <leader>p "+p
@@ -153,8 +158,6 @@ augroup vimrcEx
         \   exe "normal g`\"" |
         \ endif
   autocmd FileType ruby,eruby,yaml setlocal path+=lib
-  " Don't automatically continue comments after newline
-  autocmd BufNewFile,BufRead * setlocal formatoptions-=cro
 augroup end
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " COLOR
@@ -242,3 +245,6 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'mileszs/ack.vim'
 call plug#end()
+
+  " Don't automatically continue comments after newline
+autocmd BufNewFile,BufRead * setlocal formatoptions-=cro
