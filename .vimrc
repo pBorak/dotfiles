@@ -244,6 +244,7 @@ Plug 'vim-ruby/vim-ruby'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'mileszs/ack.vim'
+Plug 'christoomey/vim-tmux-navigator'
 call plug#end()
 
   " Don't automatically continue comments after newline
