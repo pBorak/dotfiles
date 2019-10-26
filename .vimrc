@@ -91,8 +91,8 @@ let mapleader = ','
 :set timeout timeoutlen=1000 ttimeoutlen=100
 " Unmap K dosc entirely
 nnoremap K <Nop>
-" unmap ex mode: 'Type visual to go into Normal mode.'
-nnoremap Q <nop>
+" Execute macro in q
+map Q @q
 
 map <leader>y "+y
 map <leader>p "+p
