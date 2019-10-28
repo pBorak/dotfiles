@@ -137,6 +137,7 @@ nnoremap <c-j> <c-w>j
 nnoremap <c-k> <c-w>k
 nnoremap <c-h> <c-w>h
 nnoremap <c-l> <c-w>l
+map <leader>o :only<cr>
 " Switch between the last two files
 nnoremap <Leader><Leader> <C-^>
 
