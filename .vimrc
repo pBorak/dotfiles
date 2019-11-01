@@ -27,6 +27,7 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'mileszs/ack.vim'
 Plug 'christoomey/vim-tmux-navigator'
+Plug 'christoomey/vim-conflicted'
 call plug#end()
 
 
@@ -174,6 +175,7 @@ map <Leader>v :vnew <C-R>=escape(expand("%:p:h"), ' ') . '/'<cr>
 
 " Fugitivie mappings
 nnoremap <Leader>gs :Gstatus<cr>
+nnoremap <leader>gnc :GitNextConflict<cr>
 
 " Don't automatically continue comments after newline
 autocmd BufNewFile,BufRead * setlocal formatoptions-=cro
@@ -203,6 +205,7 @@ augroup end
 " STATUS LINE
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 :set statusline=%<%f\ (%{&ft})\ %-4(%m%)%=%-19(%3l,%02c%03V%)
+set stl+=%{ConflictedVersion()}
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " SQUASH ALL COMMITS INTO THE FIRST ONE
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
