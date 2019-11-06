@@ -102,6 +102,9 @@ if executable('ag')
   endif
 endif
 
+" Make it obvious where 80 characters is
+set textwidth=80
+set colorcolumn=+1
 
 " Ruby-vim configuration
 :let g:ruby_indent_block_style = 'do'
@@ -171,7 +174,7 @@ map <Leader>vv :Vview<cr>
 " EDIT ANOTHER FILE IN THE SAME DIR
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 map <Leader>e :e <C-R>=escape(expand("%:p:h"),' ') . '/'<cr>
-map <Leader>v :vnew <C-R>=escape(expand("%:p:h"), ' ') . '/'<cr>
+map <Leader>vs :vnew <C-R>=escape(expand("%:p:h"), ' ') . '/'<cr>
 
 " Fugitivie mappings
 nnoremap <Leader>gs :Gstatus<cr>
@@ -185,7 +188,6 @@ autocmd BufNewFile,BufRead * setlocal formatoptions-=cro
 augroup vimrcEx
   " Clear all autocmds in the group
   autocmd!
-  autocmd FileType text setlocal textwidth=78
   "for ruby, autoindent with two spaces, always expand tabs
   autocmd FileType ruby,haml,eruby,yaml,html,sass,cucumber set ai sw=2 sts=2 et
   " Jump to last cursor position unless it's invalid or in an event handler
@@ -200,7 +202,7 @@ augroup end
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 :set t_Co=256 " 256 colors
 :color grb24bit
-
+highlight ColorColumn ctermbg=235 guibg=#2c2d27
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " STATUS LINE
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
