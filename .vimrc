@@ -29,6 +29,8 @@ Plug 'mileszs/ack.vim'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'christoomey/vim-conflicted'
 Plug 'w0rp/ale'
+Plug 'pangloss/vim-javascript'
+Plug 'MaxMEllon/vim-jsx-pretty'
 call plug#end()
 
 
