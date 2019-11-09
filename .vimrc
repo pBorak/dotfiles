@@ -28,6 +28,7 @@ Plug 'junegunn/fzf.vim'
 Plug 'mileszs/ack.vim'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'christoomey/vim-conflicted'
+Plug 'w0rp/ale'
 call plug#end()
 
 
@@ -67,7 +68,6 @@ set foldmethod=manual
 set nofoldenable
 " Diffs are shown side-by-side not above/below
 set diffopt=vertical
-set signcolumn=no
 :set termguicolors
 " Completion options.
 "   menu: use a popup menu
@@ -203,6 +203,8 @@ augroup end
 :set t_Co=256 " 256 colors
 :color grb24bit
 highlight ColorColumn ctermbg=235 guibg=#2c2d27
+" Set gutter background to black
+highlight SignColumn ctermbg=black guibg=#2c2d27
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " STATUS LINE
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -249,3 +251,16 @@ function! InsertTabWrapper()
 endfunction
 inoremap <expr> <tab> InsertTabWrapper()
 inoremap <s-tab> <c-n>
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" VIM - ALE
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:ale_linters = { 'javascript': ['eslint'], 'ruby': ['rubocop', 'ruby'] }
+let g:ale_set_highlights = 0
+let g:ale_lint_on_text_changed = 'normal'
+let g:ale_lint_on_insert_leave = 1
+let g:ale_lint_delay = 0
+let g:ale_set_quickfix = 0
+let g:ale_set_loclist = 0
+nmap <silent> [r <Plug>(ale_previous_wrap)
+nmap <silent> ]r <Plug>(ale_next_wrap)
+let g:ale_ruby_rubocop_executable = 'bundle'
