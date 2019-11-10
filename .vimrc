@@ -98,6 +98,9 @@ if executable('ag')
   let g:ackprg = 'ag --nogroup --nocolor --column'
   " Use ag in fzf for listing files. Lightning fast and respects .gitignore
   let $FZF_DEFAULT_COMMAND = 'ag --literal --files-with-matches --nocolor --hidden -g ""'
+  let g:fzf_files_options =
+        \ '--reverse ' .
+        \ '--preview "(coderay {} || cat {}) 2> /dev/null | head -'.&lines.'"'
   if !exists(":Ag")
     command -nargs=+ -complete=file -bar Ag silent! grep! <args>|cwindow|redraw!
     nnoremap \ :Ag<SPACE>
