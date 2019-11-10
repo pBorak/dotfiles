@@ -115,13 +115,10 @@ set colorcolumn=+1
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " CUSTOM KEY MAPPINGS
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
 " map leader key to ','
 let mapleader = ','
 " Fix slow O inserts
 :set timeout timeoutlen=1000 ttimeoutlen=100
-" Unmap K dosc entirely
-nnoremap K <Nop>
 " Execute macro in q
 map Q @q
 
@@ -153,8 +150,22 @@ map <Leader>l :call RunLastSpec()<cr>
 map <Leader>a :call RunAllSpecs()<cr>
 map <Leader>s :call RunNearestSpec()<cr>
 
-" Ack.vim
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" ACK
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 map <Leader>f :Ack!<space>
+
+function! s:VisualAck()
+  let temp = @"
+  normal! gvy
+  let escaped_pattern = escape(@", "[]().*")
+  let @" = temp
+  execute "Ack! '" . escaped_pattern . "'"
+endfunction
+
+nnoremap K :Ack! '<C-r><C-w>'<cr>
+vnoremap K :<C-u>call <sid>VisualAck()<cr>
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Quickfix
 map <Leader>Q :cc<cr>
 map <space><space> :ccl<cr>
