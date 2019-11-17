@@ -128,12 +128,20 @@ map Q @q
 map <leader>y "+y
 map <leader>p "+p
 
-" Map Ctrl + p to open fuzzy find (FZF)
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"FZF MAPINGS
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 nnoremap <c-p> :Files<cr>
+nnoremap <Leader>ga :Files app/<cr>
+nnoremap <Leader>gm :Files app/models/<cr>
+nnoremap <Leader>gv :Files app/views/<cr>
+nnoremap <Leader>gc :Files app/controllers/<cr>
+nnoremap <Leader>gt :Files spec/<cr>
 
 nmap 0 ^
 nmap k gk
 nmap j gj
+nnoremap Y  y$
 
 " C-s saves and go to normal mode
 nnoremap <C-s> <esc>:noh<cr>:w<cr>
@@ -190,7 +198,7 @@ map <Leader>vc :Vcontroller<cr>
 map <Leader>vm :Vmodel<cr>
 map <Leader>vv :Vview<cr>
 
-" EDIT ANOTHER FILE IN THE SAME DIR
+" EDIT ANOtHER FILE IN THE SAME DIR
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 map <Leader>e :e <C-R>=escape(expand("%:p:h"),' ') . '/'<cr>
 map <Leader>vs :vnew <C-R>=escape(expand("%:p:h"), ' ') . '/'<cr>
