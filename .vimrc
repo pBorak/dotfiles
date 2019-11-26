@@ -31,6 +31,8 @@ Plug 'christoomey/vim-conflicted'
 Plug 'w0rp/ale'
 Plug 'pangloss/vim-javascript'
 Plug 'MaxMEllon/vim-jsx-pretty'
+Plug 'nanotech/jellybeans.vim'
+Plug 'itchyny/lightline.vim'
 call plug#end()
 
 
@@ -70,7 +72,6 @@ set foldmethod=manual
 set nofoldenable
 " Diffs are shown side-by-side not above/below
 set diffopt=vertical
-:set termguicolors
 " Completion options.
 "   menu: use a popup menu
 "   preview: show more info in menu
@@ -228,15 +229,18 @@ augroup end
 " COLOR
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 :set t_Co=256 " 256 colors
-:color grb24bit
-highlight ColorColumn ctermbg=235 guibg=#2c2d27
-" Set gutter background to black
-highlight SignColumn ctermbg=black guibg=#2c2d27
+:color jellybeans
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" STATUS LINE
+" Light line
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-:set statusline=%<%f\ (%{&ft})\ %-4(%m%)%=%-19(%3l,%02c%03V%)
-set stl+=%{ConflictedVersion()}
+let g:lightline = {
+      \ 'colorscheme': 'wombat',
+      \ 'active': {
+      \   'left': [ [ 'mode', 'paste' ],
+      \             [ 'readonly', 'filename', 'modified' ] ]
+      \ },
+      \ }
+set noshowmode
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " SQUASH ALL COMMITS INTO THE FIRST ONE
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
