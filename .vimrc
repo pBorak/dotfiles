@@ -19,7 +19,6 @@ Plug 'tpope/vim-endwise'
 Plug 'tpope/vim-bundler'
 Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-rails'
-Plug 'tpope/vim-dispatch'
 Plug 'tpope/vim-fugitive'
 Plug 'thoughtbot/vim-rspec'
 Plug 'vim-ruby/vim-ruby'
@@ -28,17 +27,26 @@ Plug 'junegunn/fzf.vim'
 Plug 'mileszs/ack.vim'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'christoomey/vim-conflicted'
-Plug 'w0rp/ale'
 Plug 'pangloss/vim-javascript'
 Plug 'MaxMEllon/vim-jsx-pretty'
 Plug 'nanotech/jellybeans.vim'
 Plug 'itchyny/lightline.vim'
+Plug 'neoclide/coc.nvim', {'branch': 'release', 'do': { -> coc#util#install() }}
+Plug 'neoclide/coc-prettier', {'do': 'yarn install --frozen-lockfile'}
+Plug 'neoclide/coc-eslint', {'do': 'yarn install --frozen-lockfile'}
+Plug 'neoclide/coc-css', {'do': 'yarn install --frozen-lockfile'}
+Plug 'neoclide/coc-highlight', {'do': 'yarn install --frozen-lockfile'}
+Plug 'neoclide/coc-json', {'do': 'yarn install --frozen-lockfile'}
+Plug 'neoclide/coc-tsserver', {'do': 'yarn install --frozen-lockfile'}
+Plug 'neoclide/coc-html', {'do': 'yarn install --frozen-lockfile'}
+Plug 'neoclide/coc-yaml', {'do': 'yarn install --frozen-lockfile'}
+Plug 'mattn/emmet-vim'
 call plug#end()
 
 
 set nocompatible
-set backupdir=~/.tmp
-set directory=~/.tmp            " Don't clutter my dirs up with swp and tmp files
+" set backupdir=~/.tmp
+" set directory=~/.tmp            " Don't clutter my dirs up with swp and tmp files
 set backspace=indent,eol,start  " allow backspacing over everything in insert mode
 set history=10000               " keep 10000 lines of command line history
 set showcmd                     " display incomplete commands
@@ -84,10 +92,9 @@ set splitbelow
 set splitright
 " Ignore stuff that can't be opened
 set wildignore+=tmp/**
-" Run specs in vim dispatch
-let g:rspec_command = "Dispatch bundle exec rspec {spec}"
+let g:rspec_command = "bundle exec rspec {spec}"
 " Fix mouse tmux issue
-set ttymouse=xterm2
+" set ttymouse=xterm2
 set mouse=a
 "Store ctags in .git folder
 set tags =.git/tags
@@ -192,13 +199,6 @@ command! Q q " Bind :Q to :q
 command! E e
 command! W w
 command! Wq wq
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"RAILS-VIM FAST ACCESS MAPPINGS
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-map <Leader>vc :Vcontroller<cr>
-map <Leader>vm :Vmodel<cr>
-map <Leader>vv :Vview<cr>
-
 " EDIT ANOtHER FILE IN THE SAME DIR
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 map <Leader>e :e <C-R>=escape(expand("%:p:h"),' ') . '/'<cr>
@@ -208,6 +208,7 @@ map <Leader>vs :vnew <C-R>=escape(expand("%:p:h"), ' ') . '/'<cr>
 nnoremap <Leader>gs :Gstatus<cr>
 nnoremap <leader>gnc :GitNextConflict<cr>
 
+:let g:user_emmet_leader_key = '<c-e>'
 " Don't automatically continue comments after newline
 autocmd BufNewFile,BufRead * setlocal formatoptions-=cro
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -237,7 +238,10 @@ let g:lightline = {
       \ 'colorscheme': 'wombat',
       \ 'active': {
       \   'left': [ [ 'mode', 'paste' ],
-      \             [ 'readonly', 'filename', 'modified' ] ]
+      \             [ 'cocstatus', 'readonly', 'filename', 'modified' ] ]
+      \ },
+      \ 'component_function': {
+      \   'cocstatus': 'coc#status'
       \ },
       \ }
 set noshowmode
@@ -283,15 +287,105 @@ endfunction
 inoremap <expr> <tab> InsertTabWrapper()
 inoremap <s-tab> <c-n>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" VIM - ALE
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:ale_linters = { 'javascript': ['eslint'], 'ruby': ['rubocop', 'ruby'] }
-let g:ale_set_highlights = 0
-let g:ale_lint_on_text_changed = 'normal'
-let g:ale_lint_on_insert_leave = 1
-let g:ale_lint_delay = 0
-let g:ale_set_quickfix = 0
-let g:ale_set_loclist = 0
-nmap <silent> [r <Plug>(ale_previous_wrap)
-nmap <silent> ]r <Plug>(ale_next_wrap)
-let g:ale_ruby_rubocop_executable = 'bundle'
+" don't give |ins-completion-menu| messages.
+set shortmess+=c
+
+set hidden
+
+" Some servers have issues with backup files, see #649
+set nobackup
+set nowritebackup
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+" Use <c-space> to trigger completion.
+inoremap <silent><expr> <c-space> coc#refresh()
+
+" Use <tab> to confirm completion, `<C-g>u` means break undo chain at current position.
+inoremap <expr> <TAB> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<TAB>"
+
+" Use `[r` and `]r` to navigate diagnostics
+nmap <silent> [r <Plug>(coc-diagnostic-prev)
+nmap <silent> ]r <Plug>(coc-diagnostic-next)
+
+" Remap keys for gotos
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+
+" show documentation
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  else
+    call CocAction('doHover')
+  endif
+endfunction
+nnoremap <silent> S :call <SID>show_documentation()<CR>
+
+" show error, otherwise documentation, on hold
+function! ShowDocIfNoDiagnostic(timer_id)
+  if (coc#util#has_float() == 0)
+    silent call CocActionAsync('doHover')
+  endif
+endfunction
+function! s:show_hover_doc()
+  call timer_start(200, 'ShowDocIfNoDiagnostic')
+endfunction
+autocmd CursorHoldI * :call <SID>show_hover_doc()
+autocmd CursorHold * :call <SID>show_hover_doc()
+
+" common editor actions
+nmap <leader>rn <Plug>(coc-rename)
+xmap <leader>vf <Plug>(coc-format-selected)
+nmap <leader>vf <Plug>(coc-format-selected)
+
+augroup cocgroup
+  autocmd!
+  " Setup formatexpr specified filetype(s).
+  autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
+
+  " Update signature help on jump placeholder
+  autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+augroup end
+
+" Fix autofix problem of current line
+nmap <leader>qf  <Plug>(coc-fix-current)
+
+" Create mappings for function text object, requires document symbols feature of languageserver.
+
+xmap if <Plug>(coc-funcobj-i)
+xmap af <Plug>(coc-funcobj-a)
+omap if <Plug>(coc-funcobj-i)
+omap af <Plug>(coc-funcobj-a)
+
+" Use `:Format` to format current buffer
+command! -nargs=0 Format :call CocAction('format')
+
+" use `:OR` for organize import of current buffer
+command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
+
+" Show all diagnostics
+nnoremap <silent> <space>d :<C-u>CocList diagnostics<cr>
+" Manage extensions
+nnoremap <silent> <space>e :<C-u>CocList extensions<cr>
+" Show commands
+nnoremap <silent> <space>c :<C-u>CocList commands<cr>
+" Find symbol of current document
+nnoremap <silent> <space>o :<C-u>CocList outline<cr>
+" Search workspace symbols
+nnoremap <silent> <space>s :<C-u>CocList -I symbols<cr>
+" Do default action for next item.
+nnoremap <silent> <space>j :<C-u>CocNext<CR>
+" Do default action for previous item.
+nnoremap <silent> <space>k :<C-u>CocPrev<CR>
+" Resume latest coc list
+nnoremap <silent> <space>p :<C-u>CocListResume<CR>
+" floating windows
+highlight VertSplit guibg=NONE
+highlight NormalFloat guifg=#999999 guibg=#222222
+hi Pmenu guibg=#222222 guifg=#999999
