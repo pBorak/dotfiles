@@ -41,6 +41,7 @@ Plug 'neoclide/coc-tsserver', {'do': 'yarn install --frozen-lockfile'}
 Plug 'neoclide/coc-html', {'do': 'yarn install --frozen-lockfile'}
 Plug 'neoclide/coc-yaml', {'do': 'yarn install --frozen-lockfile'}
 Plug 'mattn/emmet-vim'
+Plug 'christoomey/vim-tmux-runner'
 call plug#end()
 
 
@@ -92,7 +93,7 @@ set splitbelow
 set splitright
 " Ignore stuff that can't be opened
 set wildignore+=tmp/**
-let g:rspec_command = "bundle exec rspec {spec}"
+let g:rspec_command = "VtrSendCommand! bundle exec rspec {spec}"
 " Fix mouse tmux issue
 " set ttymouse=xterm2
 set mouse=a
@@ -175,8 +176,6 @@ map <Leader>s :call RunNearestSpec()<cr>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " ACK
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-map <Leader>f :Ack!<space>
-
 function! s:VisualAck()
   let temp = @"
   normal! gvy
@@ -187,6 +186,7 @@ endfunction
 
 nnoremap K :Ack! '<C-r><C-w>'<cr>
 vnoremap K :<C-u>call <sid>VisualAck()<cr>
+map <Leader>k :Ack!<space>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Quickfix
 map <Leader>Q :cc<cr>
@@ -203,6 +203,16 @@ command! Wq wq
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 map <Leader>e :e <C-R>=escape(expand("%:p:h"),' ') . '/'<cr>
 map <Leader>vs :vnew <C-R>=escape(expand("%:p:h"), ' ') . '/'<cr>
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" VTR commands
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+nnoremap <leader>v- :VtrOpenRunner { "orientation": "v", "percentage": 30 }<cr>
+nnoremap <leader>v\ :VtrOpenRunner { "orientation": "h", "percentage": 30 }<cr>
+nnoremap <leader>vk :VtrKillRunner<cr>
+nnoremap <leader>va :VtrAttachToPane<cr>
+nnoremap <leader>fr :VtrFocusRunner<cr>
+noremap <C-f> :VtrSendLinesToRunner<cr>
+nnoremap <leader>ss :VtrSendCommandToRunner<space>
 
 " Fugitivie mappings
 nnoremap <Leader>gs :Gstatus<cr>
@@ -295,6 +305,7 @@ set hidden
 " Some servers have issues with backup files, see #649
 set nobackup
 set nowritebackup
+set noswapfile
 
 function! s:check_back_space() abort
   let col = col('.') - 1
@@ -341,8 +352,8 @@ autocmd CursorHold * :call <SID>show_hover_doc()
 
 " common editor actions
 nmap <leader>rn <Plug>(coc-rename)
-xmap <leader>vf <Plug>(coc-format-selected)
-nmap <leader>vf <Plug>(coc-format-selected)
+xmap <leader>fo <Plug>(coc-format-selected)
+nmap <leader>fo <Plug>(coc-format-selected)
 
 augroup cocgroup
   autocmd!
@@ -371,8 +382,6 @@ command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organize
 
 " Show all diagnostics
 nnoremap <silent> <space>d :<C-u>CocList diagnostics<cr>
-" Manage extensions
-nnoremap <silent> <space>e :<C-u>CocList extensions<cr>
 " Show commands
 nnoremap <silent> <space>c :<C-u>CocList commands<cr>
 " Find symbol of current document
