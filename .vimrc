@@ -58,6 +58,7 @@ set ignorecase smartcase
 set laststatus=2                " always display the status line
 syntax on                       " enable highlighting for syntax 
 set showmatch
+set inccommand=nosplit
 set number
 set relativenumber
 " Display extra whitespace
