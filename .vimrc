@@ -42,6 +42,7 @@ Plug 'neoclide/coc-html', {'do': 'yarn install --frozen-lockfile'}
 Plug 'neoclide/coc-yaml', {'do': 'yarn install --frozen-lockfile'}
 Plug 'mattn/emmet-vim'
 Plug 'christoomey/vim-tmux-runner'
+Plug 'pbrisbin/vim-mkdir'
 call plug#end()
 
 
@@ -174,6 +175,10 @@ map <Leader>l :call RunLastSpec()<cr>
 map <Leader>a :call RunAllSpecs()<cr>
 map <Leader>s :call RunNearestSpec()<cr>
 
+" Debugging
+
+nnoremap <leader>bp obinding.pry<esc>
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " ACK
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -236,6 +241,7 @@ augroup vimrcEx
         \   exe "normal g`\"" |
         \ endif
   autocmd FileType ruby,eruby,yaml setlocal path+=lib
+  autocmd FileType gitcommit setlocal spell
 augroup end
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " COLOR
