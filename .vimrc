@@ -13,6 +13,7 @@ autocmd!
 call plug#begin('~/.vim/plugged')
 Plug 'MaxMEllon/vim-jsx-pretty'
 Plug 'christoomey/vim-conflicted'
+Plug 'christoomey/vim-system-copy'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'christoomey/vim-tmux-runner'
 Plug 'itchyny/lightline.vim'
@@ -137,8 +138,8 @@ let mapleader = ','
 " Execute macro in q
 map Q @q
 
-map <leader>y "+y
-map <leader>p "+p
+let g:system_copy#copy_command='xclip -sel clipboard'
+let g:system_copy#paste_command='xclip -sel clipboard -o'
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "FZF MAPINGS
@@ -169,6 +170,10 @@ nnoremap <c-l> <c-w>l
 map <leader>o :only<cr>
 " Switch between the last two files
 nnoremap <Leader><Leader> <C-^>
+nnoremap <leader>w1 1gt
+nnoremap <leader>w2 2gt
+nnoremap <leader>w3 3gt
+nnoremap <leader>w4 4gt
 
 " Rspec.vim mappings
 map <Leader>t :call RunCurrentSpecFile()<cr>
@@ -206,6 +211,7 @@ command! Q q " Bind :Q to :q
 command! E e
 command! W w
 command! Wq wq
+command! Vs vs
 " EDIT ANOtHER FILE IN THE SAME DIR
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 map <Leader>e :e <C-R>=escape(expand("%:p:h"),' ') . '/'<cr>
