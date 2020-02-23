@@ -45,6 +45,8 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-vinegar'
 Plug 'vim-ruby/vim-ruby'
+Plug 'vim-scripts/ReplaceWithRegister'
+Plug 'vim-scripts/ReplaceWithSameIndentRegister'
 call plug#end()
 
 
@@ -184,6 +186,11 @@ map <Leader>s :call RunNearestSpec()<cr>
 " Debugging
 
 nnoremap <leader>bp obinding.pry<esc>
+
+" ReplaceWithRegister
+
+nmap <leader>gr "*gr
+nmap <leader>gR "*gR
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " ACK
