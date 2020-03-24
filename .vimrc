@@ -19,6 +19,7 @@ Plug 'christoomey/vim-tmux-runner'
 Plug 'itchyny/lightline.vim'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
+Plug 'junegunn/vim-easy-align'
 Plug 'mattn/emmet-vim'
 Plug 'mileszs/ack.vim'
 Plug 'nanotech/jellybeans.vim'
@@ -47,6 +48,7 @@ Plug 'tpope/vim-vinegar'
 Plug 'vim-ruby/vim-ruby'
 Plug 'vim-scripts/ReplaceWithRegister'
 Plug 'vim-scripts/ReplaceWithSameIndentRegister'
+Plug 'AndrewRadev/splitjoin.vim'
 call plug#end()
 
 
@@ -99,7 +101,7 @@ set splitbelow
 set splitright
 " Ignore stuff that can't be opened
 set wildignore+=tmp/**
-let g:rspec_command = "VtrSendCommand! bundle exec rspec {spec}"
+let g:rspec_command = "VtrSendCommand! rspec {spec}"
 " Fix mouse tmux issue
 " set ttymouse=xterm2
 set mouse=a
@@ -185,12 +187,16 @@ map <Leader>s :call RunNearestSpec()<cr>
 
 " Debugging
 
-nnoremap <leader>bp obinding.pry<esc>
+nnoremap <leader>bp orequire "pry"; binding.pry<esc>
 
 " ReplaceWithRegister
 
 nmap <leader>gr "*gr
 nmap <leader>gR "*gR
+
+" EasyAlign
+
+vmap <cr> <Plug>(EasyAlign)
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " ACK
@@ -277,13 +283,6 @@ let g:lightline = {
       \ }
 set noshowmode
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" SQUASH ALL COMMITS INTO THE FIRST ONE
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-function! SquashAll()
-  normal ggj}klllcf:w
-endfunction
-command! SquashAll :call SquashAll()
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " RENAME CURRENT FILE
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 function! RenameFile()
@@ -296,7 +295,6 @@ function! RenameFile()
   endif
 endfunction
 map <leader>n :call RenameFile()<cr>
-
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " MULTIPURPOSE TAB KEY
 " INDENT IF WE'RE AT THE BEGINNING OF A LINE. ELSE, DO COMPLETION.
