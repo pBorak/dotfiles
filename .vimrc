@@ -53,8 +53,6 @@ call plug#end()
 
 
 set nocompatible
-" set backupdir=~/.tmp
-" set directory=~/.tmp            " Don't clutter my dirs up with swp and tmp files
 set backspace=indent,eol,start  " allow backspacing over everything in insert mode
 set history=10000               " keep 10000 lines of command line history
 set showcmd                     " display incomplete commands
