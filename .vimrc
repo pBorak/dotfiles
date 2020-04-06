@@ -100,8 +100,6 @@ set splitright
 " Ignore stuff that can't be opened
 set wildignore+=tmp/**
 let g:rspec_command = "VtrSendCommand! rspec {spec}"
-" Fix mouse tmux issue
-" set ttymouse=xterm2
 set mouse=a
 "Store ctags in .git folder
 set tags =.git/tags
@@ -419,3 +417,4 @@ highlight VertSplit guibg=NONE
 highlight NormalFloat guifg=#999999 guibg=#222222
 highlight Pmenu guibg=#0e293f
 highlight PmenuSel guibg=#296596
+highlight WildMenu guibg=#296596
