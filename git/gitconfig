@@ -1,0 +1,36 @@
+[user]
+	name = Pawel Borak
+	email = borak.pawel@gmail.com
+[core]
+	autocrlf = input
+	excludesfile = ~/.gitignore
+	editor = nvim
+[fetch]
+	prune = true
+[color]
+	ui = auto
+[commit]
+	template = ~/.gitmessage
+[init]
+	templatedir = ~/.git_template
+[alias]
+	aa = add --all
+	b = branch
+	ca = commit --amend
+	ce = commit --amend --no-edit
+	co = checkout
+	conflicted = !nvim +Conflicted
+	dc = diff --cached
+	l = log --oneline --decorate --graph --all -20
+	pl = pull
+	plr = pull --rebase
+	ps = push
+	psoh = push origin HEAD
+	publish = "! git push -u origin $(git rev-parse --abbrev-ref HEAD)"
+	rba = rebase --abort
+	rbc = rebase --continue
+	uncommit = reset --soft HEAD^
+	unstage = reset
+	upstream = rev-parse --abbrev-ref --symbolic-full-name @{u}
+	bsel = !git branch | grep -v '^*' | fzf-tmux --reverse | xargs git checkout
+
