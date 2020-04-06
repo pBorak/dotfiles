@@ -11,18 +11,19 @@ autocmd!
 " PLUGINS
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 call plug#begin('~/.vim/plugged')
+Plug 'AndrewRadev/splitjoin.vim'
 Plug 'MaxMEllon/vim-jsx-pretty'
 Plug 'christoomey/vim-conflicted'
 Plug 'christoomey/vim-system-copy'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'christoomey/vim-tmux-runner'
+Plug 'haishanh/night-owl.vim'
 Plug 'itchyny/lightline.vim'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/vim-easy-align'
 Plug 'mattn/emmet-vim'
 Plug 'mileszs/ack.vim'
-Plug 'nanotech/jellybeans.vim'
 Plug 'neoclide/coc-css', {'do': 'yarn install --frozen-lockfile'}
 Plug 'neoclide/coc-eslint', {'do': 'yarn install --frozen-lockfile'}
 Plug 'neoclide/coc-highlight', {'do': 'yarn install --frozen-lockfile'}
@@ -48,7 +49,6 @@ Plug 'tpope/vim-vinegar'
 Plug 'vim-ruby/vim-ruby'
 Plug 'vim-scripts/ReplaceWithRegister'
 Plug 'vim-scripts/ReplaceWithSameIndentRegister'
-Plug 'AndrewRadev/splitjoin.vim'
 call plug#end()
 
 
@@ -266,13 +266,16 @@ augroup end
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " COLOR
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-:set t_Co=256 " 256 colors
-:color jellybeans
+if (has("termguicolors"))
+ set termguicolors
+endif
+
+colorscheme night-owl
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Light line
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:lightline = {
-      \ 'colorscheme': 'wombat',
+      \ 'colorscheme': 'nightowl',
       \ 'active': {
       \   'left': [ [ 'mode', 'paste' ],
       \             [ 'cocstatus', 'readonly', 'filename', 'modified' ] ]
@@ -416,4 +419,5 @@ nnoremap <silent> <space>p :<C-u>CocListResume<CR>
 " floating windows
 highlight VertSplit guibg=NONE
 highlight NormalFloat guifg=#999999 guibg=#222222
-hi Pmenu guibg=#222222 guifg=#999999
+highlight Pmenu guibg=#0e293f
+highlight PmenuSel guibg=#296596
