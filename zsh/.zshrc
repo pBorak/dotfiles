@@ -1,11 +1,5 @@
-source ~/.zplug/init.zsh
-
-zplug 'mafredri/zsh-async'
-zplug 'sindresorhus/pure'
-zplug 'zsh-users/zsh-syntax-highlighting', defer:2
-zplug 'zsh-users/zsh-completions', defer:2
-
-zplug load
+# antibody bundle < ~/code/dotfiles/zsh/configs/plugins.zsh > ~/.zsh_plugins.sh
+source ~/.zsh_plugins.sh
 
 stty start undef
 stty stop undef
