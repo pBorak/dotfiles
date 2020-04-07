@@ -27,8 +27,8 @@
 	ps = push
 	psoh = push origin HEAD
 	publish = "! git push -u origin $(git rev-parse --abbrev-ref HEAD)"
-	rba = rebase --abort
-	rbc = rebase --continue
+	continue = continue
+	abort = abort
 	uncommit = reset --soft HEAD^
 	unstage = reset
 	upstream = rev-parse --abbrev-ref --symbolic-full-name @{u}
