@@ -416,7 +416,8 @@ nnoremap <silent> <space>k :<C-u>CocPrev<CR>
 nnoremap <silent> <space>p :<C-u>CocListResume<CR>
 " floating windows
 highlight VertSplit guibg=NONE
-highlight NormalFloat guifg=#999999 guibg=#222222
-highlight Pmenu guibg=#0e293f
-highlight PmenuSel guibg=#296596
-highlight WildMenu guibg=#296596
+highlight NormalFloat guifg=#d6deeb guibg=#2C3043
+highlight Pmenu guibg=#2C3043
+highlight PmenuSel guibg=#5f7e97
+highlight WildMenu guibg=#5f7e97
+highlight IncSearch guifg=#d6deeb guibg=#c792ea
