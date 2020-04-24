@@ -17,7 +17,6 @@ Plug 'christoomey/vim-conflicted'
 Plug 'christoomey/vim-system-copy'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'christoomey/vim-tmux-runner'
-Plug 'haishanh/night-owl.vim'
 Plug 'itchyny/lightline.vim'
 Plug 'jiangmiao/auto-pairs'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
@@ -52,6 +51,7 @@ Plug 'tpope/vim-vinegar'
 Plug 'vim-ruby/vim-ruby'
 Plug 'vim-scripts/ReplaceWithRegister'
 Plug 'vim-scripts/ReplaceWithSameIndentRegister'
+Plug 'whatyouhide/vim-gotham'
 call plug#end()
 
 
@@ -269,12 +269,12 @@ if (has("termguicolors"))
  set termguicolors
 endif
 
-colorscheme night-owl
+colorscheme gotham
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Light line
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:lightline = {
-      \ 'colorscheme': 'nightowl',
+      \ 'colorscheme': 'gotham',
       \ 'active': {
       \   'left': [ [ 'mode', 'paste' ],
       \             [ 'cocstatus', 'readonly', 'filename', 'modified' ] ]
@@ -415,10 +415,3 @@ nnoremap <silent> <space>j :<C-u>CocNext<CR>
 nnoremap <silent> <space>k :<C-u>CocPrev<CR>
 " Resume latest coc list
 nnoremap <silent> <space>p :<C-u>CocListResume<CR>
-" floating windows
-highlight VertSplit guibg=NONE
-highlight NormalFloat guifg=#d6deeb guibg=#2C3043
-highlight Pmenu guibg=#2C3043
-highlight PmenuSel guibg=#5f7e97
-highlight WildMenu guibg=#5f7e97
-highlight IncSearch guifg=#d6deeb guibg=#c792ea
