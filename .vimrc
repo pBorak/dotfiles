@@ -189,11 +189,6 @@ map <Leader>s :call RunNearestSpec()<cr>
 
 nnoremap <leader>bp orequire "pry"; binding.pry<esc>
 
-" ReplaceWithRegister
-
-nmap <leader>gr "*gr
-nmap <leader>gR "*gR
-
 " EasyAlign
 
 vmap <cr> <Plug>(EasyAlign)
@@ -262,6 +257,7 @@ augroup vimrcEx
         \ endif
   autocmd FileType ruby,eruby,yaml setlocal path+=lib
   autocmd FileType gitcommit setlocal spell
+  autocmd BufEnter *.es6 setf javascript
 augroup end
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " COLOR
@@ -348,7 +344,7 @@ nmap <silent> ]r <Plug>(coc-diagnostic-next)
 nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
-nmap <silent> gr <Plug>(coc-references)
+nmap <silent> gh <Plug>(coc-references)
 
 " show documentation
 function! s:show_documentation()
