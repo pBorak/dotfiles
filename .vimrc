@@ -52,7 +52,7 @@ Plug 'tpope/vim-vinegar'
 Plug 'vim-ruby/vim-ruby'
 Plug 'vim-scripts/ReplaceWithRegister'
 Plug 'vim-scripts/ReplaceWithSameIndentRegister'
-Plug 'whatyouhide/vim-gotham'
+Plug 'bluz71/vim-nightfly-guicolors'
 call plug#end()
 
 
@@ -237,6 +237,7 @@ nnoremap <leader>ss :VtrSendCommandToRunner<space>
 
 " Fugitivie mappings
 nnoremap <Leader>gs :Gstatus<cr>
+nnoremap <Leader>d :Gdiff<cr>
 nnoremap <leader>gnc :GitNextConflict<cr>
 
 :let g:user_emmet_leader_key = '<c-e>'
@@ -266,12 +267,13 @@ if (has("termguicolors"))
  set termguicolors
 endif
 
-colorscheme gotham
+let g:nightflyUndercurls = 0
+colorscheme nightfly
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Light line
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:lightline = {
-      \ 'colorscheme': 'gotham',
+      \ 'colorscheme': 'nightfly',
       \ 'active': {
       \   'left': [ [ 'mode', 'paste' ],
       \             [ 'cocstatus', 'readonly', 'filename', 'modified' ] ]
