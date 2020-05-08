@@ -12,3 +12,4 @@ alias vim="nvim"
 alias vi="nvim"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+eval "$(rbenv init -)"

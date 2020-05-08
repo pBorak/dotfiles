@@ -1,0 +1,17 @@
+#!/usr/bin/env ruby
+
+def get_current_branch
+  `git rev-parse --abbrev-ref HEAD`.chomp
+end
+
+def main
+  current_branch = get_current_branch
+  if current_branch == 'master'
+    $stderr.puts "Currently on master, aborting."
+    exit 1
+  else
+    system("git push -u origin #{current_branch}:pborak/#{current_branch}")
+  end
+end
+
+main

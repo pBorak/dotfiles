@@ -52,7 +52,7 @@ Plug 'tpope/vim-vinegar'
 Plug 'vim-ruby/vim-ruby'
 Plug 'vim-scripts/ReplaceWithRegister'
 Plug 'vim-scripts/ReplaceWithSameIndentRegister'
-Plug 'bluz71/vim-nightfly-guicolors'
+Plug 'bluz71/vim-moonfly-colors'
 call plug#end()
 
 
@@ -103,7 +103,7 @@ set splitbelow
 set splitright
 " Ignore stuff that can't be opened
 set wildignore+=tmp/**
-let g:rspec_command = "VtrSendCommand! rspec {spec}"
+let g:rspec_command = "VtrSendCommand! bundle exec rspec {spec}"
 set mouse=a
 "Store ctags in .git folder
 set tags =.git/tags
@@ -141,9 +141,6 @@ let mapleader = ','
 :set timeout timeoutlen=1000 ttimeoutlen=100
 " Execute macro in q
 map Q @q
-
-let g:system_copy#copy_command='xclip -sel clipboard'
-let g:system_copy#paste_command='xclip -sel clipboard -o'
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "FZF MAPINGS
@@ -267,13 +264,12 @@ if (has("termguicolors"))
  set termguicolors
 endif
 
-let g:nightflyUndercurls = 0
-colorscheme nightfly
+colorscheme moonfly
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Light line
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:lightline = {
-      \ 'colorscheme': 'nightfly',
+      \ 'colorscheme': 'moonfly',
       \ 'active': {
       \   'left': [ [ 'mode', 'paste' ],
       \             [ 'cocstatus', 'readonly', 'filename', 'modified' ] ]

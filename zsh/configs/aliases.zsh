@@ -1,6 +1,6 @@
 alias ..='cd ..'
-alias ls='ls --color'
-alias l='ls -laFh --color'
+alias ls='ls -G'
+alias l='ls -laFhG'
 alias be='bundle exec'
 alias c='clear'
 alias vrc='nvim ~/code/dotfiles/.vimrc'
