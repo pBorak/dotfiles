@@ -13,6 +13,8 @@
 	template = ~/.gitmessage
 [init]
 	templatedir = ~/.git_template
+[push]
+  default = upstream
 [alias]
 	aa = add --all
 	b = branch

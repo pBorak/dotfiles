@@ -1,30 +1,26 @@
-" BASICS
-
-set encoding=utf-8
-
-" remove all existings autocmds
-autocmd!
-
-
-
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " PLUGINS
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 call plug#begin('~/.vim/plugged')
 Plug 'AndrewRadev/splitjoin.vim'
 Plug 'MaxMEllon/vim-jsx-pretty'
+Plug 'bluz71/vim-moonfly-colors'
+Plug 'pBorak/vim-nightfly-guicolors'
 Plug 'christoomey/vim-conflicted'
 Plug 'christoomey/vim-system-copy'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'christoomey/vim-tmux-runner'
 Plug 'itchyny/lightline.vim'
-Plug 'jiangmiao/auto-pairs'
+Plug 'janko/vim-test'
 Plug 'jparise/vim-graphql'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/vim-easy-align'
+Plug 'kana/vim-textobj-user'
+Plug 'leafgarland/typescript-vim'
 Plug 'mattn/emmet-vim'
 Plug 'mileszs/ack.vim'
+Plug 'nelstrom/vim-textobj-rubyblock'
 Plug 'neoclide/coc-css', {'do': 'yarn install --frozen-lockfile'}
 Plug 'neoclide/coc-eslint', {'do': 'yarn install --frozen-lockfile'}
 Plug 'neoclide/coc-highlight', {'do': 'yarn install --frozen-lockfile'}
@@ -37,8 +33,7 @@ Plug 'neoclide/coc-yaml', {'do': 'yarn install --frozen-lockfile'}
 Plug 'neoclide/coc.nvim', {'branch': 'release', 'do': { -> coc#util#install() }}
 Plug 'pangloss/vim-javascript'
 Plug 'pbrisbin/vim-mkdir'
-Plug 'roman/golden-ratio'
-Plug 'thoughtbot/vim-rspec'
+Plug 'peitalin/vim-jsx-typescript', { 'for': 'typescript.jsx' }
 Plug 'tommcdo/vim-exchange'
 Plug 'tpope/vim-bundler'
 Plug 'tpope/vim-commentary'
@@ -52,7 +47,6 @@ Plug 'tpope/vim-vinegar'
 Plug 'vim-ruby/vim-ruby'
 Plug 'vim-scripts/ReplaceWithRegister'
 Plug 'vim-scripts/ReplaceWithSameIndentRegister'
-Plug 'bluz71/vim-moonfly-colors'
 call plug#end()
 
 
@@ -103,7 +97,6 @@ set splitbelow
 set splitright
 " Ignore stuff that can't be opened
 set wildignore+=tmp/**
-let g:rspec_command = "VtrSendCommand! bundle exec rspec {spec}"
 set mouse=a
 "Store ctags in .git folder
 set tags =.git/tags
@@ -117,10 +110,17 @@ if executable('ag')
   let $FZF_DEFAULT_COMMAND = 'ag --literal --files-with-matches --nocolor --hidden -g ""'
   let g:fzf_files_options =
         \ '--reverse ' .
-        \ '--preview "(coderay {} || cat {}) 2> /dev/null | head -'.&lines.'"'
+        \ '--preview "(bat -style full --decorations always --color always {} ' .
+        \ '|| cat {}) 2> /dev/null | head -'.&lines.'" '.
+        \ '--preview-window right:60%'
+  let g:fzf_layout = { 'window': {
+        \ 'width': 0.8,
+        \ 'height': 0.5,
+        \ 'highlight': 'Statement',
+        \ 'border': 'sharp' } }
+
   if !exists(":Ag")
     command -nargs=+ -complete=file -bar Ag silent! grep! <args>|cwindow|redraw!
-    nnoremap \ :Ag<SPACE>
   endif
 endif
 
@@ -176,11 +176,11 @@ nnoremap <leader>w2 2gt
 nnoremap <leader>w3 3gt
 nnoremap <leader>w4 4gt
 
-" Rspec.vim mappings
-map <Leader>t :call RunCurrentSpecFile()<cr>
-map <Leader>l :call RunLastSpec()<cr>
-map <Leader>a :call RunAllSpecs()<cr>
-map <Leader>s :call RunNearestSpec()<cr>
+let test#strategy = "vtr"
+map <silent> <Leader>t :TestFile<cr>
+map <silent> <Leader>l :TestLast<cr>
+map <silent> <Leader>a :TestSuite<cr>
+map <silent> <Leader>s :TestNearest<cr>
 
 " Debugging
 
@@ -189,7 +189,6 @@ nnoremap <leader>bp orequire "pry"; binding.pry<esc>
 " EasyAlign
 
 vmap <cr> <Plug>(EasyAlign)
-
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " ACK
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -238,16 +237,11 @@ nnoremap <Leader>d :Gdiff<cr>
 nnoremap <leader>gnc :GitNextConflict<cr>
 
 :let g:user_emmet_leader_key = '<c-e>'
-" Don't automatically continue comments after newline
-autocmd BufNewFile,BufRead * setlocal formatoptions-=cro
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " CUSTOM AUTOCMDS
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 augroup vimrcEx
-  " Clear all autocmds in the group
   autocmd!
-  "for ruby, autoindent with two spaces, always expand tabs
-  autocmd FileType ruby,haml,eruby,yaml,html,sass,cucumber set ai sw=2 sts=2 et
   " Jump to last cursor position unless it's invalid or in an event handler
   autocmd BufReadPost *
         \ if line("'\"") > 0 && line("'\"") <= line("$") |
@@ -255,21 +249,20 @@ augroup vimrcEx
         \ endif
   autocmd FileType ruby,eruby,yaml setlocal path+=lib
   autocmd FileType gitcommit setlocal spell
-  autocmd BufEnter *.es6 setf javascript
+" Don't automatically continue comments after newline
+  autocmd BufNewFile,BufRead * setlocal formatoptions-=cro
 augroup end
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " COLOR
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-if (has("termguicolors"))
- set termguicolors
-endif
+set termguicolors
 
-colorscheme moonfly
+colorscheme nightfly
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Light line
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:lightline = {
-      \ 'colorscheme': 'moonfly',
+      \ 'colorscheme': 'nightfly',
       \ 'active': {
       \   'left': [ [ 'mode', 'paste' ],
       \             [ 'cocstatus', 'readonly', 'filename', 'modified' ] ]
