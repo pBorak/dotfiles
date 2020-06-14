@@ -1,0 +1,138 @@
+# Helper function
+global !p
+def rb_class(snip, type):
+	parts = vim.eval("ruby#class_name(1)")
+	shiftwidth = int(vim.eval("&shiftwidth"))
+	for idx, part in enumerate(parts):
+		shift = shiftwidth * idx * ' '
+		if idx == (len(parts) - 1):
+			snip.rv += "\n" + snip.mkline("%s %s"%(type, part), shift)
+			snip.rv += "\n" + snip.mkline('', shift + ' ' * shiftwidth)
+		else:
+			snip.rv += "\n" + snip.mkline("module %s"%(part), shift)
+		snip.shift()
+def rb_class_end(snip):
+	parts = vim.eval("ruby#class_name(1)")
+	snip.rv = ''
+	for idx, part in enumerate(parts):
+		shift = int(vim.eval("&shiftwidth"))* (len(parts) - 1 - idx) * ' '
+		if idx != 0:
+			snip.rv += "\n"
+		snip.rv +=  snip.mkline("end", shift)
+		snip.unshift()
+endglobal
+
+snippet class "" b
+# frozen_string_literal: true
+`!p rb_class(snip, 'class')`${0}
+`!p rb_class_end(snip)`
+endsnippet
+
+snippet module "" b
+# frozen_string_literal: true
+`!p rb_class(snip, 'module')`${0}
+`!p rb_class_end(snip)`
+endsnippet
+
+snippet priv "" b
+private
+
+${0}
+endsnippet
+
+snippet ar "" b
+attr_reader :${0:attr_names}
+endsnippet
+
+snippet aw "" b
+attr_writer :${0:attr_names}
+endsnippet
+
+snippet aa "" b
+attr_accessor :${0:attr_names}
+endsnippet
+
+snippet del "" b
+delegate :${1:method}, to: :${0:obj}
+endsnippet
+
+snippet "(?<=def\s)initialize" "" r
+initialize(${1:args})
+	${1/(\w+,?\s?)(?=$)?/@$1/g} = $1
+end
+
+private
+
+attr_reader ${1/(\w+,?\s?)(?=$)?/:$1/g}
+endsnippet
+
+snippet init "" b
+def initialize(${1:args})
+	${1/(\w+,?\s?)(?=$)?/@$1/g} = $1
+end
+
+private
+
+attr_reader ${1/(\w+,?\s?)(?=$)?/:$1/g}
+endsnippet
+
+snippet call "" b
+def self.call(${1:args})
+	new($1)
+end
+
+def initialize($1)
+	${1/(\w+,?\s?)(?=$)?/@$1/g} = $1
+end
+
+def call
+	${0: #call}
+end
+
+private
+
+attr_reader $1
+
+endsnippet
+
+#RSpec
+
+snippet spec "" b
+require '${1:spec_helper}'
+
+describe ${2:`!v ruby#class_name()`} do
+	${0}
+end
+endsnippet
+
+snippet cont "" b
+context '${1:message}' do
+	${0:${VISUAL: #assertions}}
+end
+endsnippet
+
+snippet desc "" b
+describe '${1:#method}' do
+	${2:${VISUAL: #assertions}}
+end
+endsnippet
+
+snippet it "" b
+it '${1:docstring}' do
+	${2:${VISUAL: #assertions}}
+end
+endsnippet
+
+snippet exp "" b
+expect(${1}).to ${2}
+endsnippet
+
+snippet agg "" b
+aggregate_failures '${1:message}' do
+	${2:${VISUAL: #examples}}
+end
+endsnippet
+
+snippet dc
+described_class
+endsnippet

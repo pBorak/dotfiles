@@ -46,7 +46,10 @@ Plug 'tpope/vim-vinegar'
 Plug 'vim-ruby/vim-ruby'
 Plug 'vim-scripts/ReplaceWithRegister'
 
-let g:coc_global_extensions = [ 'coc-flow' ]
+let g:coc_global_extensions = [
+      \ 'coc-flow',
+      \ 'coc-snippets',
+      \]
 call plug#end()
 
 set nocompatible
@@ -324,8 +327,11 @@ endfunction
 " Use <c-space> to trigger completion.
 inoremap <silent><expr> <c-space> coc#refresh()
 
-" Use <tab> to confirm completion, `<C-g>u` means break undo chain at current position.
-inoremap <expr> <TAB> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<TAB>"
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? coc#_select_confirm() :
+      \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
 
 " Use `[r` and `]r` to navigate diagnostics
 nmap <silent> [r <Plug>(coc-diagnostic-prev)
@@ -393,15 +399,15 @@ command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organize
 nnoremap <silent> <space>d :<C-u>CocList diagnostics<cr>
 " Show commands
 nnoremap <silent> <space>c :<C-u>CocList commands<cr>
-" Find symbol of current document
-nnoremap <silent> <space>o :<C-u>CocList outline<cr>
-" Search workspace symbols - not working with flow
-" nnoremap <silent> <space>s :<C-u>CocList -I symbols<cr>
 " Do default action for next item.
 nnoremap <silent> <space>j :<C-u>CocNext<CR>
 " Do default action for previous item.
 nnoremap <silent> <space>k :<C-u>CocPrev<CR>
 " Resume latest coc list
 nnoremap <silent> <space>p :<C-u>CocListResume<CR>
+
+let g:coc_snippet_next = '<c-n>'
+let g:coc_snippet_prev = '<c-p>'
+
 
 let g:javascript_plugin_flow = 1

@@ -1,5 +1,5 @@
 {
-  "coc.preferences.jumpCommand": "drop",
+  "coc.preferences.jumpCommand": "edit",
   "coc.preferences.hoverTarget": "float",
   "suggest.floatEnable": true,
   "suggest.noselect": false,
@@ -31,5 +31,9 @@
   "tsserver.formatOnType": true,
   "coc.preferences.formatOnType": true,
   "tsserver.enable": false,
-  "javascript.validate.enable": false
+  "javascript.validate.enable": false,
+  "snippets.extends": {
+    "javascriptreact": ["javascript"],
+    "typescript": ["javascript"]
+  }
 }
