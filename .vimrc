@@ -4,7 +4,6 @@
 call plug#begin('~/.vim/plugged')
 Plug 'AndrewRadev/splitjoin.vim'
 Plug 'MaxMEllon/vim-jsx-pretty'
-Plug 'bluz71/vim-moonfly-colors'
 Plug 'pBorak/vim-nightfly-guicolors'
 Plug 'christoomey/vim-conflicted'
 Plug 'christoomey/vim-system-copy'
@@ -15,8 +14,8 @@ Plug 'janko/vim-test'
 Plug 'jparise/vim-graphql'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
-Plug 'junegunn/vim-easy-align'
 Plug 'kana/vim-textobj-user'
+Plug 'Krasjet/auto.pairs'
 Plug 'leafgarland/typescript-vim'
 Plug 'mattn/emmet-vim'
 Plug 'mileszs/ack.vim'
@@ -30,7 +29,7 @@ Plug 'neoclide/coc-prettier', {'do': 'yarn install --frozen-lockfile'}
 Plug 'neoclide/coc-solargraph', {'do': 'yarn install --frozen-lockfile'}
 Plug 'neoclide/coc-tsserver', {'do': 'yarn install --frozen-lockfile'}
 Plug 'neoclide/coc-yaml', {'do': 'yarn install --frozen-lockfile'}
-Plug 'neoclide/coc.nvim', {'branch': 'release', 'do': { -> coc#util#install() }}
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'pangloss/vim-javascript'
 Plug 'pbrisbin/vim-mkdir'
 Plug 'peitalin/vim-jsx-typescript', { 'for': 'typescript.jsx' }
@@ -46,7 +45,6 @@ Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-vinegar'
 Plug 'vim-ruby/vim-ruby'
 Plug 'vim-scripts/ReplaceWithRegister'
-Plug 'vim-scripts/ReplaceWithSameIndentRegister'
 call plug#end()
 
 
@@ -84,7 +82,8 @@ set nojoinspaces
 set foldmethod=manual
 set nofoldenable
 " Diffs are shown side-by-side not above/below
-set diffopt=vertical
+set diffopt+=iwhite
+set diffopt+=vertical
 " Completion options.
 "   menu: use a popup menu
 "   preview: show more info in menu
@@ -395,11 +394,13 @@ nnoremap <silent> <space>d :<C-u>CocList diagnostics<cr>
 nnoremap <silent> <space>c :<C-u>CocList commands<cr>
 " Find symbol of current document
 nnoremap <silent> <space>o :<C-u>CocList outline<cr>
-" Search workspace symbols
-nnoremap <silent> <space>s :<C-u>CocList -I symbols<cr>
+" Search workspace symbols - not working with flow
+" nnoremap <silent> <space>s :<C-u>CocList -I symbols<cr>
 " Do default action for next item.
 nnoremap <silent> <space>j :<C-u>CocNext<CR>
 " Do default action for previous item.
 nnoremap <silent> <space>k :<C-u>CocPrev<CR>
 " Resume latest coc list
 nnoremap <silent> <space>p :<C-u>CocListResume<CR>
+
+let g:javascript_plugin_flow = 1

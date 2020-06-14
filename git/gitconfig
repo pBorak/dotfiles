@@ -23,7 +23,7 @@
 	co = checkout
 	conflicted = !nvim +Conflicted
 	dc = diff --cached
-	l = log --oneline --decorate --graph --all -20
+	l = log --oneline --decorate --graph -20
 	pl = pull
 	plr = pull --rebase
 	ps = push
