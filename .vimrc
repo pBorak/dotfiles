@@ -45,8 +45,9 @@ Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-vinegar'
 Plug 'vim-ruby/vim-ruby'
 Plug 'vim-scripts/ReplaceWithRegister'
-call plug#end()
 
+let g:coc_global_extensions = [ 'coc-flow' ]
+call plug#end()
 
 set nocompatible
 set backspace=indent,eol,start  " allow backspacing over everything in insert mode
