@@ -1,4 +1,10 @@
 {
+ "list.insertMappings": {
+    "<C-s>": "do:exit"
+  },
+  "list.normalMappings": {
+    "<C-s>": "do:exit"
+  },
   "coc.preferences.jumpCommand": "edit",
   "coc.preferences.hoverTarget": "float",
   "suggest.floatEnable": true,
