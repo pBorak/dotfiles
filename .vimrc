@@ -162,9 +162,9 @@ nnoremap Y  y$
 
 " C-s saves and go to normal mode
 nnoremap <C-s> <esc>:noh<cr>:w<cr>
-vnoremap <C-S> <esc>gV
-onoremap <C-S> <esc>
-cnoremap <C-S> <C-c>
+vnoremap <C-s> <esc>gV
+onoremap <C-s> <esc>
+cnoremap <C-s> <C-c>
 inoremap <C-s> <esc>:w<cr>
 " Move around splits with <c-hjkl>
 nnoremap <c-j> <c-w>j
