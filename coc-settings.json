@@ -1,9 +1,7 @@
 {
- "list.insertMappings": {
-    "<C-s>": "do:exit"
-  },
   "list.normalMappings": {
-    "<C-s>": "do:exit"
+    "<C-n>": "normal:j",
+    "<C-p>": "normal:k"
   },
   "coc.preferences.jumpCommand": "edit",
   "coc.preferences.hoverTarget": "float",

@@ -138,8 +138,7 @@ set colorcolumn=+1
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " CUSTOM KEY MAPPINGS
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" map leader key to ','
-let mapleader = ','
+let mapleader = "\<Space>"
 " Fix slow O inserts
 :set timeout timeoutlen=1000 ttimeoutlen=100
 " Execute macro in q
@@ -161,11 +160,19 @@ nmap j gj
 nnoremap Y  y$
 
 " C-s saves and go to normal mode
-nnoremap <C-s> <esc>:noh<cr>:w<cr>
-vnoremap <C-s> <esc>gV
-onoremap <C-s> <esc>
-cnoremap <C-s> <C-c>
-inoremap <C-s> <esc>:w<cr>
+nnoremap <silent> <C-Space> <Esc>:noh<cr>:w<cr>
+vnoremap <C-Space> <Esc>gV
+onoremap <C-Space> <Esc>
+cnoremap <C-Space> <C-c>
+inoremap <C-Space> <Esc>:w<cr>
+
+nnoremap <C-@> <Esc>:noh<cr>:w<cr>
+vnoremap <C-@> <Esc>gV
+onoremap <C-@> <Esc>
+cnoremap <C-@> <C-c>
+inoremap <C-@> <Esc>
+
+nnoremap <leader>cc :cclose<cr>:pclose<cr>
 " Move around splits with <c-hjkl>
 nnoremap <c-j> <c-w>j
 nnoremap <c-k> <c-w>k
@@ -174,10 +181,10 @@ nnoremap <c-l> <c-w>l
 map <leader>o :only<cr>
 " Switch between the last two files
 nnoremap <Leader><Leader> <C-^>
-nnoremap <leader>w1 1gt
-nnoremap <leader>w2 2gt
-nnoremap <leader>w3 3gt
-nnoremap <leader>w4 4gt
+nnoremap <leader>1 1gt
+nnoremap <leader>2 2gt
+nnoremap <leader>3 3gt
+nnoremap <leader>4 4gt
 
 let test#strategy = "vtr"
 map <silent> <Leader>t :TestFile<cr>
@@ -188,10 +195,6 @@ map <silent> <Leader>s :TestNearest<cr>
 " Debugging
 
 nnoremap <leader>bp orequire "pry"; binding.pry<esc>
-
-" EasyAlign
-
-vmap <cr> <Plug>(EasyAlign)
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " ACK
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -205,12 +208,7 @@ endfunction
 
 nnoremap K :Ack! '<C-r><C-w>'<cr>
 vnoremap K :<C-u>call <sid>VisualAck()<cr>
-map <Leader>k :Ack!<space>
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Quickfix
-map <Leader>Q :cc<cr>
-map <space><space> :ccl<cr>
-map <Leader>q :copen<cr><cr>
+map <C-f> :Ack!<space>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " PARDON, My bad
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -231,13 +229,15 @@ nnoremap <leader>v\ :VtrOpenRunner { "orientation": "h", "percentage": 30 }<cr>
 nnoremap <leader>vk :VtrKillRunner<cr>
 nnoremap <leader>va :VtrAttachToPane<cr>
 nnoremap <leader>fr :VtrFocusRunner<cr>
-noremap <C-f> :VtrSendLinesToRunner<cr>
+noremap <C-s> :VtrSendLinesToRunner<cr>
 nnoremap <leader>ss :VtrSendCommandToRunner<space>
 
 " Fugitivie mappings
 nnoremap <Leader>gs :Gstatus<cr>
 nnoremap <Leader>d :Gdiff<cr>
 nnoremap <leader>gnc :GitNextConflict<cr>
+
+nnoremap <leader>; :
 
 :let g:user_emmet_leader_key = '<c-e>'
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -324,9 +324,6 @@ function! s:check_back_space() abort
   return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
 
-" Use <c-space> to trigger completion.
-inoremap <silent><expr> <c-space> coc#refresh()
-
 inoremap <silent><expr> <TAB>
       \ pumvisible() ? coc#_select_confirm() :
       \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
@@ -395,10 +392,6 @@ command! -nargs=0 Format :call CocAction('format')
 " use `:OR` for organize import of current buffer
 command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
 
-" Show all diagnostics
-nnoremap <silent> <space>d :<C-u>CocList diagnostics<cr>
-" Show commands
-nnoremap <silent> <space>c :<C-u>CocList commands<cr>
 " Do default action for next item.
 nnoremap <silent> <space>j :<C-u>CocNext<CR>
 " Do default action for previous item.
@@ -408,6 +401,5 @@ nnoremap <silent> <space>p :<C-u>CocListResume<CR>
 
 let g:coc_snippet_next = '<c-n>'
 let g:coc_snippet_prev = '<c-p>'
-
 
 let g:javascript_plugin_flow = 1

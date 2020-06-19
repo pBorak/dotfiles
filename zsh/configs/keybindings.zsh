@@ -16,6 +16,7 @@ bindkey "^n" history-search-forward
 bindkey "^y" accept-and-hold
 bindkey "^w" backward-kill-dir
 bindkey "^u" backward-kill-line
+bindkey "^g" autosuggest-accept
 
 bindkey "^[[1;5C" forward-word
 bindkey "^[[1;5D" backward-word
