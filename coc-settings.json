@@ -1,5 +1,9 @@
 {
+  "list.insertMappings": {
+    "<C-c>": "do:exit"
+  },
   "list.normalMappings": {
+    "<C-c>": "do:exit",
     "<C-n>": "normal:j",
     "<C-p>": "normal:k"
   },
