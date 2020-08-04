@@ -37,6 +37,7 @@ Plug 'tommcdo/vim-exchange'
 Plug 'tpope/vim-bundler'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-endwise'
+Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rails'
 Plug 'tpope/vim-repeat'
@@ -135,6 +136,10 @@ set colorcolumn=+1
 :let g:ruby_indent_block_style = 'do'
 :let g:ruby_indent_assigment_style = 'veriable'
 
+
+" Splitjoin 
+let g:splitjoin_ruby_curly_braces = 0
+let g:splitjoin_ruby_hanging_args = 0
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " CUSTOM KEY MAPPINGS
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -159,18 +164,8 @@ nmap k gk
 nmap j gj
 nnoremap Y  y$
 
-" C-s saves and go to normal mode
-nnoremap <silent> <C-Space> <Esc>:noh<cr>:w<cr>
-vnoremap <C-Space> <Esc>gV
-onoremap <C-Space> <Esc>
-cnoremap <C-Space> <C-c>
-inoremap <C-Space> <Esc>:w<cr>
-
-nnoremap <C-@> <Esc>:noh<cr>:w<cr>
-vnoremap <C-@> <Esc>gV
-onoremap <C-@> <Esc>
-cnoremap <C-@> <C-c>
-inoremap <C-@> <Esc>
+nnoremap <silent> <Esc> <Esc>:noh<cr>
+nnoremap <leader>w :w<cr>
 
 nnoremap <leader>cc :cclose<cr>:pclose<cr>
 " Move around splits with <c-hjkl>
@@ -398,6 +393,8 @@ nnoremap <silent> <space>j :<C-u>CocNext<CR>
 nnoremap <silent> <space>k :<C-u>CocPrev<CR>
 " Resume latest coc list
 nnoremap <silent> <space>p :<C-u>CocListResume<CR>
+
+nnoremap <leader>f :CocSearch <C-R>=expand("<cword>")<CR><CR>
 
 let g:coc_snippet_next = '<c-n>'
 let g:coc_snippet_prev = '<c-p>'
