@@ -104,14 +104,14 @@ set wildignore+=tmp/**
 set mouse=a
 "Store ctags in .git folder
 set tags =.git/tags
-" Use The Silver Searcher https://github.com/ggreer/the_silver_searcher
-if executable('ag')
+" rg > ag
+if executable('rg')
   " Use Ag over Grep
-  set grepprg=ag\ --nogroup\ --nocolor
-  " User ag for ack.vim
-  let g:ackprg = 'ag --nogroup --nocolor --column'
-  " Use ag in fzf for listing files. Lightning fast and respects .gitignore
-  let $FZF_DEFAULT_COMMAND = 'ag --literal --files-with-matches --nocolor --hidden -g ""'
+  set grepprg=rg\ --vimgrep\ --smart-case
+  " User rg for ack.vim
+  let g:ackprg = 'rg --vimgrep --smart-case'
+
+  let $FZF_DEFAULT_COMMAND = 'rg --files -g "" --hidden'
   let g:fzf_files_options =
         \ '--reverse ' .
         \ '--preview "(bat -style full --decorations always --color always {} ' .
@@ -122,11 +122,21 @@ if executable('ag')
         \ 'height': 0.5,
         \ 'highlight': 'Statement',
         \ 'border': 'sharp' } }
-
-  if !exists(":Ag")
-    command -nargs=+ -complete=file -bar Ag silent! grep! <args>|cwindow|redraw!
-  endif
 endif
+
+nnoremap <leader>f :CocSearch <C-R>=expand("<cword>")<CR><CR>
+nnoremap <C-f> :Rg<space>
+
+function! s:VisualAck()
+  let temp = @"
+  normal! gvy
+  let escaped_pattern = escape(@", "[]().*")
+  let @" = temp
+  execute "Ack! '" . escaped_pattern . "'"
+endfunction
+
+vnoremap K :<C-u>call <sid>VisualAck()<cr>
+nnoremap K :Rg <C-R><C-W><CR>
 
 " Make it obvious where 80 characters is
 set textwidth=80
@@ -190,20 +200,6 @@ map <silent> <Leader>s :TestNearest<cr>
 " Debugging
 
 nnoremap <leader>bp orequire "pry"; binding.pry<esc>
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" ACK
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-function! s:VisualAck()
-  let temp = @"
-  normal! gvy
-  let escaped_pattern = escape(@", "[]().*")
-  let @" = temp
-  execute "Ack! '" . escaped_pattern . "'"
-endfunction
-
-nnoremap K :Ack! '<C-r><C-w>'<cr>
-vnoremap K :<C-u>call <sid>VisualAck()<cr>
-map <C-f> :Ack!<space>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " PARDON, My bad
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -374,6 +370,7 @@ augroup end
 " Fix autofix problem of current line
 nmap <leader>qf  <Plug>(coc-fix-current)
 
+nmap <leader>rr <Plug>(coc-codeaction)
 " Create mappings for function text object, requires document symbols feature of languageserver.
 
 xmap if <Plug>(coc-funcobj-i)
@@ -393,8 +390,6 @@ nnoremap <silent> <space>j :<C-u>CocNext<CR>
 nnoremap <silent> <space>k :<C-u>CocPrev<CR>
 " Resume latest coc list
 nnoremap <silent> <space>p :<C-u>CocListResume<CR>
-
-nnoremap <leader>f :CocSearch <C-R>=expand("<cword>")<CR><CR>
 
 let g:coc_snippet_next = '<c-n>'
 let g:coc_snippet_prev = '<c-p>'
