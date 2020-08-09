@@ -124,7 +124,6 @@ if executable('rg')
         \ 'border': 'sharp' } }
 endif
 
-nnoremap <leader>f :CocSearch <C-R>=expand("<cword>")<CR><CR>
 nnoremap <C-f> :Rg<space>
 
 function! s:VisualAck()
@@ -390,6 +389,7 @@ nnoremap <silent> <space>j :<C-u>CocNext<CR>
 nnoremap <silent> <space>k :<C-u>CocPrev<CR>
 " Resume latest coc list
 nnoremap <silent> <space>p :<C-u>CocListResume<CR>
+nnoremap <leader>f :CocSearch <C-R>=expand("<cword>")<CR><CR>
 
 let g:coc_snippet_next = '<c-n>'
 let g:coc_snippet_prev = '<c-p>'
