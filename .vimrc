@@ -9,6 +9,7 @@ Plug 'christoomey/vim-conflicted'
 Plug 'christoomey/vim-system-copy'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'christoomey/vim-tmux-runner'
+Plug 'rhysd/clever-f.vim'
 Plug 'itchyny/lightline.vim'
 Plug 'janko/vim-test'
 Plug 'jparise/vim-graphql'
@@ -145,6 +146,11 @@ set colorcolumn=+1
 :let g:ruby_indent_block_style = 'do'
 :let g:ruby_indent_assigment_style = 'veriable'
 
+" Clever f
+let g:clever_f_across_no_line    = 1
+let g:clever_f_fix_key_direction = 1
+let g:clever_f_mark_cursor       = 1
+let g:clever_f_mark_cursor_color = 'IncSearch'
 
 " Splitjoin 
 let g:splitjoin_ruby_curly_braces = 0
@@ -227,7 +233,7 @@ nnoremap <Leader>gs :Gstatus<cr>
 nnoremap <Leader>d :Gdiff<cr>
 nnoremap <leader>gnc :GitNextConflict<cr>
 
-nnoremap <leader>; :
+noremap ; :
 
 :let g:user_emmet_leader_key = '<c-e>'
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
