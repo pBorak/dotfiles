@@ -28,7 +28,6 @@
 	plr = pull --rebase
 	ps = push
 	psoh = push origin HEAD
-	publish = "! git push -u origin $(git rev-parse --abbrev-ref HEAD)"
 	continue = continue
 	abort = abort
 	uncommit = reset --soft HEAD^
