@@ -5,14 +5,14 @@ call plug#begin('~/.vim/plugged')
 Plug 'AndrewRadev/splitjoin.vim'
 Plug 'MaxMEllon/vim-jsx-pretty'
 Plug 'pBorak/vim-nightfly-guicolors'
+Plug 'bluz71/vim-moonfly-colors'
+Plug 'bluz71/vim-moonfly-statusline'
 Plug 'christoomey/vim-conflicted'
 Plug 'christoomey/vim-system-copy'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'christoomey/vim-tmux-runner'
 Plug 'rhysd/clever-f.vim'
-Plug 'itchyny/lightline.vim'
 Plug 'janko/vim-test'
-Plug 'joshdick/onedark.vim'
 Plug 'jparise/vim-graphql'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
@@ -91,10 +91,7 @@ set nofoldenable
 " Diffs are shown side-by-side not above/below
 set diffopt+=iwhite
 set diffopt+=vertical
-" Completion options.
-"   menu: use a popup menu
-"   preview: show more info in menu
-:set completeopt=menu,preview
+set completeopt=menu,menuone,noinsert,noselect
 set cursorline
 " Enable built-in matchit plugin
 runtime macros/matchit.vim
@@ -257,20 +254,9 @@ augroup end
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set termguicolors
 
-colorscheme onedark
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Light line
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:lightline = {
-      \ 'colorscheme': 'onedark',
-      \ 'active': {
-      \   'left': [ [ 'mode', 'paste' ],
-      \             [ 'cocstatus', 'readonly', 'filename', 'modified' ] ]
-      \ },
-      \ 'component_function': {
-      \   'cocstatus': 'coc#status'
-      \ },
-      \ }
+colorscheme moonfly
+let g:moonflyWithGitBranchCharacter = 1
+let g:moonflyWithCocIndicator = 1
 set noshowmode
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " RENAME CURRENT FILE
