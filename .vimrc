@@ -93,7 +93,6 @@ set diffopt+=iwhite
 set diffopt+=vertical
 set completeopt=menu,menuone,noinsert,noselect
 set cursorline
-" Enable built-in matchit plugin
 runtime macros/matchit.vim
 " Open new split panes to right and bottom, which feels more natural
 set splitbelow

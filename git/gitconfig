@@ -25,6 +25,7 @@
 	conflicted = !nvim +Conflicted
 	dc = diff --cached
 	l = log --oneline --decorate --graph -20
+	ll = log --graph --format=\"%C(yellow)%h%C(red)%d%C(reset) - %C(bold green)(%ar)%C(reset) %s %C(blue)<%an>%C(reset)\"
 	pl = pull
 	plr = pull --rebase
 	ps = push
@@ -35,6 +36,5 @@
 [delta]
 	line-numbers = true
 	syntax-theme = nightfly
-	side-by-side = true
 [diff]
 	colorMoved = default
