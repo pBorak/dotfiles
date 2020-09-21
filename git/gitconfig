@@ -5,6 +5,7 @@
 	autocrlf = input
 	excludesfile = ~/.gitignore
 	editor = nvim
+	pager = delta
 [fetch]
 	prune = true
 [color]
@@ -27,11 +28,13 @@
 	pl = pull
 	plr = pull --rebase
 	ps = push
-	psoh = push origin HEAD
-	continue = continue
-	abort = abort
 	uncommit = reset --soft HEAD^
 	unstage = reset
 	upstream = rev-parse --abbrev-ref --symbolic-full-name @{u}
 	bsel = !git branch | grep -v '^*' | fzf-tmux --reverse | xargs git checkout
-
+[delta]
+	line-numbers = true
+	syntax-theme = nightfly
+	side-by-side = true
+[diff]
+	colorMoved = default
