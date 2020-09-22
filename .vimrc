@@ -102,25 +102,24 @@ set wildignore+=tmp/**
 set mouse=a
 "Store ctags in .git folder
 set tags =.git/tags
-" rg > ag
-if executable('rg')
-  " Use Ag over Grep
-  set grepprg=rg\ --vimgrep\ --smart-case
-  " User rg for ack.vim
-  let g:ackprg = 'rg --vimgrep --smart-case'
+set grepprg=rg\ --vimgrep\ --smart-case
+" User rg for ack.vim
+let g:ackprg = 'rg --vimgrep --smart-case'
 
-  let $FZF_DEFAULT_COMMAND = 'rg --files -g "" --hidden'
-  let g:fzf_files_options =
-        \ '--reverse ' .
-        \ '--preview "(bat -style full --decorations always --color always {} ' .
-        \ '|| cat {}) 2> /dev/null | head -'.&lines.'" '.
-        \ '--preview-window right:60%'
-  let g:fzf_layout = { 'window': {
-        \ 'width': 0.8,
-        \ 'height': 0.5,
-        \ 'highlight': 'Statement',
-        \ 'border': 'sharp' } }
-endif
+let $FZF_DEFAULT_COMMAND = 'rg --files -g "" --hidden'
+let g:fzf_files_options =
+      \ '--reverse ' .
+      \ '--preview "(bat -style full --decorations always --color always {} ' .
+      \ '|| cat {}) 2> /dev/null | head -'.&lines.'" '.
+      \ '--preview-window right:60%'
+let g:fzf_layout = { 'window': {
+      \ 'width': 0.9,
+      \ 'height': 0.7,
+      \ 'highlight': 'fzfBorder',
+      \ 'border': 'sharp' } }
+let g:fzf_commits_log_options = '--graph --color=always
+ \ --date=human --format="%C(#e3c78a)%h%C(#ff5454)%d%C(reset)
+ \ - %C(#42cf89)(%ad)%C(reset) %s %C(#80a0ff){%an}%C(reset)"'
 
 nnoremap <C-f> :Rg<space>
 
@@ -170,6 +169,8 @@ nnoremap <Leader>gm :Files app/models/<cr>
 nnoremap <Leader>gv :Files app/views/<cr>
 nnoremap <Leader>gc :Files app/controllers/<cr>
 nnoremap <Leader>gt :Files spec/<cr>
+nnoremap <Leader>gl :Commits<cr>
+nnoremap <Leader>bl :BCommits<cr>
 
 nmap 0 ^
 nmap k gk

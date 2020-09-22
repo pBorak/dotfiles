@@ -25,14 +25,13 @@
 	conflicted = !nvim +Conflicted
 	dc = diff --cached
 	l = log --oneline --decorate --graph -20
-	ll = log --graph --format=\"%C(yellow)%h%C(red)%d%C(reset) - %C(bold green)(%ar)%C(reset) %s %C(blue)<%an>%C(reset)\"
+  ll  = "log --graph --date=human --format='%C(#e3c78a)%h%C(#ff5454)%d%C(reset) - %C(#36c692)(%ad)%C(reset) %s %C(#80a0ff){%an}%C(reset)'"
 	pl = pull
 	plr = pull --rebase
 	ps = push
 	uncommit = reset --soft HEAD^
 	unstage = reset
 	upstream = rev-parse --abbrev-ref --symbolic-full-name @{u}
-	bsel = !git branch | grep -v '^*' | fzf-tmux --reverse | xargs git checkout
 [delta]
 	line-numbers = true
 	syntax-theme = nightfly

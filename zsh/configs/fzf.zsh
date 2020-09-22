@@ -52,3 +52,11 @@ fzf_git_log_pickaxe() {
          git show $(echo "$selections" | cut -d' ' -f1 | tr '\n' ' ')
      fi
  }
+
+fzf_git_branch() {
+  git branch -a --color=always | grep -v '/HEAD\s' | sort |
+    fzf --height 50% "$@" --border --ansi --multi --tac --preview-window right:70% \
+    --preview 'git log --oneline --graph --date=short --color=always --pretty="format:%C(auto)%cd %h%d %s" $(sed s/^..// <<< {} | cut -d" " -f1) | head -200' |
+  sed 's/^..//' | cut -d' ' -f1 |
+  sed 's#^remotes/##'
+}
