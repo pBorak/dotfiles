@@ -119,7 +119,7 @@ let g:fzf_layout = { 'window': {
       \ 'border': 'sharp' } }
 let g:fzf_commits_log_options = '--graph --color=always
  \ --date=human --format="%C(#e3c78a)%h%C(#ff5454)%d%C(reset)
- \ - %C(#42cf89)(%ad)%C(reset) %s %C(#80a0ff){%an}%C(reset)"'
+ \ - %C(#36c692)(%ad)%C(reset) %s %C(#80a0ff){%an}%C(reset)"'
 
 nnoremap <C-f> :Rg<space>
 

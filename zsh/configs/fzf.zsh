@@ -5,7 +5,7 @@ export FZF_DEFAULT_OPTS='
   --height 75% --multi --reverse --margin=0,1
   --bind ctrl-f:preview-page-down,ctrl-b:preview-page-up
   --color bg+:#262626,fg+:#dadada,hl:#ae81ff,hl+:#ae81ff
-  --color border:#303030,info:#cfcfb0,header:#80a0ff,spinner:#42cf89
+  --color border:#303030,info:#cfcfb0,header:#80a0ff,spinner:#36c692
   --color prompt:#87afff,pointer:#ff5189,marker:#f09479
 '
 export FZF_CTRL_T_OPTS="--preview 'bat --color=always --line-range :500 {}'"
