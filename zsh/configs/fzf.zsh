@@ -34,7 +34,7 @@ fzf_git_log() {
                        delta"
       )
     if [[ -n $selections ]]; then
-        git show $(echo "$selections" | cut -d' ' -f2 | tr '\n' ' ')
+        git show $(echo "$selections" | sed 's/^[* |]*//' | cut -d' ' -f1 | tr '\n' ' ')
     fi
 }
 

@@ -89,7 +89,6 @@ set nojoinspaces
 set foldmethod=manual
 set nofoldenable
 " Diffs are shown side-by-side not above/below
-set diffopt+=iwhite
 set diffopt+=vertical
 set completeopt=menu,menuone,noinsert,noselect
 set cursorline
@@ -163,14 +162,14 @@ map Q @q
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "FZF MAPINGS
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-nnoremap <c-p> :Files<cr>
-nnoremap <Leader>ga :Files app/<cr>
-nnoremap <Leader>gm :Files app/models/<cr>
-nnoremap <Leader>gv :Files app/views/<cr>
-nnoremap <Leader>gc :Files app/controllers/<cr>
-nnoremap <Leader>gt :Files spec/<cr>
-nnoremap <Leader>gl :Commits<cr>
-nnoremap <Leader>bl :BCommits<cr>
+nnoremap <silent> <c-p> :Files<cr>
+nnoremap <silent> <Leader>gm :Files app/models/<cr>
+nnoremap <silent> <Leader>gv :Files app/views/<cr>
+nnoremap <silent> <Leader>gc :Files app/controllers/<cr>
+nnoremap <silent> <Leader>gt :Files spec/<cr>
+nnoremap <silent> <Leader>gl :Commits<cr>
+nnoremap <silent> <Leader>bl :BCommits<cr>
+nnoremap <silent> <Leader>. :Files <C-r>=expand("%:h")<CR>/<CR>
 
 nmap 0 ^
 nmap k gk
@@ -271,26 +270,6 @@ function! RenameFile()
   endif
 endfunction
 map <leader>n :call RenameFile()<cr>
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" MULTIPURPOSE TAB KEY
-" INDENT IF WE'RE AT THE BEGINNING OF A LINE. ELSE, DO COMPLETION.
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-function! InsertTabWrapper()
-  let col = col('.') - 1
-  if !col
-    return "\<tab>"
-  endif
-
-  let char = getline('.')[col - 1]
-  if char =~ '\k'
-    " There's an identifier before the cursor, so complete the identifier.
-    return "\<c-p>"
-  else
-    return "\<tab>"
-  endif
-endfunction
-inoremap <expr> <tab> InsertTabWrapper()
-inoremap <s-tab> <c-n>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " don't give |ins-completion-menu| messages.
 set shortmess+=c
