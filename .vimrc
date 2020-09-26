@@ -55,33 +55,21 @@ let g:coc_global_extensions = [
       \]
 call plug#end()
 
-set nocompatible
-set backspace=indent,eol,start  " allow backspacing over everything in insert mode
-set history=10000               " keep 10000 lines of command line history
-set showcmd                     " display incomplete commands
-set incsearch                   " do incremental searching
-set hlsearch
 " make searches case-sensitive only if they contain upper-case characters
 set ignorecase smartcase
-set laststatus=2                " always display the status line
-syntax on                       " enable highlighting for syntax 
+set gdefault
 set showmatch
 set inccommand=nosplit
 set number
 set relativenumber
 " Display extra whitespace
 set list listchars=tab:»·,trail:·,nbsp:·
-filetype plugin indent on
 set wildmode=longest,list,full
-set wildmenu
 " Softtabs, 2 spaces
 set expandtab
 set tabstop=2
 set shiftwidth=2
 set softtabstop=2
-set autoindent
-" If a file is changed outside of vim, automatically reload it without asking
-set autoread
 " Insert only one space when joining lines that contain sentence-terminating
 " punctuation like `.`.
 set nojoinspaces
@@ -92,7 +80,6 @@ set nofoldenable
 set diffopt+=vertical
 set completeopt=menu,menuone,noinsert,noselect
 set cursorline
-runtime macros/matchit.vim
 " Open new split panes to right and bottom, which feels more natural
 set splitbelow
 set splitright
