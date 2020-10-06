@@ -4,7 +4,7 @@
 call plug#begin('~/.vim/plugged')
 Plug 'AndrewRadev/splitjoin.vim'
 Plug 'MaxMEllon/vim-jsx-pretty'
-Plug 'pBorak/vim-nightfly-guicolors'
+Plug 'bluz71/vim-nightfly-guicolors'
 Plug 'bluz71/vim-moonfly-colors'
 Plug 'bluz71/vim-moonfly-statusline'
 Plug 'christoomey/vim-conflicted'
@@ -104,8 +104,8 @@ let g:fzf_layout = { 'window': {
       \ 'highlight': 'fzfBorder',
       \ 'border': 'sharp' } }
 let g:fzf_commits_log_options = '--color=always
- \ --date=human --format="%C(#e3c78a)%h%C(#ff5454)%d%C(reset)
- \ - %C(#36c692)(%ad)%C(reset) %s %C(#80a0ff){%an}%C(reset)"'
+ \ --date=human --format="%C(#e3d18a)%h%C(#fc514e)%d%C(reset)
+ \ - %C(#21c7a8	)(%ad)%C(reset) %s %C(#80a0ff){%an}%C(reset)"'
 
 nnoremap <C-f> :Rg<space>
 
@@ -240,7 +240,7 @@ augroup end
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set termguicolors
 
-colorscheme moonfly
+colorscheme nightfly
 let g:moonflyWithGitBranchCharacter = 1
 let g:moonflyWithCocIndicator = 1
 set noshowmode

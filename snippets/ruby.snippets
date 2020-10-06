@@ -58,22 +58,15 @@ endsnippet
 
 snippet "(?<=def\s)initialize" "" r
 initialize(${1:args})
-	${1/(\w+,?\s?)(?=$)?/@$1/g} = $1
+	${2}
 end
-
-private
-
-attr_reader ${1/(\w+,?\s?)(?=$)?/:$1/g}
 endsnippet
 
 snippet init "" b
 def initialize(${1:args})
-	${1/(\w+,?\s?)(?=$)?/@$1/g} = $1
+	${2}
 end
-
-private
-
-attr_reader ${1/(\w+,?\s?)(?=$)?/:$1/g}
+end
 endsnippet
 
 snippet call "" b
@@ -82,17 +75,12 @@ def self.call(${1:args})
 end
 
 def initialize($1)
-	${1/(\w+,?\s?)(?=$)?/@$1/g} = $1
+	${2}
 end
 
 def call
 	${0: #call}
 end
-
-private
-
-attr_reader $1
-
 endsnippet
 
 #RSpec
