@@ -1,0 +1,64 @@
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                                 VISUAL
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set termguicolors
+colorscheme nightfly
+
+set number
+set relativenumber
+set textwidth=80
+set colorcolumn=+1
+set noshowmode
+set list listchars=tab:»·,trail:·,nbsp:· "Display extra whitespace
+set cursorline
+set mouse=a
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                               SEARCHING
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+set ignorecase smartcase
+set gdefault
+set inccommand=nosplit
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                               TABS & SPACES
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+set expandtab
+set tabstop=2
+set shiftwidth=2
+set softtabstop=2
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                               COMPLETION
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+set wildmode=longest,list,full
+set completeopt=menu,menuone,noinsert,noselect
+set wildignore+=tmp/**
+:set timeout timeoutlen=1000 ttimeoutlen=100 "Fix slow O inserts
+set nojoinspaces "Insert only one space when joining lines that contain sentence-terminating punctuation like `.`
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                               (NO)FOLDING
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+set foldmethod=manual
+set nofoldenable
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                               SPLITS
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+set diffopt+=vertical
+set splitbelow
+set splitright
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                               TAGS
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+set tags =.git/tags
+
+" vim:ft=vim

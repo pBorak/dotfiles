@@ -1,0 +1,37 @@
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                               OPTIONS
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+let $FZF_DEFAULT_COMMAND = 'rg --files -g "" --hidden'
+let g:fzf_files_options =
+      \ '--reverse ' .
+      \ '--preview "(bat -style full --decorations always --color always {} ' .
+      \ '|| cat {}) 2> /dev/null | head -'.&lines.'" '.
+      \ '--preview-window right:60%'
+let g:fzf_layout = { 'window': {
+      \ 'width': 0.9,
+      \ 'height': 0.7,
+      \ 'highlight': 'fzfBorder',
+      \ 'border': 'sharp' } }
+let g:fzf_commits_log_options = '--color=always
+ \ --date=human --format="%C(#e3d18a)%h%C(#fc514e)%d%C(reset)
+ \ - %C(#21c7a8	)(%ad)%C(reset) %s %C(#80a0ff){%an}%C(reset)"'
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                               MAPPINGS
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+nnoremap <C-f> :Rg<space>
+nnoremap <silent> <c-p> :Files<cr>
+nnoremap <silent> <Leader>gm :Files app/models/<cr>
+nnoremap <silent> <Leader>gv :Files app/views/<cr>
+nnoremap <silent> <Leader>gc :Files app/controllers/<cr>
+nnoremap <silent> <Leader>gt :Files spec/<cr>
+nnoremap <silent> <Leader>gl :Commits<cr>
+nnoremap <silent> <Leader>bl :BCommits<cr>
+nnoremap <silent> <Leader>. :Files <C-r>=expand("%:h")<CR>/<CR>
+
+" vim:ft=vim

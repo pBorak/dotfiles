@@ -1,0 +1,26 @@
+Plug 'mileszs/ack.vim'
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                               OPTIONS
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+set grepprg=rg\ --vimgrep\ --smart-case
+let g:ackprg = 'rg --vimgrep --smart-case'
+
+function! s:VisualAck()
+  let temp = @"
+  normal! gvy
+  let escaped_pattern = escape(@", "[]().*")
+  let @" = temp
+  execute "Ack! '" . escaped_pattern . "'"
+endfunction
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                               MAPPINGS
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+vnoremap K :<C-u>call <sid>VisualAck()<cr>
+nnoremap K :Rg <C-R><C-W><CR>
+
+" vim:ft=vim
+

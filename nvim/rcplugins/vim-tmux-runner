@@ -1,0 +1,15 @@
+Plug 'christoomey/vim-tmux-runner'
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                               MAPPINGS
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+nnoremap <leader>v- :VtrOpenRunner { "orientation": "v", "percentage": 30 }<cr>
+nnoremap <leader>v\ :VtrOpenRunner { "orientation": "h", "percentage": 30 }<cr>
+nnoremap <leader>vk :VtrKillRunner<cr>
+nnoremap <leader>va :VtrAttachToPane<cr>
+nnoremap <leader>fr :VtrFocusRunner<cr>
+noremap <C-s> :VtrSendLinesToRunner<cr>
+nnoremap <leader>ss :VtrSendCommandToRunner<space>
+
+" vim:ft=vim

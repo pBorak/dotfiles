@@ -1,0 +1,10 @@
+Plug 'bluz71/vim-moonfly-statusline'
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                               OPTIONS
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+let g:moonflyWithGitBranchCharacter = 1
+let g:moonflyWithCocIndicator = 1
+
+" vim:ft=vim
