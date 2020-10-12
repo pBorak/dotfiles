@@ -4,6 +4,7 @@ Plug 'tpope/vim-fugitive'
 "                               MAPPINGS
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+nnoremap <Leader>gb :Gblame<cr>
 nnoremap <Leader>gs :Gstatus<cr>
 nnoremap <Leader>d :Gdiff<cr>
 

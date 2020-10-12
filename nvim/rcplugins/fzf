@@ -27,7 +27,6 @@ let g:fzf_commits_log_options = '--color=always
 nnoremap <C-f> :Rg<space>
 nnoremap <silent> <c-p> :Files<cr>
 nnoremap <silent> <Leader>gm :Files app/models/<cr>
-nnoremap <silent> <Leader>gv :Files app/views/<cr>
 nnoremap <silent> <Leader>gc :Files app/controllers/<cr>
 nnoremap <silent> <Leader>gt :Files spec/<cr>
 nnoremap <silent> <Leader>gl :Commits<cr>

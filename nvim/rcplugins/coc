@@ -81,11 +81,10 @@ omap if <Plug>(coc-funcobj-i)
 omap af <Plug>(coc-funcobj-a)
 
 command! -nargs=0 Format :call CocAction('format')
-command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
+command! -nargs=0 OR   :call CocAction('runCommand', 'editor.action.organizeImport')
 
 nnoremap <silent><nowait> <space>j  :<C-u>CocNext<CR>
 nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
-nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
 nnoremap <leader>f :CocSearch <C-R>=expand("<cword>")<CR><CR>
 
 let g:coc_snippet_next = '<tab>'
