@@ -1,0 +1,5 @@
+Plug 'antoinemadec/coc-fzf'
+
+let g:coc_fzf_preview = ''
+let g:coc_fzf_opts = []
+" vim:ft=vim
