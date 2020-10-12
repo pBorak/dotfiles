@@ -1,10 +1,10 @@
-Plug 'antoinemadec/coc-fzf'
+Plug 'junegunn/gv.vim'
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"                               OPTIONS
+"                               MAPPINGS
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-let g:coc_fzf_preview = ''
-let g:coc_fzf_opts = []
+nmap <leader>gv :GV<CR>
+xmap <leader>gv :GV<CR>
 
 " vim:ft=vim
