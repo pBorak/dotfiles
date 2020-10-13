@@ -16,6 +16,7 @@ nnoremap <leader>w :w<cr>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 map <leader>o :only<cr>
+map <leader>av :AV<cr>
 nnoremap <leader>1 1gt
 nnoremap <leader>2 2gt
 nnoremap <leader>3 3gt

@@ -10,9 +10,9 @@ let test#strategy = "vtr"
 "                               MAPPINGS
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-map <silent> <Leader>t :TestFile<cr>
-map <silent> <Leader>l :TestLast<cr>
-map <silent> <Leader>a :TestSuite<cr>
-map <silent> <Leader>s :TestNearest<cr>
+map <silent> <Leader>tf :TestFile<cr>
+map <silent> <Leader>tl :TestLast<cr>
+map <silent> <Leader>ta :TestSuite<cr>
+map <silent> <Leader>tt :TestNearest<cr>
 
 " vim:ft=vim

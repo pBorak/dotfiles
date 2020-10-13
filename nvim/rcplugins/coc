@@ -82,7 +82,7 @@ command! -nargs=0 OR   :call CocAction('runCommand', 'editor.action.organizeImpo
 
 nnoremap <silent><nowait> <space>j  :<C-u>CocNext<CR>
 nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
-nnoremap <leader>f :CocSearch <C-R>=expand("<cword>")<CR><CR>
+nnoremap <leader>cs :CocSearch <C-R>=expand("<cword>")<CR><CR>
 
 let g:coc_snippet_next = '<tab>'
 let g:coc_snippet_prev = '<s-tab>'
