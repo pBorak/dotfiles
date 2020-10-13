@@ -69,18 +69,15 @@ nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gh <Plug>(coc-references)
 
 nmap <leader>rn <Plug>(coc-rename)
-xmap <leader>fo <Plug>(coc-format-selected)
-nmap <leader>fo <Plug>(coc-format-selected)
 
 nmap <leader>qf  <Plug>(coc-fix-current)
-nmap <leader>rr <Plug>(coc-codeaction)
+nmap <leader>ca <Plug>(coc-codeaction)
 
 xmap if <Plug>(coc-funcobj-i)
 xmap af <Plug>(coc-funcobj-a)
 omap if <Plug>(coc-funcobj-i)
 omap af <Plug>(coc-funcobj-a)
 
-command! -nargs=0 Format :call CocAction('format')
 command! -nargs=0 OR   :call CocAction('runCommand', 'editor.action.organizeImport')
 
 nnoremap <silent><nowait> <space>j  :<C-u>CocNext<CR>
