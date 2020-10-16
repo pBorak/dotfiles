@@ -38,8 +38,8 @@
   "html.format.enable": true,
   "tsserver.formatOnType": true,
   "coc.preferences.formatOnType": true,
-  "tsserver.enable": false,
-  "javascript.validate.enable": false,
+  "tsserver.enable": true,
+  "javascript.validate.enable": true,
   "snippets.extends": {
     "javascriptreact": ["javascript"],
     "typescript": ["javascript"]

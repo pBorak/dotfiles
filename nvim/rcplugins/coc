@@ -9,10 +9,7 @@ Plug 'neoclide/coc-solargraph', {'do': 'yarn install --frozen-lockfile'}
 Plug 'neoclide/coc-tsserver', {'do': 'yarn install --frozen-lockfile'}
 Plug 'neoclide/coc-yaml', {'do': 'yarn install --frozen-lockfile'}
 
-let g:coc_global_extensions = [
-      \ 'coc-flow',
-      \ 'coc-snippets',
-      \]
+let g:coc_global_extensions = [ 'coc-snippets' ]
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                               OPTIONS
