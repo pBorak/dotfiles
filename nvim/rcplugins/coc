@@ -26,14 +26,6 @@ function! s:check_back_space() abort
   return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
 
-function! s:show_documentation()	
-  if (index(['vim','help'], &filetype) >= 0)	
-    execute 'h '.expand('<cword>')	
-  else	
-    call CocActionAsync('doHover')	
-  endif	
-endfunction
-
 autocmd CursorHold * silent call CocActionAsync('highlight')
 
 augroup cocgroup
@@ -55,7 +47,17 @@ inoremap <silent><expr> <TAB>
       \ <SID>check_back_space() ? "\<TAB>" :
       \ coc#refresh()
 
-nnoremap <silent> S :call <SID>show_documentation()<CR>	
+nnoremap <silent> S :call <SID>show_documentation()<CR>
+
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  elseif (coc#rpc#ready())
+    call CocActionAsync('doHover')
+  else
+    execute '!' . &keywordprg . " " . expand('<cword>')
+  endif
+endfunction
 
 nmap <silent> [r <Plug>(coc-diagnostic-prev)
 nmap <silent> ]r <Plug>(coc-diagnostic-next)
