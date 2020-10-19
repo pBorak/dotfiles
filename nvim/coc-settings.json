@@ -24,6 +24,7 @@
   "diagnostic.checkCurrentLine": true,
   "coc.preferences.currentFunctionSymbolAutoUpdate": true,
   "solargraph.diagnostics": true,
+  "solargraph.promptDownload": false,
   "coc.preferences.formatOnSaveFiletypes": [
     "css",
     "markdown",
