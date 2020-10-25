@@ -43,6 +43,7 @@
   "javascript.validate.enable": true,
   "snippets.extends": {
     "javascriptreact": ["javascript"],
-    "typescript": ["javascript"]
+    "typescript": ["javascript"],
+    "typescriptreact": ["javascript"]
   }
 }
