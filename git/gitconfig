@@ -25,6 +25,7 @@
 	co = checkout
 	conflicted = !nvim +Conflicted
   continue = continue
+	d = diff
 	dc = diff --cached
 	l = log --oneline --decorate --graph -20
   ll  = "log --graph --date=human --format='%C(#e3d18a)%h%C(#fc514e)%d%C(reset) - %C(#21c7a8)(%ad)%C(reset) %s %C(#80a0ff){%an}%C(reset)'"
