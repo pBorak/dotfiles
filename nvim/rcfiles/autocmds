@@ -9,6 +9,11 @@ augroup vimrcEx
   autocmd FileType gitcommit setlocal spell
 " Don't automatically continue comments after newline
   autocmd BufNewFile,BufRead * setlocal formatoptions-=cro
+  autocmd Syntax * syntax sync minlines=2000
+  autocmd BufReadPre *
+        \ if getfsize(expand('%')) > 200000|
+        \     call signs#Disable()|
+        \ endif
 augroup end
 
 " vim:ft=vim
