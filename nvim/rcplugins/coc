@@ -59,8 +59,8 @@ function! s:show_documentation()
   endif
 endfunction
 
-nmap <silent> [r <Plug>(coc-diagnostic-prev)
-nmap <silent> ]r <Plug>(coc-diagnostic-next)
+nmap <silent> [r <Plug>(coc-diagnostic-prev)zz
+nmap <silent> ]r <Plug>(coc-diagnostic-next)zz
 
 nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)

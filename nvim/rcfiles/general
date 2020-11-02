@@ -12,6 +12,7 @@ set noshowmode
 set list listchars=tab:»·,trail:·,nbsp:· "Display extra whitespace
 set cursorline
 set mouse=a
+set updatetime=100
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                               SEARCHING
