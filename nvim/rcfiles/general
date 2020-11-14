@@ -2,7 +2,7 @@
 "                                 VISUAL
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set termguicolors
-colorscheme nightfly
+colorscheme moonfly
 
 set number
 set relativenumber
