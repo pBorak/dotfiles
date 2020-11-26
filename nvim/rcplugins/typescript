@@ -1,4 +1,0 @@
-Plug 'leafgarland/typescript-vim', { 'for': ['javascript', 'javascript.jsx'] }
-Plug 'peitalin/vim-jsx-typescript', { 'for': 'typescript.jsx' }
-
-" vim:ft=vim
