@@ -11,7 +11,7 @@ let test#strategy = "vtr"
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 map <silent> <Leader>tf :TestFile<cr>
-map <silent> <cr> :TestLast<cr>
+map <silent> <Leader>tl :TestLast<cr>
 map <silent> <Leader>ta :TestSuite<cr>
 map <silent> <Leader>tt :TestNearest<cr>
 
