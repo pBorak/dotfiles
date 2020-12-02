@@ -116,6 +116,10 @@ snippet exp "" b
 expect(${1}).to ${2}
 endsnippet
 
+snippet all "" b
+allow(${1}).to receive(:${2})${0}
+endsnippet
+
 snippet agg "" b
 aggregate_failures '${1:message}' do
 	${2:${VISUAL: #examples}}
