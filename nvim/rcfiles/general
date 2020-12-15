@@ -3,6 +3,7 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set termguicolors
 colorscheme nightfly
+highlight Whitespace guifg=#82aaff
 
 set number
 set relativenumber
