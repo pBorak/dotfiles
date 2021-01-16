@@ -13,7 +13,6 @@ set noshowmode
 set list listchars=tab:»·,trail:·,nbsp:· "Display extra whitespace
 set cursorline
 set mouse=a
-set updatetime=100
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                               SEARCHING
@@ -62,5 +61,23 @@ set splitright
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 set tags =.git/tags
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                               UNDO
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+let s:undoDir='/tmp/.undodir_' . $USER
+if !isdirectory(s:undoDir)
+    call mkdir(s:undoDir, '', 0700)
+endif
+let &undodir=s:undoDir
+set undofile
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                               MISC
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+set scrolloff=8
+set updatetime=100
 
 " vim:ft=vim
