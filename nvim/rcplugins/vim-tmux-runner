@@ -5,7 +5,6 @@ Plug 'christoomey/vim-tmux-runner'
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 nnoremap <leader>v- :VtrOpenRunner { "orientation": "v", "percentage": 30 }<cr>
-nnoremap <leader>v\ :VtrOpenRunner { "orientation": "h", "percentage": 30 }<cr>
 nnoremap <leader>vk :VtrKillRunner<cr>
 nnoremap <leader>va :VtrAttachToPane<cr>
 nnoremap <leader>fr :VtrFocusRunner<cr>

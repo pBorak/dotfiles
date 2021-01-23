@@ -1,10 +1,15 @@
 Plug 'tpope/vim-fugitive'
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                               OPTIONS
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+autocmd BufReadPost fugitive://* set bufhidden=delete
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                               MAPPINGS
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-nnoremap <Leader>gb :Gblame<cr>
 nnoremap <Leader>gr :Gread<cr>
 nnoremap <Leader>gs :Gstatus<cr>
 nnoremap <Leader>d :Gdiff<cr>
