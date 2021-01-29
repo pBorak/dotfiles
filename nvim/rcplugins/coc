@@ -57,15 +57,15 @@ function! s:show_documentation()
   endif
 endfunction
 
-nmap <silent> [r <Plug>(coc-diagnostic-prev)zz
-nmap <silent> ]r <Plug>(coc-diagnostic-next)zz
+nmap <silent> [d <Plug>(coc-diagnostic-prev)zz
+nmap <silent> ]d <Plug>(coc-diagnostic-next)zz
 
 nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gh <Plug>(coc-references)
 
-nmap <leader>rn <Plug>(coc-rename)
+nmap <leader>cr <Plug>(coc-rename)
 
 nmap <leader>qf  <Plug>(coc-fix-current)
 nmap <leader>ca <Plug>(coc-codeaction)

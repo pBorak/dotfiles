@@ -15,8 +15,8 @@ nnoremap <leader>w :w<cr>
 "                          WINDOWS,TABS,SPLITS
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-map <leader>o :only<cr>
-map <leader>av :AV<cr>
+nnoremap <silent> <Leader>o  :only<CR>
+nnoremap <silent> <Leader>v  :vsplit<CR>
 nnoremap <leader>1 1gt
 nnoremap <leader>2 2gt
 nnoremap <leader>3 3gt
@@ -28,7 +28,6 @@ nnoremap <c-h> <c-w>h
 nnoremap <c-l> <c-w>l
 
 map <Leader>e :e <C-R>=escape(expand("%:p:h"),' ') . '/'<cr>
-map <Leader>vs :vnew <C-R>=escape(expand("%:p:h"), ' ') . '/'<cr>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                               QUICKFIX
