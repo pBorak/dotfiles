@@ -22,3 +22,4 @@ alias glS='fzf_git_log_pickaxe'
 alias gll='fzf_git_log'
 alias ga='fzf_git_add'
 alias gb='fzf_git_branch | xargs git checkout'
+alias gcurrent="git rev-parse --abbrev-ref HEAD"
