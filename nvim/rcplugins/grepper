@@ -1,26 +1,20 @@
-Plug 'mileszs/ack.vim'
+Plug 'mhinz/vim-grepper'
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                               OPTIONS
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-set grepprg=rg\ --vimgrep\ --smart-case
-let g:ackprg = 'rg --vimgrep --smart-case'
-
-function! s:VisualAck()
-  let temp = @"
-  normal! gvy
-  let escaped_pattern = escape(@", "[]().*")
-  let @" = temp
-  execute "Ack! '" . escaped_pattern . "'"
-endfunction
+let g:grepper       = {}
+let g:grepper.tools = ['rg']
+let g:grepper.jump  = 1
+let g:grepper.stop  = 1000
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                               MAPPINGS
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-vnoremap K :<C-u>call <sid>VisualAck()<cr>
 nnoremap K :Rg <C-R><C-W><CR>
+xmap K <Plug>(GrepperOperator)
+
 
 " vim:ft=vim
-
