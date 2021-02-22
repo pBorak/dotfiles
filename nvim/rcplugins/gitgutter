@@ -19,8 +19,8 @@ let g:gitgutter_preview_win_floating = 1
 "                               MAPPINGS
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-nmap [g <Plug>(GitGutterPrevHunk)zz
-nmap ]g <Plug>(GitGutterNextHunk)zz
+nmap [g <Plug>(GitGutterPrevHunk)
+nmap ]g <Plug>(GitGutterNextHunk)
 nmap <leader>= <Plug>(GitGutterStageHunk)
 nmap <leader>- <Plug>(GitGutterUndoHunk)
 nmap <leader>p <Plug>(GitGutterPreviewHunk)

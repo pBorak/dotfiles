@@ -10,6 +10,7 @@ nnoremap Y  y$
 map Q @q
 nnoremap <silent> <Esc> <Esc>:noh<cr>
 nnoremap <leader>w :w<cr>
+imap <c-l> ={}<left>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                          WINDOWS,TABS,SPLITS
