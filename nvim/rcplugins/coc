@@ -61,7 +61,6 @@ nmap <silent> ]d <Plug>(coc-diagnostic-next)
 
 nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
-nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gh <Plug>(coc-references)
 
 nmap <leader>cr <Plug>(coc-rename)
