@@ -1,5 +1,7 @@
 alias ..='cd ..'
 alias be='bundle exec'
+alias bs='./base start @base-core/app'
+alias bl='./base local-proxy start'
 alias c='clear'
 alias dbm='be rails db:migrate'
 alias dbmt='be rails db:migrate RAILS_ENV=test'
