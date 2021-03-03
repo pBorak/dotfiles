@@ -33,6 +33,7 @@
 	pl = pull
 	plr = pull --rebase
 	ps = push
+	publish = publish
   rbm = !git mup && git rebase master
   rim = !git rebase -i $(git merge-base master HEAD)
   riu = !git rebase -i $(git upstream)
