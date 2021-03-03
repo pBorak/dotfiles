@@ -4,7 +4,7 @@ Plug 'junegunn/gv.vim'
 "                               MAPPINGS
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-nmap <c-g> :GV -100<CR>
-xmap <c-g> :GV<CR>
+nmap <leader>gv :GV -100<CR>
+xmap <leader>gv :GV<CR>
 
 " vim:ft=vim
