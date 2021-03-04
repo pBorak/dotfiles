@@ -4,8 +4,6 @@ Plug 'stsewd/fzf-checkout.vim'
 "                               OPTIONS
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-let g:fzf_checkout_git_options = '--sort=-committerdate'
-
 let g:fzf_branch_actions = {
       \ 'track': {'keymap': 'ctrl-t'},
       \}
