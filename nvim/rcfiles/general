@@ -35,7 +35,6 @@ set softtabstop=2
 "                               COMPLETION
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-set wildmode=longest,list,full
 set completeopt=menu,menuone,noinsert,noselect
 set wildignore+=tmp/**
 :set timeout timeoutlen=1000 ttimeoutlen=100 "Fix slow O inserts
