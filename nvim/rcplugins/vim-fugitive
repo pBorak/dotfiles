@@ -11,7 +11,7 @@ autocmd BufReadPost fugitive://* set bufhidden=delete
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 nnoremap <Leader>gr :Gread<cr>
-nnoremap <Leader>gs :Gstatus<cr>
-nnoremap <Leader>d :Gdiff<cr>
+nnoremap <Leader>gs :G<cr>
+nnoremap <Leader>d :Gdiffsplit<cr>
 
 " vim:ft=vim
