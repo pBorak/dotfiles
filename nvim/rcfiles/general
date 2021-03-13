@@ -2,8 +2,8 @@
 "                                 VISUAL
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set termguicolors
-colorscheme nightfly
-highlight Whitespace guifg=#82aaff
+colorscheme moonfly
+highlight Whitespace guifg=#80a0ff
 
 set number
 set relativenumber
