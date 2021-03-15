@@ -15,4 +15,5 @@ log/*.log
 rerun.txt
 tmp/**/*
 .solargraph.yml
+solargraph.rb
 .projections.json
