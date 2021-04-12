@@ -21,8 +21,8 @@ let g:gitgutter_preview_win_floating = 1
 
 nmap [g <Plug>(GitGutterPrevHunk)
 nmap ]g <Plug>(GitGutterNextHunk)
-nmap <leader>= <Plug>(GitGutterStageHunk)
-nmap <leader>- <Plug>(GitGutterUndoHunk)
+nmap <leader>ga <Plug>(GitGutterStageHunk)
+nmap <leader>gu <Plug>(GitGutterUndoHunk)
 nmap <leader>p <Plug>(GitGutterPreviewHunk)
 
 " vim:ft=vim

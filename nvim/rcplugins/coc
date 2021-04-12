@@ -75,8 +75,6 @@ omap af <Plug>(coc-funcobj-a)
 
 command! -nargs=0 OR   :call CocAction('runCommand', 'editor.action.organizeImport')
 
-nnoremap <leader>cs :CocSearch <C-R>=expand("<cword>")<CR><CR>
-
 xmap <tab> <Plug>(coc-snippets-select)
 let g:coc_snippet_next = '<tab>'
 let g:coc_snippet_prev = '<s-tab>'

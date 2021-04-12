@@ -4,6 +4,7 @@
 set termguicolors
 colorscheme moonfly
 highlight Whitespace guifg=#80a0ff
+highlight ColorColumn guibg=#1c1c1c
 
 set number
 set relativenumber

@@ -11,6 +11,7 @@ autocmd BufReadPost fugitive://* set bufhidden=delete
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 nnoremap <Leader>gr :Gread<cr>
+nnoremap <Leader>gw :Gwrite<cr>
 nnoremap <Leader>gs :G<cr>
 nnoremap <Leader>d :Gdiffsplit<cr>
 
