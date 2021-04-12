@@ -8,7 +8,6 @@
     "<C-p>": "normal:k"
   },
   "coc.preferences.jumpCommand": "edit",
-  "coc.preferences.hoverTarget": "float",
   "suggest.floatEnable": true,
   "suggest.noselect": false,
   "suggest.acceptSuggestionOnCommitCharacter": true,
