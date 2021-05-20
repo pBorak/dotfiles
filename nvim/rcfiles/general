@@ -79,6 +79,7 @@ set undofile
 
 set scrolloff=8
 set updatetime=100
+set signcolumn=yes:1
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                                 LUA
