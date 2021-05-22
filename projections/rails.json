@@ -1,0 +1,59 @@
+{
+  "app/controllers/*_controller.rb": {
+    "command": "controller",
+    "test": [
+      "spec/requests/{}_spec.rb",
+      "spec/controllers/{}_controller_spec.rb"
+    ],
+    "alternate": [
+      "spec/requests/{}_controller_spec.rb",
+      "spec/controllers/{}_controller_spec.rb"
+    ]
+  },
+  "spec/requests/*_spec.rb": {
+    "alternate": "app/controllers/{}.rb"
+  },
+  "spec/controllers/*_spec.rb": {
+    "alternate": "app/controllers/{}.rb"
+  },
+  "app/domain/*.rb": {
+    "command": "domain",
+    "test": ["spec/domain/{}_spec.rb"],
+    "alternate": ["spec/domain/{}_spec.rb"]
+  },
+  "spec/domain/*_spec.rb": {
+    "alternate": "app/domain/{}.rb"
+  },
+  "app/models/*.rb": {
+    "command": "model",
+    "test": ["spec/models/{}_spec.rb"],
+    "alternate": ["spec/models/{}_spec.rb"]
+  },
+  "spec/models/*_spec.rb": {
+    "alternate": "app/models/{}.rb"
+  },
+  "app/jobs/*_job.rb": {
+    "command": "job",
+    "test": ["spec/jobs/{}_job_spec.rb"],
+    "alternate": ["spec/jobs/{}_job_spec.rb"]
+  },
+  "spec/jobs/*_job_spec.rb": {
+    "alternate": "app/jobs/{}_job.rb"
+  },
+  "app/services/*.rb": {
+    "command": "service",
+    "test": ["spec/services/{}_spec.rb"],
+    "alternate": ["spec/services/{}_spec.rb"]
+  },
+  "spec/services/*_spec.rb": {
+    "alternate": "app/services/{}.rb"
+  },
+  "lib/*.rb": {
+    "command": "lib",
+    "test": ["spec/lib/{}_spec.rb"],
+    "alternate": ["spec/lib/{}_spec.rb"]
+  },
+  "spec/lib/*_spec.rb": {
+    "alternate": "lib/{}.rb"
+  }
+}
