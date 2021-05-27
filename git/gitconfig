@@ -37,6 +37,7 @@
   rbm = !git mup && git rebase master
   rim = !git rebase -i $(git merge-base master HEAD)
   riu = !git rebase -i $(git upstream)
+	trust = !mkdir .git/safe
 	uncommit = reset --soft HEAD^
 	unstage = reset
 	upstream = rev-parse --abbrev-ref --symbolic-full-name @{u}
