@@ -6,7 +6,7 @@ end
 
 def main
   current_branch = get_current_branch
-  if current_branch == 'master'
+  if current_branch == 'master' || current_branch == 'main'
     $stderr.puts "Currently on master, aborting."
     exit 1
   else

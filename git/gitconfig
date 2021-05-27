@@ -29,13 +29,13 @@
 	dc = diff --cached
 	l = log --oneline --decorate --graph -20
   ll  = "log --graph --date=human --format='%C(#e3c78a)%h%C(#ff5454)%d%C(reset) - %C(#36c692)(%ad)%C(reset) %s %C(#80a0ff){%an}%C(reset)'"
-  mup = !git checkout master && git fetch origin && echo && git l master..origin/master && echo && git pull --quiet && git checkout -
+  mup = !git checkout main && git fetch origin && echo && git l main..origin/main && echo && git pull --quiet && git checkout -
 	pl = pull
 	plr = pull --rebase
 	ps = push
 	publish = publish
-  rbm = !git mup && git rebase master
-  rim = !git rebase -i $(git merge-base master HEAD)
+  rbm = !git mup && git rebase main
+  rim = !git rebase -i $(git merge-base main HEAD)
   riu = !git rebase -i $(git upstream)
 	trust = !mkdir .git/safe
 	uncommit = reset --soft HEAD^
