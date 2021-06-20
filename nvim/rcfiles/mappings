@@ -16,8 +16,6 @@ imap <c-l> ={}<left>
 "                          WINDOWS,TABS,SPLITS
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-nnoremap <silent> <Leader>o  :only<CR>
-nnoremap <silent> <Leader>v  :vsplit<CR>
 nnoremap <leader>1 1gt
 nnoremap <leader>2 2gt
 nnoremap <leader>3 3gt
