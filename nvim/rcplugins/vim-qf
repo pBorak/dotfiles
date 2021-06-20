@@ -1,19 +1,15 @@
-Plug 'mhinz/vim-grepper'
+Plug 'romainl/vim-qf'
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                               OPTIONS
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-let g:grepper       = {}
-let g:grepper.tools = ['rg']
-let g:grepper.jump  = 0
+let g:qf_mapping_ack_style = 1
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                               MAPPINGS
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-nnoremap K :Rg <C-R><C-W><CR>
-xmap K <Plug>(GrepperOperator)
-
+nmap <leader>cc <Plug>(qf_qf_toggle)
 
 " vim:ft=vim
