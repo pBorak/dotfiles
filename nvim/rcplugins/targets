@@ -1,3 +1,10 @@
 Plug 'wellle/targets.vim'
 
+autocmd User targets#mappings#user call targets#mappings#extend({
+    \ 'q': {},
+    \ '"': {},
+    \ "'": {},
+    \ '`': {},
+    \ })
+
 " vim:ft=vim
