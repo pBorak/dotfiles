@@ -30,7 +30,8 @@
     "javascript",
     "javascriptreact",
     "typescript",
-    "typescriptreact"
+    "typescriptreact",
+    "graphql"
   ],
   "prettier.requireConfig": true,
   "eslint.autoFixOnSave": true,
