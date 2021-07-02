@@ -7,8 +7,8 @@ zle -N backward-kill-dir
 
 bindkey "^a" beginning-of-line
 bindkey "^e" end-of-line
-bindkey "^f" forward-char
-bindkey "^b" backward-char
+bindkey "^f" forward-word
+bindkey "^b" backward-word
 bindkey "^k" kill-line
 bindkey "^d" delete-char
 bindkey "^p" history-search-backward
