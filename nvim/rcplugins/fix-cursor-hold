@@ -1,5 +1,0 @@
-Plug 'antoinemadec/FixCursorHold.nvim'
-
-let g:cursorhold_updatetime = 100
-
-" vim:ft=vim

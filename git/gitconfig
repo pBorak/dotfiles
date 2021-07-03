@@ -12,8 +12,6 @@
 	ui = auto
 [commit]
 	template = ~/.gitmessage
-[init]
-	templatedir = ~/.git_template
 [push]
   default = upstream
 [alias]
@@ -27,22 +25,23 @@
   continue = continue
 	d = diff
 	dc = diff --cached
+  gone = "!f() { git fetch --all --prune; git branch -vv | awk '/: gone]/{print $1}' | xargs git branch -D; }; f"
 	l = log --oneline --decorate --graph -20
-  ll  = "log --graph --date=human --format='%C(#e3c78a)%h%C(#ff5454)%d%C(reset) - %C(#36c692)(%ad)%C(reset) %s %C(#80a0ff){%an}%C(reset)'"
-  mup = !git checkout main && git fetch origin && echo && git l main..origin/main && echo && git pull --quiet && git checkout -
+  ll  = "log --graph --date=human --format='%C(#e0af68)%h%C(#f7768e)%d%C(reset) - %C(#9ece6a)(%ad)%C(reset) %s %C(#7aa2f7){%an}%C(reset)'"
 	pl = pull
 	plr = pull --rebase
 	ps = push
+	psf = push --force-with-lease
 	publish = publish
-  rbm = !git mup && git rebase main
   rim = !git rebase -i $(git merge-base main HEAD)
+  rima = !git rebase -i $(git merge-base master HEAD)
   riu = !git rebase -i $(git upstream)
-	trust = !mkdir .git/safe
 	uncommit = reset --soft HEAD^
 	unstage = reset
 	upstream = rev-parse --abbrev-ref --symbolic-full-name @{u}
 [delta]
 	line-numbers = true
-	syntax-theme = nightfly
 [diff]
 	colorMoved = default
+[pull]
+  ff = only
