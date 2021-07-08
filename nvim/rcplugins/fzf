@@ -41,7 +41,6 @@ nnoremap <silent> <c-p> :Files<cr>
 nnoremap <silent> <Leader>fm :Files app/models/<cr>
 nnoremap <silent> <Leader>fc :Files app/controllers/<cr>
 nnoremap <silent> <Leader>ft :Files spec/<cr>
-nnoremap <silent> <Leader>bl :BCommits<cr>
 nnoremap <silent> <Leader>. :Files <C-r>=expand("%:h")<CR>/<CR>
 nnoremap <silent> <Leader>, :Buffers<cr>
 nnoremap <silent> <Leader>fg :GFiles?<cr>
