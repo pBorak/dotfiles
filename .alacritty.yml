@@ -23,17 +23,17 @@ scrolling:
 font:
   # Normal (roman) font face
   normal:
-    family: JetBrains Mono
+    family: JetBrainsMonoNL Nerd Font
     style: Regular
 
   # Bold font face
   bold:
-    family: JetBrains Mono
+    family: JetBrainsMonoNL Nerd Font
     style: Bold
 
   # Italic font face
   italic:
-    family: JetBrains Mono
+    family: JetBrainsMonoNL Nerd Font
     style: Italic
 
   # Point size
