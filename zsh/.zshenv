@@ -4,6 +4,9 @@ export DOTFILES=$HOME/code/dotfiles
 
 export EDITOR="nvim"
 
+export LANG=en_US.UTF-8
+export LC_ALL=en_US.UTF-8
+
 export RIPGREP_CONFIG_PATH=$DOTFILES/rg/.ripgreprc
 
 export FZF_DEFAULT_COMMAND='fd --type f --color=never'

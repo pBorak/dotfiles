@@ -8,6 +8,10 @@ for zsh_source in $HOME/.zsh/configs/*.zsh; do
   source $zsh_source
 done
 
+if [[ "$TERM" == "xterm-kitty" ]]; then
+  kitty + complete setup zsh | source /dev/stdin
+fi
+
 alias vim="nvim"
 alias vi="nvim"
 
