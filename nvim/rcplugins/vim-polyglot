@@ -1,3 +1,0 @@
-Plug 'sheerun/vim-polyglot', { 'tag': 'v4.13.1' }
-
-" vim:ft=vim

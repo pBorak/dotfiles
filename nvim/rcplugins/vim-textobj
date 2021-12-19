@@ -1,7 +1,0 @@
-Plug 'kana/vim-textobj-user'
-Plug 'kana/vim-textobj-indent'
-Plug 'kana/vim-textobj-entire'
-Plug 'nelstrom/vim-textobj-rubyblock'
-Plug 'beloglazov/vim-textobj-quotes'
-
-" vim:ft=vim
