@@ -16,14 +16,6 @@ sz() { source ~/.zshrc }
 # antibody bundle < ~/code/dotfiles/zsh/configs/plugins.zsh > ~/.zsh_plugins.sh
 source ~/.zsh_plugins.sh
 #-------------------------------------------------------------------------------
-#  Colors
-#-------------------------------------------------------------------------------
-# makes color constants available
-autoload -U colors
-colors
-# enable colored output from ls, etc. on FreeBSD-based systems
-export CLICOLOR=1
-#-------------------------------------------------------------------------------
 #  Source config files
 #-------------------------------------------------------------------------------
 for zsh_source in $HOME/.zsh/configs/*.zsh; do
