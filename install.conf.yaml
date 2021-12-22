@@ -1,0 +1,34 @@
+- defaults:
+    link:
+      create: true
+      relink: true
+
+- create:
+    - ~/.config
+    - ~/code
+
+- clean: ["~"]
+
+- link:
+    /usr/local/bin/git-abort: bin/git-abort
+    /usr/local/bin/git-cm: bin/git-cm
+    /usr/local/bin/git-continue: bin/git-continue
+    /usr/local/bin/git-publish: bin/git-publish
+    /usr/local/bin/tas: bin/tas
+    /usr/local/bin/tat: bin/tat
+    ~/.zshrc: zsh/.zshrc
+    ~/.zshenv: zsh/.zshenv
+    ~/.zsh/configs: zsh/configs
+    ~/.gitconfig: git/.gitconfig
+    ~/.gitmessage: git/.gitmessage
+    ~/.gitignore: git/.gitignore
+    ~/.tmux.conf: tmux/.tmux.conf
+    ~/.config/kitty:
+      force: true
+      path: .config/kitty
+    ~/.config/alacritty:
+      force: true
+      path: .config/alacritty
+    ~/.config/nvim:
+      force: true
+      path: .config/nvim

@@ -11,7 +11,7 @@ fi
 #-------------------------------------------------------------------------------
 #  Plugins
 #-------------------------------------------------------------------------------
-# antibody bundle < ~/code/dotfiles/zsh/configs/plugins.zsh > ~/.zsh_plugins.sh
+# antibody bundle < $DOTFILES/zsh/plugins.zsh > ~/.zsh_plugins.sh
 source ~/.zsh_plugins.sh
 #-------------------------------------------------------------------------------
 #  Source config files
@@ -19,6 +19,7 @@ source ~/.zsh_plugins.sh
 for zsh_source in $HOME/.zsh/configs/*.zsh; do
   source $zsh_source
 done
+source ~/.zendesk.zsh
 #-------------------------------------------------------------------------------
 #  Init dependencies
 #-------------------------------------------------------------------------------
