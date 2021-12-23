@@ -114,6 +114,11 @@ require('packer').startup {
       commit = 'e958850',
     }
     use {
+      'jose-elias-alvarez/null-ls.nvim',
+      requires = { 'nvim-lua/plenary.nvim' },
+      config = conf 'null-ls',
+    }
+    use {
       'hrsh7th/nvim-cmp',
       event = { 'InsertEnter', 'CmdlineEnter' },
       requires = {

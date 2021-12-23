@@ -11,13 +11,12 @@ Should haves:
 
 - [x] Abbreviations
 - [ ] TS config -> formatting, prettier, tsconfig, frontend snippets
-- [ ] NullTS + stylua
+- [x] NullTS + stylua
 - [x] Adjusted tmux statusline
 - [x] Change git_message template
 - [x] Refacotr zsh
 - [x] Restructure files
 - [x] Dotbot management
-- [ ] Readme
 
 Nice to haves:
 

@@ -22,6 +22,16 @@ local function setup_autocommands(client, _)
       },
     }, { buffer = true })
   end
+
+  if client and client.resolved_capabilities.document_formatting then
+    gh.augroup('LspFormat', {
+      {
+        events = { 'BufWritePre' },
+        targets = { '<buffer>' },
+        command = gh.lsp.formatting,
+      },
+    }, { buffer = true })
+  end
 end
 --------------------------------------------------------------------------------
 ---- Mappings
@@ -71,8 +81,6 @@ end
 function gh.lsp.on_attach(client, bufnr)
   setup_autocommands(client, bufnr)
   setup_mappings(client, bufnr)
-
-  -- require('lsp-status').on_attach(client)
 end
 --------------------------------------------------------------------------------
 ---- Language servers
