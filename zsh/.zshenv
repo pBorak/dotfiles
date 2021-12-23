@@ -1,6 +1,6 @@
 #!/usr/bin/zsh
 
-export DOTFILES=$HOME/code/dotfiles
+export DOTFILES=$HOME/.dotfiles
 export PROJECTS_DIR=$HOME/code
 
 export EDITOR="nvim"
