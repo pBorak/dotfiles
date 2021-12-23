@@ -15,8 +15,8 @@ Should haves:
 - [x] Adjusted tmux statusline
 - [x] Change git_message template
 - [x] Refacotr zsh
-- [ ] Restructure files
-- [ ] Dotbot management
+- [x] Restructure files
+- [x] Dotbot management
 - [ ] Readme
 
 Nice to haves:
