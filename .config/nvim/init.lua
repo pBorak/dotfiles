@@ -11,8 +11,8 @@ function R(name)
 end
 
 R 'globals'
-R 'plugins'
 R 'settings'
+R 'plugins'
 
 if gh.plugin_installed 'tokyonight.nvim' then
   require('tokyonight').colorscheme()
