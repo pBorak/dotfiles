@@ -34,6 +34,53 @@ local function setup_autocommands(client, _)
   end
 end
 --------------------------------------------------------------------------------
+---- Formatting
+--------------------------------------------------------------------------------
+-- use lsp formatting if it's available (and if it's good)
+-- otherwise, fall back to null-ls
+gh.lsp.formatting = function(bufnr)
+  local preferred_formatting_clients = { 'eslint' }
+  local fallback_formatting_client = 'null-ls'
+
+  bufnr = tonumber(bufnr) or vim.api.nvim_get_current_buf()
+
+  local selected_client
+  for _, client in ipairs(vim.lsp.buf_get_clients(bufnr)) do
+    if vim.tbl_contains(preferred_formatting_clients, client.name) then
+      selected_client = client
+      break
+    end
+
+    if client.name == fallback_formatting_client then
+      selected_client = client
+    end
+  end
+
+  if not selected_client then
+    return
+  end
+
+  local params = vim.lsp.util.make_formatting_params()
+  selected_client.request('textDocument/formatting', params, function(err, res)
+    if err then
+      local err_msg = type(err) == 'string' and err or err.message
+      vim.notify('global.lsp.formatting: ' .. err_msg, vim.log.levels.WARN)
+      return
+    end
+
+    if not vim.api.nvim_buf_is_loaded(bufnr) or vim.api.nvim_buf_get_option(bufnr, 'modified') then
+      return
+    end
+
+    if res then
+      vim.lsp.util.apply_text_edits(res, bufnr, selected_client.offset_encoding or 'utf-16')
+      vim.api.nvim_buf_call(bufnr, function()
+        vim.cmd 'silent noautocmd update'
+      end)
+    end
+  end, bufnr)
+end
+--------------------------------------------------------------------------------
 ---- Mappings
 --------------------------------------------------------------------------------
 ---Setup mapping when an lsp attaches to a buffer
