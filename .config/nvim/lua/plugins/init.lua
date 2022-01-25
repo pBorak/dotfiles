@@ -64,7 +64,7 @@ require('packer').startup {
     use {
       'nvim-telescope/telescope.nvim',
       cmd = 'Telescope',
-      keys = { '<c-p>', '<leader>f' },
+      keys = { '<c-p>', '<c-s>', '<leader>f' },
       config = conf 'telescope',
       requires = {
         {

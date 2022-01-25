@@ -164,5 +164,5 @@ return function()
   gh.nnoremap('<leader>fs', builtins.live_grep)
   gh.nnoremap('<leader>ff', builtins.grep_string)
   gh.nnoremap('<leader>f.', find_in_current_directory)
-  gh.nnoremap('<leader>ft', tmux_sessions)
+  gh.nnoremap('<c-s>', tmux_sessions)
 end
