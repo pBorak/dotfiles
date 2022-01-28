@@ -7,7 +7,7 @@ return function()
     float_opts = { border = 'curved', winblend = 3 },
     size = function(term)
       if term.direction == 'horizontal' then
-        return 40
+        return 30
       elseif term.direction == 'vertical' then
         return math.floor(vim.o.columns * 0.4)
       end
