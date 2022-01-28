@@ -34,31 +34,6 @@ return function()
     end
   end
 
-  local function lsp_progress(_, is_active)
-    if not is_active then
-      return
-    end
-    local messages = vim.lsp.util.get_progress_messages()
-    if #messages == 0 then
-      return ''
-    end
-    local status = {}
-    for _, msg in pairs(messages) do
-      local title = ''
-      if msg.title then
-        title = msg.title
-      end
-
-      table.insert(status, (msg.percentage or 0) .. '%% ' .. title)
-    end
-    local spinners = { '⠋', '⠙', '⠹', '⠸', '⠼', '⠴', '⠦', '⠧', '⠇', '⠏' }
-    local ms = vim.loop.hrtime() / 1000000
-    local frame = math.floor(ms / 120) % #spinners
-    return table.concat(status, ' | ') .. ' ' .. spinners[frame + 1]
-  end
-
-  vim.cmd 'au User LspProgressUpdate let &ro = &ro'
-
   local config = {
     options = {
       theme = 'tokyonight',
@@ -103,11 +78,6 @@ return function()
         },
       },
       lualine_x = {
-        {
-          lsp_progress,
-          cond = window_wide_enough,
-          color = { fg = colors.magenta },
-        },
         {
           'diagnostics',
           cond = window_wide_enough,

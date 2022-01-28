@@ -260,6 +260,17 @@ require('packer').startup {
         }
       end,
     }
+
+    use {
+      'j-hui/fidget.nvim',
+      config = function()
+        require('fidget').setup {
+          text = {
+            spinner = 'moon',
+          },
+        }
+      end,
+    }
     ----------------------------------------------------------------------------
     -- Syntax
     ----------------------------------------------------------------------------
