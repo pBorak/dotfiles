@@ -66,6 +66,7 @@ return function()
           buffer = '[Buffer]',
           spell = '[Spell]',
           cmdline = '[Command]',
+          rg = '[RG]',
         })[name]
         return vim_item
       end,
@@ -80,6 +81,7 @@ return function()
       { name = 'path' },
     }, {
       { name = 'buffer' },
+      { name = 'rg', keyword_length = 5 },
     }),
   }
 
