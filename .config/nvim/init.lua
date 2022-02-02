@@ -14,6 +14,6 @@ R 'globals'
 R 'settings'
 R 'plugins'
 
-if gh.plugin_installed 'tokyonight.nvim' then
-  require('tokyonight').colorscheme()
+if gh.plugin_installed 'kanagawa.nvim' then
+  vim.cmd 'colorscheme kanagawa'
 end

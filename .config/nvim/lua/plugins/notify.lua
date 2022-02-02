@@ -3,7 +3,7 @@ return function()
   notify.setup {
     stages = 'fade_in_slide_out', -- fade
     timeout = 3000,
-    background_colour = '#24283b',
+    background_colour = '#1F1F28',
     on_open = function(win)
       vim.api.nvim_win_set_config(win, { focusable = false })
     end,

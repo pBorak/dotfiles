@@ -1,10 +1,9 @@
 return function()
   local colors = {
-    bg_statusline = '#1f2335',
-    blue = '#7aa2f7',
-    fg_sidebar = '#a9b1d6',
-    magenta = '#bb9af7',
-    st_grey = '#565f89',
+    bg_statusline = '#2A2A37',
+    blue = '#7E9CD8',
+    fg_sidebar = '#C8C093',
+    st_grey = '#727169',
   }
 
   local function window_wide_enough()
@@ -36,7 +35,7 @@ return function()
 
   local config = {
     options = {
-      theme = 'tokyonight',
+      theme = 'kanagawa',
       section_separators = { left = '', right = '' },
       component_separators = { left = '', right = '' },
       icons_enabled = true,

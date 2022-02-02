@@ -195,6 +195,7 @@ require('packer').startup {
         vim.g.tokyonight_lualine_bold = true
       end,
     }
+    use 'rebelot/kanagawa.nvim'
     use {
       'rcarriga/nvim-notify',
       config = conf 'notify',
@@ -260,7 +261,6 @@ require('packer').startup {
         }
       end,
     }
-
     use {
       'j-hui/fidget.nvim',
       config = function()
@@ -269,6 +269,13 @@ require('packer').startup {
             spinner = 'moon',
           },
         }
+      end,
+    }
+    use {
+      'folke/todo-comments.nvim',
+      requires = 'nvim-lua/plenary.nvim',
+      config = function()
+        require('todo-comments').setup {}
       end,
     }
     ----------------------------------------------------------------------------
