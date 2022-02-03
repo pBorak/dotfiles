@@ -20,6 +20,7 @@ vim.g.loaded_netrwPlugin = 0
 vim.g.loaded_netrwSettings = 0
 vim.g.loaded_netrwFileHandlers = 0
 vim.g.loaded_ruby_provider = 0
+vim.g.loaded_matchit = 0
 --------------------------------------------------------------------------------
 -- Message output on vim actions
 --------------------------------------------------------------------------------
