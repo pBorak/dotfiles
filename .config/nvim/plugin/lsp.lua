@@ -26,7 +26,6 @@ command {
           events = { 'DiagnosticChanged' },
           targets = { '*' },
           command = function()
-            vim.diagnostic.setqflist { open = false }
             if gh.is_vim_list_open() then
               gh.toggle_list 'quickfix'
             end
@@ -61,9 +60,9 @@ end, diagnostic_types))
 
 ---Override diagnostics signs helper to only show the single most relevant sign
 ---@param diagnostics table[]
----@param bufnr number
+---@param _ number buffer number
 ---@return table[]
-local function filter_diagnostics(diagnostics, bufnr)
+local function filter_diagnostics(diagnostics, _)
   if not diagnostics then
     return {}
   end
