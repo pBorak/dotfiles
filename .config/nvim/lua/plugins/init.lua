@@ -20,7 +20,6 @@ require('packer').startup {
     -- Startup time improvements
     ----------------------------------------------------------------------------
     use 'lewis6991/impatient.nvim'
-    use 'nathom/filetype.nvim'
     ----------------------------------------------------------------------------
     -- Editor
     ----------------------------------------------------------------------------
@@ -29,10 +28,6 @@ require('packer').startup {
     use 'tpope/vim-repeat'
     use 'vim-scripts/ReplaceWithRegister'
     use 'pbrisbin/vim-mkdir'
-    use {
-      'romainl/vim-qf',
-      ft = 'qf',
-    }
     use {
       'numToStr/Comment.nvim',
       config = function()
@@ -215,6 +210,17 @@ require('packer').startup {
       event = 'BufRead',
       config = function()
         require('pqf').setup()
+      end,
+    }
+    use {
+      'kevinhwang91/nvim-bqf',
+      ft = 'qf',
+      config = function()
+        require('bqf').setup {
+          preview = {
+            auto_preview = false
+          }
+        }
       end,
     }
     use {
