@@ -139,7 +139,6 @@ require('packer').startup {
       config = function()
         local pairs = require 'nvim-autopairs'
         pairs.setup {}
-        pairs.add_rules(require 'nvim-autopairs.rules.endwise-ruby')
       end,
     }
     ----------------------------------------------------------------------------
@@ -294,6 +293,7 @@ require('packer').startup {
       config = conf 'treesitter',
       requires = {
         { 'nvim-treesitter/nvim-treesitter-textobjects', after = 'nvim-treesitter' },
+        { 'RRethy/nvim-treesitter-endwise', after = 'nvim-treesitter' },
         {
           'nvim-treesitter/playground',
           cmd = { 'TSPlaygroundToggle', 'TSHighlightCapturesUnderCursor' },

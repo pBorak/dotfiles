@@ -70,7 +70,7 @@ return function()
         },
       },
     },
-    matchup = {
+    endwise = {
       enable = true,
     },
   }
