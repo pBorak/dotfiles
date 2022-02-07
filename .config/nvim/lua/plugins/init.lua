@@ -217,8 +217,8 @@ require('packer').startup {
       config = function()
         require('bqf').setup {
           preview = {
-            auto_preview = false
-          }
+            auto_preview = false,
+          },
         }
       end,
     }
