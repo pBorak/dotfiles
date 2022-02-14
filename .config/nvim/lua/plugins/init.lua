@@ -233,7 +233,6 @@ require('packer').startup {
     }
     use {
       'lukas-reineke/indent-blankline.nvim',
-      event = 'BufRead',
       config = conf 'indent-blankline',
     }
     use {
