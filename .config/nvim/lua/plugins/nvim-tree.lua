@@ -37,8 +37,11 @@ return function()
       enable = true,
       update_cwd = true,
     },
+    git = {
+      ignore = false,
+    },
     filters = {
-      custom = { '.DS_Store', 'fugitive:', '.git', 'node_modules' },
+      custom = { '.DS_Store', 'fugitive:', 'vendor', '.git', 'node_modules' },
     },
   }
 end
