@@ -104,10 +104,7 @@ require('packer').startup {
       'neovim/nvim-lspconfig',
       config = conf 'lspconfig',
     }
-    use {
-      'folke/lua-dev.nvim',
-      commit = 'e958850',
-    }
+    use 'folke/lua-dev.nvim'
     use {
       'jose-elias-alvarez/null-ls.nvim',
       requires = { 'nvim-lua/plenary.nvim' },
