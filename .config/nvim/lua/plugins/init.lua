@@ -271,6 +271,9 @@ require('packer').startup {
           text = {
             spinner = 'moon',
           },
+          window = {
+            blend = 0,
+          },
         }
       end,
     }

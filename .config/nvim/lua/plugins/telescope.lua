@@ -33,7 +33,7 @@ return function()
     defaults = {
       set_env = { ['TERM'] = vim.env.TERM },
       borderchars = { '─', '│', '─', '│', '┌', '┐', '┘', '└' },
-      prompt_prefix = '',
+      prompt_prefix = ' ',
       selection_caret = '» ',
       mappings = {
         i = {

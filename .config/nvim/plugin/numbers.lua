@@ -2,6 +2,7 @@ local api = vim.api
 local M = {}
 
 vim.g.number_filetype_exclusions = {
+  'prompt',
   'undotree',
   'log',
   'man',
