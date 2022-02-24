@@ -106,9 +106,9 @@ return function()
           source = diff_source,
           color = { bg = colors.bg_statusline },
           symbols = {
-            added = ' ',
+            added = ' ',
             modified = ' ',
-            removed = ' ',
+            removed = ' ',
           },
         },
       },
