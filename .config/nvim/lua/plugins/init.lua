@@ -262,19 +262,6 @@ require('packer').startup {
       end,
     }
     use {
-      'j-hui/fidget.nvim',
-      config = function()
-        require('fidget').setup {
-          text = {
-            spinner = 'moon',
-          },
-          window = {
-            blend = 0,
-          },
-        }
-      end,
-    }
-    use {
       'folke/todo-comments.nvim',
       requires = 'nvim-lua/plenary.nvim',
       config = function()

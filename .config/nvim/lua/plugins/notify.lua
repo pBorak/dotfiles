@@ -1,28 +1,16 @@
 return function()
   local notify = require 'notify'
+  ---@type table<string, fun(bufnr: number, notif: table, highlights: table)>
+  local renderer = require 'notify.render'
   notify.setup {
-    stages = 'fade_in_slide_out', -- fade
+    stages = 'fade_in_slide_out',
     timeout = 3000,
-    background_colour = '#1F1F28',
-    on_open = function(win)
-      vim.api.nvim_win_set_config(win, { focusable = false })
+    render = function(bufnr, notif, highlights)
+      if notif.title[1] == '' then
+        return renderer.minimal(bufnr, notif, highlights)
+      end
+      return renderer.default(bufnr, notif, highlights)
     end,
   }
-  ---Send a notification
-  --@param msg of the notification to show to the user
-  --@param level Optional log level
-  --@param opts Dictionary with optional options (timeout, etc)
-  vim.notify = function(msg, level, opts)
-    local l = vim.log.levels
-    opts = opts or {}
-    level = level or l.INFO
-    local levels = {
-      [l.DEBUG] = 'Debug',
-      [l.INFO] = 'Information',
-      [l.WARN] = 'Warning',
-      [l.ERROR] = 'Error',
-    }
-    opts.title = opts.title or type(level) == 'string' and level or levels[level]
-    notify(msg, level, opts)
-  end
+  vim.notify = notify
 end
