@@ -112,7 +112,7 @@ end
 -----------------------------------------------------------------------------//
 local client_notifs = {}
 
-local spinner_frames = { '⣾', '⣽', '⣻', '⢿', '⡿', '⣟', '⣯', '⣷' }
+local spinner_frames = { '🌑 ', '🌒 ', '🌓 ', '🌔 ', '🌕 ', '🌖 ', '🌗 ', '🌘 ' }
 
 local function update_spinner(client_id, token)
   local notif_data = client_notifs[client_id][token]
@@ -176,7 +176,7 @@ local function lsp_progress_notification(_, result, ctx)
       local new_notif = vim.notify(
         val.message and format_message(val.message) or 'Complete',
         'info',
-        { icon = '', replace = notif_data.notification, timeout = 3000 }
+        { icon = ' ', replace = notif_data.notification, timeout = 3000 }
       )
       client_notifs[client_id][result.token] = {
         notification = new_notif,
