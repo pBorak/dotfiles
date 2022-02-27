@@ -23,12 +23,14 @@ local function setup_autocommands(client, _)
     }, { buffer = true })
   end
 
-  if client and client.resolved_capabilities.document_formatting then
+  if client and client.supports_method 'textDocument/formatting' then
     gh.augroup('LspFormat', {
       {
         events = { 'BufWritePre' },
         targets = { '<buffer>' },
-        command = gh.lsp.formatting,
+        command = function()
+          gh.lsp.formatting(vim.fn.expand '<abuf>')
+        end,
       },
     }, { buffer = true })
   end
@@ -41,24 +43,32 @@ end
 gh.lsp.formatting = function(bufnr)
   local preferred_formatting_clients = { 'eslint' }
   local fallback_formatting_client = 'null-ls'
+  -- prevent repeated lookups
+  local buffer_client_ids = {}
 
   bufnr = tonumber(bufnr) or vim.api.nvim_get_current_buf()
 
   local selected_client
-  for _, client in ipairs(vim.lsp.buf_get_clients(bufnr)) do
-    if vim.tbl_contains(preferred_formatting_clients, client.name) then
-      selected_client = client
-      break
-    end
+  if buffer_client_ids[bufnr] then
+    selected_client = vim.lsp.get_client_by_id(buffer_client_ids[bufnr])
+  else
+    for _, client in ipairs(vim.lsp.buf_get_clients(bufnr)) do
+      if vim.tbl_contains(preferred_formatting_clients, client.name) then
+        selected_client = client
+        break
+      end
 
-    if client.name == fallback_formatting_client then
-      selected_client = client
+      if client.name == fallback_formatting_client then
+        selected_client = client
+      end
     end
   end
 
   if not selected_client then
     return
   end
+
+  buffer_client_ids[bufnr] = selected_client.id
 
   local params = vim.lsp.util.make_formatting_params()
   selected_client.request('textDocument/formatting', params, function(err, res)
@@ -120,7 +130,7 @@ local function setup_mappings(client, bufnr)
     gh.nnoremap('<leader>ln', vim.lsp.buf.rename)
   end
 
-  if client.resolved_capabilities.document_formatting then
+  if client.supports_method 'textDocument/formatting' then
     gh.nnoremap('<leader>lf', vim.lsp.buf.formatting)
   end
 end
