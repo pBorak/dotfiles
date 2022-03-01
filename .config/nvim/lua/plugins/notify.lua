@@ -1,4 +1,8 @@
 return function()
+  if vim.g.packer_compiled_loaded then
+    return
+  end
+
   local notify = require 'notify'
   ---@type table<string, fun(bufnr: number, notif: table, highlights: table)>
   local renderer = require 'notify.render'
