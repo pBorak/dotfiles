@@ -14,8 +14,7 @@ local function make_mapper(mode, o)
   return function(lhs, rhs, opts)
     -- If the label is all that was passed in, set the opts automagically
     opts = type(opts) == 'string' and { label = opts } or opts and vim.deepcopy(opts) or {}
-    opts = vim.tbl_extend('keep', opts, parent_opts)
-    vim.keymap.set(mode, lhs, rhs, opts)
+    vim.keymap.set(mode, lhs, rhs, vim.tbl_extend('keep', opts, parent_opts))
   end
 end
 
@@ -27,7 +26,7 @@ gh.nmap = make_mapper('n', map_opts)
 -- A recursive terminal mapping
 gh.imap = make_mapper('i', map_opts)
 -- A recursive normal mapping
-gh.cmap = make_mapper('c', { noremap = false, silent = false })
+gh.cmap = make_mapper('c', { remap = true, silent = false })
 -- A non recursive normal mapping
 gh.nnoremap = make_mapper('n', noremap_opts)
 -- A non recursive visual mapping
@@ -43,4 +42,4 @@ gh.tnoremap = make_mapper('t', noremap_opts)
 -- A non recursive select mapping
 gh.snoremap = make_mapper('s', noremap_opts)
 -- A non recursive commandline mapping
-gh.cnoremap = make_mapper('c', { noremap = true, silent = false })
+gh.cnoremap = make_mapper('c', { silent = false })
