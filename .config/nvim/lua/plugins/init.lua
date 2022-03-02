@@ -261,17 +261,6 @@ require('packer').startup {
         }
       end,
     }
-    use {
-      'folke/todo-comments.nvim',
-      requires = 'nvim-lua/plenary.nvim',
-      config = function()
-        if vim.g.packer_compiled_loaded then
-          return
-        end
-
-        require('todo-comments').setup {}
-      end,
-    }
     ----------------------------------------------------------------------------
     -- Syntax
     ----------------------------------------------------------------------------
