@@ -171,6 +171,8 @@ gh.lsp.servers = {
   end,
 
   solargraph = {},
+
+  tsserver = {},
 }
 
 ---Logic to merge default config with custom config coming from gh.lsp.servers
