@@ -3,7 +3,6 @@ return function()
     bg_statusline = '#2A2A37',
     blue = '#7E9CD8',
     fg_sidebar = '#C8C093',
-    st_grey = '#727169',
   }
 
   local function window_wide_enough()
@@ -60,21 +59,6 @@ return function()
           symbols = { modified = ' [✎] ', readonly = ' [] ' },
           color = { gui = 'italic,bold' },
         },
-        {
-          function()
-            local gps = require 'nvim-gps'
-            return gps.get_location()
-          end,
-          cond = function()
-            local gps = require 'nvim-gps'
-            return pcall(require, 'nvim-treesitter.parsers')
-              and gps.is_available()
-              and window_wide_enough()
-          end,
-          color = {
-            fg = colors.st_grey,
-          },
-        },
       },
       lualine_x = {
         {
@@ -93,7 +77,7 @@ return function()
         {
           'b:gitsigns_head',
           cond = window_wide_enough,
-          icon = '',
+          icon = ' ',
           color = {
             bg = colors.bg_statusline,
             fg = colors.blue,

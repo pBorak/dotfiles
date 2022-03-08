@@ -244,12 +244,6 @@ require('packer').startup {
       requires = 'nvim-web-devicons',
     }
     use {
-      'SmiteshP/nvim-gps',
-      requires = 'nvim-treesitter/nvim-treesitter',
-      module = 'nvim-gps',
-      config = conf 'nvim-gps',
-    }
-    use {
       'stevearc/dressing.nvim',
       config = function()
         require('dressing').setup {
