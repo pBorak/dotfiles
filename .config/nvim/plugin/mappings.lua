@@ -13,8 +13,8 @@ local tnoremap = gh.tnoremap
 --------------------------------------------------------------------------------
 gh.augroup('AddTerminalMappings', {
   {
-    events = { 'TermOpen' },
-    targets = { 'term://*' },
+    event = 'TermOpen',
+    pattern = { 'term://*' },
     command = function()
       if vim.bo.filetype == '' or vim.bo.filetype == 'toggleterm' then
         local opts = { silent = false, buffer = 0 }

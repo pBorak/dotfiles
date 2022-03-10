@@ -30,14 +30,14 @@ end
 gh.augroup('SmartClose', {
   {
     -- Auto open grep quickfix window
-    events = { 'QuickFixCmdPost' },
-    targets = { '*grep*' },
+    event = 'QuickFixCmdPost',
+    pattern = { '*grep*' },
     command = 'cwindow',
   },
   {
     -- Close certain filetypes by pressing q.
-    events = { 'FileType' },
-    targets = { '*' },
+    event = 'FileType',
+    pattern = '*',
     command = function()
       local is_readonly = (vim.bo.readonly or not vim.bo.modifiable) and fn.hasmapto('q', 'n') == 0
 
@@ -53,8 +53,8 @@ gh.augroup('SmartClose', {
   },
   {
     -- Close quick fix window if the file containing it was closed
-    events = { 'BufEnter' },
-    targets = { '*' },
+    event = 'BufEnter',
+    pattern = '*',
     command = function()
       if fn.winnr '$' == 1 and vim.bo.buftype == 'quickfix' then
         api.nvim_buf_delete(0, { force = true })
@@ -63,9 +63,9 @@ gh.augroup('SmartClose', {
   },
   {
     -- automatically close corresponding loclist when quitting a window
-    events = { 'QuitPre' },
-    targets = { '*' },
-    modifiers = { 'nested' },
+    event = 'QuitPre',
+    pattern = '*',
+    nested = true,
     command = function()
       if vim.bo.filetype ~= 'qf' then
         vim.cmd 'silent! lclose'
@@ -94,8 +94,8 @@ end
 
 gh.augroup('ClearCommandMessages', {
   {
-    events = { 'CmdlineLeave', 'CmdlineChanged' },
-    targets = { ':' },
+    event = { 'CmdlineLeave', 'CmdlineChanged' },
+    pattern = { ':' },
     command = clear_commandline(),
   },
 })
@@ -103,8 +103,8 @@ gh.augroup('ClearCommandMessages', {
 gh.augroup('TextYankHighlight', {
   {
     -- don't execute silently in case of errors
-    events = { 'TextYankPost' },
-    targets = { '*' },
+    event = 'TextYankPost',
+    pattern = '*',
     command = function()
       vim.highlight.on_yank {
         timeout = 500,
@@ -153,15 +153,15 @@ end
 gh.augroup('CustomColorColumn', {
   {
     -- Update the cursor column to match current window size
-    events = { 'WinEnter', 'BufEnter', 'VimResized', 'FileType' },
-    targets = { '*' },
+    event = { 'WinEnter', 'BufEnter', 'VimResized', 'FileType' },
+    pattern = '*',
     command = function()
       check_color_column()
     end,
   },
   {
-    events = { 'WinLeave' },
-    targets = { '*' },
+    event = 'WinLeave',
+    pattern = '*',
     command = function()
       check_color_column(true)
     end,
@@ -171,15 +171,15 @@ gh.augroup('CustomColorColumn', {
 gh.augroup('QuickfixBehaviours', {
   -- Automatically jump into the quickfix window on open
   {
-    events = { 'QuickFixCmdPost' },
-    targets = { '[^l]*' },
-    modifiers = { 'nested' },
+    event = { 'QuickFixCmdPost' },
+    pattern = { '[^l]*' },
+    nested = true,
     command = 'cwindow',
   },
   {
-    events = { 'QuickFixCmdPost' },
-    targets = { 'l*' },
-    modifiers = { 'nested' },
+    event = { 'QuickFixCmdPost' },
+    pattern = { 'l*' },
+    nested = true,
     command = 'lwindow',
   },
 })
@@ -193,8 +193,8 @@ end
 
 gh.augroup('Cursorline', {
   {
-    events = { 'BufEnter' },
-    targets = { '*' },
+    event = { 'BufEnter' },
+    pattern = { '*' },
     command = function()
       if should_show_cursorline() then
         vim.wo.cursorline = true
@@ -202,8 +202,8 @@ gh.augroup('Cursorline', {
     end,
   },
   {
-    events = { 'BufLeave' },
-    targets = { '*' },
+    event = { 'BufLeave' },
+    pattern = { '*' },
     command = function()
       vim.wo.cursorline = false
     end,
@@ -215,8 +215,8 @@ gh.augroup('Utilities', {
     -- When editing a file, always jump to the last known cursor position.
     -- Don't do it for commit messages, when the position is invalid, or when
     -- inside an event handler (happens when dropping a file on gvim).
-    events = { 'BufWinEnter' },
-    targets = { '*' },
+    event = 'BufWinEnter',
+    pattern = '*',
     command = function()
       local pos = fn.line [['"]]
       if
@@ -230,26 +230,26 @@ gh.augroup('Utilities', {
     end,
   },
   {
-    events = { 'FileType' },
-    targets = { 'gitcommit', 'gitrebase' },
+    event = 'FileType',
+    pattern = { 'gitcommit', 'gitrebase' },
     command = 'set bufhidden=delete',
   },
   {
-    events = { 'FileType' },
-    targets = { 'qf' },
+    event = 'FileType',
+    pattern = { 'qf' },
     command = 'wincmd J',
   },
   {
-    events = { 'Syntax' },
-    targets = { '*' },
+    event = 'Syntax',
+    pattern = '*',
     command = "if 5000 < line('$') | syntax sync minlines=200 | endif",
   },
 })
 
 gh.augroup('TerminalAutocommands', {
   {
-    events = { 'TermClose' },
-    targets = { '*' },
+    event = 'TermClose',
+    pattern = '*',
     command = function()
       --- automatically close a terminal if the job was successful
       if not vim.v.event.status == 0 then

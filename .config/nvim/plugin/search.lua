@@ -9,8 +9,8 @@ end
 
 gh.augroup('InitVimSearch', {
   {
-    events = { 'FileType' },
-    targets = { 'qf' },
+    event = 'FileType',
+    pattern = { 'qf' },
     command = function()
       gh.nnoremap('<leader>r', ':cgetexpr v:lua._search.do_search()<CR>', { buffer = 0 })
     end,

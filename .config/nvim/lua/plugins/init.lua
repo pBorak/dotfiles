@@ -318,8 +318,9 @@ end
 
 gh.augroup('PackerSetupInit', {
   {
-    events = { 'BufWritePost' },
-    targets = { '*/plugins/*.lua' },
+    event = 'BufWritePost',
+    pattern = { '*/plugins/*.lua' },
+    description = 'Packer setup and reload',
     command = function()
       gh.invalidate('plugins', true)
       require('packer').compile()

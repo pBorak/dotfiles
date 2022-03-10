@@ -23,8 +23,8 @@ command {
     if gh.is_vim_list_open() then
       gh.augroup('LspDiagnosticUpdate', {
         {
-          events = { 'DiagnosticChanged' },
-          targets = { '*' },
+          event = 'DiagnosticChanged',
+          pattern = { '*' },
           command = function()
             if gh.is_vim_list_open() then
               gh.toggle_list 'quickfix'
