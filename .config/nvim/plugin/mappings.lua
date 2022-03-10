@@ -1,5 +1,4 @@
 local fn = vim.fn
-local api = vim.api
 local noisy = { silent = false }
 
 local nnoremap = gh.nnoremap
