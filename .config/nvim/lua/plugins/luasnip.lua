@@ -100,7 +100,7 @@ return function()
 
       if arg and arg:match '^%a' then
         local stripped_arg = arg:match(ruby_args_pattern)
-        local node = opts.keyword_only == true and t_node { stripped_arg .. ':' }
+        local node = opts.user_args.keyword_only == true and t_node { stripped_arg .. ':' }
           or t_node { stripped_arg .. ': ' .. stripped_arg }
 
         vim.list_extend(nodes, { node, t_node { ', ' } })
@@ -184,11 +184,11 @@ return function()
         i_node(1),
         t_node { ')', '' },
         t_node '\tnew(',
-        d_node(2, pass_ruby_args, { 1 }, { keyword_only = false }),
+        d_node(2, pass_ruby_args, { 1 }, { user_args = { keyword_only = false } }),
         t_node { ').call', '' },
         t_node { 'end', '', '' },
         t_node 'def initialize(',
-        d_node(3, pass_ruby_args, { 1 }, { keyword_only = true }),
+        d_node(3, pass_ruby_args, { 1 }, { user_args = { keyword_only = true } }),
         t_node { ')', '' },
         d_node(4, assign_instance_variables, { 1 }),
         t_node { 'end', '', '' },
@@ -212,5 +212,5 @@ return function()
     },
   }
 
-  require('luasnip.loaders.from_vscode').load { paths = './snippets' }
+  require('luasnip.loaders.from_vscode').lazy_load { paths = './snippets' }
 end
