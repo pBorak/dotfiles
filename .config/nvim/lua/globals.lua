@@ -180,15 +180,6 @@ function gh.executable(e)
   return fn.executable(e) > 0
 end
 
----check if a certain feature/version/commit exists in nvim
----@param feature string
----@return boolean
-function gh.has(feature)
-  return vim.fn.has(feature) > 0
-end
-
-gh.nightly = gh.has 'nvim-0.6'
-
 ---Create an nvim command
 ---@param args table
 function gh.command(args)

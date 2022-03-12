@@ -178,13 +178,6 @@ require('packer').startup {
     ----------------------------------------------------------------------------
     -- UI
     ----------------------------------------------------------------------------
-    use {
-      'folke/tokyonight.nvim',
-      config = function()
-        vim.g.tokyonight_sidebars = { 'qf', 'packer', 'fugitive' }
-        vim.g.tokyonight_lualine_bold = true
-      end,
-    }
     use 'rebelot/kanagawa.nvim'
     use {
       'rcarriga/nvim-notify',
