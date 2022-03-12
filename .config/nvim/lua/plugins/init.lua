@@ -13,7 +13,9 @@ utils.bootstrap_packer()
 
 gh.safe_require 'impatient'
 
-require('packer').startup {
+local packer = require 'packer'
+
+packer.startup {
   function(use)
     use { 'wbthomason/packer.nvim', opt = true }
     ----------------------------------------------------------------------------
@@ -316,7 +318,7 @@ gh.augroup('PackerSetupInit', {
     description = 'Packer setup and reload',
     command = function()
       gh.invalidate('plugins', true)
-      require('packer').compile()
+      packer.compile()
     end,
   },
 })
