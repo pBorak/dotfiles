@@ -98,11 +98,9 @@ xnoremap('\\s', [["sy:%s/<C-r>s//<Left>]], noisy)
 -- Replace occurrence under the cursor, then use dot to change next occurrences
 nnoremap('cn', '*``cgn')
 nnoremap('cN', '*``cgN')
-vim.cmd [[
-  let g:mc = "y/\\V\<C-r>=escape(@\", '/')\<CR>\<CR>"
-  xnoremap <silent><expr> cn g:mc . "``cgn"
-  xnoremap <silent><expr> cN g:mc . "``cgN"
-]]
+vim.g.mc = vim.api.nvim_replace_termcodes([[y/\V<C-r>=escape(@", '/')<CR><CR>]], true, true, true)
+xnoremap('cn', [[g:mc . "``cgn"]], { expr = true, silent = true })
+xnoremap('cN', [[g:mc . "``cgN"]], { expr = true, silent = true })
 --------------------------------------------------------------------------------
 -- Commandline mappings
 --------------------------------------------------------------------------------
