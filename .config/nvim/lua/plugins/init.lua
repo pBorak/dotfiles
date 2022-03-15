@@ -321,5 +321,13 @@ gh.augroup('PackerSetupInit', {
       packer.compile()
     end,
   },
+  {
+    event = 'User',
+    pattern = 'PackerCompileDone',
+    description = 'Inform me that packer has finished compiling',
+    command = function()
+      packer_notify 'Packer compile complete'
+    end,
+  },
 })
 gh.nnoremap('<leader>ps', [[<Cmd>PackerSync<CR>]])
