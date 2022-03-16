@@ -186,6 +186,16 @@ packer.startup {
       config = conf 'notify',
     }
     use {
+      'j-hui/fidget.nvim',
+      config = function()
+        require('fidget').setup {
+          text = {
+            spinner = 'moon',
+          },
+        }
+      end,
+    }
+    use {
       'mbbill/undotree',
       cmd = 'UndotreeToggle',
       keys = '<leader>u',

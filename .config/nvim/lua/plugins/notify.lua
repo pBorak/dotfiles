@@ -17,5 +17,4 @@ return function()
     end,
   }
   vim.notify = notify
-  gh.nnoremap('<leader>pd', notify.dismiss)
 end
