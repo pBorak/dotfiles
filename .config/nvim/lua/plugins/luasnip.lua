@@ -1,6 +1,7 @@
 return function()
   local ls = require 'luasnip'
   local types = require 'luasnip.util.types'
+  local fmt = require('luasnip.extras.fmt').fmt
 
   local snippet = ls.snippet
   local t_node = ls.text_node
@@ -132,14 +133,23 @@ return function()
     },
     enable_autosnippets = true,
   }
-  local opts = { expr = true }
-  gh.imap('<c-j>', "luasnip#expand_or_jumpable() ? '<Plug>luasnip-expand-or-jump' : '<c-j>'", opts)
-  gh.imap('<c-k>', "luasnip#jumpable(-1) ? '<Plug>luasnip-jump-prev': '<c-k>'", opts)
-  gh.snoremap('<c-j>', function()
-    ls.jump(1)
+  -- <c-l> is selecting within a list of options.
+  vim.keymap.set('i', '<c-l>', function()
+    if ls.choice_active() then
+      ls.change_choice(1)
+    end
   end)
-  gh.snoremap('<c-k>', function()
-    ls.jump(-1)
+
+  vim.keymap.set({ 's', 'i' }, '<c-j>', function()
+    if ls.expand_or_jumpable() then
+      ls.expand_or_jump()
+    end
+  end)
+
+  vim.keymap.set({ 's', 'i' }, '<c-k>', function()
+    if ls.jumpable(-1) then
+      ls.jump(-1)
+    end
   end)
 
   ls.snippets = {
