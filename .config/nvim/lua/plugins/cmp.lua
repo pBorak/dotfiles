@@ -2,19 +2,11 @@ return function()
   local cmp = require 'cmp'
   local cmp_autopairs = require 'nvim-autopairs.completion.cmp'
 
-  local function get_luasnip()
-    local ok, luasnip = gh.safe_require('luasnip', { silent = true })
-    if not ok then
-      return nil
-    end
-    return luasnip
-  end
-
   local function tab(fallback)
-    local luasnip = get_luasnip()
+    local ok, luasnip = gh.safe_require('luasnip', { silent = true })
     if cmp.visible() then
       cmp.select_next_item()
-    elseif luasnip and luasnip.expand_or_jumpable() then
+    elseif ok and luasnip.expand_or_jumpable() then
       luasnip.expand_or_jump()
     else
       fallback()
@@ -22,10 +14,10 @@ return function()
   end
 
   local function shift_tab(fallback)
-    local luasnip = get_luasnip()
+    local ok, luasnip = gh.safe_require('luasnip', { silent = true })
     if cmp.visible() then
       cmp.select_prev_item()
-    elseif luasnip and luasnip.jumpable(-1) then
+    elseif ok and luasnip.jumpable(-1) then
       luasnip.jump(-1)
     else
       fallback()
