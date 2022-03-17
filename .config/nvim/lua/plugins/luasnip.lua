@@ -77,14 +77,18 @@ return function()
     local nodes = {}
     local args_table = vim.split(args[1][1], ',', true)
 
-    for _, arg in ipairs(args_table) do
+    for index, arg in ipairs(args_table) do
       arg = arg:gsub(' ', '')
 
       if arg and arg:match '^%a' then
         local stripped_arg = arg:match(ruby_args_pattern)
+        if index > 1 then
+          vim.list_extend(nodes, {
+            t_node { '', '\t' },
+          })
+        end
         vim.list_extend(nodes, {
-          t_node { '\t' .. '@' .. stripped_arg .. ' = ' .. stripped_arg },
-          t_node { '', '' },
+          t_node { '@' .. stripped_arg .. ' = ' .. stripped_arg },
         })
       end
     end
@@ -154,37 +158,49 @@ return function()
 
   ls.snippets = {
     ruby = {
-      snippet({
-        trig = 'spec',
-        docstring = "# frozen_string_literal: true\n\nrequire 'spec_helper'\n\ndescribe $FILE_CLASS do\n\nend",
-        name = 'rspec spec init',
-        dscr = { 'Initialize rspec file' },
-      }, {
-        t_node '# frozen_string_literal: true',
-        t_node { '', '', '' },
-        t_node "require 'spec_helper'",
-        t_node { '', '', '' },
-        t_node 'describe ',
-        f_node(function(_, snip)
-          local file_path = snip.env.RELATIVE_FILEPATH
-          return spec_name(file_path)
-        end, {}),
-        t_node { ' do', '\t' },
-        i_node(0),
-        t_node { '', 'end' },
-      }),
-      snippet({
-        trig = 'init',
-        name = 'Ruby `initialize` method',
-        dscr = { 'Ruby initialize function' },
-      }, {
-        t_node 'def initialize',
-        t_node '(',
-        i_node(1),
-        t_node { ')', '' },
-        d_node(2, assign_instance_variables, { 1 }),
-        t_node 'end',
-      }),
+      snippet(
+        {
+          trig = 'spec',
+          name = 'rspec spec init',
+          dscr = { 'Initialize rspec file' },
+        },
+        fmt(
+          [[
+          # frozen_string_literal: true
+
+          require 'spec_helper'
+
+          describe {} do
+            {}
+          end
+        ]],
+          {
+            f_node(function(_, snip)
+              local file_path = snip.env.RELATIVE_FILEPATH
+              return spec_name(file_path)
+            end, {}),
+            i_node(0),
+          }
+        )
+      ),
+      snippet(
+        {
+          trig = 'init',
+          name = 'Ruby `initialize` method',
+          dscr = { 'Ruby initialize function' },
+        },
+        fmt(
+          [[
+          def initialize({})
+            {}
+          end
+          ]],
+          {
+            i_node(1),
+            d_node(2, assign_instance_variables, { 1 }),
+          }
+        )
+      ),
       snippet({
         trig = 'scall',
         name = 'Ruby `self.call` method',
