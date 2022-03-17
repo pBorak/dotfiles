@@ -178,13 +178,13 @@ return function()
         },
         fmt(
           [[
-          # frozen_string_literal: true
+            # frozen_string_literal: true
 
-          require 'spec_helper'
+            require 'spec_helper'
 
-          describe {} do
-            {}
-          end
+            describe {} do
+              {}
+            end
         ]],
           {
             f_node(function(_, snip)
@@ -203,9 +203,9 @@ return function()
         },
         fmt(
           [[
-          def initialize({})
-            {}
-          end
+            def initialize({})
+              {}
+            end
           ]],
           {
             i_node(1),
@@ -221,17 +221,17 @@ return function()
         },
         fmt(
           [[
-        def self.call({})
-          new({}).call
-        end
+            def self.call({})
+              new({}).call
+            end
 
-        def initialize({})
-          {}
-        end
+            def initialize({})
+              {}
+            end
 
-        def call
-          {}
-        end
+            def call
+              {}
+            end
         ]],
           {
             i_node(1),
@@ -250,9 +250,9 @@ return function()
         },
         fmt(
           [[
-          # frozen_string_literal: true
+            # frozen_string_literal: true
 
-          {}
+            {}
           ]],
           d_node(1, function(_, snip)
             local file_path = snip.env.RELATIVE_FILEPATH
