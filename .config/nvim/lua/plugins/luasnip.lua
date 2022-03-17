@@ -223,19 +223,24 @@ return function()
         i_node(0),
         t_node { '', 'end' },
       }),
-      snippet({
-        trig = 'class',
-        docstring = '# frozen_string_literal: true\n\nclass $FILE_CLASS do\n\nend',
-        name = 'ruby class',
-        dscr = { 'Init Ruby class and modules based on the path' },
-      }, {
-        t_node '# frozen_string_literal: true',
-        t_node { '', '', '' },
-        d_node(1, function(_, snip)
-          local file_path = snip.env.RELATIVE_FILEPATH
-          return ruby_class(file_path)
-        end, {}),
-      }),
+      snippet(
+        {
+          trig = 'class',
+          name = 'ruby class',
+          dscr = { 'Init Ruby class and modules based on the path' },
+        },
+        fmt(
+          [[
+          # frozen_string_literal: true
+
+          {}
+          ]],
+          d_node(1, function(_, snip)
+            local file_path = snip.env.RELATIVE_FILEPATH
+            return ruby_class(file_path)
+          end, {})
+        )
+      ),
     },
   }
 
