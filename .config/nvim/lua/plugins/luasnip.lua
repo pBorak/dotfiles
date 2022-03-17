@@ -201,28 +201,35 @@ return function()
           }
         )
       ),
-      snippet({
-        trig = 'scall',
-        name = 'Ruby `self.call` method',
-        dscr = { 'Ruby self.call function boilerplate' },
-      }, {
-        t_node 'def self.call',
-        t_node '(',
-        i_node(1),
-        t_node { ')', '' },
-        t_node '\tnew(',
-        d_node(2, pass_ruby_args, { 1 }),
-        t_node { ').call', '' },
-        t_node { 'end', '', '' },
-        t_node 'def initialize(',
-        d_node(3, pass_ruby_args, { 1 }, { user_args = { 'keyword_args' } }),
-        t_node { ')', '' },
-        d_node(4, assign_instance_variables, { 1 }),
-        t_node { 'end', '', '' },
-        t_node { 'def call', '\t' },
-        i_node(0),
-        t_node { '', 'end' },
-      }),
+      snippet(
+        {
+          trig = 'scall',
+          name = 'Ruby `self.call` method',
+          dscr = { 'Ruby self.call function boilerplate' },
+        },
+        fmt(
+          [[
+        def self.call({})
+          new({}).call
+        end
+
+        def initialize({})
+          {}
+        end
+
+        def call
+          {}
+        end
+        ]],
+          {
+            i_node(1),
+            d_node(2, pass_ruby_args, { 1 }),
+            d_node(3, pass_ruby_args, { 1 }, { user_args = { 'keyword_args' } }),
+            d_node(4, assign_instance_variables, { 1 }),
+            i_node(0),
+          }
+        )
+      ),
       snippet(
         {
           trig = 'class',
