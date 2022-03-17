@@ -121,7 +121,7 @@ return function()
 
   ls.config.set_config {
     history = false,
-    updateevents = 'TextChanged,TextChangedI',
+    updateevents = 'TextChangedI',
     region_check_events = 'CursorMoved,CursorHold,InsertEnter',
     delete_check_events = 'InsertLeave',
     ext_opts = {
