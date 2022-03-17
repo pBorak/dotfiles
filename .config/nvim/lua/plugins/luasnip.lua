@@ -8,6 +8,7 @@ return function()
   local f_node = ls.function_node
   local i_node = ls.insert_node
   local d_node = ls.dynamic_node
+  local c_node = ls.choice_node
   local snip_node = ls.snippet_node
   local ruby_args_pattern = '^%a[^=:,]*'
 
@@ -157,6 +158,17 @@ return function()
   end)
 
   ls.snippets = {
+    all = {
+      snippet({ trig = 'td', name = 'TODO' }, {
+        c_node(1, {
+          t_node 'TODO: ',
+          t_node 'FIXME: ',
+          t_node 'HACK: ',
+          t_node 'BUG: ',
+        }),
+        i_node(0),
+      }),
+    },
     ruby = {
       snippet(
         {
