@@ -38,6 +38,7 @@ return function()
       section_separators = { left = '', right = '' },
       component_separators = { left = '', right = '' },
       icons_enabled = true,
+      globalstatus = true,
     },
     sections = {
       lualine_a = { 'mode' },
@@ -108,21 +109,6 @@ return function()
           },
         },
       },
-    },
-    inactive_sections = {
-      lualine_a = {},
-      lualine_b = {},
-      lualine_c = {
-        {
-          'filetype',
-          icon_only = true,
-          padding = { left = 1, right = 0 },
-        },
-        'filename',
-      },
-      lualine_x = {},
-      lualine_y = {},
-      lualine_z = {},
     },
     extensions = { 'nvim-tree', 'fugitive', 'toggleterm', 'quickfix' },
   }

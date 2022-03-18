@@ -88,6 +88,7 @@ opt.linebreak = true
 opt.signcolumn = 'yes:2'
 opt.ruler = false
 opt.lazyredraw = true
+opt.laststatus = 3
 --------------------------------------------------------------------------------
 -- List chars
 --------------------------------------------------------------------------------
@@ -95,10 +96,6 @@ opt.list = true
 opt.listchars = {
   tab = '│ ',
   trail = '•',
-}
-
-opt.fillchars = {
-  vert = '▕', -- alternatives │
 }
 --------------------------------------------------------------------------------
 -- Indentation
