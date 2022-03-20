@@ -180,20 +180,12 @@ function gh.executable(e)
   return fn.executable(e) > 0
 end
 
----Create an nvim command
----@param args table
-function gh.command(args)
-  local nargs = args.nargs or 0
-  local name = args[1]
-  local rhs = args[2]
-  local types = (args.types and type(args.types) == 'table') and table.concat(args.types, ' ') or ''
-
-  if type(rhs) == 'function' then
-    local fn_id = gh._create(rhs)
-    rhs = string.format('lua gh._execute(%d%s)', fn_id, nargs > 0 and ', <f-args>' or '')
-  end
-
-  vim.cmd(string.format('command! -nargs=%s %s %s %s', nargs, types, name, rhs))
+---@param name any
+---@param rhs string|fun(args: string, fargs: table, bang: boolean)
+---@param opts table
+function gh.command(name, rhs, opts)
+  opts = opts or {}
+  api.nvim_add_user_command(name, rhs, opts)
 end
 
 function gh.invalidate(path, recursive)

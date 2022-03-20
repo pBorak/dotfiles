@@ -22,10 +22,7 @@ return function()
     direction = 'float',
   }
 
-  gh.command {
-    'Htop',
-    function()
-      htop:toggle()
-    end,
-  }
+  gh.command('Htop', function()
+    htop:toggle()
+  end)
 end

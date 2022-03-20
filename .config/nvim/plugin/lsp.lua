@@ -8,35 +8,29 @@ local api = vim.api
 --------------------------------------------------------------------------------
 local command = gh.command
 
-command {
-  'LspLog',
-  function()
-    vim.cmd('edit ' .. vim.lsp.get_log_path())
-  end,
-}
+command('LspLog', function()
+  vim.cmd('edit ' .. vim.lsp.get_log_path())
+end)
 
-command {
-  'LspDiagnostics',
-  function()
-    vim.diagnostic.setqflist { open = false }
-    gh.toggle_list 'quickfix'
-    if gh.is_vim_list_open() then
-      gh.augroup('LspDiagnosticUpdate', {
-        {
-          event = 'DiagnosticChanged',
-          pattern = { '*' },
-          command = function()
-            if gh.is_vim_list_open() then
-              gh.toggle_list 'quickfix'
-            end
-          end,
-        },
-      })
-    elseif fn.exists '#LspDiagnosticUpdate' > 0 then
-      vim.cmd 'autocmd! LspDiagnosticUpdate'
-    end
-  end,
-}
+command('LspDiagnostics', function()
+  vim.diagnostic.setqflist { open = false }
+  gh.toggle_list 'quickfix'
+  if gh.is_vim_list_open() then
+    gh.augroup('LspDiagnosticUpdate', {
+      {
+        event = { 'DiagnosticChanged' },
+        pattern = { '*' },
+        command = function()
+          if gh.is_vim_list_open() then
+            gh.toggle_list 'quickfix'
+          end
+        end,
+      },
+    })
+  elseif fn.exists '#LspDiagnosticUpdate' > 0 then
+    vim.cmd 'autocmd! LspDiagnosticUpdate'
+  end
+end)
 gh.nnoremap('<leader>ll', '<Cmd>LspDiagnostics<CR>')
 --------------------------------------------------------------------------------
 ---- Signs
