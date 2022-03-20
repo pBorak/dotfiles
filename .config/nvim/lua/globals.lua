@@ -4,15 +4,9 @@ local fmt = string.format
 --------------------------------------------------------------------------------
 -- Global namespace
 --------------------------------------------------------------------------------
-_G.__as_global_callbacks = __as_global_callbacks or {}
-
 _G.gh = {
-  _store = __as_global_callbacks,
   mappings = {},
 }
-
--- inject mapping helpers into the global namespace
-R 'utils.mappings'
 --------------------------------------------------------------------------------
 -- UI
 --------------------------------------------------------------------------------
@@ -108,15 +102,6 @@ function gh.is_vim_list_open()
   return false
 end
 
-function gh._create(f)
-  table.insert(gh._store, f)
-  return #gh._store
-end
-
-function gh._execute(id, args)
-  gh._store[id](args)
-end
-
 ---@class Autocommand
 ---@field description string
 ---@field event  string[] list of autocommand events
@@ -180,6 +165,7 @@ function gh.executable(e)
   return fn.executable(e) > 0
 end
 
+---Create an nvim command
 ---@param name any
 ---@param rhs string|fun(args: string, fargs: table, bang: boolean)
 ---@param opts table
@@ -188,6 +174,9 @@ function gh.command(name, rhs, opts)
   api.nvim_add_user_command(name, rhs, opts)
 end
 
+---Reload lua modules
+---@param path string
+---@param recursive string
 function gh.invalidate(path, recursive)
   if recursive then
     for key, value in pairs(package.loaded) do
@@ -201,3 +190,49 @@ function gh.invalidate(path, recursive)
     require(path)
   end
 end
+--------------------------------------------------------------------------------
+-- Mappings
+--------------------------------------------------------------------------------
+---create a mapping function factory
+---@param mode string
+---@param o table
+---@return fun(lhs: string, rhs: string, opts: table|nil) 'create a mapping'
+local function make_mapper(mode, o)
+  -- copy the opts table as extends will mutate the opts table passed in otherwise
+  local parent_opts = vim.deepcopy(o)
+  ---Create a mapping
+  ---@param lhs string
+  ---@param rhs string|function
+  ---@param opts table
+  return function(lhs, rhs, opts)
+    -- If the label is all that was passed in, set the opts automagically
+    opts = type(opts) == 'string' and { label = opts } or opts and vim.deepcopy(opts) or {}
+    vim.keymap.set(mode, lhs, rhs, vim.tbl_extend('keep', opts, parent_opts))
+  end
+end
+
+local map_opts = { remap = true, silent = true }
+local noremap_opts = { remap = false, silent = true }
+
+-- A recursive commandline mapping
+gh.nmap = make_mapper('n', map_opts)
+-- A recursive terminal mapping
+gh.imap = make_mapper('i', map_opts)
+-- A recursive normal mapping
+gh.cmap = make_mapper('c', { remap = true, silent = false })
+-- A non recursive normal mapping
+gh.nnoremap = make_mapper('n', noremap_opts)
+-- A non recursive visual mapping
+gh.xnoremap = make_mapper('x', noremap_opts)
+-- A non recursive visual & select mapping
+gh.vnoremap = make_mapper('v', noremap_opts)
+-- A non recursive insert mapping
+gh.inoremap = make_mapper('i', noremap_opts)
+-- A non recursive operator mapping
+gh.onoremap = make_mapper('o', noremap_opts)
+-- A non recursive terminal mapping
+gh.tnoremap = make_mapper('t', noremap_opts)
+-- A non recursive select mapping
+gh.snoremap = make_mapper('s', noremap_opts)
+-- A non recursive commandline mapping
+gh.cnoremap = make_mapper('c', { silent = false })
