@@ -257,7 +257,9 @@ packer.startup {
               layout_config = {
                 height = function(self, _, max_lines)
                   local results = #self.finder.results
-                  return (results <= max_lines and results or max_lines - 10) + 4 -- 4 is the size of the window
+                  local PADDING = 4 -- this represents the size of the telescope window
+                  local LIMIT = math.floor(max_lines / 2)
+                  return (results <= (LIMIT - PADDING) and results + PADDING or LIMIT)
                 end,
               },
             },
