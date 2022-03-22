@@ -205,8 +205,7 @@ local function make_mapper(mode, o)
   ---@param rhs string|function
   ---@param opts table
   return function(lhs, rhs, opts)
-    -- If the label is all that was passed in, set the opts automagically
-    opts = type(opts) == 'string' and { label = opts } or opts and vim.deepcopy(opts) or {}
+    opts = opts and vim.deepcopy(opts) or {}
     vim.keymap.set(mode, lhs, rhs, vim.tbl_extend('keep', opts, parent_opts))
   end
 end
