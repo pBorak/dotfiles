@@ -10,45 +10,43 @@ _G.gh = {
 --------------------------------------------------------------------------------
 -- UI
 --------------------------------------------------------------------------------
-do
-  gh.style = {
-    icons = {
-      error = '✗',
-      warn = '',
-      info = '',
-      hint = '',
+gh.style = {
+  icons = {
+    error = '✗',
+    warn = '',
+    info = '',
+    hint = '',
+  },
+  lsp = {
+    kinds = {
+      Text = '',
+      Method = '',
+      Function = '',
+      Constructor = '',
+      Field = '',
+      Variable = '',
+      Class = '',
+      Interface = '',
+      Module = '',
+      Property = 'ﰠ',
+      Unit = '塞',
+      Value = '',
+      Enum = '',
+      Keyword = '',
+      Snippet = '',
+      Color = '',
+      File = '',
+      Reference = '',
+      Folder = '',
+      EnumMember = '',
+      Constant = '',
+      Struct = 'פּ',
+      Event = '',
+      Operator = '',
+      TypeParameter = '',
     },
-    lsp = {
-      kinds = {
-        Text = '',
-        Method = '',
-        Function = '',
-        Constructor = '',
-        Field = '',
-        Variable = '',
-        Class = '',
-        Interface = '',
-        Module = '',
-        Property = 'ﰠ',
-        Unit = '塞',
-        Value = '',
-        Enum = '',
-        Keyword = '',
-        Snippet = '',
-        Color = '',
-        File = '',
-        Reference = '',
-        Folder = '',
-        EnumMember = '',
-        Constant = '',
-        Struct = 'פּ',
-        Event = '',
-        Operator = '',
-        TypeParameter = '',
-      },
-    },
-  }
-end
+  },
+}
 --------------------------------------------------------------------------------
 -- Debugging
 --------------------------------------------------------------------------------
