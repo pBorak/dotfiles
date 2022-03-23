@@ -40,7 +40,7 @@ gh.lsp.formatting = function(bufnr)
   if buffer_client_ids[bufnr] then
     selected_client = vim.lsp.get_client_by_id(buffer_client_ids[bufnr])
   else
-    for _, client in ipairs(vim.lsp.buf_get_clients(bufnr)) do
+    for _, client in pairs(vim.lsp.buf_get_clients(bufnr)) do
       if vim.tbl_contains(preferred_formatting_clients, client.name) then
         selected_client = client
         break
