@@ -2,6 +2,7 @@ local lsp = vim.lsp
 local fn = vim.fn
 local fmt = string.format
 local api = vim.api
+local icons = gh.style.icons.lsp
 
 --------------------------------------------------------------------------------
 ---- Commands
@@ -36,10 +37,10 @@ gh.nnoremap('<leader>ll', '<Cmd>LspDiagnostics<CR>')
 ---- Signs
 --------------------------------------------------------------------------------
 local diagnostic_types = {
-  { 'Hint', icon = gh.style.icons.hint },
-  { 'Error', icon = gh.style.icons.error },
-  { 'Warn', icon = gh.style.icons.warn },
-  { 'Info', icon = gh.style.icons.info },
+  { 'Hint', icon = icons.hint },
+  { 'Error', icon = icons.error },
+  { 'Warn', icon = icons.warn },
+  { 'Info', icon = icons.info },
 }
 
 fn.sign_define(vim.tbl_map(function(t)

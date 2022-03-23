@@ -1,4 +1,6 @@
 return function()
+  local icons = gh.style.icons
+
   local colors = {
     bg_statusline = '#2A2A37',
     blue = '#7E9CD8',
@@ -67,10 +69,10 @@ return function()
           cond = window_wide_enough,
           sources = { 'nvim_diagnostic' },
           symbols = {
-            error = gh.style.icons.error .. '  ',
-            warn = gh.style.icons.warn .. ' ',
-            info = gh.style.icons.info .. ' ',
-            hint = gh.style.icons.hint .. ' ',
+            error = icons.lsp.error .. ' ',
+            warn = icons.lsp.warn .. ' ',
+            info = icons.lsp.info .. ' ',
+            hint = icons.lsp.hint .. ' ',
           },
         },
       },
@@ -78,7 +80,7 @@ return function()
         {
           'b:gitsigns_head',
           cond = window_wide_enough,
-          icon = ' ',
+          icon = icons.misc.git_branch,
           color = {
             bg = colors.bg_statusline,
             fg = colors.blue,
@@ -91,9 +93,9 @@ return function()
           source = diff_source,
           color = { bg = colors.bg_statusline },
           symbols = {
-            added = ' ',
-            modified = ' ',
-            removed = ' ',
+            added = icons.git.add .. ' ',
+            modified = icons.git.mod .. ' ',
+            removed = icons.git.remove .. ' ',
           },
         },
       },
@@ -101,7 +103,7 @@ return function()
         {
           '%l/%L',
           cond = window_wide_enough,
-          icon = 'ℓ',
+          icon = icons.misc.line,
           color = {
             bg = colors.bg_statusline,
             fg = colors.fg_sidebar,

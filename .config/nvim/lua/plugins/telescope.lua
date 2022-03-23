@@ -33,8 +33,8 @@ return function()
     defaults = {
       set_env = { ['TERM'] = vim.env.TERM },
       borderchars = { '─', '│', '─', '│', '┌', '┐', '┘', '└' },
-      prompt_prefix = ' ',
-      selection_caret = '» ',
+      prompt_prefix = gh.style.icons.misc.telescope .. ' ',
+      selection_caret = gh.style.icons.misc.chevron_right .. ' ',
       mappings = {
         i = {
           ['<c-c>'] = function()
