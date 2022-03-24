@@ -180,7 +180,14 @@ packer.startup {
     ----------------------------------------------------------------------------
     -- UI
     ----------------------------------------------------------------------------
-    use 'rebelot/kanagawa.nvim'
+    use {
+      'rebelot/kanagawa.nvim',
+      config = function()
+        require('kanagawa').setup {
+          globalStatus = true,
+        }
+      end,
+    }
     use {
       'rcarriga/nvim-notify',
       config = conf 'notify',
