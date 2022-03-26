@@ -135,8 +135,9 @@ packer.startup {
       'windwp/nvim-autopairs',
       after = 'nvim-cmp',
       config = function()
-        local pairs = require 'nvim-autopairs'
-        pairs.setup {}
+        require('nvim-autopairs').setup {
+          check_ts = true,
+        }
       end,
     }
     ----------------------------------------------------------------------------
