@@ -60,26 +60,6 @@ gh.style = {
     },
   },
 }
---------------------------------------------------------------------------------
--- Debugging
---------------------------------------------------------------------------------
--- inspect the contents of an object very quickly
--- in your code or from the command-line:
--- @see: https://www.reddit.com/r/neovim/comments/p84iu2/useful_functions_to_explore_lua_objects/
--- USAGE:
--- in lua: P({1, 2, 3})
--- in commandline: :lua P(vim.loop)
----@vararg any
-function P(...)
-  local objects, v = {}, nil
-  for i = 1, select('#', ...) do
-    v = select(i, ...)
-    table.insert(objects, vim.inspect(v))
-  end
-
-  print(table.concat(objects, '\n'))
-  return ...
-end
 
 local installed
 ---Check if a plugin is on the system not whether or not it is loaded
