@@ -91,23 +91,11 @@ local function setup_mappings(client, bufnr)
   gh.inoremap('<C-h>', vim.lsp.buf.signature_help)
 
   gh.nnoremap('[d', function()
-    vim.diagnostic.goto_prev {
-      float = {
-        border = 'rounded',
-        focusable = false,
-        source = 'always',
-      },
-    }
+    vim.diagnostic.goto_prev()
   end)
 
   gh.nnoremap(']d', function()
-    vim.diagnostic.goto_next {
-      float = {
-        border = 'rounded',
-        focusable = false,
-        source = 'always',
-      },
-    }
+    vim.diagnostic.goto_next()
   end)
 
   if client.supports_method 'textDocument/codeAction' then

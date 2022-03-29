@@ -90,6 +90,11 @@ vim.diagnostic.config {
   signs = true,
   update_in_insert = false,
   severity_sort = true,
+  float = {
+    border = 'rounded',
+    focusable = false,
+    source = 'always',
+  },
 }
 
 local max_width = math.max(math.floor(vim.o.columns * 0.7), 100)
