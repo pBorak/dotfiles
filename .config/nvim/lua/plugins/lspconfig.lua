@@ -1,26 +1,42 @@
 gh.lsp = {}
+
 --------------------------------------------------------------------------------
 ---- Autocommands
 --------------------------------------------------------------------------------
+local augroup = vim.api.nvim_create_augroup
+local autocmd = vim.api.nvim_create_autocmd
+
 local function setup_autocommands(client, _)
   if client and client.resolved_capabilities.document_highlight then
-    -- FIXME: https://github.com/neovim/neovim/issues/17554
-    vim.cmd [[
-      augroup LspDocumentHiglight
-        autocmd! * <buffer>
-        autocmd CursorHold <buffer> lua vim.lsp.buf.document_highlight()
-        autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()
-      augroup END
-    ]]
+    local group = augroup('LspDocumentHiglight', { clear = false })
+    vim.api.nvim_clear_autocmds { group = group, pattern = '<buffer>' }
+    autocmd({ 'CursorHold' }, {
+      group = group,
+      pattern = '<buffer>',
+      callback = function()
+        vim.lsp.buf.document_highlight()
+      end,
+    })
+
+    autocmd({ 'CursorMoved' }, {
+      group = group,
+      pattern = '<buffer>',
+      callback = function()
+        vim.lsp.buf.clear_references()
+      end,
+    })
   end
 
   if client and client.supports_method 'textDocument/formatting' then
-    vim.cmd [[
-      augroup LspFormatting
-          autocmd! * <buffer>
-          autocmd BufWritePost <buffer> silent! lua gh.lsp.formatting(vim.fn.expand("<abuf>"))
-      augroup END
-      ]]
+    local group = augroup('LspFormatting', { clear = false })
+    vim.api.nvim_clear_autocmds { group = group, pattern = '<buffer>' }
+    autocmd({ 'BufWritePost' }, {
+      group = group,
+      pattern = '<buffer>',
+      callback = function()
+        gh.lsp.formatting(vim.fn.expand '<abuf>')
+      end,
+    })
   end
 end
 --------------------------------------------------------------------------------
