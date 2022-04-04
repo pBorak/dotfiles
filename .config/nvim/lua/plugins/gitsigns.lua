@@ -11,21 +11,30 @@ return function()
     },
     on_attach = function()
       local gs = package.loaded.gitsigns
-      local line = vim.fn.line
 
-      gh.nnoremap(']g', "&diff ? ']c' : '<cmd>Gitsigns next_hunk<CR>'", { expr = true })
-      gh.nnoremap('[g', "&diff ? '[c' : '<cmd>Gitsigns prev_hunk<CR>'", { expr = true })
+      gh.nnoremap(']g', function()
+        if vim.wo.diff then
+          return ']c'
+        end
+        vim.schedule(function()
+          gs.next_hunk()
+        end)
+        return '<Ignore>'
+      end, { expr = true })
+      gh.nnoremap('[g', function()
+        if vim.wo.diff then
+          return '[c'
+        end
+        vim.schedule(function()
+          gs.prev_hunk()
+        end)
+        return '<Ignore>'
+      end, { expr = true })
+      vim.keymap.set({ 'n', 'v' }, '<leader>hs', ':Gitsigns stage_hunk<CR>')
+      vim.keymap.set({ 'n', 'v' }, '<leader>hr', ':Gitsigns reset_hunk<CR>')
       gh.nnoremap('<leader>gw', gs.stage_buffer)
       gh.nnoremap('<leader>gr', gs.reset_buffer)
-      gh.nnoremap('<leader>hs', gs.stage_hunk)
-      gh.vnoremap('<leader>hs', function()
-        gs.stage_hunk { line '.', line 'v' }
-      end)
       gh.nnoremap('<leader>hu', gs.undo_stage_hunk)
-      gh.nnoremap('<leader>hr', gs.reset_hunk)
-      gh.vnoremap('<leader>hr', function()
-        gs.reset_hunk { line '.', line 'v' }
-      end)
       gh.nnoremap('<leader>hp', gs.preview_hunk)
       gh.nnoremap('<leader>hl', function()
         gs.setqflist 'all'
