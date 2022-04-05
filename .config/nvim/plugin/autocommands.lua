@@ -214,7 +214,7 @@ gh.augroup('Utilities', {
   {
     -- When editing a file, always jump to the last known cursor position.
     -- Don't do it for commit messages, when the position is invalid.
-    event = { 'BufWinEnter' },
+    event = { 'BufReadPost' },
     pattern = { '*' },
     command = function()
       if vim.bo.ft ~= 'gitcommit' and vim.fn.win_gettype() ~= 'popup' then
