@@ -6,13 +6,13 @@ gh.lsp = {}
 local augroup = vim.api.nvim_create_augroup
 local autocmd = vim.api.nvim_create_autocmd
 
-local function setup_autocommands(client, _)
+local function setup_autocommands(client, bufnr)
   if client and client.resolved_capabilities.document_highlight then
     local group = augroup('LspDocumentHiglight', { clear = false })
-    vim.api.nvim_clear_autocmds { group = group, pattern = '<buffer>' }
+    vim.api.nvim_clear_autocmds { group = group, buffer = bufnr }
     autocmd({ 'CursorHold' }, {
       group = group,
-      pattern = '<buffer>',
+      buffer = bufnr,
       callback = function()
         vim.lsp.buf.document_highlight()
       end,
@@ -20,7 +20,7 @@ local function setup_autocommands(client, _)
 
     autocmd({ 'CursorMoved' }, {
       group = group,
-      pattern = '<buffer>',
+      buffer = bufnr,
       callback = function()
         vim.lsp.buf.clear_references()
       end,
@@ -29,10 +29,10 @@ local function setup_autocommands(client, _)
 
   if client and client.supports_method 'textDocument/formatting' then
     local group = augroup('LspFormatting', { clear = false })
-    vim.api.nvim_clear_autocmds { group = group, pattern = '<buffer>' }
+    vim.api.nvim_clear_autocmds { group = group, buffer = bufnr }
     autocmd({ 'BufWritePost' }, {
       group = group,
-      pattern = '<buffer>',
+      buffer = bufnr,
       callback = function()
         gh.lsp.formatting(vim.fn.expand '<abuf>')
       end,
