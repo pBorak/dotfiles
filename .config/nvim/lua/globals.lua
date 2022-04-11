@@ -167,7 +167,7 @@ end
 ---@param opts table
 function gh.command(name, rhs, opts)
   opts = opts or {}
-  api.nvim_add_user_command(name, rhs, opts)
+  api.nvim_create_user_command(name, rhs, opts)
 end
 
 ---Reload lua modules
