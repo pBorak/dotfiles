@@ -25,6 +25,10 @@ return function()
   end
 
   cmp.setup {
+    window = {
+      completion = cmp.config.window.bordered(),
+      documentation = cmp.config.window.bordered(),
+    },
     experimental = {
       ghost_text = true,
     },
@@ -61,9 +65,6 @@ return function()
         })[name]
         return vim_item
       end,
-    },
-    documentation = {
-      border = 'rounded',
     },
     sources = cmp.config.sources({
       { name = 'nvim_lsp' },
