@@ -14,7 +14,6 @@ return function()
   gh.nnoremap('<leader>n', [[<cmd>NvimTreeToggle<CR>]])
 
   vim.g.nvim_tree_special_files = {}
-  vim.g.nvim_tree_indent_markers = 1
   vim.g.nvim_tree_group_empty = 1
   vim.g.nvim_tree_git_hl = 1
   vim.g.nvim_tree_root_folder_modifier = ':t'
@@ -42,6 +41,11 @@ return function()
     },
     filters = {
       custom = { '.DS_Store', 'fugitive:', 'vendor', '.git', 'node_modules' },
+    },
+    renderer = {
+      indent_markers = {
+        enable = true,
+      },
     },
   }
 end
