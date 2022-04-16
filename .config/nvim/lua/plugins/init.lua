@@ -284,18 +284,10 @@ packer.startup {
     ----------------------------------------------------------------------------
     use {
       'nvim-treesitter/nvim-treesitter',
-      run = ':TSUpdate',
-      event = 'BufRead',
       config = conf 'treesitter',
-      requires = {
-        { 'nvim-treesitter/nvim-treesitter-textobjects', after = 'nvim-treesitter' },
-        { 'RRethy/nvim-treesitter-endwise', after = 'nvim-treesitter' },
-        {
-          'nvim-treesitter/playground',
-          cmd = { 'TSPlaygroundToggle', 'TSHighlightCapturesUnderCursor' },
-        },
-      },
     }
+    use { 'RRethy/nvim-treesitter-endwise' }
+    use { 'nvim-treesitter/nvim-treesitter-textobjects' }
     ----------------------------------------------------------------------------
     -- Utils
     ----------------------------------------------------------------------------
