@@ -150,10 +150,6 @@ return function()
     }
   end
 
-  local function tmux_sessions()
-    telescope.extensions.tmux.sessions {}
-  end
-
   gh.nnoremap('<c-p>', project_files)
   gh.nnoremap('<leader>fd', dotfiles)
   gh.nnoremap('<leader>fg', builtins.git_status)
@@ -164,5 +160,4 @@ return function()
   gh.nnoremap('<leader>fs', builtins.live_grep)
   gh.nnoremap('<leader>ff', builtins.grep_string)
   gh.nnoremap('<leader>f.', find_in_current_directory)
-  gh.nnoremap('<c-s>', tmux_sessions)
 end
