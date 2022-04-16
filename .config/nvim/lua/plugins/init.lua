@@ -251,6 +251,16 @@ packer.startup {
       requires = 'nvim-web-devicons',
     }
     use {
+      'b0o/incline.nvim',
+      config = function()
+        require('incline').setup {
+          hide = {
+            focused_win = true,
+          },
+        }
+      end,
+    }
+    use {
       'stevearc/dressing.nvim',
       config = function()
         require('dressing').setup {
