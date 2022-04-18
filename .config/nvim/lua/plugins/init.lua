@@ -102,6 +102,14 @@ packer.startup {
     }
     use 'folke/lua-dev.nvim'
     use {
+      'lukas-reineke/lsp-format.nvim',
+      config = function()
+        require('lsp-format').setup {
+          ruby = { exclude = { 'solargraph' } },
+        }
+      end,
+    }
+    use {
       'jose-elias-alvarez/null-ls.nvim',
       requires = { 'nvim-lua/plenary.nvim' },
       config = conf 'null-ls',

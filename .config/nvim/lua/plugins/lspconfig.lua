@@ -26,73 +26,6 @@ local function setup_autocommands(client, bufnr)
       end,
     })
   end
-
-  if client and client.supports_method 'textDocument/formatting' then
-    local group = augroup('LspFormatting', { clear = false })
-    vim.api.nvim_clear_autocmds { group = group, buffer = bufnr }
-    autocmd({ 'BufWritePost' }, {
-      group = group,
-      buffer = bufnr,
-      callback = function()
-        gh.lsp.formatting(vim.fn.expand '<abuf>')
-      end,
-    })
-  end
-end
---------------------------------------------------------------------------------
----- Formatting
---------------------------------------------------------------------------------
--- use lsp formatting if it's available (and if it's good)
--- otherwise, fall back to null-ls
-gh.lsp.formatting = function(bufnr)
-  local preferred_formatting_clients = { 'eslint' }
-  local fallback_formatting_client = 'null-ls'
-  -- prevent repeated lookups
-  local buffer_client_ids = {}
-
-  bufnr = tonumber(bufnr) or vim.api.nvim_get_current_buf()
-
-  local selected_client
-  if buffer_client_ids[bufnr] then
-    selected_client = vim.lsp.get_client_by_id(buffer_client_ids[bufnr])
-  else
-    for _, client in pairs(vim.lsp.buf_get_clients(bufnr)) do
-      if vim.tbl_contains(preferred_formatting_clients, client.name) then
-        selected_client = client
-        break
-      end
-
-      if client.name == fallback_formatting_client then
-        selected_client = client
-      end
-    end
-  end
-
-  if not selected_client then
-    return
-  end
-
-  buffer_client_ids[bufnr] = selected_client.id
-
-  local params = vim.lsp.util.make_formatting_params()
-  selected_client.request('textDocument/formatting', params, function(err, res)
-    if err then
-      local err_msg = type(err) == 'string' and err or err.message
-      vim.notify('global.lsp.formatting: ' .. err_msg, vim.log.levels.WARN)
-      return
-    end
-
-    if not vim.api.nvim_buf_is_loaded(bufnr) or vim.api.nvim_buf_get_option(bufnr, 'modified') then
-      return
-    end
-
-    if res then
-      vim.lsp.util.apply_text_edits(res, bufnr, selected_client.offset_encoding or 'utf-16')
-      vim.api.nvim_buf_call(bufnr, function()
-        vim.cmd 'silent noautocmd update'
-      end)
-    end
-  end, bufnr)
 end
 --------------------------------------------------------------------------------
 ---- Mappings
@@ -130,6 +63,10 @@ end
 function gh.lsp.on_attach(client, bufnr)
   setup_autocommands(client, bufnr)
   setup_mappings(client, bufnr)
+  local format_ok, lsp_format = pcall(require, 'lsp-format')
+  if format_ok then
+    lsp_format.on_attach(client)
+  end
 end
 --------------------------------------------------------------------------------
 ---- Language servers
