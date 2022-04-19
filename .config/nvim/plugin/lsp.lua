@@ -13,25 +13,35 @@ command('LspLog', function()
   vim.cmd('edit ' .. vim.lsp.get_log_path())
 end)
 
-command('LspDiagnostics', function()
-  vim.diagnostic.setqflist { open = false }
-  gh.toggle_list 'quickfix'
-  if gh.is_vim_list_open() then
-    gh.augroup('LspDiagnosticUpdate', {
-      {
-        event = { 'DiagnosticChanged' },
-        pattern = { '*' },
-        command = function()
-          if gh.is_vim_list_open() then
+-- A helper function to auto-update the quickfix list when new diagnostics come
+-- in and close it once everything is resolved. This functionality only runs whilst
+-- the list is open.
+local function make_diagnostic_qf_updater()
+  local cmd_id = nil
+  return function()
+    vim.diagnostic.setqflist { open = false }
+    gh.toggle_list 'quickfix'
+    if not gh.is_vim_list_open() and cmd_id then
+      api.nvim_del_autocmd(cmd_id)
+      cmd_id = nil
+    end
+    if cmd_id then
+      return
+    end
+    cmd_id = api.nvim_create_autocmd('DiagnosticChanged', {
+      callback = function()
+        if gh.is_vim_list_open() then
+          vim.diagnostic.setqflist { open = false }
+          if #vim.fn.getqflist() == 0 then
             gh.toggle_list 'quickfix'
           end
-        end,
-      },
+        end
+      end,
     })
-  elseif fn.exists '#LspDiagnosticUpdate' > 0 then
-    vim.cmd 'autocmd! LspDiagnosticUpdate'
   end
-end)
+end
+
+command('LspDiagnostics', make_diagnostic_qf_updater())
 gh.nnoremap('<leader>ll', '<Cmd>LspDiagnostics<CR>')
 --------------------------------------------------------------------------------
 ---- Signs
