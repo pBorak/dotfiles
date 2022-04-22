@@ -25,4 +25,4 @@ export FZF_CTRL_T_OPTS="--preview 'bat --color=always --line-range :500 {}'"
 
 export FUTURE_KISS_CONFIG_PROFILE='local'
 
-export CLOUDSDK_PYTHON=python2
+export CLOUDSDK_PYTHON=python3
