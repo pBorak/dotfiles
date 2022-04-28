@@ -27,6 +27,7 @@ local function setup_autocommands(client, bufnr)
     })
   end
 end
+
 --------------------------------------------------------------------------------
 ---- Mappings
 --------------------------------------------------------------------------------
@@ -68,6 +69,7 @@ function gh.lsp.on_attach(client, bufnr)
     lsp_format.on_attach(client)
   end
 end
+
 --------------------------------------------------------------------------------
 ---- Language servers
 --------------------------------------------------------------------------------
@@ -106,12 +108,11 @@ gh.lsp.servers = {
 
 ---Logic to merge default config with custom config coming from gh.lsp.servers
 function gh.lsp.build_server_config(conf)
-  local nvim_lsp_ok, cmp_nvim_lsp = gh.safe_require 'cmp_nvim_lsp'
   local conf_type = type(conf)
   local config = conf_type == 'table' and conf or conf_type == 'function' and conf() or {}
-  config.flags = { debounce_text_changes = 500 }
   config.on_attach = gh.lsp.on_attach
   config.capabilities = config.capabilities or vim.lsp.protocol.make_client_capabilities()
+  local nvim_lsp_ok, cmp_nvim_lsp = gh.safe_require 'cmp_nvim_lsp'
   if nvim_lsp_ok then
     cmp_nvim_lsp.update_capabilities(config.capabilities)
   end
