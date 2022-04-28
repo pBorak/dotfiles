@@ -89,7 +89,7 @@ gh.lsp.servers = {
           },
         },
         cmd = {
-          lua_lsp_path .. '/bin/macOS/lua-language-server',
+          lua_lsp_path .. '/bin/lua-language-server',
           '-E',
           '-e',
           'LANG=en',
