@@ -76,6 +76,7 @@ function gh.plugin_installed(plugin_name)
   end
   return vim.tbl_contains(installed, plugin_name)
 end
+
 --------------------------------------------------------------------------------
 -- Utils
 --------------------------------------------------------------------------------
@@ -164,7 +165,7 @@ end
 ---Create an nvim command
 ---@param name any
 ---@param rhs string|fun(args: CommandArgs)
----@param opts table
+---@param opts table?
 function gh.command(name, rhs, opts)
   opts = opts or {}
   api.nvim_create_user_command(name, rhs, opts)
@@ -186,6 +187,7 @@ function gh.invalidate(path, recursive)
     require(path)
   end
 end
+
 --------------------------------------------------------------------------------
 -- Mappings
 --------------------------------------------------------------------------------
