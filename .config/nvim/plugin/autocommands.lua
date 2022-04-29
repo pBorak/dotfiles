@@ -2,7 +2,7 @@ local fn = vim.fn
 local api = vim.api
 local contains = vim.tbl_contains
 
-vim.api.nvim_exec(
+vim.cmd(
   [[
    augroup vimrc -- Ensure all autocommands are cleared
    autocmd!
@@ -42,9 +42,9 @@ gh.augroup('SmartClose', {
       local is_readonly = (vim.bo.readonly or not vim.bo.modifiable) and fn.hasmapto('q', 'n') == 0
 
       local is_eligible = vim.bo.buftype ~= ''
-        or is_readonly
-        or vim.wo.previewwindow
-        or contains(smart_close_filetypes, vim.bo.filetype)
+          or is_readonly
+          or vim.wo.previewwindow
+          or contains(smart_close_filetypes, vim.bo.filetype)
 
       if is_eligible then
         gh.nnoremap('q', smart_close, { buffer = 0, nowait = true })
@@ -136,11 +136,10 @@ local function check_color_column(leaving)
   local small_window = api.nvim_win_get_width(0) <= vim.bo.textwidth + 1
   local is_last_win = #api.nvim_list_wins() == 1
 
-  if
-    contains(column_clear, vim.bo.filetype)
-    or not_eligible
-    or (leaving and not is_last_win)
-    or small_window
+  if contains(column_clear, vim.bo.filetype)
+      or not_eligible
+      or (leaving and not is_last_win)
+      or small_window
   then
     vim.wo.colorcolumn = ''
     return
@@ -186,9 +185,9 @@ gh.augroup('QuickfixBehaviours', {
 
 local function should_show_cursorline()
   return vim.bo.buftype ~= 'terminal'
-    and not vim.wo.previewwindow
-    and vim.wo.winhighlight == ''
-    and vim.bo.filetype ~= ''
+      and not vim.wo.previewwindow
+      and vim.wo.winhighlight == ''
+      and vim.bo.filetype ~= ''
 end
 
 gh.augroup('Cursorline', {
