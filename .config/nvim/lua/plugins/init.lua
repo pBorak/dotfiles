@@ -96,9 +96,10 @@ packer.startup {
     ----------------------------------------------------------------------------
     -- LSP & Completion
     ----------------------------------------------------------------------------
+    --
     use {
-      'neovim/nvim-lspconfig',
-      config = conf 'lspconfig',
+      'williamboman/nvim-lsp-installer',
+      requires = { { 'neovim/nvim-lspconfig', config = conf 'lspconfig' } },
     }
     use 'folke/lua-dev.nvim'
     use {
