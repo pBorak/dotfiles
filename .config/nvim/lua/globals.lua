@@ -80,6 +80,10 @@ end
 --------------------------------------------------------------------------------
 -- Utils
 --------------------------------------------------------------------------------
+
+-- Debugging
+P = vim.pretty_print
+
 ---Check whether or not the location or quickfix list is open
 ---@return boolean
 function gh.is_vim_list_open()
