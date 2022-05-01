@@ -5,13 +5,13 @@ gh.lsp = {}
 --------------------------------------------------------------------------------
 local augroup = vim.api.nvim_create_augroup
 local autocmd = vim.api.nvim_create_autocmd
+local highligh_ag = augroup('LspDocumentHiglight', {})
 
 local function setup_autocommands(client, bufnr)
-  if client and client.resolved_capabilities.document_highlight then
-    local group = augroup('LspDocumentHiglight', { clear = false })
-    vim.api.nvim_clear_autocmds { group = group, buffer = bufnr }
+  if client and client.supports_method 'textDocument/documentHighlight' then
+    vim.api.nvim_clear_autocmds { group = highligh_ag, buffer = bufnr }
     autocmd({ 'CursorHold' }, {
-      group = group,
+      group = highligh_ag,
       buffer = bufnr,
       callback = function()
         vim.lsp.buf.document_highlight()
@@ -19,7 +19,7 @@ local function setup_autocommands(client, bufnr)
     })
 
     autocmd({ 'CursorMoved' }, {
-      group = group,
+      group = highligh_ag,
       buffer = bufnr,
       callback = function()
         vim.lsp.buf.clear_references()
@@ -57,7 +57,7 @@ local function setup_mappings(client, bufnr)
   end
 
   if client.supports_method 'textDocument/formatting' then
-    gh.nnoremap('<leader>lf', vim.lsp.buf.formatting)
+    gh.nnoremap('<leader>lf', vim.lsp.buf.format)
   end
 end
 
