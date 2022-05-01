@@ -76,27 +76,24 @@ end
 ----- LSP server configs are setup dynamically as they need to be generated during
 ----- startup so things like runtimepath for lua is correctly populated
 gh.lsp.servers = {
-  ensure_installed = { 'sumneko_lua', 'tsserver' },
-  all = {
-    sumneko_lua = function()
-      local ok, lua_dev = gh.safe_require 'lua-dev'
-      if not ok then
-        return {}
-      end
+  sumneko_lua = function()
+    local ok, lua_dev = gh.safe_require 'lua-dev'
+    if not ok then
+      return {}
+    end
 
-      return lua_dev.setup {
-        lspconfig = {
-          settings = {
-            Lua = {
-              completion = { keywordSnippet = 'Replace', callSnippet = 'Replace' },
-            },
+    return lua_dev.setup {
+      lspconfig = {
+        settings = {
+          Lua = {
+            completion = { keywordSnippet = 'Replace', callSnippet = 'Replace' },
           },
         },
-      }
-    end,
-    solargraph = true,
-    tsserver = true,
-  },
+      },
+    }
+  end,
+  solargraph = true,
+  tsserver = true,
 }
 
 ---Logic to merge default config with custom config coming from gh.lsp.servers
@@ -114,12 +111,12 @@ end
 
 return function()
   require('nvim-lsp-installer').setup {
-    ensure_installed = gh.lsp.servers.ensure_installed,
+    automatic_installation = { exclude = { 'solargraph' } },
   }
   if vim.v.vim_did_enter == 1 then
     return
   end
-  for server, custom_config in pairs(gh.lsp.servers.all) do
+  for server, custom_config in pairs(gh.lsp.servers) do
     require('lspconfig')[server].setup(gh.lsp.build_server_config(custom_config))
   end
 end
