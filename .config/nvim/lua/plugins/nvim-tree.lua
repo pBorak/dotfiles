@@ -22,7 +22,6 @@ return function()
   require('nvim-tree').setup {
     view = {
       width = '25%',
-      auto_resize = true,
     },
     diagnostics = {
       enable = true,
