@@ -69,10 +69,10 @@ return function()
     sources = cmp.config.sources({
       { name = 'nvim_lsp' },
       { name = 'luasnip' },
-      { name = 'spell' },
       { name = 'path' },
     }, {
       { name = 'buffer' },
+      { name = 'spell' },
     }),
   }
 
@@ -91,10 +91,9 @@ return function()
   })
 
   cmp.setup.cmdline(':', {
-    sources = cmp.config.sources({
+    sources = cmp.config.sources {
       { name = 'path' },
-    }, {
       { name = 'cmdline', keyword_length = 2 },
-    }),
+    },
   })
 end
