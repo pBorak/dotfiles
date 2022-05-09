@@ -86,6 +86,7 @@ gh.lsp.servers = {
       lspconfig = {
         settings = {
           Lua = {
+            format = { enable = false },
             completion = { keywordSnippet = 'Replace', callSnippet = 'Replace' },
           },
         },
