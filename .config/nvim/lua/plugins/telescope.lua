@@ -55,7 +55,6 @@ return function()
           preview_width = 0.45,
         },
       },
-      winblend = 3,
     },
     extensions = {
       fzf = {
