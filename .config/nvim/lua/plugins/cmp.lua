@@ -59,18 +59,18 @@ return function()
     },
     formatting = {
       deprecated = true,
-      fields = { 'kind', 'abbr', 'menu' },
+      fields = { 'abbr', 'kind', 'menu' },
       format = function(entry, vim_item)
-        vim_item.kind = gh.style.lsp.kinds[vim_item.kind]
+        vim_item.kind = string.format('%s %s', vim_item.kind, gh.style.lsp.kinds[vim_item.kind])
         local name = entry.source.name
         vim_item.menu = ({
           nvim_lsp = '[LSP]',
           nvim_lua = '[Lua]',
           path = '[Path]',
-          luasnip = '[Luasnip]',
-          buffer = '[Buffer]',
-          spell = '[Spell]',
-          cmdline = '[Command]',
+          luasnip = '[SN]',
+          buffer = '[B]',
+          spell = '[SP]',
+          cmdline = '[CMD]',
         })[name]
         return vim_item
       end,
