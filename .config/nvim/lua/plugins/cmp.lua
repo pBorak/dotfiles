@@ -2,12 +2,19 @@ return function()
   local cmp = require 'cmp'
   local cmp_autopairs = require 'nvim-autopairs.completion.cmp'
 
+  local has_words_before = function()
+    local col = vim.api.nvim_win_get_cursor(0)[2]
+    return col ~= 0 and vim.api.nvim_get_current_line():sub(col, col):match '%s' == nil
+  end
+
   local function tab(fallback)
     local ok, luasnip = gh.safe_require('luasnip', { silent = true })
     if cmp.visible() then
       cmp.select_next_item()
     elseif ok and luasnip.expand_or_jumpable() then
       luasnip.expand_or_jump()
+    elseif has_words_before() then
+      cmp.complete()
     else
       fallback()
     end
@@ -19,6 +26,8 @@ return function()
       cmp.select_prev_item()
     elseif ok and luasnip.jumpable(-1) then
       luasnip.jump(-1)
+    elseif has_words_before() then
+      cmp.complete()
     else
       fallback()
     end
