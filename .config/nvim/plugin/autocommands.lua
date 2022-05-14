@@ -2,15 +2,6 @@ local fn = vim.fn
 local api = vim.api
 local contains = vim.tbl_contains
 
-vim.cmd(
-  [[
-   augroup vimrc -- Ensure all autocommands are cleared
-   autocmd!
-   augroup END
-  ]],
-  ''
-)
-
 local smart_close_filetypes = {
   'help',
   'git-status',
@@ -241,11 +232,6 @@ gh.augroup('Utilities', {
     event = 'FileType',
     pattern = { 'qf' },
     command = 'wincmd J',
-  },
-  {
-    event = 'Syntax',
-    pattern = '*',
-    command = "if 5000 < line('$') | syntax sync minlines=200 | endif",
   },
 })
 

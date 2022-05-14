@@ -10,6 +10,9 @@ function R(name)
   return require(name)
 end
 
+-- Ensure all autocommands are cleared
+vim.api.nvim_create_augroup('vimrc', {})
+
 R 'globals'
 R 'settings'
 R 'plugins'
