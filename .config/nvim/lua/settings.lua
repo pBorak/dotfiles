@@ -20,7 +20,6 @@ vim.g.loaded_netrwPlugin = 0
 vim.g.loaded_netrwSettings = 0
 vim.g.loaded_netrwFileHandlers = 0
 vim.g.loaded_ruby_provider = 0
-vim.g.loaded_matchit = 0
 vim.g.did_load_filetypes = 0
 vim.g.do_filetype_lua = 1
 --------------------------------------------------------------------------------
