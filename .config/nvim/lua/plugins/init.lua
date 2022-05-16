@@ -264,6 +264,16 @@ packer.startup {
       config = conf 'dressing',
     }
     use {
+      'b0o/incline.nvim',
+      config = function()
+        require('incline').setup {
+          hide = {
+            focused_win = true,
+          },
+        }
+      end,
+    }
+    use {
       'folke/todo-comments.nvim',
       requires = 'nvim-lua/plenary.nvim',
       config = function()
