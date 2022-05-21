@@ -3,7 +3,6 @@ return function()
 
   null_ls.setup {
     debounce = 150,
-    on_attach = gh.lsp.on_attach,
     sources = {
       null_ls.builtins.code_actions.gitsigns,
       null_ls.builtins.formatting.stylua.with {

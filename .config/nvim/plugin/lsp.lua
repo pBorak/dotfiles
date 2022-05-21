@@ -37,7 +37,7 @@ local function setup_autocommands(client, bufnr)
       group = highligh_ag,
       buffer = bufnr,
       callback = function()
-        if vim.fn.bufloaded(bufnr) then
+        if fn.bufloaded(bufnr) then
           vim.lsp.buf.format {
             bufnr = bufnr,
             async = true,
@@ -76,7 +76,7 @@ end
 ---Add buffer local mappings, autocommands, tagfunc etc for attaching servers
 ---@param client table lsp client
 ---@param bufnr number
-function gh.lsp.on_attach(client, bufnr)
+local function on_attach(client, bufnr)
   setup_autocommands(client, bufnr)
   setup_mappings(client)
 end
@@ -88,7 +88,7 @@ gh.augroup('LspSetupCommands', {
     command = function(args)
       local bufnr = args.buf
       local client = vim.lsp.get_client_by_id(args.data.client_id)
-      gh.lsp.on_attach(client, bufnr)
+      on_attach(client, bufnr)
     end,
   },
 })
