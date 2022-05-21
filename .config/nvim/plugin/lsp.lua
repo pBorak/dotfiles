@@ -5,6 +5,94 @@ local api = vim.api
 local icons = gh.style.icons.lsp
 
 --------------------------------------------------------------------------------
+---- Autocommands
+--------------------------------------------------------------------------------
+local augroup = vim.api.nvim_create_augroup
+local autocmd = vim.api.nvim_create_autocmd
+local highligh_ag = augroup('LspDocumentHiglight', {})
+local formatting_ag = augroup('LspDocumentFormat', {})
+
+local function setup_autocommands(client, bufnr)
+  if client and client.supports_method 'textDocument/documentHighlight' then
+    vim.api.nvim_clear_autocmds { group = highligh_ag, buffer = bufnr }
+    autocmd({ 'CursorHold' }, {
+      group = highligh_ag,
+      buffer = bufnr,
+      callback = function()
+        vim.lsp.buf.document_highlight()
+      end,
+    })
+
+    autocmd({ 'CursorMoved' }, {
+      group = highligh_ag,
+      buffer = bufnr,
+      callback = function()
+        vim.lsp.buf.clear_references()
+      end,
+    })
+  end
+  if client and client.server_capabilities.documentFormattingProvider then
+    vim.api.nvim_clear_autocmds { group = formatting_ag, buffer = bufnr }
+    autocmd({ 'BufWritePre' }, {
+      group = highligh_ag,
+      buffer = bufnr,
+      callback = function()
+        if vim.fn.bufloaded(bufnr) then
+          vim.lsp.buf.format {
+            bufnr = bufnr,
+            async = true,
+          }
+        end
+      end,
+    })
+  end
+end
+--------------------------------------------------------------------------------
+---- Mappings
+--------------------------------------------------------------------------------
+---Setup mapping when an lsp attaches to a buffer
+---@param _ table lsp client
+local function setup_mappings(_)
+  gh.nnoremap('<leader>ld', vim.lsp.buf.definition)
+  gh.nnoremap('<leader>lr', vim.lsp.buf.references)
+  gh.nnoremap('<leader>lh', vim.lsp.buf.hover)
+  gh.inoremap('<C-h>', vim.lsp.buf.signature_help)
+  gh.nnoremap('<leader>la', vim.lsp.buf.code_action)
+  gh.nnoremap('<leader>ln', vim.lsp.buf.rename)
+  gh.nnoremap('<leader>lf', function()
+    vim.lsp.buf.format { async = true }
+  end)
+
+  gh.nnoremap('[d', function()
+    vim.diagnostic.goto_prev()
+  end)
+  gh.nnoremap(']d', function()
+    vim.diagnostic.goto_next()
+  end)
+end
+-----------------------------------------------------------------------------//
+-- Lsp setup/teardown
+-----------------------------------------------------------------------------//
+---Add buffer local mappings, autocommands, tagfunc etc for attaching servers
+---@param client table lsp client
+---@param bufnr number
+function gh.lsp.on_attach(client, bufnr)
+  setup_autocommands(client, bufnr)
+  setup_mappings(client)
+end
+
+gh.augroup('LspSetupCommands', {
+  {
+    event = 'LspAttach',
+    desc = 'setup the language server autocommands',
+    command = function(args)
+      local bufnr = args.buf
+      local client = vim.lsp.get_client_by_id(args.data.client_id)
+      gh.lsp.on_attach(client, bufnr)
+    end,
+  },
+})
+--------------------------------------------------------------------------------
 ---- Commands
 --------------------------------------------------------------------------------
 local command = gh.command
