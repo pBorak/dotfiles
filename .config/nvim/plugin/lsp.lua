@@ -12,6 +12,14 @@ local autocmd = vim.api.nvim_create_autocmd
 local highligh_ag = augroup('LspDocumentHiglight', {})
 local formatting_ag = augroup('LspDocumentFormat', {})
 
+local format_exclusions = { 'sumneko_lua' }
+
+local function formatting_filter(clients)
+  return vim.tbl_filter(function(c)
+    return not vim.tbl_contains(format_exclusions, c.name)
+  end, clients)
+end
+
 local function setup_autocommands(client, bufnr)
   if client and client.supports_method 'textDocument/documentHighlight' then
     vim.api.nvim_clear_autocmds { group = highligh_ag, buffer = bufnr }
@@ -31,7 +39,11 @@ local function setup_autocommands(client, bufnr)
       end,
     })
   end
-  if client and client.server_capabilities.documentFormattingProvider then
+  if
+    client
+    and client.server_capabilities.documentFormattingProvider
+    and not vim.tbl_contains({ 'ruby' }, vim.bo[bufnr].filetype)
+  then
     vim.api.nvim_clear_autocmds { group = formatting_ag, buffer = bufnr }
     autocmd({ 'BufWritePre' }, {
       group = highligh_ag,
@@ -40,7 +52,7 @@ local function setup_autocommands(client, bufnr)
         if fn.bufloaded(bufnr) then
           vim.lsp.buf.format {
             bufnr = bufnr,
-            async = true,
+            filter = formatting_filter,
           }
         end
       end,
@@ -59,9 +71,7 @@ local function setup_mappings(_)
   gh.inoremap('<C-h>', vim.lsp.buf.signature_help)
   gh.nnoremap('<leader>la', vim.lsp.buf.code_action)
   gh.nnoremap('<leader>ln', vim.lsp.buf.rename)
-  gh.nnoremap('<leader>lf', function()
-    vim.lsp.buf.format { async = true }
-  end)
+  gh.nnoremap('<leader>lf', vim.lsp.buf.format)
 
   gh.nnoremap('[d', function()
     vim.diagnostic.goto_prev()
