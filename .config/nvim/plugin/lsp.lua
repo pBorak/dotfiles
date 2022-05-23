@@ -97,10 +97,6 @@ gh.augroup('LspSetupCommands', {
 --------------------------------------------------------------------------------
 local command = gh.command
 
-command('LspLog', function()
-  vim.cmd('edit ' .. vim.lsp.get_log_path())
-end)
-
 -- A helper function to auto-update the quickfix list when new diagnostics come
 -- in and close it once everything is resolved. This functionality only runs whilst
 -- the list is open.
