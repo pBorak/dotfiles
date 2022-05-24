@@ -10,11 +10,15 @@ return function()
     stages = 'fade_in_slide_out',
     timeout = 3000,
     render = function(bufnr, notif, highlights)
-      if notif.title[1] == '' then
-        return renderer.minimal(bufnr, notif, highlights)
-      end
-      return renderer.default(bufnr, notif, highlights)
+      local style = notif.title[1] == '' and 'minimal' or 'default'
+      renderer[style](bufnr, notif, highlights)
     end,
   }
-  vim.notify = notify
+  vim.notify = function(msg, level, opts)
+    if msg:match 'Format request failed, no matching language servers.' then
+      return
+    end
+
+    notify(msg, level, opts)
+  end
 end
