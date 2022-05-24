@@ -27,18 +27,6 @@ gh.lsp.servers = {
   tsserver = true,
 }
 
----Logic to merge default config with custom config coming from gh.lsp.servers
-function gh.lsp.build_server_config(conf)
-  local conf_type = type(conf)
-  local config = conf_type == 'table' and conf or conf_type == 'function' and conf() or {}
-  config.capabilities = config.capabilities or vim.lsp.protocol.make_client_capabilities()
-  local nvim_lsp_ok, cmp_nvim_lsp = gh.safe_require 'cmp_nvim_lsp'
-  if nvim_lsp_ok then
-    cmp_nvim_lsp.update_capabilities(config.capabilities)
-  end
-  return config
-end
-
 return function()
   require('nvim-lsp-installer').setup {
     automatic_installation = { exclude = { 'solargraph' } },
@@ -46,7 +34,19 @@ return function()
   if vim.v.vim_did_enter == 1 then
     return
   end
-  for server, custom_config in pairs(gh.lsp.servers) do
-    require('lspconfig')[server].setup(gh.lsp.build_server_config(custom_config))
+  for name, config in pairs(gh.lsp.servers) do
+    if type(config) == 'boolean' then
+      config = {}
+    elseif config and type(config) == 'function' then
+      config = config()
+    end
+    if config then
+      config.capabilities = config.capabilities or vim.lsp.protocol.make_client_capabilities()
+      local ok, cmp_nvim_lsp = gh.safe_require 'cmp_nvim_lsp'
+      if ok then
+        cmp_nvim_lsp.update_capabilities(config.capabilities)
+      end
+      require('lspconfig')[name].setup(config)
+    end
   end
 end
