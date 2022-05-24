@@ -12,7 +12,7 @@ local autocmd = vim.api.nvim_create_autocmd
 local highligh_ag = augroup('LspDocumentHiglight', {})
 local formatting_ag = augroup('LspDocumentFormat', {})
 
-local format_exclusions = { 'sumneko_lua' }
+local format_exclusions = { 'sumneko_lua', 'solargraph' }
 
 local function formatting_filter(clients)
   return vim.tbl_filter(function(c)
@@ -39,11 +39,7 @@ local function setup_autocommands(client, bufnr)
       end,
     })
   end
-  if
-    client
-    and client.server_capabilities.documentFormattingProvider
-    and not vim.tbl_contains({ 'ruby' }, vim.bo[bufnr].filetype)
-  then
+  if client and client.server_capabilities.documentFormattingProvider then
     vim.api.nvim_clear_autocmds { group = formatting_ag, buffer = bufnr }
     autocmd({ 'BufWritePre' }, {
       group = highligh_ag,
