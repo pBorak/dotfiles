@@ -14,10 +14,8 @@ local formatting_ag = augroup('LspDocumentFormat', {})
 
 local format_exclusions = { 'sumneko_lua', 'solargraph' }
 
-local function formatting_filter(clients)
-  return vim.tbl_filter(function(c)
-    return not vim.tbl_contains(format_exclusions, c.name)
-  end, clients)
+local function formatting_filter(client)
+  return not vim.tbl_contains(format_exclusions, client.name)
 end
 
 local function setup_autocommands(client, bufnr)
