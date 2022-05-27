@@ -47,10 +47,10 @@ return function()
       end,
     },
     mapping = {
-      ['<Tab>'] = cmp.mapping(tab, { 'i', 'c' }),
-      ['<S-Tab>'] = cmp.mapping(shift_tab, { 'i', 'c' }),
-      ['<C-d>'] = cmp.mapping(cmp.mapping.scroll_docs(-4), { 'i', 'c' }),
-      ['<C-f>'] = cmp.mapping(cmp.mapping.scroll_docs(4), { 'i', 'c' }),
+      ['<Tab>'] = tab,
+      ['<S-Tab>'] = shift_tab,
+      ['<C-d>'] = cmp.mapping.scroll_docs(-4),
+      ['<C-f>'] = cmp.mapping.scroll_docs(4),
       ['<C-e>'] = cmp.mapping.abort(),
       ['<CR>'] = cmp.mapping.confirm {
         behavior = cmp.ConfirmBehavior.Replace,
@@ -85,21 +85,48 @@ return function()
     }),
   }
 
+  local cmdline_mappings = {
+    select_next_item = {
+      c = function(fallback)
+        if cmp.visible() then
+          return cmp.mapping.select_next_item { behavior = cmp.SelectBehavior.Insert }(fallback)
+        else
+          return cmp.mapping.complete { reason = cmp.ContextReason.Auto }(fallback)
+        end
+      end,
+    },
+    select_prev_item = {
+      c = cmp.mapping.select_prev_item { behavior = cmp.SelectBehavior.Insert },
+    },
+  }
+
   cmp.event:on('confirm_done', cmp_autopairs.on_confirm_done { map_char = { tex = '' } })
 
   cmp.setup.cmdline('/', {
+    mapping = {
+      ['<Tab>'] = cmdline_mappings.select_next_item,
+      ['<S-Tab>'] = cmdline_mappings.select_prev_item,
+    },
     sources = {
       { name = 'buffer' },
     },
   })
 
   cmp.setup.cmdline('?', {
+    mapping = {
+      ['<Tab>'] = cmdline_mappings.select_next_item,
+      ['<S-Tab>'] = cmdline_mappings.select_prev_item,
+    },
     sources = {
       { name = 'buffer' },
     },
   })
 
   cmp.setup.cmdline(':', {
+    mapping = {
+      ['<Tab>'] = cmdline_mappings.select_next_item,
+      ['<S-Tab>'] = cmdline_mappings.select_prev_item,
+    },
     sources = cmp.config.sources {
       { name = 'path' },
       { name = 'cmdline', keyword_length = 2 },
