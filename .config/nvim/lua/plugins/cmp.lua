@@ -61,6 +61,10 @@ return function()
       deprecated = true,
       fields = { 'abbr', 'kind', 'menu' },
       format = function(entry, vim_item)
+        local maxwidth = 35
+        if #vim_item.abbr > maxwidth then
+          vim_item.abbr = vim_item.abbr:sub(1, maxwidth) .. '…'
+        end
         vim_item.kind = string.format('%s %s', vim_item.kind, gh.style.lsp.kinds[vim_item.kind])
         local name = entry.source.name
         vim_item.menu = ({
