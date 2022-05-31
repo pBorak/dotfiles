@@ -42,13 +42,12 @@ local function setup_autocommands(client, bufnr)
     autocmd({ 'BufWritePre' }, {
       group = highligh_ag,
       buffer = bufnr,
-      callback = function()
-        if fn.bufloaded(bufnr) then
-          vim.lsp.buf.format {
-            bufnr = bufnr,
-            filter = formatting_filter,
-          }
-        end
+      callback = function(args)
+        vim.lsp.buf.format {
+          bufnr = args.bufnr,
+          filter = formatting_filter,
+          async = true,
+        }
       end,
     })
   end
