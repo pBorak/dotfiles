@@ -82,9 +82,6 @@ nnoremap('[t', '<cmd>tabnext<CR>')
 --------------------------------------------------------------------------------
 -- Windows
 --------------------------------------------------------------------------------
--- visual star search
-vnoremap('*', [[y/<C-R>"<CR>]])
-vnoremap('#', [[y?<C-R>"<CR>]])
 -- make . work with visually selected lines
 vnoremap('.', ':norm.<CR>')
 -- edit file in current directory
