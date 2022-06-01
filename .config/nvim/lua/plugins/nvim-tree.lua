@@ -1,23 +1,5 @@
 return function()
-  vim.g.nvim_tree_icons = {
-    default = '',
-    git = {
-      unstaged = '',
-      staged = '',
-      unmerged = '',
-      renamed = '',
-      untracked = '',
-      deleted = '',
-    },
-  }
-
   gh.nnoremap('<leader>n', [[<cmd>NvimTreeToggle<CR>]])
-
-  vim.g.nvim_tree_special_files = {}
-  vim.g.nvim_tree_group_empty = 1
-  vim.g.nvim_tree_git_hl = 1
-  vim.g.nvim_tree_root_folder_modifier = ':t'
-  vim.g.nvim_tree_highlight_opened_files = 1
 
   require('nvim-tree').setup {
     view = {
@@ -44,6 +26,23 @@ return function()
     renderer = {
       indent_markers = {
         enable = true,
+      },
+      group_empty = true,
+      highlight_git = true,
+      root_folder_modifier = ':t',
+      highlight_opened_files = 'icon',
+      icons = {
+        glyphs = {
+          default = '',
+          git = {
+            unstaged = '',
+            staged = '',
+            unmerged = '',
+            renamed = '',
+            untracked = '',
+            deleted = '',
+          },
+        },
       },
     },
   }
