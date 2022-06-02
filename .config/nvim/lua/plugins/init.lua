@@ -82,8 +82,19 @@ packer.startup {
       end,
     }
     use {
-      'ggandor/lightspeed.nvim',
-      keys = { 's', 'S', 'f', 'F', 't', 'T' },
+      'ggandor/leap.nvim',
+      keys = { 's', 'S' },
+      config = function()
+        require('leap').set_default_keymaps()
+      end,
+    }
+    use {
+      'rhysd/clever-f.vim',
+      keys = { 'f', 'F', 't', 'T' },
+      config = function()
+        vim.g.clever_f_across_no_line = 1
+        vim.g.clever_f_fix_key_direction = 1
+      end,
     }
     use {
       'christoomey/vim-tmux-navigator',
