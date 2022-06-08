@@ -2,6 +2,9 @@ return function()
   gh.nnoremap('<leader>gd', '<Cmd>DiffviewOpen<CR>')
   gh.nnoremap('<leader>gh', '<Cmd>DiffviewFileHistory<CR>')
   require('diffview').setup {
+    default_args = {
+      DiffviewFileHistory = { '.' },
+    },
     enhanced_diff_hl = true,
     keymaps = {
       view = {
