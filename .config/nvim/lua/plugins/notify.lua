@@ -4,14 +4,13 @@ return function()
   end
 
   local notify = require 'notify'
-  ---@type table<string, fun(bufnr: number, notif: table, highlights: table)>
-  local renderer = require 'notify.render'
   notify.setup {
     stages = 'fade_in_slide_out',
     timeout = 3000,
-    render = function(bufnr, notif, highlights)
+    render = function(...)
+      local notif = select(2, ...)
       local style = notif.title[1] == '' and 'minimal' or 'default'
-      renderer[style](bufnr, notif, highlights)
+      require('notify.render')[style](...)
     end,
   }
   vim.notify = function(msg, level, opts)
