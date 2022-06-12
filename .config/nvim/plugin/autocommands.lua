@@ -106,55 +106,34 @@ gh.augroup('TextYankHighlight', {
 })
 
 local column_exclude = { 'gitcommit' }
-local column_clear = {
-  'vimwiki',
+local column_block_list = {
   'help',
   'fugitive',
-  'org',
-  'orgagenda',
 }
 
---- Set or unset the color column depending on the filetype of the buffer and its eligibility
----@param leaving boolean indicates if the function was called on window leave
-local function check_color_column(leaving)
-  if contains(column_exclude, vim.bo.filetype) then
-    return
-  end
-
-  local not_eligible = not vim.bo.modifiable or vim.wo.previewwindow or vim.bo.buftype ~= ''
-
-  local small_window = api.nvim_win_get_width(0) <= vim.bo.textwidth + 1
-  local is_last_win = #api.nvim_list_wins() == 1
-
-  if
-    contains(column_clear, vim.bo.filetype)
-    or not_eligible
-    or (leaving and not is_last_win)
-    or small_window
-  then
-    vim.wo.colorcolumn = ''
-    return
-  end
-  if vim.wo.colorcolumn == '' then
-    vim.wo.colorcolumn = '+1'
+---Set or unset the color column depending on the filetype of the buffer and its eligibility
+local function check_color_column()
+  for _, win in ipairs(api.nvim_list_wins()) do
+    local buffer = vim.bo[api.nvim_win_get_buf(win)]
+    local window = vim.wo[win]
+    local is_current = win == api.nvim_get_current_win()
+    if gh.empty(fn.win_gettype()) and not contains(column_exclude, buffer.filetype) then
+      local too_small = api.nvim_win_get_width(win) <= buffer.textwidth + 1
+      local is_excluded = contains(column_block_list, buffer.filetype)
+      if is_excluded or too_small then
+        window.colorcolumn = ''
+      elseif gh.empty(window.colorcolumn) and is_current then
+        window.colorcolumn = '+1'
+      end
+    end
   end
 end
 
 gh.augroup('CustomColorColumn', {
   {
     -- Update the cursor column to match current window size
-    event = { 'WinEnter', 'BufEnter', 'VimResized', 'FileType' },
-    pattern = '*',
-    command = function()
-      check_color_column()
-    end,
-  },
-  {
-    event = 'WinLeave',
-    pattern = '*',
-    command = function()
-      check_color_column(true)
-    end,
+    event = { 'BufEnter', 'WinNew', 'WinClosed', 'FileType', 'VimResized' },
+    command = check_color_column,
   },
 })
 
