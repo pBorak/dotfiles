@@ -30,3 +30,6 @@
     ~/.config/nvim:
       force: true
       path: .config/nvim
+
+- shell:
+  - [git submodule update --init --recursive, Installing submodules]
