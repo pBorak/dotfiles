@@ -20,7 +20,6 @@ source $ZSH_PLUGINS_DIR/powerlevel10k/powerlevel10k.zsh-theme
 for zsh_source in $HOME/.zsh/configs/*.zsh; do
   source $zsh_source
 done
-source ~/.zendesk.zsh
 #-------------------------------------------------------------------------------
 #  Init dependencies
 #-------------------------------------------------------------------------------
@@ -35,8 +34,3 @@ fi
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-#-------------------------------------------------------------------------------
-#  Google cloud sdk
-#-------------------------------------------------------------------------------
-source /usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc
-source /usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc
