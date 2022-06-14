@@ -19,6 +19,7 @@
     ~/.zshrc: zsh/.zshrc
     ~/.zshenv: zsh/.zshenv
     ~/.zsh/configs: zsh/configs
+    ~/.zsh/plugins: zsh/plugins
     ~/.gitconfig: git/.gitconfig
     ~/.gitmessage: git/.gitmessage
     ~/.gitignore: git/.gitignore

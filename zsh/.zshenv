@@ -2,6 +2,7 @@
 
 export DOTFILES=$HOME/.dotfiles
 export PROJECTS_DIR=$HOME/code
+export ZSH_PLUGINS_DIR=$HOME/.zsh/plugins
 
 export EDITOR="nvim"
 

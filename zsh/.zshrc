@@ -11,8 +11,9 @@ fi
 #-------------------------------------------------------------------------------
 #  Plugins
 #-------------------------------------------------------------------------------
-# antibody bundle < $DOTFILES/zsh/plugins.zsh > ~/.zsh_plugins.sh
-source ~/.zsh_plugins.sh
+source $ZSH_PLUGINS_DIR/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source $ZSH_PLUGINS_DIR/zsh-autosuggestions/zsh-autosuggestions.zsh
+source $ZSH_PLUGINS_DIR/powerlevel10k/powerlevel10k.zsh-theme
 #-------------------------------------------------------------------------------
 #  Source config files
 #-------------------------------------------------------------------------------
