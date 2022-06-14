@@ -26,9 +26,6 @@
     ~/.config/kitty:
       force: true
       path: .config/kitty
-    ~/.config/alacritty:
-      force: true
-      path: .config/alacritty
     ~/.config/nvim:
       force: true
       path: .config/nvim
