@@ -76,7 +76,7 @@ packer.startup {
       },
     }
     use {
-      '~/code/vim-projectionist',
+      'tpope/vim-projectionist',
       config = function()
         gh.nnoremap('<leader>a', '<cmd>A<cr>')
       end,
