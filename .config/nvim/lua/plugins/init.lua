@@ -159,10 +159,10 @@ packer.startup {
       end,
     }
     use {
-      'christoomey/vim-conflicted',
-      cmd = 'Conflicted',
+      'akinsho/git-conflict.nvim',
+      event = 'BufRead',
       config = function()
-        gh.nnoremap('<leader>gnc', '<cmd>GitNextConflict<CR>')
+        require('git-conflict').setup()
       end,
     }
     use {
