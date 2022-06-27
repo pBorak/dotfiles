@@ -83,7 +83,6 @@ packer.startup {
     }
     use {
       'ggandor/leap.nvim',
-      keys = { 's', 'S' },
       config = function()
         require('leap').set_default_keymaps()
       end,
