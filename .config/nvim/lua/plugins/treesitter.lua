@@ -13,6 +13,8 @@ return function()
       'json',
       'yaml',
       'hcl',
+      'markdown',
+      'markdown_inline',
     },
     highlight = {
       enable = true,
