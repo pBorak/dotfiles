@@ -284,6 +284,12 @@ packer.startup {
     }
     use { 'RRethy/nvim-treesitter-endwise' }
     use { 'nvim-treesitter/nvim-treesitter-textobjects' }
+    use {
+      'nvim-treesitter/nvim-treesitter-context',
+      config = function()
+        require('treesitter-context').setup()
+      end,
+    }
     ----------------------------------------------------------------------------
     -- Utils
     ----------------------------------------------------------------------------
