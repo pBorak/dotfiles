@@ -265,16 +265,6 @@ packer.startup {
       'stevearc/dressing.nvim',
       config = conf 'dressing',
     }
-    use {
-      'b0o/incline.nvim',
-      config = function()
-        require('incline').setup {
-          hide = {
-            focused_win = true,
-          },
-        }
-      end,
-    }
     ----------------------------------------------------------------------------
     -- Syntax
     ----------------------------------------------------------------------------
