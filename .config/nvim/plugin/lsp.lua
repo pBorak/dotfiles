@@ -46,7 +46,6 @@ local function setup_autocommands(client, bufnr)
         vim.lsp.buf.format {
           bufnr = args.bufnr,
           filter = formatting_filter,
-          async = true,
         }
       end,
     })
