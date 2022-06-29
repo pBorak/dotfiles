@@ -51,6 +51,9 @@ return function()
         },
       },
       lualine_c = {
+        function()
+          return '%='
+        end,
         {
           'filetype',
           icon_only = true,
