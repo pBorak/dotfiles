@@ -19,3 +19,4 @@ solargraph.rb
 .projections.json
 config/application.local.yml
 tags
+.localrc.lua
