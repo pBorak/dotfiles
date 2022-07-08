@@ -63,13 +63,12 @@ return function()
       },
     },
     pickers = {
-      buffers = {
+      buffers = dropdown {
         sort_mru = true,
         sort_lastused = true,
         show_all_buffers = true,
         ignore_current_buffer = true,
         previewer = false,
-        theme = 'dropdown',
         mappings = {
           i = { ['<c-x>'] = 'delete_buffer' },
           n = { ['<c-x>'] = 'delete_buffer' },
@@ -150,6 +149,12 @@ return function()
     }
   end
 
+  local function grep_string()
+    builtins.grep_string {
+      word_match = '-w',
+    }
+  end
+
   gh.nnoremap('<c-p>', project_files)
   gh.nnoremap('<leader>fd', dotfiles)
   gh.nnoremap('<leader>fg', builtins.git_status)
@@ -158,6 +163,6 @@ return function()
   gh.nnoremap('<leader>fo', builtins.buffers)
   gh.nnoremap('<leader>fr', builtins.resume)
   gh.nnoremap('<leader>fs', builtins.live_grep)
-  gh.nnoremap('<leader>ff', builtins.grep_string)
+  gh.nnoremap('<leader>ff', grep_string)
   gh.nnoremap('<leader>f.', find_in_current_directory)
 end
