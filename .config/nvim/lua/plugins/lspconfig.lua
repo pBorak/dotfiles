@@ -1,40 +1,36 @@
-gh.lsp = {}
+return function()
+  if vim.g.lsp_config_complete then
+    return
+  end
+  vim.g.lsp_config_complete = true
 
---------------------------------------------------------------------------------
----- Language servers
---------------------------------------------------------------------------------
------ LSP server configs are setup dynamically as they need to be generated during
------ startup so things like runtimepath for lua is correctly populated
-gh.lsp.servers = {
-  sumneko_lua = function()
-    local ok, lua_dev = gh.safe_require 'lua-dev'
-    if not ok then
-      return {}
-    end
+  local servers = {
+    sumneko_lua = function()
+      local ok, lua_dev = gh.safe_require 'lua-dev'
+      if not ok then
+        return {}
+      end
 
-    return lua_dev.setup {
-      lspconfig = {
-        settings = {
-          Lua = {
-            format = { enable = false },
-            completion = { keywordSnippet = 'Replace', callSnippet = 'Replace' },
+      return lua_dev.setup {
+        lspconfig = {
+          settings = {
+            Lua = {
+              format = { enable = false },
+              completion = { keywordSnippet = 'Replace', callSnippet = 'Replace' },
+            },
           },
         },
-      },
-    }
-  end,
-  solargraph = true,
-  tsserver = true,
-}
-
-return function()
+      }
+    end,
+    solargraph = true,
+    tsserver = true,
+    eslint = true,
+  }
   require('nvim-lsp-installer').setup {
     automatic_installation = { exclude = { 'solargraph' } },
   }
-  if vim.v.vim_did_enter == 1 then
-    return
-  end
-  for name, config in pairs(gh.lsp.servers) do
+
+  for name, config in pairs(servers) do
     if type(config) == 'boolean' then
       config = {}
     elseif config and type(config) == 'function' then
