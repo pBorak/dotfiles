@@ -7,7 +7,10 @@ alias dbm='be rails db:migrate'
 alias dbmt='be rails db:migrate RAILS_ENV=test'
 alias dbs='be rails db:migrate:status'
 alias dbst='be rails db:migrate:status RAILS_ENV=test'
+alias dc='docker-compose'
+alias dcb='docker-compose exec -it backend'
 alias dlog='tail -f log/development.log'
+alias cat='bat'
 alias ga='fzf_git_add'
 alias gb='fzf_git_branch | xargs git checkout'
 alias gcurrent="git rev-parse --abbrev-ref HEAD"
@@ -15,10 +18,6 @@ alias glS='fzf_git_log_pickaxe'
 alias gll='fzf_git_log'
 alias gv='gh pr view -w'
 alias gva='gh pr list -a pborak -w'
-alias kcl="kubectl"
-alias kctx="kubie ctx $@"
-alias kgall="kubectl get all -n $@"
-alias kns="kubie ns $@"
 alias l='ls -laFhG'
 alias ls='ls -G'
 alias rc='be rails c'
