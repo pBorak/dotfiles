@@ -108,8 +108,9 @@ packer.startup {
     ----------------------------------------------------------------------------
     --
     use {
-      'williamboman/nvim-lsp-installer',
-      requires = { { 'neovim/nvim-lspconfig', config = conf 'lspconfig' } },
+      'neovim/nvim-lspconfig',
+      requires = { 'williamboman/nvim-lsp-installer' },
+      config = conf 'lspconfig',
     }
     use 'folke/lua-dev.nvim'
     use {
