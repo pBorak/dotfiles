@@ -10,6 +10,8 @@ local smart_close_filetypes = {
   'fugitive',
   'fugitiveblame',
   'qf',
+  'startuptime',
+  'lspinfo',
 }
 
 local function smart_close()
@@ -107,6 +109,7 @@ gh.augroup('TextYankHighlight', {
 
 local column_exclude = { 'gitcommit' }
 local column_block_list = {
+  'DiffViewFileHistory',
   'help',
   'fugitive',
 }
