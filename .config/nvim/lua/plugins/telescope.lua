@@ -16,7 +16,7 @@ return function()
   end
 
   ---@param opts table?
-  ---@return table
+  ---@return table | nil
   local function dropdown(opts)
     return themes.get_dropdown(get_border(opts))
   end
