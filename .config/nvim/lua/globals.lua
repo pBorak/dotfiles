@@ -194,7 +194,7 @@ end
 
 ---Reload lua modules
 ---@param path string
----@param recursive string
+---@param recursive boolean
 function gh.invalidate(path, recursive)
   if recursive then
     for key, value in pairs(package.loaded) do
