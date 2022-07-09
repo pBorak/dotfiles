@@ -279,6 +279,13 @@ packer.startup {
       'nvim-treesitter/nvim-treesitter-context',
       config = function()
         vim.api.nvim_set_hl(0, 'TreesitterContext', { link = 'Folded' })
+        require('treesitter-context').setup {
+          patterns = {
+            ruby = {
+              'block',
+            },
+          },
+        }
       end,
     }
     ----------------------------------------------------------------------------
