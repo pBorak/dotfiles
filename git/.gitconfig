@@ -35,8 +35,7 @@
 	ps = push
 	psf = push --force-with-lease
 	publish = publish
-  rim = !git rebase -i $(git merge-base main HEAD)
-  rima = !git rebase -i $(git merge-base master HEAD)
+  rim = !git rebase -i $(git merge-base master HEAD)
   riu = !git rebase -i $(git upstream)
 	uncommit = reset --soft HEAD^
 	unstage = reset
