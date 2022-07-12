@@ -75,5 +75,6 @@ return function()
     endwise = {
       enable = true,
     },
+    autotag = { enable = true },
   }
 end
