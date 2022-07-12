@@ -81,6 +81,9 @@ end
 local function on_attach(client, bufnr)
   setup_autocommands(client, bufnr)
   setup_mappings(client)
+  -- Lsp tagfunc is now set by default - surprise, surprise it does not play
+  -- good with solargraph
+  vim.bo[bufnr].tagfunc = nil
 end
 
 gh.augroup('LspSetupCommands', {
