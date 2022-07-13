@@ -15,7 +15,8 @@
 [commit]
 	template = ~/.gitmessage
 [push]
-  default = upstream
+  default = current
+  autoSetupRemote = true
 [alias]
 	aa = add --all
   abort = abort
