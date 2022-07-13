@@ -26,3 +26,4 @@ alias tf='./base test'
 alias tlog='tail -f log/test.log'
 alias vi='nvim'
 alias vim="nvim"
+alias ssh='TERM="xterm-256color" ssh'
