@@ -10,7 +10,6 @@ alias dbst='be rails db:migrate:status RAILS_ENV=test'
 alias dc='docker-compose'
 alias dcb='docker-compose exec -it backend'
 alias dlog='tail -f log/development.log'
-alias cat='bat'
 alias ga='fzf_git_add'
 alias gb='fzf_git_branch | xargs git checkout'
 alias gcurrent="git rev-parse --abbrev-ref HEAD"
