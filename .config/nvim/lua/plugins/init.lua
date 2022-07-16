@@ -47,6 +47,7 @@ packer.startup {
     }
     use {
       'akinsho/toggleterm.nvim',
+      tag = 'v2.*',
       keys = [[<c-\>]],
       event = 'BufRead',
       config = conf 'toggleterm',
