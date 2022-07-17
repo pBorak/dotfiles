@@ -49,7 +49,6 @@ packer.startup {
       'akinsho/toggleterm.nvim',
       tag = 'v2.*',
       keys = [[<c-\>]],
-      event = 'BufRead',
       config = conf 'toggleterm',
     }
     use {
@@ -111,12 +110,14 @@ packer.startup {
     --
     use {
       'neovim/nvim-lspconfig',
+      event = 'BufRead',
       requires = { 'williamboman/nvim-lsp-installer' },
       config = conf 'lspconfig',
     }
     use 'folke/lua-dev.nvim'
     use {
       'jose-elias-alvarez/null-ls.nvim',
+      event = 'BufRead',
       requires = { 'nvim-lua/plenary.nvim' },
       config = conf 'null-ls',
     }
@@ -163,7 +164,6 @@ packer.startup {
     }
     use {
       'akinsho/git-conflict.nvim',
-      event = 'BufRead',
       config = function()
         require('git-conflict').setup()
       end,
@@ -267,6 +267,7 @@ packer.startup {
     }
     use {
       'stevearc/dressing.nvim',
+      after = 'telescope.nvim',
       config = conf 'dressing',
     }
     ----------------------------------------------------------------------------
