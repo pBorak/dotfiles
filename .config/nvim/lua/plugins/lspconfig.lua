@@ -25,6 +25,7 @@ return function()
     solargraph = true,
     tsserver = true,
     eslint = true,
+    dockerls = true,
   }
   require('nvim-lsp-installer').setup {
     automatic_installation = { exclude = { 'solargraph' } },
