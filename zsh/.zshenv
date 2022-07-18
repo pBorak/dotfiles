@@ -23,7 +23,3 @@ export FZF_DEFAULT_OPTS='
   --color prompt:#7dcfff,pointer:#f7768e,marker:#545c7e
 '
 export FZF_CTRL_T_OPTS="--preview 'bat --color=always --line-range :500 {}'"
-
-export FUTURE_KISS_CONFIG_PROFILE='local'
-
-export CLOUDSDK_PYTHON=python3
