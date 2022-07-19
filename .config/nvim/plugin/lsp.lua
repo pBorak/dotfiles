@@ -7,10 +7,10 @@ local icons = gh.style.icons.lsp
 --------------------------------------------------------------------------------
 ---- Autocommands
 --------------------------------------------------------------------------------
-local augroup = vim.api.nvim_create_augroup
-local autocmd = vim.api.nvim_create_autocmd
-local highligh_ag = augroup('LspDocumentHiglight', {})
-local formatting_ag = augroup('LspDocumentFormat', {})
+local get_augroup = function(bufnr)
+  assert(bufnr, 'A bufnr is required to create an lsp augroup')
+  return fmt('LspCommands_%d', bufnr)
+end
 
 local format_exclusions = { 'sumneko_lua', 'solargraph' }
 
@@ -19,30 +19,36 @@ local function formatting_filter(client)
 end
 
 local function setup_autocommands(client, bufnr)
+  local group = get_augroup(bufnr)
+  -- Clear pre-existing buffer autocommands
+  pcall(api.nvim_clear_autocmds, { group = group })
+
+  local cmds = {}
+
   if client and client.supports_method 'textDocument/documentHighlight' then
-    vim.api.nvim_clear_autocmds { group = highligh_ag, buffer = bufnr }
-    autocmd({ 'CursorHold' }, {
-      group = highligh_ag,
+    table.insert(cmds, {
+      event = { 'CursorHold' },
       buffer = bufnr,
-      callback = function()
+      desc = 'LSP: Document Highlight',
+      command = function()
         vim.lsp.buf.document_highlight()
       end,
     })
-
-    autocmd({ 'CursorMoved' }, {
-      group = highligh_ag,
+    table.insert(cmds, {
+      event = 'CursorMoved',
+      desc = 'LSP: Document Highlight (Clear)',
       buffer = bufnr,
-      callback = function()
+      command = function()
         vim.lsp.buf.clear_references()
       end,
     })
   end
   if client and client.server_capabilities.documentFormattingProvider then
-    vim.api.nvim_clear_autocmds { group = formatting_ag, buffer = bufnr }
-    autocmd({ 'BufWritePre' }, {
-      group = highligh_ag,
+    table.insert(cmds, {
+      event = 'BufWritePre',
       buffer = bufnr,
-      callback = function(args)
+      desc = 'Format the current buffer on save',
+      command = function(args)
         vim.lsp.buf.format {
           bufnr = args.bufnr,
           filter = formatting_filter,
@@ -50,6 +56,7 @@ local function setup_autocommands(client, bufnr)
       end,
     })
   end
+  gh.augroup(group, cmds)
 end
 --------------------------------------------------------------------------------
 ---- Mappings

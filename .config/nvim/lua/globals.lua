@@ -99,7 +99,7 @@ function gh.is_vim_list_open()
 end
 
 ---@class Autocommand
----@field description string
+---@field desc string
 ---@field event  string[] list of autocommand events
 ---@field pattern string[] list of autocommand patterns
 ---@field command string | function
@@ -119,7 +119,7 @@ function gh.augroup(name, commands)
     api.nvim_create_autocmd(autocmd.event, {
       group = name,
       pattern = autocmd.pattern,
-      desc = autocmd.description,
+      desc = autocmd.desc,
       callback = is_callback and autocmd.command or nil,
       command = not is_callback and autocmd.command or nil,
       once = autocmd.once,
@@ -143,7 +143,7 @@ end
 
 ---Determine if a value of any type is empty
 ---@param item any
----@return boolean
+---@return boolean?
 function gh.empty(item)
   if not item then
     return true

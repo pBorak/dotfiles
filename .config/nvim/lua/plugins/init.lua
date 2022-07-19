@@ -342,7 +342,7 @@ gh.augroup('PackerSetupInit', {
   {
     event = 'BufWritePost',
     pattern = { '*/plugins/*.lua' },
-    description = 'Packer setup and reload',
+    desc = 'Packer setup and reload',
     command = function()
       gh.invalidate('plugins', true)
       packer.compile()
