@@ -84,9 +84,7 @@ packer.startup {
     }
     use {
       'ggandor/leap.nvim',
-      config = function()
-        require('leap').set_default_keymaps()
-      end,
+      config = conf 'leap',
     }
     use {
       'rhysd/clever-f.vim',
