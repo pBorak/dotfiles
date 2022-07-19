@@ -29,6 +29,7 @@
 	d = diff
 	dc = diff --cached
   gone = "!f() { git fetch --all --prune; git branch -vv | awk '/: gone]/{print $1}' | xargs git branch -D; }; f"
+  fa = fetch --all
 	l = log --oneline --decorate --graph -20
   ll  = "log --graph --date=human --format='%C(#e0af68)%h%C(#f7768e)%d%C(reset) - %C(#9ece6a)(%ad)%C(reset) %s %C(#7aa2f7){%an}%C(reset)'"
 	pl = pull
