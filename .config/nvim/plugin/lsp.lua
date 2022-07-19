@@ -79,6 +79,14 @@ end
 ---@param client table lsp client
 ---@param bufnr number
 local function on_attach(client, bufnr)
+  local active = vim.lsp.get_active_clients { bufnr = bufnr }
+  local attached = vim.tbl_filter(function(c)
+    return c.attached_buffers[bufnr]
+  end, active)
+  if #attached > 0 then
+    return
+  end
+
   setup_autocommands(client, bufnr)
   setup_mappings(client)
   -- Lsp tagfunc is now set by default - surprise, surprise it does not play
