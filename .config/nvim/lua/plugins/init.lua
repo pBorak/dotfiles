@@ -162,6 +162,7 @@ packer.startup {
     }
     use {
       'akinsho/git-conflict.nvim',
+      event = 'CursorHold',
       config = function()
         require('git-conflict').setup()
       end,
