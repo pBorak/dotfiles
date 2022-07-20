@@ -12,7 +12,7 @@ local get_augroup = function(bufnr)
   return fmt('LspCommands_%d', bufnr)
 end
 
-local format_exclusions = { 'sumneko_lua', 'solargraph' }
+local format_exclusions = { 'sumneko_lua', 'solargraph', 'dockerls' }
 
 local function formatting_filter(client)
   return not vim.tbl_contains(format_exclusions, client.name)
