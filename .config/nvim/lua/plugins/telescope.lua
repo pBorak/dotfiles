@@ -35,7 +35,7 @@ return function()
       selection_caret = gh.style.icons.misc.chevron_right .. ' ',
       mappings = {
         i = {
-          ['<c-c>'] = function() vim.cmd('stopinsert!') end,
+          ['<c-c>'] = function() vim.cmd.stopinsert({ bang = true }) end,
           ['<esc>'] = actions.close,
           ['<c-j>'] = actions.cycle_history_next,
           ['<c-k>'] = actions.cycle_history_prev,

@@ -64,7 +64,7 @@ function _search.run(search_term, is_visual)
   end
 
   cleanup('no_reset_mode')
-  vim.cmd([[redraw!]])
+  vim.cmd.redraw({ bang = true })
 
   if term == '' then return msg('Empty search.') end
 

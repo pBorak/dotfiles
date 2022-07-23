@@ -141,7 +141,7 @@ function gh.toggle_list(list_type)
 
   local winnr = fn.winnr()
   fn.execute(prefix .. 'open')
-  if fn.winnr() ~= winnr then vim.cmd('wincmd p') end
+  if fn.winnr() ~= winnr then vim.cmd.wincmd('p') end
 end
 
 nnoremap('<leader>cc', function() gh.toggle_list('quickfix') end)

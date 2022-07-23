@@ -55,7 +55,7 @@ gh.augroup('SmartClose', {
     pattern = '*',
     nested = true,
     command = function()
-      if vim.bo.filetype ~= 'qf' then vim.cmd('silent! lclose') end
+      if vim.bo.filetype ~= 'qf' then vim.cmd.lclose({ mods = { emsg_silent = true } }) end
     end,
   },
 })
@@ -69,7 +69,7 @@ local function clear_commandline()
   return function()
     if timer then timer:stop() end
     timer = vim.defer_fn(function()
-      if fn.mode() == 'n' then vim.cmd([[echon '']]) end
+      if fn.mode() == 'n' then vim.cmd.echon("''") end
     end, 10000)
   end
 end
@@ -204,7 +204,7 @@ gh.augroup('TerminalAutocommands', {
     pattern = '*',
     command = function()
       --- automatically close a terminal if the job was successful
-      if not vim.v.event.status == 0 then vim.cmd('bdelete! ' .. fn.expand('<abuf>')) end
+      if not vim.v.event.status == 0 then vim.cmd.bdelete({ fn.expand('<abuf>'), bang = true }) end
     end,
   },
 })

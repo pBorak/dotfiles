@@ -15,4 +15,4 @@ R('globals')
 R('settings')
 R('plugins')
 
-if gh.plugin_installed('kanagawa.nvim') then vim.cmd('colorscheme kanagawa') end
+vim.cmd.colorscheme('kanagawa')

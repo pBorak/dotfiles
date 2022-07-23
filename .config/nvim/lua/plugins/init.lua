@@ -310,7 +310,7 @@ packer.startup({
   },
 })
 
-gh.command('PackerCompiledEdit', function() vim.cmd(fmt('edit %s', PACKER_COMPILED_PATH)) end)
+gh.command('PackerCompiledEdit', function() vim.cmd.edit(PACKER_COMPILED_PATH) end)
 
 gh.command('PackerCompiledDelete', function()
   vim.fn.delete(PACKER_COMPILED_PATH)
@@ -318,7 +318,7 @@ gh.command('PackerCompiledDelete', function()
 end)
 
 if not vim.g.packer_compiled_loaded and vim.loop.fs_stat(PACKER_COMPILED_PATH) then
-  gh.source(PACKER_COMPILED_PATH)
+  vim.cmd.source(PACKER_COMPILED_PATH)
   vim.g.packer_compiled_loaded = true
 end
 
