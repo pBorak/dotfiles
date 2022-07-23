@@ -7,19 +7,13 @@ return function()
     fg_sidebar = '#C8C093',
   }
 
-  local function window_wide_enough()
-    return vim.fn.winwidth(0) > 80
-  end
+  local function window_wide_enough() return vim.fn.winwidth(0) > 80 end
 
   local function search_result()
-    if vim.v.hlsearch == 0 then
-      return ''
-    end
-    local last_search = vim.fn.getreg '/'
-    if not last_search or last_search == '' then
-      return ''
-    end
-    local searchcount = vim.fn.searchcount { maxcount = 9999 }
+    if vim.v.hlsearch == 0 then return '' end
+    local last_search = vim.fn.getreg('/')
+    if not last_search or last_search == '' then return '' end
+    local searchcount = vim.fn.searchcount({ maxcount = 9999 })
     return searchcount.current .. '/' .. searchcount.total
   end
 
@@ -51,9 +45,7 @@ return function()
         },
       },
       lualine_c = {
-        function()
-          return '%='
-        end,
+        function() return '%=' end,
         {
           'filetype',
           icon_only = true,

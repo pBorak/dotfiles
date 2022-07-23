@@ -1,7 +1,7 @@
 return function()
   gh.nnoremap('<leader>n', [[<cmd>NvimTreeToggle<CR>]])
 
-  require('nvim-tree').setup {
+  require('nvim-tree').setup({
     view = {
       width = '25%',
     },
@@ -45,5 +45,5 @@ return function()
         },
       },
     },
-  }
+  })
 end

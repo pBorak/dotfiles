@@ -1,10 +1,10 @@
 return function()
-  local cmp = require 'cmp'
-  local cmp_autopairs = require 'nvim-autopairs.completion.cmp'
+  local cmp = require('cmp')
+  local cmp_autopairs = require('nvim-autopairs.completion.cmp')
 
   local has_words_before = function()
     local col = vim.api.nvim_win_get_cursor(0)[2]
-    return col ~= 0 and vim.api.nvim_get_current_line():sub(col, col):match '%s' == nil
+    return col ~= 0 and vim.api.nvim_get_current_line():sub(col, col):match('%s') == nil
   end
 
   local function tab(fallback)
@@ -33,7 +33,7 @@ return function()
     end
   end
 
-  cmp.setup {
+  cmp.setup({
     window = {
       completion = cmp.config.window.bordered(),
       documentation = cmp.config.window.bordered(),
@@ -42,9 +42,7 @@ return function()
       ghost_text = true,
     },
     snippet = {
-      expand = function(args)
-        require('luasnip').lsp_expand(args.body)
-      end,
+      expand = function(args) require('luasnip').lsp_expand(args.body) end,
     },
     mapping = {
       ['<Tab>'] = tab,
@@ -52,10 +50,10 @@ return function()
       ['<C-d>'] = cmp.mapping.scroll_docs(-4),
       ['<C-f>'] = cmp.mapping.scroll_docs(4),
       ['<C-e>'] = cmp.mapping.abort(),
-      ['<CR>'] = cmp.mapping.confirm {
+      ['<CR>'] = cmp.mapping.confirm({
         behavior = cmp.ConfirmBehavior.Replace,
         select = true,
-      },
+      }),
     },
     formatting = {
       deprecated = true,
@@ -87,24 +85,24 @@ return function()
       { name = 'buffer' },
       { name = 'spell' },
     }),
-  }
+  })
 
   local cmdline_mappings = {
     select_next_item = {
       c = function(fallback)
         if cmp.visible() then
-          return cmp.mapping.select_next_item { behavior = cmp.SelectBehavior.Insert }(fallback)
+          return cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Insert })(fallback)
         else
-          return cmp.mapping.complete { reason = cmp.ContextReason.Auto }(fallback)
+          return cmp.mapping.complete({ reason = cmp.ContextReason.Auto })(fallback)
         end
       end,
     },
     select_prev_item = {
-      c = cmp.mapping.select_prev_item { behavior = cmp.SelectBehavior.Insert },
+      c = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Insert }),
     },
   }
 
-  cmp.event:on('confirm_done', cmp_autopairs.on_confirm_done { map_char = { tex = '' } })
+  cmp.event:on('confirm_done', cmp_autopairs.on_confirm_done({ map_char = { tex = '' } }))
 
   cmp.setup.cmdline('/', {
     mapping = {
@@ -131,9 +129,9 @@ return function()
       ['<Tab>'] = cmdline_mappings.select_next_item,
       ['<S-Tab>'] = cmdline_mappings.select_prev_item,
     },
-    sources = cmp.config.sources {
+    sources = cmp.config.sources({
       { name = 'path' },
       { name = 'cmdline', keyword_length = 2 },
-    },
+    }),
   })
 end

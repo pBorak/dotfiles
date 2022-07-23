@@ -15,9 +15,7 @@ local smart_close_filetypes = {
 }
 
 local function smart_close()
-  if fn.winnr '$' ~= 1 then
-    api.nvim_win_close(0, true)
-  end
+  if fn.winnr('$') ~= 1 then api.nvim_win_close(0, true) end
 end
 
 gh.augroup('SmartClose', {
@@ -38,9 +36,7 @@ gh.augroup('SmartClose', {
         or vim.wo.previewwindow
         or contains(smart_close_filetypes, vim.bo.filetype)
 
-      if is_eligible then
-        gh.nnoremap('q', smart_close, { buffer = 0, nowait = true })
-      end
+      if is_eligible then gh.nnoremap('q', smart_close, { buffer = 0, nowait = true }) end
     end,
   },
   {
@@ -48,7 +44,7 @@ gh.augroup('SmartClose', {
     event = 'BufEnter',
     pattern = '*',
     command = function()
-      if fn.winnr '$' == 1 and vim.bo.buftype == 'quickfix' then
+      if fn.winnr('$') == 1 and vim.bo.buftype == 'quickfix' then
         api.nvim_buf_delete(0, { force = true })
       end
     end,
@@ -59,9 +55,7 @@ gh.augroup('SmartClose', {
     pattern = '*',
     nested = true,
     command = function()
-      if vim.bo.filetype ~= 'qf' then
-        vim.cmd 'silent! lclose'
-      end
+      if vim.bo.filetype ~= 'qf' then vim.cmd('silent! lclose') end
     end,
   },
 })
@@ -73,13 +67,9 @@ local function clear_commandline()
   --- deferred each time
   local timer
   return function()
-    if timer then
-      timer:stop()
-    end
+    if timer then timer:stop() end
     timer = vim.defer_fn(function()
-      if fn.mode() == 'n' then
-        vim.cmd [[echon '']]
-      end
+      if fn.mode() == 'n' then vim.cmd([[echon '']]) end
     end, 10000)
   end
 end
@@ -98,11 +88,11 @@ gh.augroup('TextYankHighlight', {
     event = 'TextYankPost',
     pattern = '*',
     command = function()
-      vim.highlight.on_yank {
+      vim.highlight.on_yank({
         timeout = 500,
         on_visual = false,
         higroup = 'Visual',
-      }
+      })
     end,
   },
 })
@@ -168,17 +158,13 @@ gh.augroup('Cursorline', {
     event = { 'BufEnter' },
     pattern = { '*' },
     command = function()
-      if should_show_cursorline() then
-        vim.wo.cursorline = true
-      end
+      if should_show_cursorline() then vim.wo.cursorline = true end
     end,
   },
   {
     event = { 'BufLeave' },
     pattern = { '*' },
-    command = function()
-      vim.wo.cursorline = false
-    end,
+    command = function() vim.wo.cursorline = false end,
   },
 })
 
@@ -218,9 +204,7 @@ gh.augroup('TerminalAutocommands', {
     pattern = '*',
     command = function()
       --- automatically close a terminal if the job was successful
-      if not vim.v.event.status == 0 then
-        vim.cmd('bdelete! ' .. fn.expand '<abuf>')
-      end
+      if not vim.v.event.status == 0 then vim.cmd('bdelete! ' .. fn.expand('<abuf>')) end
     end,
   },
 })

@@ -31,12 +31,12 @@ gh.augroup('AddTerminalMappings', {
 -- MACROS
 --------------------------------------------------------------------------------
 -- repeat macros across a visual range
-vim.cmd [[
+vim.cmd([[
   function! ExecuteMacroOverVisualRange()
     echo "@".getcmdline()
     execute ":'<,'>normal @".nr2char(getchar())
   endfunction
-]]
+]])
 
 xnoremap('@', ':<C-u>call ExecuteMacroOverVisualRange()<CR>', noisy)
 -- Map Q to replay q register
@@ -132,9 +132,7 @@ function gh.toggle_list(list_type)
   local prefix = is_location_target and 'l' or 'c'
   local L = vim.log.levels
   local is_open = gh.is_vim_list_open()
-  if is_open then
-    return fn.execute(prefix .. 'close')
-  end
+  if is_open then return fn.execute(prefix .. 'close') end
   local list = is_location_target and fn.getloclist(0) or fn.getqflist()
   if vim.tbl_isempty(list) then
     local msg_prefix = (is_location_target and 'Location' or 'QuickFix')
@@ -143,11 +141,7 @@ function gh.toggle_list(list_type)
 
   local winnr = fn.winnr()
   fn.execute(prefix .. 'open')
-  if fn.winnr() ~= winnr then
-    vim.cmd 'wincmd p'
-  end
+  if fn.winnr() ~= winnr then vim.cmd('wincmd p') end
 end
 
-nnoremap('<leader>cc', function()
-  gh.toggle_list 'quickfix'
-end)
+nnoremap('<leader>cc', function() gh.toggle_list('quickfix') end)

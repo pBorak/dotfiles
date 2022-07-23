@@ -1,7 +1,5 @@
 return function()
-  if vim.g.lsp_config_complete then
-    return
-  end
+  if vim.g.lsp_config_complete then return end
   vim.g.lsp_config_complete = true
 
   local servers = {
@@ -26,9 +24,9 @@ return function()
     eslint = true,
     dockerls = true,
   }
-  require('nvim-lsp-installer').setup {
+  require('nvim-lsp-installer').setup({
     automatic_installation = { exclude = { 'solargraph' } },
-  }
+  })
 
   for name, config in pairs(servers) do
     if type(config) == 'boolean' then
@@ -38,10 +36,8 @@ return function()
     end
     if config then
       config.capabilities = config.capabilities or vim.lsp.protocol.make_client_capabilities()
-      local ok, cmp_nvim_lsp = gh.safe_require 'cmp_nvim_lsp'
-      if ok then
-        cmp_nvim_lsp.update_capabilities(config.capabilities)
-      end
+      local ok, cmp_nvim_lsp = gh.safe_require('cmp_nvim_lsp')
+      if ok then cmp_nvim_lsp.update_capabilities(config.capabilities) end
       require('lspconfig')[name].setup(config)
     end
   end

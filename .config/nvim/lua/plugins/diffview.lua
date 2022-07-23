@@ -2,7 +2,7 @@ return function()
   gh.nnoremap('<leader>gd', '<Cmd>DiffviewOpen<CR>')
   gh.nnoremap('<leader>gh', '<Cmd>DiffviewFileHistory<CR>')
   gh.vnoremap('<leader>gh', [[:'<'>DiffviewFileHistory<CR>]])
-  require('diffview').setup {
+  require('diffview').setup({
     default_args = {
       DiffviewFileHistory = { '.' },
     },
@@ -18,5 +18,5 @@ return function()
         q = '<Cmd>DiffviewClose<CR>',
       },
     },
-  }
+  })
 end

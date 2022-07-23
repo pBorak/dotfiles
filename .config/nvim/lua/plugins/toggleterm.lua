@@ -1,5 +1,5 @@
 return function()
-  require('toggleterm').setup {
+  require('toggleterm').setup({
     open_mapping = [[<c-\>]],
     shade_filetypes = { 'none' },
     direction = 'horizontal',
@@ -12,17 +12,15 @@ return function()
         return math.floor(vim.o.columns * 0.4)
       end
     end,
-  }
+  })
 
   local Terminal = require('toggleterm.terminal').Terminal
 
-  local htop = Terminal:new {
+  local htop = Terminal:new({
     cmd = 'htop',
     hidden = 'true',
     direction = 'float',
-  }
+  })
 
-  gh.command('Htop', function()
-    htop:toggle()
-  end)
+  gh.command('Htop', function() htop:toggle() end)
 end

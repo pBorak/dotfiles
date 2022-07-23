@@ -1,7 +1,7 @@
 return function()
-  require('dressing').setup {
+  require('dressing').setup({
     select = {
-      telescope = require('telescope.themes').get_cursor {
+      telescope = require('telescope.themes').get_cursor({
         layout_config = {
           height = function(self, _, max_lines)
             local results = #self.finder.results
@@ -10,7 +10,7 @@ return function()
             return (results <= (LIMIT - PADDING) and results + PADDING or LIMIT)
           end,
         },
-      },
+      }),
     },
-  }
+  })
 end

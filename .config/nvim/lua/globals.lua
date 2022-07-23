@@ -67,12 +67,10 @@ local installed
 ---@return boolean
 function gh.plugin_installed(plugin_name)
   if not installed then
-    local dirs = fn.expand(fn.stdpath 'data' .. '/site/pack/packer/start/*', true, true)
-    local opt = fn.expand(fn.stdpath 'data' .. '/site/pack/packer/opt/*', true, true)
+    local dirs = fn.expand(fn.stdpath('data') .. '/site/pack/packer/start/*', true, true)
+    local opt = fn.expand(fn.stdpath('data') .. '/site/pack/packer/opt/*', true, true)
     vim.list_extend(dirs, opt)
-    installed = vim.tbl_map(function(path)
-      return fn.fnamemodify(path, ':t')
-    end, dirs)
+    installed = vim.tbl_map(function(path) return fn.fnamemodify(path, ':t') end, dirs)
   end
   return vim.tbl_contains(installed, plugin_name)
 end
@@ -91,9 +89,7 @@ function gh.is_vim_list_open()
     local buf = api.nvim_win_get_buf(win)
     local location_list = fn.getloclist(0, { filewinid = 0 })
     local is_loc_list = location_list.filewinid > 0
-    if vim.bo[buf].filetype == 'qf' or is_loc_list then
-      return true
-    end
+    if vim.bo[buf].filetype == 'qf' or is_loc_list then return true end
   end
   return false
 end
@@ -145,9 +141,7 @@ end
 ---@param item any
 ---@return boolean?
 function gh.empty(item)
-  if not item then
-    return true
-  end
+  if not item then return true end
   local item_type = type(item)
   if item_type == 'string' then
     return item == ''
@@ -174,9 +168,7 @@ end
 ---Check if a cmd is executable
 ---@param e string
 ---@return boolean
-function gh.executable(e)
-  return fn.executable(e) > 0
-end
+function gh.executable(e) return fn.executable(e) > 0 end
 
 --- @class CommandArgs
 --- @field args string

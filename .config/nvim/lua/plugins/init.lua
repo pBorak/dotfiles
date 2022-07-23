@@ -1,4 +1,4 @@
-local utils = require 'utils.plugins'
+local utils = require('utils.plugins')
 
 local conf = utils.conf
 local packer_notify = utils.packer_notify
@@ -6,119 +6,113 @@ local packer_notify = utils.packer_notify
 local fn = vim.fn
 local fmt = string.format
 
-local PACKER_COMPILED_PATH = fn.stdpath 'cache' .. '/packer/packer_compiled.lua'
+local PACKER_COMPILED_PATH = fn.stdpath('cache') .. '/packer/packer_compiled.lua'
 
 -- Bootstrap Packer
 utils.bootstrap_packer()
 
-gh.safe_require 'impatient'
+gh.safe_require('impatient')
 
-local packer = require 'packer'
+local packer = require('packer')
 
-packer.startup {
+packer.startup({
   function(use)
-    use { 'wbthomason/packer.nvim', opt = true }
+    use({ 'wbthomason/packer.nvim', opt = true })
     ----------------------------------------------------------------------------
     -- Startup time improvements
     ----------------------------------------------------------------------------
-    use 'lewis6991/impatient.nvim'
-    use 'antoinemadec/FixCursorHold.nvim'
+    use('lewis6991/impatient.nvim')
+    use('antoinemadec/FixCursorHold.nvim')
     ----------------------------------------------------------------------------
     -- Editor
     ----------------------------------------------------------------------------
-    use 'tpope/vim-surround'
-    use 'tpope/vim-eunuch'
-    use 'tpope/vim-repeat'
-    use 'vim-scripts/ReplaceWithRegister'
-    use 'pbrisbin/vim-mkdir'
-    use {
+    use('tpope/vim-surround')
+    use('tpope/vim-eunuch')
+    use('tpope/vim-repeat')
+    use('vim-scripts/ReplaceWithRegister')
+    use('pbrisbin/vim-mkdir')
+    use({
       'numToStr/Comment.nvim',
-      config = function()
-        require('Comment').setup()
-      end,
-    }
-    use {
+      config = function() require('Comment').setup() end,
+    })
+    use({
       'AndrewRadev/splitjoin.vim',
       keys = { 'gS', 'gJ' },
       config = function()
         vim.g.splitjoin_ruby_curly_braces = 0
         vim.g.splitjoin_ruby_hanging_args = 0
       end,
-    }
-    use {
+    })
+    use({
       'akinsho/toggleterm.nvim',
       tag = 'v2.*',
       keys = [[<c-\>]],
-      config = conf 'toggleterm',
-    }
-    use {
+      config = conf('toggleterm'),
+    })
+    use({
       'vim-test/vim-test',
       keys = { '<leader>tf', '<leader>ta', '<leader>tt' },
-      config = conf 'vim-test',
-    }
+      config = conf('vim-test'),
+    })
     ----------------------------------------------------------------------------
     -- Navigation
     ----------------------------------------------------------------------------
-    use {
+    use({
       'nvim-telescope/telescope.nvim',
       branch = '0.1.x',
       cmd = 'Telescope',
       keys = { '<c-p>', '<c-s>', '<leader>f' },
-      config = conf 'telescope',
+      config = conf('telescope'),
       requires = {
         {
           'nvim-telescope/telescope-fzf-native.nvim',
           run = 'make',
           after = 'telescope.nvim',
-          config = function()
-            require('telescope').load_extension 'fzf'
-          end,
+          config = function() require('telescope').load_extension('fzf') end,
         },
       },
-    }
-    use {
+    })
+    use({
       'tpope/vim-projectionist',
-      config = function()
-        gh.nnoremap('<leader>a', '<cmd>A<cr>')
-      end,
-    }
-    use {
+      config = function() gh.nnoremap('<leader>a', '<cmd>A<cr>') end,
+    })
+    use({
       'ggandor/leap.nvim',
-      config = conf 'leap',
-    }
-    use {
+      config = conf('leap'),
+    })
+    use({
       'rhysd/clever-f.vim',
       keys = { 'f', 'F', 't', 'T' },
       config = function()
         vim.g.clever_f_across_no_line = 1
         vim.g.clever_f_fix_key_direction = 1
       end,
-    }
-    use {
+    })
+    use({
       'christoomey/vim-tmux-navigator',
-      config = conf 'vim-tmux-navigator',
-    }
-    use {
+      config = conf('vim-tmux-navigator'),
+    })
+    use({
       'ThePrimeagen/harpoon',
-      config = conf 'harpoon',
-    }
+      config = conf('harpoon'),
+    })
     ----------------------------------------------------------------------------
     -- LSP & Completion
     ----------------------------------------------------------------------------
     --
-    use {
+    use({
       'neovim/nvim-lspconfig',
       event = 'BufRead',
       requires = { 'williamboman/nvim-lsp-installer' },
-      config = conf 'lspconfig',
-    }
-    use {
+      config = conf('lspconfig'),
+    })
+    use({
       'jose-elias-alvarez/null-ls.nvim',
       event = 'BufRead',
       requires = { 'nvim-lua/plenary.nvim' },
-      config = conf 'null-ls',
-    }
-    use {
+      config = conf('null-ls'),
+    })
+    use({
       'hrsh7th/nvim-cmp',
       event = { 'InsertEnter', 'CmdlineEnter' },
       requires = {
@@ -129,28 +123,28 @@ packer.startup {
         { 'hrsh7th/cmp-buffer', after = 'nvim-cmp' },
         { 'saadparwaiz1/cmp_luasnip', after = 'nvim-cmp' },
       },
-      config = conf 'cmp',
-    }
-    use {
+      config = conf('cmp'),
+    })
+    use({
       'L3MON4D3/LuaSnip',
       event = 'InsertEnter',
       module = 'luasnip',
-      config = conf 'luasnip',
-    }
-    use {
+      config = conf('luasnip'),
+    })
+    use({
       'windwp/nvim-autopairs',
       after = 'nvim-cmp',
       config = function()
-        require('nvim-autopairs').setup {
+        require('nvim-autopairs').setup({
           check_ts = true,
-        }
+        })
       end,
-    }
-    use 'windwp/nvim-ts-autotag'
+    })
+    use('windwp/nvim-ts-autotag')
     ----------------------------------------------------------------------------
     -- Git
     ----------------------------------------------------------------------------
-    use {
+    use({
       'tpope/vim-fugitive',
       keys = { '<leader>gs' },
       event = 'BufRead',
@@ -158,59 +152,57 @@ packer.startup {
         gh.nnoremap('<leader>gs', '<cmd>G<CR>')
         gh.nnoremap('<leader>gb', '<cmd>G blame<CR>')
       end,
-    }
-    use {
+    })
+    use({
       'akinsho/git-conflict.nvim',
       event = 'CursorHold',
-      config = function()
-        require('git-conflict').setup()
-      end,
-    }
-    use {
+      config = function() require('git-conflict').setup() end,
+    })
+    use({
       'lewis6991/gitsigns.nvim',
       event = 'BufRead',
       requires = 'nvim-lua/plenary.nvim',
-      config = conf 'gitsigns',
-    }
-    use {
+      config = conf('gitsigns'),
+    })
+    use({
       'ruifm/gitlinker.nvim',
       requires = 'plenary.nvim',
       keys = { '<leader>xl', '<leader>xo' },
-      config = conf 'gitlinker',
-    }
-    use {
+      config = conf('gitlinker'),
+    })
+    use({
       'sindrets/diffview.nvim',
       cmd = { 'DiffviewOpen', 'DiffviewFileHistory' },
       module = 'diffview',
       keys = { '<leader>gd', '<leader>gh' },
-      config = conf 'diffview',
-    }
+      config = conf('diffview'),
+    })
     ----------------------------------------------------------------------------
     -- UI
     ----------------------------------------------------------------------------
-    use {
+    use({
       'rebelot/kanagawa.nvim',
       config = function()
-        require('kanagawa').setup {
+        require('kanagawa').setup({
           globalStatus = true,
-        }
+        })
       end,
-    }
-    use {
+    })
+    use({
       'rcarriga/nvim-notify',
-      config = conf 'notify',
-    }
-    use {
+      config = conf('notify'),
+    })
+    use({
       'j-hui/fidget.nvim',
       config = function()
-        require('fidget').setup {
+        require('fidget').setup({
           text = {
             spinner = 'moon',
           },
-        }
+        })
       end,
-    }
-    use {
+    })
+    use({
       'mbbill/undotree',
       cmd = 'UndotreeToggle',
       keys = '<leader>u',
@@ -219,26 +211,24 @@ packer.startup {
         vim.g.undotree_SetFocusWhenToggle = 1
         gh.nnoremap('<leader>u', '<cmd>UndotreeToggle<CR>')
       end,
-    }
-    use {
+    })
+    use({
       'https://gitlab.com/yorickpeterse/nvim-pqf',
       event = 'BufRead',
-      config = function()
-        require('pqf').setup()
-      end,
-    }
-    use {
+      config = function() require('pqf').setup() end,
+    })
+    use({
       'kevinhwang91/nvim-bqf',
       ft = 'qf',
       config = function()
-        require('bqf').setup {
+        require('bqf').setup({
           preview = {
             auto_preview = false,
           },
-        }
+        })
       end,
-    }
-    use {
+    })
+    use({
       'norcalli/nvim-colorizer.lua',
       ft = { 'html', 'css', 'sass' },
       config = function()
@@ -246,68 +236,66 @@ packer.startup {
           RGB = false,
         })
       end,
-    }
-    use {
+    })
+    use({
       'lukas-reineke/indent-blankline.nvim',
-      config = conf 'indent-blankline',
-    }
-    use {
+      config = conf('indent-blankline'),
+    })
+    use({
       'kyazdani42/nvim-tree.lua',
       keys = '<leader>n',
-      config = conf 'nvim-tree',
+      config = conf('nvim-tree'),
       requires = 'kyazdani42/nvim-web-devicons',
-    }
-    use {
+    })
+    use({
       'nvim-lualine/lualine.nvim',
       event = 'BufRead',
-      config = conf 'lualine',
+      config = conf('lualine'),
       requires = 'nvim-web-devicons',
-    }
-    use {
+    })
+    use({
       'stevearc/dressing.nvim',
       after = 'telescope.nvim',
-      config = conf 'dressing',
-    }
+      config = conf('dressing'),
+    })
     ----------------------------------------------------------------------------
     -- Syntax
     ----------------------------------------------------------------------------
-    use {
+    use({
       'nvim-treesitter/nvim-treesitter',
-      config = conf 'treesitter',
-    }
-    use { 'RRethy/nvim-treesitter-endwise' }
-    use { 'nvim-treesitter/nvim-treesitter-textobjects' }
-    use {
+      config = conf('treesitter'),
+    })
+    use({ 'RRethy/nvim-treesitter-endwise' })
+    use({ 'nvim-treesitter/nvim-treesitter-textobjects' })
+    use({
       'nvim-treesitter/nvim-treesitter-context',
       config = function()
         vim.api.nvim_set_hl(0, 'TreesitterContext', { link = 'Folded' })
-        require('treesitter-context').setup {
+        require('treesitter-context').setup({
           patterns = {
             ruby = {
               'block',
             },
           },
-        }
+        })
       end,
-    }
+    })
     ----------------------------------------------------------------------------
     -- Utils
     ----------------------------------------------------------------------------
-    use {
+    use({
       'klen/nvim-config-local',
       config = function()
-        require('config-local').setup {
+        require('config-local').setup({
           config_files = { '.localrc.lua', '.vimrc', '.vimrc.lua' },
-        }
+        })
       end,
-    }
-    use {
+    })
+    use({
       'dstein64/vim-startuptime',
       cmd = 'StartupTime',
-      config = function()
-        vim.g.startuptime_tries = 15
-      end,
-    }
+      config = function() vim.g.startuptime_tries = 15 end,
+    })
   end,
   config = {
     compile_path = PACKER_COMPILED_PATH,
@@ -320,11 +308,9 @@ packer.startup {
       threshold = 1,
     },
   },
-}
+})
 
-gh.command('PackerCompiledEdit', function()
-  vim.cmd(fmt('edit %s', PACKER_COMPILED_PATH))
-end)
+gh.command('PackerCompiledEdit', function() vim.cmd(fmt('edit %s', PACKER_COMPILED_PATH)) end)
 
 gh.command('PackerCompiledDelete', function()
   vim.fn.delete(PACKER_COMPILED_PATH)

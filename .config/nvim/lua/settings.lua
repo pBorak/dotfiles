@@ -23,7 +23,7 @@ vim.g.loaded_ruby_provider = 0
 --------------------------------------------------------------------------------
 -- Message output on vim actions
 --------------------------------------------------------------------------------
-opt.shortmess:append 'c'
+opt.shortmess:append('c')
 --------------------------------------------------------------------------------
 -- Timings
 --------------------------------------------------------------------------------
@@ -125,7 +125,7 @@ opt.mouse = 'a'
 --------------------------------------------------------------------------------
 -- Spelling
 --------------------------------------------------------------------------------
-opt.spellsuggest:prepend { 12 }
+opt.spellsuggest:prepend({ 12 })
 opt.spellcapcheck = ''
 --------------------------------------------------------------------------------
 -- BACKUP AND SWAPS
@@ -133,9 +133,7 @@ opt.spellcapcheck = ''
 opt.backup = false
 opt.writebackup = false
 opt.swapfile = false
-if fn.isdirectory(vim.o.undodir) == 0 then
-  fn.mkdir(vim.o.undodir, 'p')
-end
+if fn.isdirectory(vim.o.undodir) == 0 then fn.mkdir(vim.o.undodir, 'p') end
 opt.undofile = true
 --------------------------------------------------------------------------------
 -- Match and search

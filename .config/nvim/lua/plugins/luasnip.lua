@@ -1,9 +1,9 @@
 return function()
-  local ls = require 'luasnip'
-  local types = require 'luasnip.util.types'
+  local ls = require('luasnip')
+  local types = require('luasnip.util.types')
   local fmt = require('luasnip.extras.fmt').fmt
 
-  ls.config.set_config {
+  ls.config.set_config({
     history = false,
     region_check_events = 'CursorMoved,CursorHold,InsertEnter',
     delete_check_events = 'InsertLeave',
@@ -30,26 +30,20 @@ return function()
       sn = ls.snippet_node,
       snippet = ls.snippet,
     },
-  }
+  })
   -- <c-l> is selecting within a list of options.
   vim.keymap.set('i', '<c-l>', function()
-    if ls.choice_active() then
-      ls.change_choice(1)
-    end
+    if ls.choice_active() then ls.change_choice(1) end
   end)
 
   vim.keymap.set({ 's', 'i' }, '<c-j>', function()
-    if ls.expand_or_jumpable() then
-      ls.expand_or_jump()
-    end
+    if ls.expand_or_jumpable() then ls.expand_or_jump() end
   end)
 
   vim.keymap.set({ 's', 'i' }, '<c-k>', function()
-    if ls.jumpable(-1) then
-      ls.jump(-1)
-    end
+    if ls.jumpable(-1) then ls.jump(-1) end
   end)
 
   require('luasnip.loaders.from_lua').lazy_load()
-  require('luasnip.loaders.from_vscode').lazy_load { paths = './snippets' }
+  require('luasnip.loaders.from_vscode').lazy_load({ paths = './snippets' })
 end

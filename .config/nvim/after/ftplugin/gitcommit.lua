@@ -1,2 +1,2 @@
-vim.cmd [[ setlocal spell ]]
-vim.cmd [[ setlocal colorcolumn=72 ]]
+vim.cmd([[ setlocal spell ]])
+vim.cmd([[ setlocal colorcolumn=72 ]])

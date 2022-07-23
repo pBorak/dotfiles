@@ -3,9 +3,7 @@ local is_toggle = false
 local mode = 'term'
 local last_search = ''
 
-local function unmap(map_mode, lhs)
-  return vim.api.nvim_del_keymap(map_mode, lhs)
-end
+local function unmap(map_mode, lhs) return vim.api.nvim_del_keymap(map_mode, lhs) end
 
 gh.augroup('InitVimSearch', {
   {
@@ -23,15 +21,13 @@ gh.vnoremap('<leader>S', ':<C-u>call v:lua._search.run("", 1)<CR>')
 
 local function cleanup(no_reset_mode)
   is_toggle = false
-  if not no_reset_mode then
-    mode = 'term'
-  end
+  if not no_reset_mode then mode = 'term' end
   return pcall(unmap, 'c', '<tab>')
 end
 
 local function get_visual_selection()
-  local s_start = vim.fn.getpos "'<"
-  local s_end = vim.fn.getpos "'>"
+  local s_start = vim.fn.getpos("'<")
+  local s_end = vim.fn.getpos("'>")
   local n_lines = math.abs(s_end[2] - s_start[2]) + 1
   local lines = vim.api.nvim_buf_get_lines(0, s_start[2] - 1, s_end[2], false)
   lines[1] = string.sub(lines[1], s_start[3], -1)
@@ -43,9 +39,7 @@ local function get_visual_selection()
   return table.concat(lines, '\n')
 end
 
-local function msg(txt)
-  return vim.api.nvim_out_write(txt .. '\n')
-end
+local function msg(txt) return vim.api.nvim_out_write(txt .. '\n') end
 
 function _search.toggle_search_mode()
   is_toggle = true
@@ -56,16 +50,12 @@ end
 
 function _search.run(search_term, is_visual)
   local term = search_term
-  if is_visual then
-    term = get_visual_selection()
-  end
+  if is_visual then term = get_visual_selection() end
 
   gh.cmap('<tab>', '<C-\\>ev:lua._search.toggle_search_mode()<CR><CR>', { noremap = false })
 
   local status, t = pcall(vim.fn.input, 'Enter ' .. mode .. ': ', term)
-  if not status then
-    return cleanup()
-  end
+  if not status then return cleanup() end
   term = t
 
   if is_toggle then
@@ -73,18 +63,14 @@ function _search.run(search_term, is_visual)
     return _search.run(term)
   end
 
-  cleanup 'no_reset_mode'
-  vim.cmd [[redraw!]]
+  cleanup('no_reset_mode')
+  vim.cmd([[redraw!]])
 
-  if term == '' then
-    return msg 'Empty search.'
-  end
+  if term == '' then return msg('Empty search.') end
 
   msg('Searching for word -> ' .. term)
   local status_dir, dir = pcall(vim.fn.input, 'Path: ', '', 'file')
-  if not status_dir then
-    return cleanup()
-  end
+  if not status_dir then return cleanup() end
 
   local grepprg = vim.o.grepprg
   local cmd = nil
@@ -95,7 +81,7 @@ function _search.run(search_term, is_visual)
   end
 
   if (not cmd or cmd == '') and last_search == '' then
-    msg 'Empty search.'
+    msg('Empty search.')
     return cleanup()
   end
 
@@ -114,10 +100,8 @@ function _search.run(search_term, is_visual)
     return cleanup()
   end
 
-  vim.cmd [[botright cgetexpr v:lua._search.do_search()]]
+  vim.cmd([[botright cgetexpr v:lua._search.do_search()]])
   return cleanup()
 end
 
-function _search.do_search()
-  return vim.fn.systemlist(last_search)
-end
+function _search.do_search() return vim.fn.systemlist(last_search) end

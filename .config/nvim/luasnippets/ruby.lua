@@ -43,9 +43,9 @@ local function ruby_class(path)
     local keyword = index == arguments_size and 'class ' or 'module '
 
     vim.list_extend(nodes, {
-      t { keyword .. arg },
-      t { '', '' },
-      t { string.rep('\t', index) },
+      t({ keyword .. arg }),
+      t({ '', '' }),
+      t({ string.rep('\t', index) }),
     })
   end
 
@@ -55,9 +55,9 @@ local function ruby_class(path)
 
   for index, _ in ipairs(classified_parts) do
     vim.list_extend(nodes, {
-      t { '', '' },
-      t { string.rep('\t', arguments_size - index) },
-      t { 'end' },
+      t({ '', '' }),
+      t({ string.rep('\t', arguments_size - index) }),
+      t({ 'end' }),
     })
   end
 
@@ -71,15 +71,13 @@ local function assign_instance_variables(args, _, _)
   for index, arg in ipairs(args_table) do
     arg = arg:gsub(' ', '')
 
-    if arg and arg:match '^%a' then
+    if arg and arg:match('^%a') then
       local stripped_arg = arg:match(ruby_args_pattern)
-      if index > 1 then
-        vim.list_extend(nodes, {
-          t { '', '\t' },
-        })
-      end
+      if index > 1 then vim.list_extend(nodes, {
+        t({ '', '\t' }),
+      }) end
       vim.list_extend(nodes, {
-        t { '@' .. stripped_arg .. ' = ' .. stripped_arg },
+        t({ '@' .. stripped_arg .. ' = ' .. stripped_arg }),
       })
     end
   end
@@ -94,12 +92,12 @@ local function pass_ruby_args(args, _, _, opts)
   for _, arg in ipairs(args_table) do
     arg = arg:gsub(' ', '')
 
-    if arg and arg:match '^%a' then
+    if arg and arg:match('^%a') then
       local stripped_arg = arg:match(ruby_args_pattern)
-      local node = opts == 'keyword_args' and t { stripped_arg .. ':' }
-        or t { stripped_arg .. ': ' .. stripped_arg }
+      local node = opts == 'keyword_args' and t({ stripped_arg .. ':' })
+        or t({ stripped_arg .. ': ' .. stripped_arg })
 
-      vim.list_extend(nodes, { node, t { ', ' } })
+      vim.list_extend(nodes, { node, t({ ', ' }) })
     end
   end
 

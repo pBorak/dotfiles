@@ -1,5 +1,5 @@
 return function()
-  require('nvim-treesitter.configs').setup {
+  require('nvim-treesitter.configs').setup({
     ensure_installed = {
       'bash',
       'ruby',
@@ -76,5 +76,5 @@ return function()
       enable = true,
     },
     autotag = { enable = true },
-  }
+  })
 end

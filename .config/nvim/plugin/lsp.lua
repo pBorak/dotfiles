@@ -14,9 +14,7 @@ end
 
 local format_exclusions = { 'sumneko_lua', 'solargraph', 'dockerls' }
 
-local function formatting_filter(client)
-  return not vim.tbl_contains(format_exclusions, client.name)
-end
+local function formatting_filter(client) return not vim.tbl_contains(format_exclusions, client.name) end
 
 local function setup_autocommands(client, bufnr)
   local group = get_augroup(bufnr)
@@ -25,22 +23,18 @@ local function setup_autocommands(client, bufnr)
 
   local cmds = {}
 
-  if client and client.supports_method 'textDocument/documentHighlight' then
+  if client and client.supports_method('textDocument/documentHighlight') then
     table.insert(cmds, {
       event = { 'CursorHold' },
       buffer = bufnr,
       desc = 'LSP: Document Highlight',
-      command = function()
-        vim.lsp.buf.document_highlight()
-      end,
+      command = function() vim.lsp.buf.document_highlight() end,
     })
     table.insert(cmds, {
       event = 'CursorMoved',
       desc = 'LSP: Document Highlight (Clear)',
       buffer = bufnr,
-      command = function()
-        vim.lsp.buf.clear_references()
-      end,
+      command = function() vim.lsp.buf.clear_references() end,
     })
   end
   if client and client.server_capabilities.documentFormattingProvider then
@@ -49,10 +43,10 @@ local function setup_autocommands(client, bufnr)
       buffer = bufnr,
       desc = 'Format the current buffer on save',
       command = function(args)
-        vim.lsp.buf.format {
+        vim.lsp.buf.format({
           bufnr = args.bufnr,
           filter = formatting_filter,
-        }
+        })
       end,
     })
   end
@@ -72,12 +66,8 @@ local function setup_mappings(_)
   gh.nnoremap('<leader>ln', vim.lsp.buf.rename)
   gh.nnoremap('<leader>lf', vim.lsp.buf.format)
 
-  gh.nnoremap('[d', function()
-    vim.diagnostic.goto_prev()
-  end)
-  gh.nnoremap(']d', function()
-    vim.diagnostic.goto_next()
-  end)
+  gh.nnoremap('[d', function() vim.diagnostic.goto_prev() end)
+  gh.nnoremap(']d', function() vim.diagnostic.goto_next() end)
 end
 -----------------------------------------------------------------------------//
 -- Lsp setup/teardown
@@ -86,13 +76,9 @@ end
 ---@param client table lsp client
 ---@param bufnr number
 local function on_attach(client, bufnr)
-  local active = vim.lsp.get_active_clients { bufnr = bufnr }
-  local attached = vim.tbl_filter(function(c)
-    return c.attached_buffers[bufnr]
-  end, active)
-  if #attached > 0 then
-    return
-  end
+  local active = vim.lsp.get_active_clients({ bufnr = bufnr })
+  local attached = vim.tbl_filter(function(c) return c.attached_buffers[bufnr] end, active)
+  if #attached > 0 then return end
 
   setup_autocommands(client, bufnr)
   setup_mappings(client)
@@ -108,9 +94,7 @@ gh.augroup('LspSetupCommands', {
     command = function(args)
       local bufnr = args.buf
       -- if the buffer is invalid we should not try and attach to it
-      if not api.nvim_buf_is_valid(args.buf) then
-        return
-      end
+      if not api.nvim_buf_is_valid(args.buf) then return end
       local client = vim.lsp.get_client_by_id(args.data.client_id)
       on_attach(client, bufnr)
     end,
@@ -127,25 +111,19 @@ local command = gh.command
 local function make_diagnostic_qf_updater()
   local cmd_id = nil
   return function()
-    if not api.nvim_buf_is_valid(0) then
-      return
-    end
-    vim.diagnostic.setqflist { open = false }
-    gh.toggle_list 'quickfix'
+    if not api.nvim_buf_is_valid(0) then return end
+    vim.diagnostic.setqflist({ open = false })
+    gh.toggle_list('quickfix')
     if not gh.is_vim_list_open() and cmd_id then
       api.nvim_del_autocmd(cmd_id)
       cmd_id = nil
     end
-    if cmd_id then
-      return
-    end
+    if cmd_id then return end
     cmd_id = api.nvim_create_autocmd('DiagnosticChanged', {
       callback = function()
         if gh.is_vim_list_open() then
-          vim.diagnostic.setqflist { open = false }
-          if #vim.fn.getqflist() == 0 then
-            gh.toggle_list 'quickfix'
-          end
+          vim.diagnostic.setqflist({ open = false })
+          if #vim.fn.getqflist() == 0 then gh.toggle_list('quickfix') end
         end
       end,
     })
@@ -181,7 +159,7 @@ end, diagnostic_types))
 --- Restricts nvim's diagnostic signs to only the single most severe one per line
 --- @see `:help vim.diagnostic`
 
-local ns = api.nvim_create_namespace 'severe-diagnostics'
+local ns = api.nvim_create_namespace('severe-diagnostics')
 
 local function max_diagnostic(callback)
   return function(_, bufnr, _, opts)
@@ -192,9 +170,7 @@ local function max_diagnostic(callback)
     local max_severity_per_line = {}
     for _, d in pairs(diagnostics) do
       local m = max_severity_per_line[d.lnum]
-      if not m or d.severity < m.severity then
-        max_severity_per_line[d.lnum] = d
-      end
+      if not m or d.severity < m.severity then max_severity_per_line[d.lnum] = d end
     end
     -- Pass the filtered diagnostics (with our custom namespace) to
     -- the original handler
@@ -205,20 +181,16 @@ end
 local signs_handler = vim.diagnostic.handlers.signs
 vim.diagnostic.handlers.signs = {
   show = max_diagnostic(signs_handler.show),
-  hide = function(_, bufnr)
-    signs_handler.hide(ns, bufnr)
-  end,
+  hide = function(_, bufnr) signs_handler.hide(ns, bufnr) end,
 }
 
 local virt_text_handler = vim.diagnostic.handlers.virtual_text
 vim.diagnostic.handlers.virtual_text = {
   show = max_diagnostic(virt_text_handler.show),
-  hide = function(_, bufnr)
-    virt_text_handler.hide(ns, bufnr)
-  end,
+  hide = function(_, bufnr) virt_text_handler.hide(ns, bufnr) end,
 }
 
-vim.diagnostic.config {
+vim.diagnostic.config({
   underline = true,
   virtual_text = false,
   signs = true,
@@ -229,7 +201,7 @@ vim.diagnostic.config {
     focusable = false,
     source = 'always',
   },
-}
+})
 
 local max_width = math.max(math.floor(vim.o.columns * 0.7), 100)
 local max_height = math.max(math.floor(vim.o.lines * 0.3), 30)
@@ -252,8 +224,6 @@ lsp.handlers['window/showMessage'] = function(_, result, ctx)
   vim.notify(result.message, lvl, {
     title = 'LSP | ' .. client.name,
     timeout = 10000,
-    keep = function()
-      return lvl == 'ERROR' or lvl == 'WARN'
-    end,
+    keep = function() return lvl == 'ERROR' or lvl == 'WARN' end,
   })
 end

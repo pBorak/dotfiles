@@ -1,1 +1,1 @@
-vim.cmd [[ set signcolumn=yes ]]
+vim.cmd([[ set signcolumn=yes ]])
