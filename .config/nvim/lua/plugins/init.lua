@@ -112,7 +112,6 @@ packer.startup {
       requires = { 'williamboman/nvim-lsp-installer' },
       config = conf 'lspconfig',
     }
-    use 'folke/lua-dev.nvim'
     use {
       'jose-elias-alvarez/null-ls.nvim',
       event = 'BufRead',

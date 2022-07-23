@@ -6,17 +6,16 @@ return function()
 
   local servers = {
     sumneko_lua = function()
-      local ok, lua_dev = gh.safe_require 'lua-dev'
-      if not ok then
-        return {}
-      end
-
-      return lua_dev.setup {
-        lspconfig = {
-          settings = {
-            Lua = {
-              format = { enable = false },
-              completion = { keywordSnippet = 'Replace', callSnippet = 'Replace' },
+      return {
+        settings = {
+          Lua = {
+            format = { enable = false },
+            completion = { keywordSnippet = 'Replace', callSnippet = 'Replace' },
+            diagnostics = {
+              globals = { 'vim', 'describe', 'it', 'before_each', 'after_each', 'packer_plugins' },
+            },
+            telemetry = {
+              enable = false,
             },
           },
         },
