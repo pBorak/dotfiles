@@ -7,6 +7,9 @@ return function()
       return {
         settings = {
           Lua = {
+            runtime = {
+              version = 'LuaJIT',
+            },
             format = { enable = false },
             completion = { keywordSnippet = 'Replace', callSnippet = 'Replace' },
             diagnostics = {
