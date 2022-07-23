@@ -1,11 +1,12 @@
 return function()
   local icons = gh.style.icons
-
+  local custom_kanagawa = require('lualine.themes.kanagawa')
   local colors = {
-    bg_statusline = '#2A2A37',
+    bg_statusline = '#16161D',
     blue = '#7E9CD8',
-    fg_sidebar = '#C8C093',
+    fg_sidebar = '#727169',
   }
+  custom_kanagawa.normal.c.bg = colors.bg_statusline
 
   local function window_wide_enough() return vim.fn.winwidth(0) > 80 end
 
@@ -30,7 +31,7 @@ return function()
 
   local config = {
     options = {
-      theme = 'kanagawa',
+      theme = custom_kanagawa,
       section_separators = { left = '', right = '' },
       component_separators = { left = '', right = '' },
       icons_enabled = true,
@@ -50,12 +51,15 @@ return function()
           'filetype',
           icon_only = true,
           padding = { left = 1, right = 0 },
+          color = {
+            fg = colors.blue,
+          },
         },
         {
           'filename',
           path = 1,
           symbols = { modified = ' [✎] ', readonly = ' [] ' },
-          color = { gui = 'italic,bold' },
+          color = { gui = 'italic,bold', fg = colors.blue },
         },
       },
       lualine_x = {
