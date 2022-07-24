@@ -27,7 +27,7 @@ return function()
     eslint = true,
     dockerls = true,
   }
-  require('nvim-lsp-installer').setup({
+  require('mason-lspconfig').setup({
     automatic_installation = { exclude = { 'solargraph' } },
   })
 

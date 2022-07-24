@@ -99,11 +99,16 @@ packer.startup({
     ----------------------------------------------------------------------------
     -- LSP & Completion
     ----------------------------------------------------------------------------
-    --
+    use({
+      'williamboman/mason.nvim',
+      config = function() require('mason').setup() end,
+    })
     use({
       'neovim/nvim-lspconfig',
       event = 'BufRead',
-      requires = { 'williamboman/nvim-lsp-installer' },
+      requires = {
+        'williamboman/mason-lspconfig.nvim',
+      },
       config = conf('lspconfig'),
     })
     use({
