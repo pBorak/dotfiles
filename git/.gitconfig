@@ -1,8 +1,6 @@
 [user]
 	name = Pawel Borak
 	email = borak.pawel@gmail.com
-[includeIf "gitdir:~/code/work/"]
-  path = ~/code/work/.gitconfig.work
 [core]
 	autocrlf = input
 	excludesfile = ~/.gitignore
