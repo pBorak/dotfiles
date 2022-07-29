@@ -4,7 +4,7 @@ return function()
   gh.vnoremap('<leader>gh', [[:'<'>DiffviewFileHistory<CR>]])
   require('diffview').setup({
     default_args = {
-      DiffviewFileHistory = { '.' },
+      DiffviewFileHistory = { '%' },
     },
     enhanced_diff_hl = true,
     keymaps = {
