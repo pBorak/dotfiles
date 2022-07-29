@@ -3,7 +3,7 @@
 if [[ $# -eq 1 ]]; then
     selected=$1
 else
-    selected=$(fd . ~/code ~/code/work --exact-depth=1 -t d | fzf --no-multi)
+    selected=$(fd . ~/code --exact-depth=1 -t d | fzf --no-multi)
 fi
 
 if [[ -z $selected ]]; then
