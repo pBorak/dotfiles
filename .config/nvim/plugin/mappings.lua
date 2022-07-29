@@ -19,10 +19,10 @@ gh.augroup('AddTerminalMappings', {
       if vim.bo.filetype == '' or vim.bo.filetype == 'toggleterm' then
         local opts = { silent = false, buffer = 0 }
         tnoremap('<esc>', [[<C-\><C-n>]], opts)
-        tnoremap('<C-h>', [[<C-\><C-n><C-W>h]], opts)
-        tnoremap('<C-j>', [[<C-\><C-n><C-W>j]], opts)
-        tnoremap('<C-k>', [[<C-\><C-n><C-W>k]], opts)
-        tnoremap('<C-l>', [[<C-\><C-n><C-W>l]], opts)
+        tnoremap('<C-h>', '<Cmd>wincmd h<CR>', opts)
+        tnoremap('<C-j>', '<Cmd>wincmd j<CR>', opts)
+        tnoremap('<C-k>', '<Cmd>wincmd k<CR>', opts)
+        tnoremap('<C-l>', '<Cmd>wincmd l<CR>', opts)
       end
     end,
   },
