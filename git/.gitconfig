@@ -27,7 +27,7 @@
 	d = diff
 	dc = diff --cached
   dup = !git checkout develop && git fetch origin && echo && git l develop..origin/develop && echo && git pull --quiet && git checkout -
-  mup = !git checkout master && git fetch origin && echo && git l master..origin/master && echo && git pull --quiet && git checkout -
+  mup = !git checkout main && git fetch origin && echo && git l main..origin/main && echo && git pull --quiet && git checkout -
   gone = "!f() { git fetch --all --prune; git branch -vv | awk '/: gone]/{print $1}' | xargs git branch -D; }; f"
   fa = fetch --all
 	l = log --oneline --decorate -20
@@ -38,7 +38,7 @@
 	psf = push --force-with-lease
 	publish = publish
   rid = !git rebase -i $(git merge-base develop HEAD)
-  rim = !git rebase -i $(git merge-base master HEAD)
+  rim = !git rebase -i $(git merge-base main HEAD)
   riu = !git rebase -i $(git upstream)
 	uncommit = reset --soft HEAD^
 	unstage = reset
