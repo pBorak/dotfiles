@@ -9,7 +9,6 @@ alias dc='docker compose'
 alias d='docker'
 alias dcr='docker compose exec -it rails'
 alias dlog='tail -f log/development.log'
-alias ga='fzf_git_add'
 alias gb='fzf_git_branch | xargs git checkout'
 alias gcurrent="git rev-parse --abbrev-ref HEAD"
 alias glS='fzf_git_log_pickaxe'

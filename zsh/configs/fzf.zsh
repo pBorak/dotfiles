@@ -1,18 +1,3 @@
-fzf_git_add() {
-    local selections=$(
-      git status --porcelain | \
-      fzf --ansi \
-          --preview 'if (git ls-files --error-unmatch {2} &>/dev/null); then
-                         git diff --color=always {2} | delta
-                     else
-                         bat --color=always --line-range :500 {2}
-                     fi'
-      )
-    if [[ -n $selections ]]; then
-        git add --verbose $(echo "$selections" | cut -c 4- | tr '\n' ' ')
-    fi
-}
-
 fzf_git_log() {
     local selections=$(
       git ll --color=always "$@" |
