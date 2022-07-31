@@ -46,7 +46,6 @@ packer.startup({
     use({
       'akinsho/toggleterm.nvim',
       tag = 'v2.*',
-      keys = [[<c-\>]],
       config = conf('toggleterm'),
     })
     use({
