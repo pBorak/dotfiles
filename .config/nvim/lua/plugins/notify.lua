@@ -1,6 +1,4 @@
 return function()
-  if vim.g.packer_compiled_loaded then return end
-
   local notify = require('notify')
   notify.setup({
     stages = 'fade_in_slide_out',
