@@ -26,6 +26,9 @@ return function()
     tsserver = true,
     eslint = true,
     dockerls = true,
+    yamlls = true,
+    jsonls = true,
+    bashls = true,
   }
   require('mason-lspconfig').setup({
     automatic_installation = { exclude = { 'solargraph' } },
