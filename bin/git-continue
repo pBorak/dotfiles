@@ -4,6 +4,8 @@
 
 if [[ -e .git/CHERRY_PICK_HEAD ]] ; then
     exec git cherry-pick --continue "$@"
+elif [[ -e .git/MERGE_HEAD ]] ; then
+    exec git merge --continue "$@"
 elif [[ -e .git/rebase-apply/applying ]] ; then
     exec git rebase --continue "$@"
 elif [[ -e .git/rebase-apply ]] ; then
