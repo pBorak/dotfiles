@@ -26,7 +26,10 @@ packer.startup({
     ----------------------------------------------------------------------------
     -- Editor
     ----------------------------------------------------------------------------
-    use('tpope/vim-surround')
+    use({
+      'kylechui/nvim-surround',
+      config = function() require('nvim-surround').setup({}) end,
+    })
     use('tpope/vim-eunuch')
     use('tpope/vim-repeat')
     use('vim-scripts/ReplaceWithRegister')
@@ -159,7 +162,7 @@ packer.startup({
     })
     use({
       'akinsho/git-conflict.nvim',
-      event = 'CursorHold',
+      event = 'VimEnter',
       config = function() require('git-conflict').setup() end,
     })
     use({

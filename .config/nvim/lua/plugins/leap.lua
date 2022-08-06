@@ -8,5 +8,5 @@ return function()
     require('leap').leap({ target_windows = focusable_windows_on_tabpage })
   end
   vim.keymap.set({ 'n', 'v' }, 's', leap_all_windows)
-  vim.keymap.set({ 'n', 'v' }, 'S', leap_all_windows)
+  vim.keymap.set({ 'n' }, 'S', leap_all_windows)
 end
