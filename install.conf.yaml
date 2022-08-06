@@ -13,7 +13,6 @@
     /usr/local/bin/git-abort: bin/git-abort
     /usr/local/bin/git-cm: bin/git-cm
     /usr/local/bin/git-continue: bin/git-continue
-    /usr/local/bin/git-publish: bin/git-publish
     /usr/local/bin/tas: bin/tas
     /usr/local/bin/tat: bin/tat
     ~/.zshrc: zsh/.zshrc
