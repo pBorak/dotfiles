@@ -162,6 +162,7 @@ packer.startup({
     })
     use({
       'akinsho/git-conflict.nvim',
+      tag = '*',
       event = 'VimEnter',
       config = function() require('git-conflict').setup() end,
     })
