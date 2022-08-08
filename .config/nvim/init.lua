@@ -14,5 +14,3 @@ vim.api.nvim_create_augroup('vimrc', {})
 R('globals')
 R('settings')
 R('plugins')
-
-vim.cmd.colorscheme('kanagawa')

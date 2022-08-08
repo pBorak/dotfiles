@@ -167,7 +167,6 @@ packer.startup({
     use({
       'akinsho/git-conflict.nvim',
       tag = '*',
-      event = 'VimEnter',
       config = function() require('git-conflict').setup() end,
     })
     use({
@@ -198,6 +197,7 @@ packer.startup({
         require('kanagawa').setup({
           globalStatus = true,
         })
+        vim.cmd.colorscheme('kanagawa')
       end,
     })
     use({
