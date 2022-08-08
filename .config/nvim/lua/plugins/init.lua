@@ -28,7 +28,11 @@ packer.startup({
     ----------------------------------------------------------------------------
     use({
       'kylechui/nvim-surround',
-      config = function() require('nvim-surround').setup({}) end,
+      config = function()
+        require('nvim-surround').setup({
+          move_cursor = false,
+        })
+      end,
     })
     use('tpope/vim-eunuch')
     use('tpope/vim-repeat')
