@@ -85,20 +85,12 @@ nnoremap('[t', '<cmd>tnext<CR>')
 --------------------------------------------------------------------------------
 -- make . work with visually selected lines
 vnoremap('.', ':norm.<CR>')
--- edit file in current directory
-nnoremap('<leader>e', [[:e <C-R>=expand("%:p:h") . "/" <CR>]], noisy)
 --------------------------------------------------------------------------------
 -- Quick find/replace
 --------------------------------------------------------------------------------
 -- Replace all occurrences under the cursor in buffer
 nnoremap('\\s', [[<cmd>let @s='\<'.expand('<cword>').'\>'<CR>:%s/<C-r>s//<Left>]], noisy)
 xnoremap('\\s', [["sy:%s/<C-r>s//<Left>]], noisy)
--- Replace occurrence under the cursor, then use dot to change next occurrences
-nnoremap('cn', '*``cgn')
-nnoremap('cN', '*``cgN')
-vim.g.mc = vim.api.nvim_replace_termcodes([[y/\V<C-r>=escape(@", '/')<CR><CR>]], true, true, true)
-xnoremap('cn', [[g:mc . "``cgn"]], { expr = true, silent = true })
-xnoremap('cN', [[g:mc . "``cgN"]], { expr = true, silent = true })
 --------------------------------------------------------------------------------
 -- Commandline mappings
 --------------------------------------------------------------------------------
