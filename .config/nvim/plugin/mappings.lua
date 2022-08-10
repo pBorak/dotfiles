@@ -53,6 +53,7 @@ nnoremap('<leader><leader>', [[<c-^>]])
 nnoremap('<leader>U', 'gUiw`]')
 
 nnoremap(';', ':', noisy)
+xnoremap(';', ':', noisy)
 -- Esc should clear hlsearch if there is one
 nnoremap('<ESC>', [[ v:hlsearch ? "\<ESC>:nohl\<CR>" : "\<ESC>" ]], { expr = true })
 --------------------------------------------------------------------------------
