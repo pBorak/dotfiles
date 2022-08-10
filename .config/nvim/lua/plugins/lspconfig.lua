@@ -22,7 +22,11 @@ return function()
         },
       }
     end,
-    solargraph = true,
+    solargraph = function()
+      return {
+        root_dir = require('lspconfig').util.root_pattern('.git', 'Gemfile', '*.gemspec'),
+      }
+    end,
     tsserver = true,
     eslint = true,
     dockerls = true,
