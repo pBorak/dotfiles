@@ -12,6 +12,14 @@ local get_augroup = function(bufnr)
   return fmt('LspCommands_%d', bufnr)
 end
 
+--- Check that a buffer is valid and loaded before calling a callback
+---@param callback function
+---@param buf integer
+local function valid_call(callback, buf)
+  if not buf or not api.nvim_buf_is_loaded(buf) or not api.nvim_buf_is_valid(buf) then return end
+  callback()
+end
+
 local format_exclusions = { 'sumneko_lua', 'solargraph', 'dockerls' }
 
 local function formatting_filter(client) return not vim.tbl_contains(format_exclusions, client.name) end
@@ -28,13 +36,13 @@ local function setup_autocommands(client, bufnr)
       event = { 'CursorHold' },
       buffer = bufnr,
       desc = 'LSP: Document Highlight',
-      command = function() vim.lsp.buf.document_highlight() end,
+      command = function(args) valid_call(vim.lsp.buf.document_highlight, args.buf) end,
     })
     table.insert(cmds, {
       event = 'CursorMoved',
       desc = 'LSP: Document Highlight (Clear)',
       buffer = bufnr,
-      command = function() vim.lsp.buf.clear_references() end,
+      command = function(args) valid_call(vim.lsp.buf.clear_references, args.buf) end,
     })
   end
   if client and client.server_capabilities.documentFormattingProvider then
@@ -111,8 +119,9 @@ local command = gh.command
 local function make_diagnostic_qf_updater()
   local cmd_id = nil
   return function()
-    if not api.nvim_buf_is_valid(0) then return end
-    vim.diagnostic.setqflist({ open = false })
+    local buf = api.nvim_get_current_buf()
+    if not api.nvim_buf_is_valid(buf) and api.nvim_buf_is_loaded(buf) then return end
+    pcall(vim.diagnostic.setqflist, { open = false })
     gh.toggle_list('quickfix')
     if not gh.is_vim_list_open() and cmd_id then
       api.nvim_del_autocmd(cmd_id)
@@ -122,8 +131,8 @@ local function make_diagnostic_qf_updater()
     cmd_id = api.nvim_create_autocmd('DiagnosticChanged', {
       callback = function()
         if gh.is_vim_list_open() then
-          vim.diagnostic.setqflist({ open = false })
-          if #vim.fn.getqflist() == 0 then gh.toggle_list('quickfix') end
+          pcall(vim.diagnostic.setqflist, { open = false })
+          if #fn.getqflist() == 0 then gh.toggle_list('quickfix') end
         end
       end,
     })
