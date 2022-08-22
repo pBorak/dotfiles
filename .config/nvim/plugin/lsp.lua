@@ -82,9 +82,6 @@ local function on_attach(client, bufnr)
 
   setup_autocommands(client, bufnr)
   setup_mappings(client)
-  -- Lsp tagfunc is now set by default - surprise, surprise it does not play
-  -- good with solargraph
-  vim.bo[bufnr].tagfunc = nil
 end
 
 gh.augroup('LspSetupCommands', {
@@ -97,6 +94,9 @@ gh.augroup('LspSetupCommands', {
       if not api.nvim_buf_is_valid(args.buf) then return end
       local client = vim.lsp.get_client_by_id(args.data.client_id)
       on_attach(client, bufnr)
+      -- Lsp tagfunc is now set by default - surprise, surprise it does not play
+      -- good with solargraph
+      vim.bo[bufnr].tagfunc = nil
     end,
   },
 })
