@@ -27,6 +27,13 @@ return function()
     vim.cmd(cmd)
   end
 
+  local function stopinsert(callback)
+    return function(prompt_bufnr)
+      vim.cmd.stopinsert()
+      vim.schedule(function() callback(prompt_bufnr) end)
+    end
+  end
+
   telescope.setup({
     defaults = {
       set_env = { ['TERM'] = vim.env.TERM },
@@ -35,13 +42,14 @@ return function()
       selection_caret = gh.style.icons.misc.chevron_right .. ' ',
       mappings = {
         i = {
-          ['<c-c>'] = function() vim.cmd.stopinsert({ bang = true }) end,
+          ['<c-c>'] = function() vim.cmd.stopinsert() end,
           ['<esc>'] = actions.close,
           ['<c-j>'] = actions.cycle_history_next,
           ['<c-k>'] = actions.cycle_history_prev,
           ['<c-b>'] = actions.preview_scrolling_up,
           ['<c-f>'] = actions.preview_scrolling_down,
           ['<c-l>'] = actions.smart_send_to_qflist + actions.open_qflist,
+          ['<CR>'] = stopinsert(actions.select_default),
         },
       },
       file_ignore_patterns = { '%.jpg', '%.jpeg', '%.png', '%.otf', '%.ttf' },
