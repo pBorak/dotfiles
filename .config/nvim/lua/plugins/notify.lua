@@ -14,4 +14,6 @@ return function()
 
     notify(msg, level, opts)
   end
+
+  gh.nnoremap('<leader>N', notify.dismiss)
 end
