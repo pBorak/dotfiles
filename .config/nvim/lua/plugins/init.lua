@@ -271,6 +271,10 @@ packer.startup({
       after = 'telescope.nvim',
       config = conf('dressing'),
     })
+    use({
+      'B4mbus/todo-comments.nvim',
+      config = function() require('todo-comments').setup() end,
+    })
     ----------------------------------------------------------------------------
     -- Syntax
     ----------------------------------------------------------------------------
