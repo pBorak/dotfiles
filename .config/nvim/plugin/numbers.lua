@@ -1,7 +1,7 @@
 local api = vim.api
 local M = {}
 
-vim.g.number_filetype_exclusions = {
+local number_filetype_exclusions = {
   'prompt',
   'undotree',
   'log',
@@ -19,7 +19,7 @@ vim.g.number_filetype_exclusions = {
   'NvimTree',
 }
 
-vim.g.number_buftype_exclusions = {
+local number_buftype_exclusions = {
   'terminal',
   'help',
   'nofile',
@@ -27,14 +27,14 @@ vim.g.number_buftype_exclusions = {
   'quickfix',
 }
 
-vim.g.number_buftype_ignored = { 'quickfix' }
+local number_buftype_ignored = { 'quickfix' }
 
 local function is_floating_win() return vim.fn.win_gettype() == 'popup' end
 
 ---Determines whether or not a window should be ignored by this plugin
 ---@return boolean
 local function is_ignored()
-  return vim.tbl_contains(vim.g.number_buftype_ignored, vim.bo.buftype) or is_floating_win()
+  return vim.tbl_contains(number_buftype_ignored, vim.bo.buftype) or is_floating_win()
 end
 
 -- block list certain plugins and buffer types
@@ -49,11 +49,11 @@ local function is_blocked()
 
   if vim.wo.previewwindow then return true end
 
-  for _, ft in ipairs(vim.g.number_filetype_exclusions) do
+  for _, ft in ipairs(number_filetype_exclusions) do
     if vim.bo.ft == ft or string.match(vim.bo.ft, ft) then return true end
   end
 
-  if vim.tbl_contains(vim.g.number_buftype_exclusions, vim.bo.buftype) then return true end
+  if vim.tbl_contains(number_buftype_exclusions, vim.bo.buftype) then return true end
   return false
 end
 
