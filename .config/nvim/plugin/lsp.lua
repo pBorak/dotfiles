@@ -7,9 +7,14 @@ local icons = gh.style.icons.lsp
 --------------------------------------------------------------------------------
 ---- Autocommands
 --------------------------------------------------------------------------------
-local get_augroup = function(bufnr)
+local features = {
+  FORMATTING = 'formatting',
+  DIAGNOSTICS = 'diagnostics',
+  REFERENCES = 'references',
+}
+local get_augroup = function(bufnr, method)
   assert(bufnr, 'A bufnr is required to create an lsp augroup')
-  return fmt('LspCommands_%d', bufnr)
+  return fmt('LspCommands_%d_%s', bufnr, method)
 end
 
 --- Check that a buffer is valid and loaded before calling a callback
@@ -25,40 +30,52 @@ local format_exclusions = { 'sumneko_lua', 'solargraph', 'dockerls' }
 local function formatting_filter(client) return not vim.tbl_contains(format_exclusions, client.name) end
 
 local function setup_autocommands(client, bufnr)
-  local group = get_augroup(bufnr)
-  -- Clear pre-existing buffer autocommands
-  pcall(api.nvim_clear_autocmds, { group = group, buffer = bufnr })
+  if not client then
+    local msg = fmt('Unable to setup LSP autocommands, client for %d is missing', bufnr)
+    return vim.notify(msg, 'error', { title = 'LSP Setup' })
+  end
 
-  local cmds = {}
-
-  if client and client.supports_method('textDocument/documentHighlight') then
-    table.insert(cmds, {
+  gh.augroup(get_augroup(bufnr, features.DIAGNOSTICS), {
+    {
       event = { 'CursorHold' },
       buffer = bufnr,
-      desc = 'LSP: Document Highlight',
-      command = function(args) valid_call(vim.lsp.buf.document_highlight, args.buf) end,
-    })
-    table.insert(cmds, {
-      event = 'CursorMoved',
-      desc = 'LSP: Document Highlight (Clear)',
-      buffer = bufnr,
-      command = function(args) valid_call(vim.lsp.buf.clear_references, args.buf) end,
-    })
-  end
-  if client and client.server_capabilities.documentFormattingProvider then
-    table.insert(cmds, {
-      event = 'BufWritePre',
-      buffer = bufnr,
-      desc = 'Format the current buffer on save',
-      command = function(args)
-        vim.lsp.buf.format({
-          bufnr = args.bufnr,
-          filter = formatting_filter,
-        })
-      end,
+      desc = 'LSP: Show diagnostics',
+      command = function(args) vim.diagnostic.open_float(args.buf, { scope = 'cursor', focus = false }) end,
+    },
+  })
+
+  if client.server_capabilities.documentFormattingProvider then
+    gh.augroup(get_augroup(bufnr, features.FORMATTING), {
+      {
+        event = 'BufWritePre',
+        buffer = bufnr,
+        desc = 'LSP: Format on save',
+        command = function(args)
+          vim.lsp.buf.format({
+            bufnr = args.bufnr,
+            filter = formatting_filter,
+          })
+        end,
+      },
     })
   end
-  gh.augroup(group, cmds)
+
+  if client.server_capabilities.documentHighlightProvider then
+    gh.augroup(get_augroup(bufnr, features.REFERENCES), {
+      {
+        event = { 'CursorHold', 'CursorHoldI' },
+        buffer = bufnr,
+        desc = 'LSP: References',
+        command = function(args) valid_call(vim.lsp.buf.document_highlight, args.buf) end,
+      },
+      {
+        event = 'CursorMoved',
+        desc = 'LSP: References Clear',
+        buffer = bufnr,
+        command = function(args) valid_call(vim.lsp.buf.clear_references, args.buf) end,
+      },
+    })
+  end
 end
 --------------------------------------------------------------------------------
 ---- Mappings
@@ -84,12 +101,11 @@ end
 ---@param client table lsp client
 ---@param bufnr number
 local function on_attach(client, bufnr)
-  local active = vim.lsp.get_active_clients({ bufnr = bufnr })
-  local attached = vim.tbl_filter(function(c) return c.attached_buffers[bufnr] end, active)
-  if #attached > 0 then return end
-
   setup_autocommands(client, bufnr)
   setup_mappings(client)
+  -- Lsp tagfunc is now set by default - surprise, surprise it does not play
+  -- good with solargraph
+  vim.bo[bufnr].tagfunc = nil
 end
 
 gh.augroup('LspSetupCommands', {
@@ -99,12 +115,26 @@ gh.augroup('LspSetupCommands', {
     command = function(args)
       local bufnr = args.buf
       -- if the buffer is invalid we should not try and attach to it
-      if not api.nvim_buf_is_valid(args.buf) then return end
+      if not api.nvim_buf_is_valid(args.buf) or not args.data then return end
       local client = vim.lsp.get_client_by_id(args.data.client_id)
       on_attach(client, bufnr)
-      -- Lsp tagfunc is now set by default - surprise, surprise it does not play
-      -- good with solargraph
-      vim.bo[bufnr].tagfunc = nil
+    end,
+  },
+  {
+    event = 'LspDetach',
+    desc = 'Clean up after detached LSP',
+    command = function(args)
+      -- Only clear autocommands if there are no other clients attached to the buffer
+      if next(vim.lsp.get_active_clients({ bufnr = args.buf })) then return end
+      gh.foreach(
+        function(feature)
+          pcall(api.nvim_clear_autocmds, {
+            group = get_augroup(args.buf, feature),
+            buffer = args.buf,
+          })
+        end,
+        features
+      )
     end,
   },
 })

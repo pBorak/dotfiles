@@ -126,6 +126,12 @@ function gh.augroup(name, commands)
   return id
 end
 
+function gh.foreach(callback, list)
+  for k, v in pairs(list) do
+    callback(v, k)
+  end
+end
+
 ---Determine if a value of any type is empty
 ---@param item any
 ---@return boolean?
