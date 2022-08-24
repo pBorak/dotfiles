@@ -1,13 +1,18 @@
 return function()
-  vim.cmd([[
-    function! ToggleTermStrategy(cmd) abort
-      call luaeval("require('toggleterm').exec(_A[1])", [a:cmd])
-    endfunction
+  local tt = require('toggleterm')
+  local ttt = require('toggleterm.terminal')
 
-    let g:test#custom_strategies = {'toggleterm': function('ToggleTermStrategy')}
-  ]])
+  vim.g['test#custom_strategies'] = {
+    tterm = function(cmd) tt.exec(cmd) end,
 
-  vim.g['test#strategy'] = 'toggleterm'
+    tterm_close = function(cmd)
+      local term_id = 0
+      tt.exec(cmd, term_id)
+      ttt.get_or_create_term(term_id):close()
+    end,
+  }
+
+  vim.g['test#strategy'] = 'tterm_close'
   gh.nnoremap('<leader>tf', '<cmd>TestFile<CR>')
   gh.nnoremap('<leader>tl', '<cmd>TestLast<CR>')
   gh.nnoremap('<leader>tt', '<cmd>TestNearest<CR>')

@@ -4,6 +4,7 @@ return function()
     shade_filetypes = { 'none' },
     direction = 'horizontal',
     start_in_insert = true,
+    persist_mode = true,
     float_opts = { border = 'curved', winblend = 3 },
     size = function(term)
       if term.direction == 'horizontal' then
