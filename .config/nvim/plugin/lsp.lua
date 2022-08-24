@@ -9,7 +9,6 @@ local icons = gh.style.icons.lsp
 --------------------------------------------------------------------------------
 local features = {
   FORMATTING = 'formatting',
-  DIAGNOSTICS = 'diagnostics',
   REFERENCES = 'references',
 }
 local get_augroup = function(bufnr, method)
@@ -34,15 +33,6 @@ local function setup_autocommands(client, bufnr)
     local msg = fmt('Unable to setup LSP autocommands, client for %d is missing', bufnr)
     return vim.notify(msg, 'error', { title = 'LSP Setup' })
   end
-
-  gh.augroup(get_augroup(bufnr, features.DIAGNOSTICS), {
-    {
-      event = { 'CursorHold' },
-      buffer = bufnr,
-      desc = 'LSP: Show diagnostics',
-      command = function(args) vim.diagnostic.open_float(args.buf, { scope = 'cursor', focus = false }) end,
-    },
-  })
 
   if client.server_capabilities.documentFormattingProvider then
     gh.augroup(get_augroup(bufnr, features.FORMATTING), {
