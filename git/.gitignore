@@ -15,6 +15,7 @@ log/*.log
 rerun.txt
 tmp/**/*
 .solargraph.yml
+.pryrc
 solargraph.rb
 .projections.json
 config/application.local.yml
