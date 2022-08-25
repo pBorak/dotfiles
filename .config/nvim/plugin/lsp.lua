@@ -16,12 +16,30 @@ local get_augroup = function(bufnr, method)
   return fmt('LspCommands_%d_%s', bufnr, method)
 end
 
---- Check that a buffer is valid and loaded before calling a callback
----@param callback function
+---@param bufnr integer
+---@param capability string
+---@return table[]
+local function clients_by_capability(bufnr, capability)
+  return vim.tbl_filter(
+    function(c) return c.server_capabilities[capability] end,
+    lsp.get_active_clients({ buffer = bufnr })
+  )
+end
+
 ---@param buf integer
-local function valid_call(callback, buf)
-  if not buf or not api.nvim_buf_is_loaded(buf) or not api.nvim_buf_is_valid(buf) then return end
-  callback()
+---@return boolean
+local function is_buffer_valid(buf)
+  return buf and api.nvim_buf_is_loaded(buf) and api.nvim_buf_is_valid(buf)
+end
+
+--- Check that a buffer is valid and loaded before calling a callback
+--- it also ensures that a client which supports the capability is attached
+---@param buf integer
+---@return boolean, table[]
+local function check_valid_client(buf, capability)
+  if not is_buffer_valid(buf) then return false, {} end
+  local clients = clients_by_capability(buf, capability)
+  return next(clients) ~= nil, clients
 end
 
 local format_exclusions = { 'sumneko_lua', 'solargraph', 'dockerls' }
@@ -41,10 +59,12 @@ local function setup_autocommands(client, bufnr)
         buffer = bufnr,
         desc = 'LSP: Format on save',
         command = function(args)
-          vim.lsp.buf.format({
-            bufnr = args.bufnr,
-            filter = formatting_filter,
-          })
+          if check_valid_client(args.buf, 'documentFormattingProvider') then
+            lsp.buf.format({
+              bufnr = args.bufnr,
+              filter = formatting_filter,
+            })
+          end
         end,
       },
     })
@@ -56,13 +76,21 @@ local function setup_autocommands(client, bufnr)
         event = { 'CursorHold', 'CursorHoldI' },
         buffer = bufnr,
         desc = 'LSP: References',
-        command = function(args) valid_call(vim.lsp.buf.document_highlight, args.buf) end,
+        command = function(args)
+          if check_valid_client(args.buf, 'documentHighlightProvider') then
+            lsp.buf.document_highlight()
+          end
+        end,
       },
       {
         event = 'CursorMoved',
         desc = 'LSP: References Clear',
         buffer = bufnr,
-        command = function(args) valid_call(vim.lsp.buf.clear_references, args.buf) end,
+        command = function(args)
+          if check_valid_client(args.buf, 'documentHighlightProvider') then
+            lsp.buf.clear_references()
+          end
+        end,
       },
     })
   end
@@ -73,13 +101,13 @@ end
 ---Setup mapping when an lsp attaches to a buffer
 ---@param _ table lsp client
 local function setup_mappings(_)
-  gh.nnoremap('<leader>ld', vim.lsp.buf.definition)
-  gh.nnoremap('<leader>lr', vim.lsp.buf.references)
-  gh.nnoremap('<leader>lh', vim.lsp.buf.hover)
-  gh.inoremap('<C-h>', vim.lsp.buf.signature_help)
-  gh.nnoremap('<leader>la', vim.lsp.buf.code_action)
-  gh.nnoremap('<leader>ln', vim.lsp.buf.rename)
-  gh.nnoremap('<leader>lf', vim.lsp.buf.format)
+  gh.nnoremap('<leader>ld', lsp.buf.definition)
+  gh.nnoremap('<leader>lr', lsp.buf.references)
+  gh.nnoremap('<leader>lh', lsp.buf.hover)
+  gh.inoremap('<C-h>', lsp.buf.signature_help)
+  gh.nnoremap('<leader>la', lsp.buf.code_action)
+  gh.nnoremap('<leader>ln', lsp.buf.rename)
+  gh.nnoremap('<leader>lf', lsp.buf.format)
 
   gh.nnoremap('[d', function() vim.diagnostic.goto_prev() end)
   gh.nnoremap(']d', function() vim.diagnostic.goto_next() end)
@@ -106,7 +134,7 @@ gh.augroup('LspSetupCommands', {
       local bufnr = args.buf
       -- if the buffer is invalid we should not try and attach to it
       if not api.nvim_buf_is_valid(args.buf) or not args.data then return end
-      local client = vim.lsp.get_client_by_id(args.data.client_id)
+      local client = lsp.get_client_by_id(args.data.client_id)
       on_attach(client, bufnr)
     end,
   },
@@ -115,7 +143,7 @@ gh.augroup('LspSetupCommands', {
     desc = 'Clean up after detached LSP',
     command = function(args)
       -- Only clear autocommands if there are no other clients attached to the buffer
-      if next(vim.lsp.get_active_clients({ bufnr = args.buf })) then return end
+      if next(lsp.get_active_clients({ bufnr = args.buf })) then return end
       gh.foreach(
         function(feature)
           pcall(api.nvim_clear_autocmds, {
@@ -248,7 +276,7 @@ lsp.handlers['textDocument/signatureHelp'] = lsp.with(lsp.handlers.signature_hel
 })
 
 lsp.handlers['window/showMessage'] = function(_, result, ctx)
-  local client = vim.lsp.get_client_by_id(ctx.client_id)
+  local client = lsp.get_client_by_id(ctx.client_id)
   local lvl = ({ 'ERROR', 'WARN', 'INFO', 'DEBUG' })[result.type]
   vim.notify(result.message, lvl, {
     title = 'LSP | ' .. client.name,
