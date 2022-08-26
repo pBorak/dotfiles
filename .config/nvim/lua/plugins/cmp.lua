@@ -65,10 +65,7 @@ return function()
         end
         vim_item.kind = string.format('%s %s', vim_item.kind, gh.style.lsp.kinds[vim_item.kind])
         local name = entry.source.name
-        local completion = entry.completion_item.data
-
-        local menu = ({
-          cmp_tabnine = '[TN]',
+        vim_item.menu = ({
           nvim_lsp = '[LSP]',
           nvim_lua = '[Lua]',
           path = '[Path]',
@@ -77,17 +74,10 @@ return function()
           spell = '[SP]',
           cmdline = '[CMD]',
         })[name]
-
-        if name == 'cmp_tabnine' then
-          if completion and completion.detail then menu = completion.detail .. ' ' .. menu end
-          vim_item.kind = ''
-        end
-        vim_item.menu = menu
         return vim_item
       end,
     },
     sources = cmp.config.sources({
-      { name = 'cmp_tabnine' },
       { name = 'nvim_lsp' },
       { name = 'luasnip' },
       { name = 'path' },
@@ -113,15 +103,6 @@ return function()
   }
 
   cmp.event:on('confirm_done', cmp_autopairs.on_confirm_done({ map_char = { tex = '' } }))
-
-  local tabnine = require('cmp_tabnine.config')
-  tabnine:setup({
-    max_lines = 1000,
-    max_num_results = 20,
-    sort = true,
-    run_on_every_keystroke = true,
-    snippet_placeholder = '..',
-  })
 
   cmp.setup.cmdline('/', {
     mapping = {
