@@ -166,6 +166,7 @@ packer.startup({
     })
     use({
       'akinsho/git-conflict.nvim',
+      after = 'kanagawa.nvim',
       tag = 'v1.0.0',
       config = function() require('git-conflict').setup() end,
     })
