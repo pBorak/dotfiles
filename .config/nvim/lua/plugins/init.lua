@@ -115,7 +115,7 @@ packer.startup({
       requires = {
         'williamboman/mason-lspconfig.nvim',
       },
-      config = conf('lspconfig'),
+      config = function() require('plugins.lspconfig') end,
     })
     use({
       'jose-elias-alvarez/null-ls.nvim',
