@@ -1,7 +1,4 @@
 return function()
-  if vim.g.lsp_config_complete then return end
-  vim.g.lsp_config_complete = true
-
   local servers = {
     sumneko_lua = function()
       return {

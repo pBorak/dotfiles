@@ -1,5 +1,4 @@
 local api = vim.api
-local M = {}
 
 local number_filetype_exclusions = {
   'prompt',
@@ -95,5 +94,3 @@ gh.augroup('ToggleRelativeLineNumbers', {
     command = function() disable_relative_number() end,
   },
 })
-
-return M
