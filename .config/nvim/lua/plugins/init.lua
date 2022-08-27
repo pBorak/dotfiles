@@ -51,7 +51,8 @@ packer.startup({
       end,
     })
     use({
-      '~/code/toggleterm.nvim',
+      'akinsho/toggleterm.nvim',
+      tag = 'v2.*',
       config = conf('toggleterm'),
     })
     use({
