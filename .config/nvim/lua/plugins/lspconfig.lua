@@ -69,6 +69,7 @@ local function on_attach(client, bufnr)
   -- Lsp tagfunc is now set by default - surprise, surprise it does not play
   -- good with solargraph
   vim.bo[bufnr].tagfunc = nil
+  vim.bo[bufnr].formatexpr = nil
 end
 
 --------------------------------------------------------------------------------
