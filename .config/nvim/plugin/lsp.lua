@@ -105,6 +105,11 @@ vim.diagnostic.config({
     border = 'rounded',
     focusable = false,
     source = 'always',
+    prefix = function(diag, i, _)
+      local level = vim.diagnostic.severity[diag.severity]
+      local prefix = fmt('%d. %s ', i, icons[level:lower()])
+      return prefix, 'Diagnostic' .. level:gsub('^%l', string.upper)
+    end,
   },
 })
 
