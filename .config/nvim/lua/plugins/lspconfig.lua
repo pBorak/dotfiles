@@ -11,7 +11,7 @@ local format_exclusions = { 'sumneko_lua', 'solargraph', 'dockerls' }
 local function formatting_filter(client) return not vim.tbl_contains(format_exclusions, client.name) end
 
 local function setup_autocommands(client, bufnr)
-  if client and client.supports_method('textDocument/documentHighlight') then
+  if client and client.server_capabilities.documentHighlightProvider then
     vim.api.nvim_clear_autocmds({ group = highlight_ag, buffer = bufnr })
     autocmd({ 'CursorHold' }, {
       group = highlight_ag,
