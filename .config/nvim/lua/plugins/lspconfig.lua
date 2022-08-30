@@ -5,6 +5,7 @@ local augroup = vim.api.nvim_create_augroup
 local autocmd = vim.api.nvim_create_autocmd
 local highlight_ag = augroup('LspDocumentHiglight', {})
 local formatting_ag = augroup('LspDocumentFormat', {})
+local diagnostics_ag = augroup('LspDocumentDiagnostics', {})
 
 local format_exclusions = { 'sumneko_lua', 'solargraph', 'dockerls' }
 
@@ -41,6 +42,14 @@ local function setup_autocommands(client, bufnr)
       end,
     })
   end
+
+  vim.api.nvim_clear_autocmds({ group = diagnostics_ag, buffer = bufnr })
+  autocmd({ 'CursorHold' }, {
+    group = diagnostics_ag,
+    buffer = bufnr,
+    desc = 'LSP: Show diagnostics',
+    callback = function(args) vim.diagnostic.open_float(args.buf, { scope = 'cursor', focus = false }) end,
+  })
 end
 --------------------------------------------------------------------------------
 ---- Mappings
@@ -56,8 +65,8 @@ local function setup_mappings(_)
   gh.nnoremap('<leader>ln', vim.lsp.buf.rename)
   gh.nnoremap('<leader>lf', vim.lsp.buf.format)
 
-  gh.nnoremap('[d', function() vim.diagnostic.goto_prev() end)
-  gh.nnoremap(']d', function() vim.diagnostic.goto_next() end)
+  gh.nnoremap('[d', function() vim.diagnostic.goto_prev({ float = false }) end)
+  gh.nnoremap(']d', function() vim.diagnostic.goto_next({ float = false }) end)
 end
 
 ---Add buffer local mappings, autocommands, tagfunc etc for attaching servers
