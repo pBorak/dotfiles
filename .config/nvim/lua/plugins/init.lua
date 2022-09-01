@@ -317,6 +317,7 @@ packer.startup({
   end,
   config = {
     compile_path = PACKER_COMPILED_PATH,
+    preview_updates = true,
     display = {
       prompt_border = 'rounded',
       open_cmd = 'silent topleft 65vnew',
