@@ -73,6 +73,7 @@ return function()
           buffer = '[B]',
           spell = '[SP]',
           cmdline = '[CMD]',
+          rg = '[Rg]',
         })[name]
         return vim_item
       end,
@@ -81,6 +82,11 @@ return function()
       { name = 'nvim_lsp' },
       { name = 'luasnip' },
       { name = 'path' },
+      {
+        name = 'rg',
+        keyword_length = 4,
+        max_item_count = 10,
+      },
     }, {
       { name = 'buffer' },
       { name = 'spell' },
