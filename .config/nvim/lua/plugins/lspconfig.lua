@@ -7,7 +7,7 @@ local highlight_ag = augroup('LspDocumentHiglight', {})
 local formatting_ag = augroup('LspDocumentFormat', {})
 local diagnostics_ag = augroup('LspDocumentDiagnostics', {})
 
-local format_exclusions = { 'sumneko_lua', 'solargraph', 'dockerls' }
+local format_exclusions = { 'sumneko_lua', 'solargraph', 'dockerls', 'tsserver' }
 
 local function formatting_filter(client) return not vim.tbl_contains(format_exclusions, client.name) end
 
@@ -75,6 +75,7 @@ end
 local function on_attach(client, bufnr)
   setup_autocommands(client, bufnr)
   setup_mappings(client)
+  if client.name == 'eslint' then client.server_capabilities.documentFormattingProvider = true end
   -- Lsp tagfunc is now set by default - surprise, surprise it does not play
   -- good with solargraph
   vim.bo[bufnr].tagfunc = nil
@@ -110,7 +111,15 @@ local servers = {
     }
   end,
   tsserver = true,
-  eslint = true,
+  eslint = function()
+    return {
+      settings = {
+        format = {
+          enable = true,
+        },
+      },
+    }
+  end,
   dockerls = true,
   yamlls = true,
   jsonls = true,
