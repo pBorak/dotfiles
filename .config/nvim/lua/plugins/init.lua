@@ -215,6 +215,13 @@ packer.startup({
             spinner = 'moon',
           },
         })
+
+        gh.augroup('CloseFidget', {
+          {
+            event = 'VimLeavePre',
+            command = 'silent! FidgetClose',
+          },
+        })
       end,
     })
     use({
