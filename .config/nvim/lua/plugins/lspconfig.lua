@@ -124,6 +124,8 @@ local servers = {
   yamlls = true,
   jsonls = true,
   bashls = true,
+  cssls = true,
+  html = true,
 }
 require('mason-lspconfig').setup({
   automatic_installation = { exclude = { 'solargraph' } },
