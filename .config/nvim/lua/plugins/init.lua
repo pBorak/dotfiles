@@ -251,7 +251,7 @@ packer.startup({
       end,
     })
     use({
-      'norcalli/nvim-colorizer.lua',
+      'NvChad/nvim-colorizer.lua',
       ft = { 'html', 'css', 'sass' },
       config = function()
         require('colorizer').setup({ '*' }, {
