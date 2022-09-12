@@ -189,13 +189,9 @@ packer.startup({
     -- UI
     ----------------------------------------------------------------------------
     use({
-      'rebelot/kanagawa.nvim',
-      config = function()
-        require('kanagawa').setup({
-          globalStatus = true,
-        })
-        vim.cmd.colorscheme('kanagawa')
-      end,
+      'catppuccin/nvim',
+      config = conf('theme'),
+      run = ':CatppuccinCompile',
     })
     use({
       'rcarriga/nvim-notify',
@@ -205,6 +201,9 @@ packer.startup({
       'j-hui/fidget.nvim',
       config = function()
         require('fidget').setup({
+          window = {
+            blend = 0,
+          },
           text = {
             spinner = 'moon',
           },
@@ -291,7 +290,6 @@ packer.startup({
     use({
       'nvim-treesitter/nvim-treesitter-context',
       config = function()
-        vim.api.nvim_set_hl(0, 'TreesitterContext', { link = 'Folded' })
         require('treesitter-context').setup({
           patterns = {
             ruby = {

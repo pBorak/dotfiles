@@ -1,12 +1,6 @@
 return function()
   local icons = gh.style.icons
-  local custom_kanagawa = require('lualine.themes.kanagawa')
-  local colors = {
-    bg_statusline = '#16161D',
-    blue = '#7E9CD8',
-    fg_sidebar = '#727169',
-  }
-  custom_kanagawa.normal.c.bg = colors.bg_statusline
+  local colors = require('catppuccin.palettes').get_palette()
 
   local function window_wide_enough() return vim.fn.winwidth(0) > 80 end
 
@@ -31,7 +25,7 @@ return function()
 
   local config = {
     options = {
-      theme = custom_kanagawa,
+      theme = 'catppuccin',
       section_separators = { left = '', right = '' },
       component_separators = { left = '', right = '' },
       icons_enabled = true,
@@ -51,15 +45,12 @@ return function()
           'filetype',
           icon_only = true,
           padding = { left = 1, right = 0 },
-          color = {
-            fg = colors.blue,
-          },
         },
         {
           'filename',
           path = 1,
           symbols = { modified = ' [✎] ', readonly = ' [] ' },
-          color = { gui = 'italic,bold', fg = colors.blue },
+          color = { gui = 'italic,bold' },
         },
       },
       lualine_x = {
@@ -81,8 +72,8 @@ return function()
           cond = window_wide_enough,
           icon = icons.misc.git_branch,
           color = {
-            bg = colors.bg_statusline,
-            fg = colors.blue,
+            bg = colors.mantle,
+            fg = colors.teal,
             gui = 'bold',
           },
         },
@@ -90,7 +81,7 @@ return function()
           'diff',
           cond = window_wide_enough,
           source = diff_source,
-          color = { bg = colors.bg_statusline },
+          color = { bg = colors.mantle },
           symbols = {
             added = icons.git.add .. ' ',
             modified = icons.git.mod .. ' ',
@@ -104,8 +95,8 @@ return function()
           cond = window_wide_enough,
           icon = icons.misc.line,
           color = {
-            bg = colors.bg_statusline,
-            fg = colors.fg_sidebar,
+            bg = colors.mantle,
+            fg = colors.peach,
             gui = 'italic,bold',
           },
         },
