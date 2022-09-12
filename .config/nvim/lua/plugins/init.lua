@@ -283,6 +283,7 @@ packer.startup({
     ----------------------------------------------------------------------------
     use({
       'nvim-treesitter/nvim-treesitter',
+      run = ':TSUpdate',
       config = conf('treesitter'),
     })
     use({ 'RRethy/nvim-treesitter-endwise' })
