@@ -167,12 +167,6 @@ packer.startup({
       end,
     })
     use({
-      'akinsho/git-conflict.nvim',
-      after = 'kanagawa.nvim',
-      tag = 'v1.0.0',
-      config = function() require('git-conflict').setup() end,
-    })
-    use({
       'lewis6991/gitsigns.nvim',
       event = 'BufRead',
       requires = 'nvim-lua/plenary.nvim',
