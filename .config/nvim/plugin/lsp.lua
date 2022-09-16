@@ -4,6 +4,12 @@ local fmt = string.format
 local api = vim.api
 local icons = gh.style.icons.lsp
 
+---@param buf integer
+---@return boolean
+local function is_buffer_valid(buf)
+  return buf and api.nvim_buf_is_loaded(buf) and api.nvim_buf_is_valid(buf)
+end
+
 --------------------------------------------------------------------------------
 ---- Commands
 --------------------------------------------------------------------------------
@@ -12,31 +18,39 @@ local command = gh.command
 -- A helper function to auto-update the quickfix list when new diagnostics come
 -- in and close it once everything is resolved. This functionality only runs whilst
 -- the list is open.
-local function make_diagnostic_qf_updater()
-  local cmd_id = nil
-  return function()
-    local buf = api.nvim_get_current_buf()
-    if not api.nvim_buf_is_valid(buf) and api.nvim_buf_is_loaded(buf) then return end
-    vim.diagnostic.setqflist({ open = false })
+do
+  ---@type integer?
+  local id
+  local TITLE = 'DIAGNOSTICS'
+  -- A helper function to auto-update the quickfix list when new diagnostics come
+  -- in and close it once everything is resolved. This functionality only runs whilst
+  -- the list is open.
+  -- similar functionality is provided by: https://github.com/onsails/diaglist.nvim
+  local function smart_quickfix_diagnostics()
+    if not is_buffer_valid(api.nvim_get_current_buf()) then return end
+
+    vim.diagnostic.setqflist({ open = false, title = TITLE })
     gh.toggle_list('quickfix')
-    if not gh.is_vim_list_open() and cmd_id then
-      api.nvim_del_autocmd(cmd_id)
-      cmd_id = nil
+
+    if not gh.is_vim_list_open() and id then
+      api.nvim_del_autocmd(id)
+      id = nil
     end
-    if cmd_id then return end
-    cmd_id = api.nvim_create_autocmd('DiagnosticChanged', {
-      callback = function()
-        if gh.is_vim_list_open() then
-          vim.diagnostic.setqflist({ open = false })
+
+    id = id
+      or api.nvim_create_autocmd('DiagnosticChanged', {
+        callback = function()
+          -- skip QF lists that we did not populate
+          if not gh.is_vim_list_open() or fn.getqflist({ title = 0 }).title ~= TITLE then return end
+          vim.diagnostic.setqflist({ open = false, title = TITLE })
           if #fn.getqflist() == 0 then gh.toggle_list('quickfix') end
-        end
-      end,
-    })
+        end,
+      })
   end
+  command('LspDiagnostics', smart_quickfix_diagnostics)
+  gh.nnoremap('<leader>ll', '<Cmd>LspDiagnostics<CR>')
 end
 
-command('LspDiagnostics', make_diagnostic_qf_updater())
-gh.nnoremap('<leader>ll', '<Cmd>LspDiagnostics<CR>')
 --------------------------------------------------------------------------------
 ---- Signs
 --------------------------------------------------------------------------------
