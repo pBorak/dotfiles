@@ -1,6 +1,4 @@
 return function()
-  local colors = require('catppuccin.palettes').get_palette()
-
   require('catppuccin').setup({
     compile = {
       enabled = true,
