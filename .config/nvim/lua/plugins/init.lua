@@ -246,11 +246,7 @@ packer.startup({
     use({
       'NvChad/nvim-colorizer.lua',
       ft = { 'html', 'css', 'sass' },
-      config = function()
-        require('colorizer').setup({ '*' }, {
-          RGB = false,
-        })
-      end,
+      config = function() require('colorizer').setup() end,
     })
     use({
       'lukas-reineke/indent-blankline.nvim',
