@@ -1,9 +1,7 @@
 return function()
+  vim.g.catppuccin_flavour = 'macchiato'
   require('catppuccin').setup({
     compile = {
-      enabled = true,
-    },
-    dim_inactive = {
       enabled = true,
     },
     integrations = {
@@ -37,9 +35,6 @@ return function()
           information = { 'undercurl' },
         },
       },
-    },
-    highlight_overrides = {
-      all = {},
     },
   })
   gh.augroup('CatppucinCompile', {
