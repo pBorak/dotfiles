@@ -1,23 +1,35 @@
-return function()
+local M = {}
+
+gh.telescope = {}
+
+local function rectangular_border(opts)
+  return vim.tbl_deep_extend('force', opts or {}, {
+    borderchars = {
+      prompt = { '─', '│', ' ', '│', '┌', '┐', '│', '│' },
+      results = { '─', '│', '─', '│', '├', '┤', '┘', '└' },
+      preview = { '▔', '▕', '▁', '▏', '🭽', '🭾', '🭿', '🭼' },
+    },
+  })
+end
+
+---@param opts table?
+---@return table
+function gh.telescope.dropdown(opts)
+  return require('telescope.themes').get_dropdown(rectangular_border(opts))
+end
+
+function gh.telescope.ivy(opts)
+  return require('telescope.themes').get_ivy(vim.tbl_deep_extend('keep', opts or {}, {
+    borderchars = {
+      preview = { '▔', '▕', '▁', '▏', '🭽', '🭾', '🭿', '🭼' },
+    },
+  }))
+end
+
+function M.config()
   local telescope = require('telescope')
   local actions = require('telescope.actions')
   local action_state = require('telescope.actions.state')
-  local themes = require('telescope.themes')
-
-  local function get_border(opts)
-    return vim.tbl_deep_extend('force', opts or {}, {
-      borderchars = {
-        { '─', '│', '─', '│', '┌', '┐', '┘', '└' },
-        prompt = { '─', '│', ' ', '│', '┌', '┐', '│', '│' },
-        results = { '─', '│', '─', '│', '├', '┤', '┘', '└' },
-        preview = { '─', '│', '─', '│', '┌', '┐', '┘', '└' },
-      },
-    })
-  end
-
-  ---@param opts table?
-  ---@return table | nil
-  local function dropdown(opts) return themes.get_dropdown(get_border(opts)) end
 
   ---@param prompt_bufnr number
   local open_in_diff_view = function(prompt_bufnr)
@@ -67,7 +79,7 @@ return function()
       },
     },
     pickers = {
-      buffers = dropdown({
+      buffers = gh.telescope.dropdown({
         sort_mru = true,
         sort_lastused = true,
         show_all_buffers = true,
@@ -78,7 +90,7 @@ return function()
           n = { ['<c-x>'] = 'delete_buffer' },
         },
       }),
-      oldfiles = dropdown(),
+      oldfiles = gh.telescope.dropdown(),
       git_files = {
         file_ignore_patterns = { 'vendor/' },
       },
@@ -89,7 +101,7 @@ return function()
           return { prompt = prompt:gsub('%s', '.*') }
         end,
       },
-      current_buffer_fuzzy_find = dropdown({
+      current_buffer_fuzzy_find = gh.telescope.dropdown({
         previewer = false,
         shorten_path = false,
       }),
@@ -99,7 +111,7 @@ return function()
       find_files = {
         hidden = true,
       },
-      git_branches = dropdown(),
+      git_branches = gh.telescope.dropdown(),
       git_bcommits = {
         layout_config = {
           horizontal = {
@@ -124,7 +136,7 @@ return function()
           },
         },
       },
-      reloader = dropdown(),
+      reloader = gh.telescope.dropdown(),
     },
   })
 
@@ -152,9 +164,13 @@ return function()
   end
 
   local function grep_string()
-    builtins.grep_string({
+    builtins.grep_string(gh.telescope.ivy({
       word_match = '-w',
-    })
+    }))
+  end
+
+  local function live_grep_args()
+    telescope.extensions.live_grep_args.live_grep_args(gh.telescope.ivy())
   end
 
   gh.nnoremap('<c-p>', project_files)
@@ -164,7 +180,9 @@ return function()
   gh.nnoremap('<leader>fb', builtins.git_branches)
   gh.nnoremap('<leader>fo', builtins.buffers)
   gh.nnoremap('<leader>fr', builtins.resume)
-  gh.nnoremap('<leader>fs', builtins.live_grep)
+  gh.nnoremap('<leader>fs', live_grep_args)
   gh.nnoremap('<leader>ff', grep_string)
   gh.nnoremap('<leader>f.', find_in_current_directory)
 end
+
+return M

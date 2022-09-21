@@ -66,15 +66,21 @@ packer.startup({
     use({
       'nvim-telescope/telescope.nvim',
       branch = '0.1.x',
+      module_pattern = 'telescope.*',
       cmd = 'Telescope',
       keys = { '<c-p>', '<c-s>', '<leader>f' },
-      config = conf('telescope'),
+      config = conf('telescope').config,
       requires = {
         {
           'nvim-telescope/telescope-fzf-native.nvim',
           run = 'make',
           after = 'telescope.nvim',
           config = function() require('telescope').load_extension('fzf') end,
+        },
+        {
+          'nvim-telescope/telescope-live-grep-args.nvim',
+          after = 'telescope.nvim',
+          config = function() require('telescope').load_extension('live_grep_args') end,
         },
       },
     })
