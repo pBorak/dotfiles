@@ -29,6 +29,11 @@ local servers = {
   tsserver = true,
   eslint = function()
     return {
+      root_dir = require('lspconfig').util.root_pattern(
+        '.eslintrc',
+        '.eslintrc.js',
+        '.eslintrc.json'
+      ),
       settings = {
         format = {
           enable = true,
