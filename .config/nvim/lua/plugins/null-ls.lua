@@ -4,7 +4,6 @@ return function()
   null_ls.setup({
     debounce = 150,
     sources = {
-      null_ls.builtins.code_actions.gitsigns,
       null_ls.builtins.formatting.prettier.with({
         condition = function(_utils) return _utils.root_has_file('.prettierrc') end,
       }),
