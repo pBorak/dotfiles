@@ -102,7 +102,7 @@ return function()
         },
       },
     },
-    extensions = { 'nvim-tree', 'fugitive', 'toggleterm', 'quickfix' },
+    extensions = { 'neo-tree', 'fugitive', 'toggleterm', 'quickfix' },
   }
 
   require('lualine').setup(config)

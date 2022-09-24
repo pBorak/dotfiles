@@ -15,7 +15,7 @@ return function()
       'git',
       'TelescopePrompt',
       'undotree',
-      'NvimTree',
+      'neo-tree-popup',
       '', -- for all buffers without a file type
     },
     buftype_exclude = { 'terminal', 'nofile' },

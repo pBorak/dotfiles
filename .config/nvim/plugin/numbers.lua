@@ -15,7 +15,7 @@ local number_filetype_exclusions = {
   'org',
   'lsputil_locations_list',
   'lsputil_symbols_list',
-  'NvimTree',
+  'neo-tree',
 }
 
 local number_buftype_exclusions = {

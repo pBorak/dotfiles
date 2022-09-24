@@ -258,10 +258,17 @@ packer.startup({
       config = conf('indent-blankline'),
     })
     use({
-      'kyazdani42/nvim-tree.lua',
-      keys = '<leader>n',
-      config = conf('nvim-tree'),
-      requires = 'kyazdani42/nvim-web-devicons',
+      'nvim-neo-tree/neo-tree.nvim',
+      branch = 'v2.x',
+      config = conf('neo-tree'),
+      keys = { '<leader>n' },
+      cmd = { 'NeoTree' },
+      requires = {
+        'nvim-lua/plenary.nvim',
+        'MunifTanjim/nui.nvim',
+        'kyazdani42/nvim-web-devicons',
+        { 's1n7ax/nvim-window-picker', tag = 'v1.*', config = conf('window-picker') },
+      },
     })
     use({
       'nvim-lualine/lualine.nvim',

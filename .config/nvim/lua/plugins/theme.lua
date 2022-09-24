@@ -12,7 +12,7 @@ return function()
       markdown = true,
       neogit = false,
       notify = true,
-      nvimtree = true,
+      nvimtree = false,
       telescope = true,
       treesitter = true,
       treesitter_context = true,
@@ -34,6 +34,11 @@ return function()
           warnings = { 'undercurl' },
           information = { 'undercurl' },
         },
+      },
+      neotree = {
+        enabled = true,
+        show_root = true, -- makes the root folder not transparent
+        transparent_panel = false, -- make the panel transparent
       },
     },
   })

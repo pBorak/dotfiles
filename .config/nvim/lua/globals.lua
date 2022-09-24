@@ -22,12 +22,14 @@ gh.style = {
       add = '',
       mod = '',
       remove = '',
+      rename = '',
     },
     misc = {
       telescope = '',
       git_branch = '',
       line = 'ℓ',
       chevron_right = '»',
+      circle = '',
     },
   },
   lsp = {
