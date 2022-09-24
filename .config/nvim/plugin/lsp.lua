@@ -4,12 +4,172 @@ local fmt = string.format
 local api = vim.api
 local icons = gh.style.icons.lsp
 
+-----------------------------------------------------------------------------//
+-- Autocommands
+-----------------------------------------------------------------------------//
+local FEATURES = {
+  DIAGNOSTICS = { name = 'diagnostics' },
+  FORMATTING = { name = 'formatting', provider = 'documentFormattingProvider' },
+  REFERENCES = { name = 'references', provider = 'documentHighlightProvider' },
+}
+
 ---@param buf integer
 ---@return boolean
 local function is_buffer_valid(buf)
   return buf and api.nvim_buf_is_loaded(buf) and api.nvim_buf_is_valid(buf)
 end
 
+--- Create augroups for each LSP feature and track which capabilities each client
+--- registers in a buffer local table
+---@param bufnr integer
+---@param client table
+---@param events table
+---@return fun(feature: table, commands: fun(string): Autocommand[])
+local function augroup_factory(bufnr, client, events)
+  return function(feature, commands)
+    local provider, name = feature.provider, feature.name
+    if not provider or client.server_capabilities[provider] then
+      events[name].group_id = gh.augroup(fmt('LspCommands_%d_%s', bufnr, name), commands(provider))
+      table.insert(events[name].clients, client.id)
+    end
+  end
+end
+
+local format_exclusions = { 'sumneko_lua', 'solargraph', 'dockerls', 'tsserver' }
+
+local function formatting_filter(client) return not vim.tbl_contains(format_exclusions, client.name) end
+
+---@param client table<string, any>
+---@param bufnr integer
+local function setup_autocommands(client, bufnr)
+  if not client then
+    local msg = fmt('Unable to setup LSP autocommands, client for %d is missing', bufnr)
+    return vim.notify(msg, 'error', { title = 'LSP Setup' })
+  end
+
+  local events = vim.F.if_nil(vim.b.lsp_events, {
+    [FEATURES.FORMATTING.name] = { clients = {}, group_id = nil },
+    [FEATURES.DIAGNOSTICS.name] = { clients = {}, group_id = nil },
+    [FEATURES.REFERENCES.name] = { clients = {}, group_id = nil },
+  })
+
+  local augroup = augroup_factory(bufnr, client, events)
+
+  augroup(FEATURES.DIAGNOSTICS, function()
+    return {
+      {
+        event = { 'CursorHold' },
+        buffer = bufnr,
+        desc = 'LSP: Show diagnostics',
+        command = function(args) vim.diagnostic.open_float(args.buf, { scope = 'cursor', focus = false }) end,
+      },
+    }
+  end)
+
+  augroup(FEATURES.FORMATTING, function()
+    return {
+      {
+        event = 'BufWritePre',
+        buffer = bufnr,
+        desc = 'LSP: Format on save',
+        command = function(args)
+          lsp.buf.format({
+            bufnr = args.buf,
+            filter = formatting_filter,
+          })
+        end,
+      },
+    }
+  end)
+
+  augroup(FEATURES.REFERENCES, function()
+    return {
+      {
+        event = { 'CursorHold' },
+        buffer = bufnr,
+        desc = 'LSP: References',
+        command = function() lsp.buf.document_highlight() end,
+      },
+      {
+        event = 'CursorMoved',
+        desc = 'LSP: References Clear',
+        buffer = bufnr,
+        command = function() lsp.buf.clear_references() end,
+      },
+    }
+  end)
+  vim.b[bufnr].lsp_events = events
+end
+--------------------------------------------------------------------------------
+---- Mappings
+--------------------------------------------------------------------------------
+---Setup mapping when an lsp attaches to a buffer
+---@param _ table lsp client
+local function setup_mappings(_)
+  gh.nnoremap('<leader>ld', lsp.buf.definition)
+  gh.nnoremap('<leader>lr', lsp.buf.references)
+  gh.nnoremap('<leader>lh', lsp.buf.hover)
+  gh.inoremap('<C-h>', lsp.buf.signature_help)
+  gh.nnoremap('<leader>la', lsp.buf.code_action)
+  gh.nnoremap('<leader>ln', lsp.buf.rename)
+  gh.nnoremap('<leader>lf', lsp.buf.format)
+
+  gh.nnoremap('[d', function() vim.diagnostic.goto_prev({ float = false }) end)
+  gh.nnoremap(']d', function() vim.diagnostic.goto_next({ float = false }) end)
+end
+
+---@param bufnr number
+local function disable_defaults(bufnr)
+  vim.bo[bufnr].tagfunc = nil
+  vim.bo[bufnr].formatexpr = nil
+end
+
+-- Add buffer local mappings, autocommands etc for attaching servers
+-- this runs for each client because they have different capabilities so each time one
+-- attaches it might enable autocommands or mappings that the previous client did not support
+---@param client table the lsp client
+---@param bufnr number
+local function on_attach(client, bufnr)
+  setup_autocommands(client, bufnr)
+  setup_mappings(client)
+  disable_defaults(bufnr)
+end
+
+--- A set of custom overrides for specific lsp clients
+--- This is a way of adding functionality for specific lsps
+--- without putting all this logic in the general on_attach function
+local client_overrides = {
+  eslint = function(client, _) client.server_capabilities.documentFormattingProvider = true end,
+}
+
+gh.augroup('LspSetupCommands', {
+  {
+    event = 'LspAttach',
+    desc = 'setup the language server autocommands',
+    command = function(args)
+      local bufnr = args.buf
+      -- if the buffer is invalid we should not try and attach to it
+      if not api.nvim_buf_is_valid(bufnr) or not args.data then return end
+      local client = lsp.get_client_by_id(args.data.client_id)
+      on_attach(client, bufnr)
+      if client_overrides[client.name] then client_overrides[client.name](client, bufnr) end
+    end,
+  },
+  {
+    event = 'LspDetach',
+    desc = 'Clean up after detached LSP',
+    command = function(args)
+      local client_id = args.data.client_id
+      if not vim.b.lsp_events or not client_id then return end
+      for _, state in pairs(vim.b.lsp_events) do
+        if #state.clients == 1 and state.clients[1] == client_id then
+          api.nvim_clear_autocmds({ group = state.group_id, buffer = args.buf })
+        end
+        vim.tbl_filter(function(id) return id ~= client_id end, state.clients)
+      end
+    end,
+  },
+})
 --------------------------------------------------------------------------------
 ---- Commands
 --------------------------------------------------------------------------------
