@@ -53,6 +53,8 @@ return function()
     window = {
       mappings = {
         ['<CR>'] = 'open_with_window_picker',
+        ['/'] = 'noop',
+        ['s'] = 'fuzzy_finder',
         ['w'] = 'noop',
         ['<space>'] = 'noop',
         ['<tab>'] = 'toggle_node',
