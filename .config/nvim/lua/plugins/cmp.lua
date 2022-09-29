@@ -82,13 +82,13 @@ return function()
       { name = 'nvim_lsp' },
       { name = 'luasnip' },
       { name = 'path' },
+      { name = 'buffer' },
+    }, {
       {
         name = 'rg',
         keyword_length = 4,
-        max_item_count = 10,
+        max_item_count = 5,
       },
-    }, {
-      { name = 'buffer' },
       { name = 'spell' },
     }),
   })
