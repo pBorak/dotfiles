@@ -12,6 +12,13 @@
       {
         "language": "eruby",
         "path": "./erb.json"
+      },
+      {
+        "language": [
+          "javascript",
+          "javascriptreact"
+        ],
+        "path": "./javascript.json"
       }
     ]
   }
