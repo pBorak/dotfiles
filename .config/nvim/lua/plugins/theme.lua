@@ -1,54 +1,47 @@
 return function()
-  vim.g.catppuccin_flavour = 'macchiato'
-  require('catppuccin').setup({
-    compile = {
-      enabled = true,
+  local tokyonight = require('tokyonight')
+  tokyonight.setup({
+    style = 'moon',
+    sidebars = {
+      'qf',
+      'packer',
+      'help',
+      'startuptime',
+      'fugitive',
+      'undotree',
     },
-    integrations = {
-      cmp = true,
-      fidget = true,
-      gitsigns = true,
-      leap = true,
-      markdown = true,
-      neogit = false,
-      notify = true,
-      nvimtree = false,
-      telescope = true,
-      treesitter = true,
-      treesitter_context = true,
-      indent_blankline = {
-        enabled = true,
-        colored_indent_levels = false,
-      },
-      native_lsp = {
-        enabled = true,
-        virtual_text = {
-          errors = { 'italic' },
-          hints = { 'italic' },
-          warnings = { 'italic' },
-          information = { 'italic' },
-        },
-        underlines = {
-          errors = { 'undercurl' },
-          hints = { 'undercurl' },
-          warnings = { 'undercurl' },
-          information = { 'undercurl' },
-        },
-      },
-      neotree = {
-        enabled = true,
-        show_root = true, -- makes the root folder not transparent
-        transparent_panel = false, -- make the panel transparent
-      },
-    },
+    on_colors = function(c) end,
+    on_highlights = function(hl, c)
+      -- borderless telescope
+      local prompt = '#2d3149'
+      hl.TelescopeNormal = {
+        bg = c.bg_dark,
+        fg = c.fg_dark,
+      }
+      hl.TelescopeBorder = {
+        bg = c.bg_dark,
+        fg = c.bg_dark,
+      }
+      hl.TelescopePromptNormal = {
+        bg = prompt,
+      }
+      hl.TelescopePromptBorder = {
+        bg = prompt,
+        fg = prompt,
+      }
+      hl.TelescopePromptTitle = {
+        bg = c.fg_gutter,
+        fg = c.orange,
+      }
+      hl.TelescopePreviewTitle = {
+        bg = c.bg_dark,
+        fg = c.bg_dark,
+      }
+      hl.TelescopeResultsTitle = {
+        bg = c.bg_dark,
+        fg = c.bg_dark,
+      }
+    end,
   })
-  gh.augroup('CatppucinCompile', {
-    {
-      event = 'User',
-      pattern = 'PackerCompileDone',
-      desc = 'Compile Catppuccin and setup as a theme',
-      command = function() vim.cmd('CatppuccinCompile') end,
-    },
-  })
-  vim.cmd.colorscheme('catppuccin')
+  tokyonight.load()
 end

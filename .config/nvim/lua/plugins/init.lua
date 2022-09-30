@@ -194,10 +194,10 @@ packer.startup({
     -- UI
     ----------------------------------------------------------------------------
     use({
-      'catppuccin/nvim',
+      'folke/tokyonight.nvim',
       config = conf('theme'),
-      run = ':CatppuccinCompile',
     })
+
     use({
       'rcarriga/nvim-notify',
       config = conf('notify'),

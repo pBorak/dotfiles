@@ -1,6 +1,5 @@
 return function()
   local icons = gh.style.icons
-  local colors = require('catppuccin.palettes').get_palette()
 
   local function window_wide_enough() return vim.fn.winwidth(0) > 80 end
 
@@ -25,7 +24,7 @@ return function()
 
   local config = {
     options = {
-      theme = 'catppuccin',
+      theme = 'auto',
       section_separators = { left = '', right = '' },
       component_separators = { left = '', right = '' },
       icons_enabled = true,
@@ -35,8 +34,12 @@ return function()
       lualine_a = { 'mode' },
       lualine_b = {
         {
-          search_result,
+          'b:gitsigns_head',
           cond = window_wide_enough,
+          icon = icons.misc.git_branch,
+          color = {
+            gui = 'bold',
+          },
         },
       },
       lualine_c = {
@@ -65,28 +68,21 @@ return function()
             hint = icons.lsp.hint .. ' ',
           },
         },
-      },
-      lualine_y = {
-        {
-          'b:gitsigns_head',
-          cond = window_wide_enough,
-          icon = icons.misc.git_branch,
-          color = {
-            bg = colors.mantle,
-            fg = colors.teal,
-            gui = 'bold',
-          },
-        },
         {
           'diff',
           cond = window_wide_enough,
           source = diff_source,
-          color = { bg = colors.mantle },
           symbols = {
             added = icons.git.add .. ' ',
             modified = icons.git.mod .. ' ',
             removed = icons.git.remove .. ' ',
           },
+        },
+      },
+      lualine_y = {
+        {
+          search_result,
+          cond = window_wide_enough,
         },
       },
       lualine_z = {
@@ -95,8 +91,6 @@ return function()
           cond = window_wide_enough,
           icon = icons.misc.line,
           color = {
-            bg = colors.mantle,
-            fg = colors.peach,
             gui = 'italic,bold',
           },
         },

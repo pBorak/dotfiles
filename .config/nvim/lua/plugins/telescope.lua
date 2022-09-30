@@ -1,35 +1,10 @@
 local M = {}
 
-gh.telescope = {}
-
-local function rectangular_border(opts)
-  return vim.tbl_deep_extend('force', opts or {}, {
-    borderchars = {
-      prompt = { '─', '│', ' ', '│', '┌', '┐', '│', '│' },
-      results = { '─', '│', '─', '│', '├', '┤', '┘', '└' },
-      preview = { '▔', '▕', '▁', '▏', '🭽', '🭾', '🭿', '🭼' },
-    },
-  })
-end
-
----@param opts table?
----@return table
-function gh.telescope.dropdown(opts)
-  return require('telescope.themes').get_dropdown(rectangular_border(opts))
-end
-
-function gh.telescope.ivy(opts)
-  return require('telescope.themes').get_ivy(vim.tbl_deep_extend('keep', opts or {}, {
-    borderchars = {
-      preview = { '▔', '▕', '▁', '▏', '🭽', '🭾', '🭿', '🭼' },
-    },
-  }))
-end
-
 function M.config()
   local telescope = require('telescope')
   local actions = require('telescope.actions')
   local action_state = require('telescope.actions.state')
+  local themes = require('telescope.themes')
 
   ---@param prompt_bufnr number
   local open_in_diff_view = function(prompt_bufnr)
@@ -52,6 +27,7 @@ function M.config()
       borderchars = { '─', '│', '─', '│', '┌', '┐', '┘', '└' },
       prompt_prefix = gh.style.icons.misc.telescope .. ' ',
       selection_caret = gh.style.icons.misc.chevron_right .. ' ',
+      winblend = 0,
       mappings = {
         i = {
           ['<c-c>'] = function() vim.cmd.stopinsert() end,
@@ -79,7 +55,7 @@ function M.config()
       },
     },
     pickers = {
-      buffers = gh.telescope.dropdown({
+      buffers = themes.get_dropdown({
         sort_mru = true,
         sort_lastused = true,
         show_all_buffers = true,
@@ -90,7 +66,7 @@ function M.config()
           n = { ['<c-x>'] = 'delete_buffer' },
         },
       }),
-      oldfiles = gh.telescope.dropdown(),
+      oldfiles = themes.get_dropdown(),
       git_files = {
         file_ignore_patterns = { 'vendor/' },
       },
@@ -101,7 +77,7 @@ function M.config()
           return { prompt = prompt:gsub('%s', '.*') }
         end,
       },
-      current_buffer_fuzzy_find = gh.telescope.dropdown({
+      current_buffer_fuzzy_find = themes.get_dropdown({
         previewer = false,
         shorten_path = false,
       }),
@@ -111,7 +87,7 @@ function M.config()
       find_files = {
         hidden = true,
       },
-      git_branches = gh.telescope.dropdown(),
+      git_branches = themes.get_dropdown(),
       git_bcommits = {
         layout_config = {
           horizontal = {
@@ -136,7 +112,7 @@ function M.config()
           },
         },
       },
-      reloader = gh.telescope.dropdown(),
+      reloader = themes.get_dropdown(),
     },
   })
 
@@ -164,13 +140,13 @@ function M.config()
   end
 
   local function grep_string()
-    builtins.grep_string(gh.telescope.ivy({
+    builtins.grep_string(themes.get_ivy({
       word_match = '-w',
     }))
   end
 
   local function live_grep_args()
-    telescope.extensions.live_grep_args.live_grep_args(gh.telescope.ivy())
+    telescope.extensions.live_grep_args.live_grep_args(require('telescope.themes').get_ivy())
   end
 
   gh.nnoremap('<c-p>', project_files)
