@@ -174,23 +174,6 @@ gh.augroup('Cursorline', {
 
 gh.augroup('Utilities', {
   {
-    -- When editing a file, always jump to the last known cursor position.
-    -- Don't do it for commit messages, when the position is invalid.
-    event = { 'BufReadPost' },
-    pattern = { '*' },
-    command = function()
-      if vim.bo.ft ~= 'gitcommit' and vim.fn.win_gettype() ~= 'popup' then
-        local last_place_mark = vim.api.nvim_buf_get_mark(0, '"')
-        local line_nr = last_place_mark[1]
-        local last_line = vim.api.nvim_buf_line_count(0)
-
-        if line_nr > 0 and line_nr <= last_line then
-          vim.api.nvim_win_set_cursor(0, last_place_mark)
-        end
-      end
-    end,
-  },
-  {
     event = 'FileType',
     pattern = { 'gitcommit', 'gitrebase' },
     command = 'set bufhidden=delete',
@@ -200,4 +183,19 @@ gh.augroup('Utilities', {
     pattern = { 'qf' },
     command = 'wincmd J',
   },
+})
+
+vim.api.nvim_create_autocmd('BufReadPre', {
+  pattern = '*',
+  callback = function()
+    vim.api.nvim_create_autocmd('FileType', {
+      pattern = '<buffer>',
+      once = true,
+      callback = function()
+        vim.cmd(
+          [[if &ft !~# 'commit\|rebase' && line("'\"") > 1 && line("'\"") <= line("$") | exe 'normal! g`"' | endif]]
+        )
+      end,
+    })
+  end,
 })
