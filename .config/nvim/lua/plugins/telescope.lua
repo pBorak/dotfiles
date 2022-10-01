@@ -140,14 +140,12 @@ function M.config()
   end
 
   local function grep_string()
-    builtins.grep_string(themes.get_ivy({
+    builtins.grep_string({
       word_match = '-w',
-    }))
+    })
   end
 
-  local function live_grep_args()
-    telescope.extensions.live_grep_args.live_grep_args(require('telescope.themes').get_ivy())
-  end
+  local function live_grep_args() telescope.extensions.live_grep_args.live_grep_args() end
 
   gh.nnoremap('<c-p>', project_files)
   gh.nnoremap('<leader>fd', dotfiles)
