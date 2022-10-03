@@ -34,12 +34,8 @@ return function()
       lualine_a = { 'mode' },
       lualine_b = {
         {
-          'b:gitsigns_head',
+          search_result,
           cond = window_wide_enough,
-          icon = icons.misc.git_branch,
-          color = {
-            gui = 'bold',
-          },
         },
       },
       lualine_c = {
@@ -81,8 +77,12 @@ return function()
       },
       lualine_y = {
         {
-          search_result,
+          'b:gitsigns_head',
           cond = window_wide_enough,
+          icon = icons.misc.git_branch,
+          color = {
+            gui = 'bold',
+          },
         },
       },
       lualine_z = {
