@@ -90,15 +90,13 @@ packer.startup({
     })
     use({
       'ggandor/leap.nvim',
+      requires = {
+        {
+          'ggandor/flit.nvim',
+          config = function() require('flit').setup() end,
+        },
+      },
       config = conf('leap'),
-    })
-    use({
-      'rhysd/clever-f.vim',
-      keys = { 'f', 'F', 't', 'T' },
-      config = function()
-        vim.g.clever_f_across_no_line = 1
-        vim.g.clever_f_fix_key_direction = 1
-      end,
     })
     use({
       'christoomey/vim-tmux-navigator',
