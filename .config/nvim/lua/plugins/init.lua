@@ -93,7 +93,11 @@ packer.startup({
       requires = {
         {
           'ggandor/flit.nvim',
-          config = function() require('flit').setup() end,
+          config = function()
+            require('flit').setup({
+              multiline = false,
+            })
+          end,
         },
       },
       config = conf('leap'),
