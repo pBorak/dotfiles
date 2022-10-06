@@ -3,14 +3,6 @@ return function()
 
   local function window_wide_enough() return vim.fn.winwidth(0) > 80 end
 
-  local function search_result()
-    if vim.v.hlsearch == 0 then return '' end
-    local last_search = vim.fn.getreg('/')
-    if not last_search or last_search == '' then return '' end
-    local searchcount = vim.fn.searchcount({ maxcount = 9999 })
-    return searchcount.current .. '/' .. searchcount.total
-  end
-
   local function diff_source()
     local gitsigns = vim.b.gitsigns_status_dict
     if gitsigns then
@@ -34,12 +26,15 @@ return function()
       lualine_a = { 'mode' },
       lualine_b = {
         {
-          search_result,
+          'b:gitsigns_head',
           cond = window_wide_enough,
+          icon = icons.misc.git_branch,
+          color = {
+            gui = 'bold',
+          },
         },
       },
       lualine_c = {
-        function() return '%=' end,
         {
           'filetype',
           icon_only = true,
@@ -54,6 +49,17 @@ return function()
       },
       lualine_x = {
         {
+          require('noice').api.statusline.message.get_hl,
+          cond = require('noice').api.statusline.message.has,
+        },
+        {
+          require('noice').api.statusline.mode.get,
+          cond = require('noice').api.statusline.mode.has,
+          color = { fg = '#ff9e64' },
+        },
+      },
+      lualine_y = {
+        {
           'diagnostics',
           cond = window_wide_enough,
           sources = { 'nvim_diagnostic' },
@@ -62,6 +68,9 @@ return function()
             warn = icons.lsp.warn .. ' ',
             info = icons.lsp.info .. ' ',
             hint = icons.lsp.hint .. ' ',
+          },
+          color = {
+            bg = '#1e2030',
           },
         },
         {
@@ -73,15 +82,8 @@ return function()
             modified = icons.git.mod .. ' ',
             removed = icons.git.remove .. ' ',
           },
-        },
-      },
-      lualine_y = {
-        {
-          'b:gitsigns_head',
-          cond = window_wide_enough,
-          icon = icons.misc.git_branch,
           color = {
-            gui = 'bold',
+            bg = '#1e2030',
           },
         },
       },

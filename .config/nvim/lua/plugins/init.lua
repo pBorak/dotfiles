@@ -199,7 +199,15 @@ packer.startup({
       'folke/tokyonight.nvim',
       config = conf('theme'),
     })
-
+    use({
+      'folke/noice.nvim',
+      event = 'VimEnter',
+      config = conf('noice'),
+      requires = {
+        'MunifTanjim/nui.nvim',
+        'rcarriga/nvim-notify',
+      },
+    })
     use({
       'rcarriga/nvim-notify',
       config = conf('notify'),
@@ -209,7 +217,7 @@ packer.startup({
       config = function()
         require('fidget').setup({
           window = {
-            blend = 0,
+            relative = 'editor',
           },
           text = {
             spinner = 'moon',
@@ -317,6 +325,8 @@ packer.startup({
       config = function()
         require('config-local').setup({
           config_files = { '.localrc.lua', '.vimrc', '.vimrc.lua' },
+          --  FIXME: There multiple vim.notify events triggered.
+          silent = true,
         })
       end,
     })
