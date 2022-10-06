@@ -124,8 +124,7 @@ opt.mouse = 'a'
 --------------------------------------------------------------------------------
 -- Spelling
 --------------------------------------------------------------------------------
--- TODO: migrate to nightly spelloptions
--- opt.spelloptions:append({ 'noplainbuffer' })
+opt.spelloptions:append({ 'noplainbuffer' })
 opt.spellsuggest:prepend({ 12 })
 opt.spellcapcheck = ''
 --------------------------------------------------------------------------------
