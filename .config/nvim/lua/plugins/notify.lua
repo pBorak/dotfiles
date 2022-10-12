@@ -11,11 +11,6 @@ return function()
     end,
     on_open = function(win) vim.api.nvim_win_set_config(win, { focusable = false }) end,
   })
-  vim.notify = function(msg, level, opts)
-    if msg:match('Format request failed, no matching language servers.') then return end
-
-    notify(msg, level, opts)
-  end
 
   gh.nnoremap('<leader>N', notify.dismiss)
 end
