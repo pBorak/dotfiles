@@ -325,7 +325,6 @@ packer.startup({
       config = function()
         require('config-local').setup({
           config_files = { '.localrc.lua', '.vimrc', '.vimrc.lua' },
-          silent = true,
         })
       end,
     })
