@@ -2,10 +2,14 @@ return function()
   require('toggleterm').setup({
     open_mapping = [[<c-\>]],
     shade_filetypes = { 'none' },
-    direction = 'horizontal',
+    direction = 'float',
     start_in_insert = true,
     persist_mode = true,
-    float_opts = { border = 'curved', winblend = 3 },
+    float_opts = {
+      border = 'curved',
+      height = function() return math.floor(vim.o.lines * 0.6) end,
+      width = function() return math.floor(vim.o.columns * 0.7) end,
+    },
     size = function(term)
       if term.direction == 'horizontal' then
         return 30
