@@ -1,5 +1,5 @@
 return function()
-  require('leap').set_default_keymaps()
+  require('leap').add_default_mappings()
   local function leap_all_windows()
     local focusable_windows_on_tabpage = vim.tbl_filter(
       function(win) return vim.api.nvim_win_get_config(win).focusable end,
