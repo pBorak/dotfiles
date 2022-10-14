@@ -65,7 +65,6 @@ packer.startup({
     ----------------------------------------------------------------------------
     use({
       'nvim-telescope/telescope.nvim',
-      branch = '0.1.x',
       module_pattern = 'telescope.*',
       cmd = 'Telescope',
       keys = { '<c-p>', '<c-s>', '<leader>f' },
