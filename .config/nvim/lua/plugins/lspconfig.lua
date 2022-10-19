@@ -61,7 +61,7 @@ for name, config in pairs(servers) do
   if config then
     config.capabilities = config.capabilities or vim.lsp.protocol.make_client_capabilities()
     local ok, cmp_nvim_lsp = gh.safe_require('cmp_nvim_lsp')
-    if ok then cmp_nvim_lsp.update_capabilities(config.capabilities) end
+    if ok then cmp_nvim_lsp.default_capabilities(config.capabilities) end
     require('lspconfig')[name].setup(config)
   end
 end
