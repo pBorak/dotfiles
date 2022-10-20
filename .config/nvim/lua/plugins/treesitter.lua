@@ -15,6 +15,7 @@ return function()
       'hcl',
       'markdown',
       'markdown_inline',
+      'diff',
     },
     highlight = {
       enable = true,
