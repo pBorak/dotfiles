@@ -43,5 +43,6 @@ return function()
       }
     end,
   })
+  vim.api.nvim_set_hl(0, '@label.ruby', { bold = true, fg = '#4fd6be' })
   tokyonight.load()
 end
