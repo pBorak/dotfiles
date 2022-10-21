@@ -3,6 +3,7 @@ return function()
   notify.setup({
     stages = 'fade_in_slide_out',
     timeout = 3000,
+    top_down = false,
     background_colour = '#222436',
     render = function(...)
       local notif = select(2, ...)
