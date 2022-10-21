@@ -16,6 +16,7 @@ return function()
       'markdown',
       'markdown_inline',
       'diff',
+      'regex',
     },
     highlight = {
       enable = true,
