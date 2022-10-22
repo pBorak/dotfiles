@@ -10,7 +10,6 @@ return function()
       local style = notif.title[1] == '' and 'minimal' or 'default'
       require('notify.render')[style](...)
     end,
-    on_open = function(win) vim.api.nvim_win_set_config(win, { focusable = false }) end,
   })
 
   gh.nnoremap('<leader>N', notify.dismiss)
