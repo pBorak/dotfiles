@@ -4,9 +4,6 @@ return function()
       mini = {
         focusable = false,
       },
-      notify = {
-        focusable = false,
-      },
     },
     routes = {
       {
