@@ -2,7 +2,7 @@ return function()
   require('toggleterm').setup({
     open_mapping = [[<c-\>]],
     shade_filetypes = { 'none' },
-    direction = 'float',
+    direction = 'horizontal',
     start_in_insert = true,
     persist_mode = true,
     float_opts = {
@@ -12,7 +12,7 @@ return function()
     },
     size = function(term)
       if term.direction == 'horizontal' then
-        return 30
+        return 35
       elseif term.direction == 'vertical' then
         return math.floor(vim.o.columns * 0.4)
       end
