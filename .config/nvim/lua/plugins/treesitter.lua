@@ -43,6 +43,8 @@ return function()
           ['im'] = '@function.inner',
           ['ab'] = '@block.outer',
           ['ib'] = '@block.inner',
+          ['rc'] = '@rspec.context',
+          ['ri'] = '@rspec.it',
         },
       },
       swap = {
@@ -60,10 +62,11 @@ return function()
         goto_next_start = {
           [']m'] = '@function.outer',
           [']b'] = '@block.outer',
+          [']r'] = '@rspec.it',
         },
         goto_previous_start = {
           ['[m'] = '@function.outer',
-          ['[b'] = '@block.outer',
+          ['[r'] = '@rspec.it',
         },
       },
       lsp_interop = {
