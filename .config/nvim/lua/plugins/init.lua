@@ -297,6 +297,10 @@ packer.startup({
         })
       end,
     })
+    use({
+      'nvim-treesitter/playground',
+      cmd = { 'TSPlaygroundToggle', 'TSHighlightCapturesUnderCursor' },
+    })
     ----------------------------------------------------------------------------
     -- Utils
     ----------------------------------------------------------------------------
