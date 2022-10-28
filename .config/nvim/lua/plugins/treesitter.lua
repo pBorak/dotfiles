@@ -17,6 +17,7 @@ return function()
       'markdown_inline',
       'diff',
       'regex',
+      'query',
     },
     highlight = {
       enable = true,
