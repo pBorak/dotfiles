@@ -45,6 +45,7 @@ opt.diffopt = opt.diffopt
     'iwhite',
     'algorithm:histogram',
     'indent-heuristic',
+    'linematch:60',
   }
 --------------------------------------------------------------------------------
 -- Format Options
