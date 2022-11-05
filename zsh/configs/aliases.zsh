@@ -24,3 +24,4 @@ alias tlog='tail -f log/test.log'
 alias vi='nvim'
 alias vim="nvim"
 alias ssh='TERM="xterm-256color" ssh'
+alias tx='touch ~/.transifexrc; docker run --rm -i -t -v `pwd`:/app -v ~/.transifexrc:/.transifexrc -v /etc/ssl/certs/ca-certificates.crt:/etc/ssl/certs/ca-certificates.crt transifex/txcli --root-config /.transifexrc'
