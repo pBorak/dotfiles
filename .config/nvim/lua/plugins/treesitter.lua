@@ -25,10 +25,9 @@ return function()
     incremental_selection = {
       enable = true,
       keymaps = {
-        -- mappings for incremental selection (visual mappings)
-        init_selection = '<leader>v', -- maps in normal mode to init the node/scope selection
-        node_incremental = '<leader>v', -- increment to the upper named parent
-        node_decremental = '<leader>V', -- decrement to the previous node
+        init_selection = '<CR>',
+        node_incremental = '<CR>',
+        node_decremental = '<BS>',
       },
     },
     indent = {
@@ -42,8 +41,6 @@ return function()
         keymaps = {
           ['am'] = '@function.outer',
           ['im'] = '@function.inner',
-          ['ab'] = '@block.outer',
-          ['ib'] = '@block.inner',
           ['rc'] = '@rspec.context',
           ['ri'] = '@rspec.it',
         },
@@ -62,7 +59,6 @@ return function()
         set_jumps = true, -- whether to set jumps in the jumplist
         goto_next_start = {
           [']m'] = '@function.outer',
-          [']b'] = '@block.outer',
           [']r'] = '@rspec.it',
         },
         goto_previous_start = {
