@@ -103,6 +103,17 @@ packer.startup({
       config = conf('leap'),
     })
     use({
+      'echasnovski/mini.nvim',
+      config = function()
+        require('mini.ai').setup({
+          mappings = {
+            goto_left = '',
+            goto_right = '',
+          },
+        })
+      end,
+    })
+    use({
       'christoomey/vim-tmux-navigator',
       config = conf('vim-tmux-navigator'),
     })
