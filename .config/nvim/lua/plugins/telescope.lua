@@ -5,6 +5,7 @@ function M.config()
   local actions = require('telescope.actions')
   local action_state = require('telescope.actions.state')
   local themes = require('telescope.themes')
+  local lga_actions = require('telescope-live-grep-args.actions')
 
   ---@param prompt_bufnr number
   local open_in_diff_view = function(prompt_bufnr)
@@ -51,6 +52,13 @@ function M.config()
       fzf = {
         override_generic_sorter = true, -- override the generic sorter
         override_file_sorter = true, -- override the file sorter
+      },
+      live_grep_args = {
+        mappings = {
+          i = {
+            ['<c-h>'] = lga_actions.quote_prompt(),
+          },
+        },
       },
     },
     pickers = {
