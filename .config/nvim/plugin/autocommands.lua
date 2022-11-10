@@ -90,7 +90,7 @@ gh.augroup('TextYankHighlight', {
     command = function()
       vim.highlight.on_yank({
         timeout = 500,
-        on_visual = false,
+        on_visual = true,
         higroup = 'Visual',
       })
     end,
