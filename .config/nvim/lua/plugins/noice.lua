@@ -1,10 +1,5 @@
 return function()
   require('noice').setup({
-    views = {
-      mini = {
-        focusable = false,
-      },
-    },
     routes = {
       {
         filter = { event = 'msg_show', kind = '', find = 'written' },
