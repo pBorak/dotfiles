@@ -8,6 +8,7 @@ return function()
       delete = { hl = 'GitSignsDelete', text = '▌' },
       topdelete = { hl = 'GitSignsDelete', text = '▌' },
       changedelete = { hl = 'GitSignsChange', text = '▌' },
+      untracked = { hl = 'GitSignsAdd', text = '▍' },
     },
     on_attach = function()
       local gs = package.loaded.gitsigns
