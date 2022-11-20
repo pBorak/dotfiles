@@ -99,7 +99,7 @@ packer.startup({
           end,
         },
       },
-      config = conf('leap'),
+      config = function() require('leap').add_default_mappings() end,
     })
     use({
       'echasnovski/mini.nvim',
