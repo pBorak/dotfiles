@@ -12,6 +12,14 @@ return function()
         },
         opts = { skip = true },
       },
+      {
+        filter = {
+          event = 'msg_show',
+          kind = 'echomsg',
+          find = 'No textobject',
+        },
+        opts = { skip = true },
+      },
     },
     lsp = {
       signature = {
