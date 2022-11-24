@@ -1,6 +1,7 @@
 return function()
   local ls = require('luasnip')
   local types = require('luasnip.util.types')
+  local extras = require('luasnip.extras')
   local fmt = require('luasnip.extras.fmt').fmt
 
   ls.config.set_config({
@@ -28,6 +29,7 @@ return function()
       d = ls.dynamic_node,
       i = ls.insert_node,
       sn = ls.snippet_node,
+      l = extras.lambda,
       snippet = ls.snippet,
     },
   })
