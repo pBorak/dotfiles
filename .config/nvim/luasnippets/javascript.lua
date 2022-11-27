@@ -5,7 +5,7 @@ return {
     {
       trig = 'us',
       name = 'React useState',
-      docstring = { 'const [value, setValue] = useState("defaultValue")' },
+      docstring = { 'const [value, setValue] = React.useState("defaultValue")' },
     },
     fmt('const [{}, set{setter}] = useState({})', {
       i(1, 'value'),
