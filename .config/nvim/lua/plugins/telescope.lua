@@ -5,7 +5,6 @@ function M.config()
   local actions = require('telescope.actions')
   local action_state = require('telescope.actions.state')
   local themes = require('telescope.themes')
-  local lga_actions = require('telescope-live-grep-args.actions')
 
   ---@param prompt_bufnr number
   local open_in_diff_view = function(prompt_bufnr)
@@ -38,6 +37,7 @@ function M.config()
           ['<c-f>'] = actions.preview_scrolling_down,
           ['<c-l>'] = actions.smart_send_to_qflist + actions.open_qflist,
           ['<CR>'] = stopinsert(actions.select_default),
+          ['<c-space>'] = require('telescope.actions').to_fuzzy_refine,
         },
       },
       file_ignore_patterns = { '%.jpg', '%.jpeg', '%.png', '%.otf', '%.ttf' },
@@ -53,13 +53,13 @@ function M.config()
         override_generic_sorter = true, -- override the generic sorter
         override_file_sorter = true, -- override the file sorter
       },
-      live_grep_args = {
-        mappings = {
-          i = {
-            ['<c-h>'] = lga_actions.quote_prompt(),
-          },
-        },
-      },
+      -- live_grep_args = {
+      --   mappings = {
+      --     i = {
+      --       ['<c-h>'] = lga_actions.quote_prompt(),
+      --     },
+      --   },
+      -- },
     },
     pickers = {
       buffers = themes.get_dropdown({
@@ -152,8 +152,6 @@ function M.config()
     })
   end
 
-  local function live_grep_args() telescope.extensions.live_grep_args.live_grep_args() end
-
   gh.nnoremap('<c-p>', project_files)
   gh.nnoremap('<leader>fd', dotfiles)
   gh.nnoremap('<leader>fg', builtins.git_status)
@@ -161,7 +159,7 @@ function M.config()
   gh.nnoremap('<leader>fb', builtins.git_branches)
   gh.nnoremap('<leader>fo', builtins.buffers)
   gh.nnoremap('<leader>fr', builtins.resume)
-  gh.nnoremap('<leader>fs', live_grep_args)
+  gh.nnoremap('<leader>fs', builtins.live_grep)
   gh.nnoremap('<leader>ff', grep_string)
   gh.nnoremap('<leader>f.', find_in_current_directory)
 end

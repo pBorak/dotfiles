@@ -76,11 +76,6 @@ packer.startup({
           after = 'telescope.nvim',
           config = function() require('telescope').load_extension('fzf') end,
         },
-        {
-          'nvim-telescope/telescope-live-grep-args.nvim',
-          after = 'telescope.nvim',
-          config = function() require('telescope').load_extension('live_grep_args') end,
-        },
       },
     })
     use({
@@ -240,13 +235,7 @@ packer.startup({
     use({
       'kevinhwang91/nvim-bqf',
       ft = 'qf',
-      config = function()
-        require('bqf').setup({
-          preview = {
-            auto_preview = false,
-          },
-        })
-      end,
+      config = function() require('bqf').setup({}) end,
     })
     use({
       'NvChad/nvim-colorizer.lua',
