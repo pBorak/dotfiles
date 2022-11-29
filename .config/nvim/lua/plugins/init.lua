@@ -209,6 +209,26 @@ packer.startup({
       config = conf('notify'),
     })
     use({
+      'j-hui/fidget.nvim',
+      config = function()
+        require('fidget').setup({
+          window = {
+            relative = 'editor',
+          },
+          text = {
+            spinner = 'moon',
+          },
+        })
+
+        gh.augroup('CloseFidget', {
+          {
+            event = 'VimLeavePre',
+            command = 'silent! FidgetClose',
+          },
+        })
+      end,
+    })
+    use({
       'mbbill/undotree',
       cmd = 'UndotreeToggle',
       keys = '<leader>u',
