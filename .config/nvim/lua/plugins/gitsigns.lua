@@ -28,7 +28,7 @@ return function()
       gh.nnoremap('<leader>gw', gs.stage_buffer)
       gh.nnoremap('<leader>gr', gs.reset_buffer)
       gh.nnoremap('<leader>hu', gs.undo_stage_hunk)
-      gh.nnoremap('<leader>hp', gs.preview_hunk_inline)
+      gh.nnoremap('<leader>hp', gs.preview_hunk)
       gh.nnoremap('<leader>hl', function() gs.setqflist('all') end)
     end,
   })
