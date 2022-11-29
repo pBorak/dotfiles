@@ -204,15 +204,15 @@ packer.startup({
       'folke/tokyonight.nvim',
       config = conf('theme'),
     })
-    use({
-      'folke/noice.nvim',
-      event = 'VimEnter',
-      config = conf('noice'),
-      requires = {
-        'MunifTanjim/nui.nvim',
-        'rcarriga/nvim-notify',
-      },
-    })
+    -- use({
+    --   'folke/noice.nvim',
+    --   event = 'VimEnter',
+    --   config = conf('noice'),
+    --   requires = {
+    --     'MunifTanjim/nui.nvim',
+    --     'rcarriga/nvim-notify',
+    --   },
+    -- })
     use({
       'rcarriga/nvim-notify',
       config = conf('notify'),
