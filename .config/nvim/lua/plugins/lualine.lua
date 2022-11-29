@@ -47,17 +47,7 @@ return function()
           color = { gui = 'italic,bold' },
         },
       },
-      lualine_x = {
-        -- {
-        --   require('noice').api.statusline.message.get_hl,
-        --   cond = require('noice').api.statusline.message.has,
-        -- },
-        -- {
-        --   require('noice').api.statusline.mode.get,
-        --   cond = require('noice').api.statusline.mode.has,
-        --   color = { fg = '#ff9e64' },
-        -- },
-      },
+      lualine_x = {},
       lualine_y = {
         {
           'diagnostics',
