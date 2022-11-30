@@ -46,6 +46,7 @@ return function()
     if ls.jumpable(-1) then ls.jump(-1) end
   end)
 
+  ls.filetype_extend("javascriptreact", {"javascript"})
   require('luasnip.loaders.from_lua').lazy_load()
   require('luasnip.loaders.from_vscode').lazy_load({ paths = './snippets' })
 end
