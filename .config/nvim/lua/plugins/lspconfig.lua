@@ -30,7 +30,6 @@ local servers = {
   eslint = function()
     return {
       root_dir = require('lspconfig').util.root_pattern(
-        '.eslintignore',
         '.eslintrc',
         '.eslintrc.js',
         '.eslintrc.json'
