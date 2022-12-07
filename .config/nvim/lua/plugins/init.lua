@@ -55,9 +55,12 @@ packer.startup({
       config = conf('toggleterm'),
     })
     use({
-      'vim-test/vim-test',
-      keys = { '<leader>tf', '<leader>ta', '<leader>tt' },
-      config = conf('vim-test'),
+      'nvim-neotest/neotest',
+      keys = { '<leader>t' },
+      config = conf('neotest'),
+      requires = {
+        { 'olimorris/neotest-rspec' },
+      },
     })
     ----------------------------------------------------------------------------
     -- Navigation
@@ -314,14 +317,14 @@ packer.startup({
     ----------------------------------------------------------------------------
     -- Utils
     ----------------------------------------------------------------------------
-    use({
-      'klen/nvim-config-local',
-      config = function()
-        require('config-local').setup({
-          config_files = { '.localrc.lua', '.vimrc', '.vimrc.lua' },
-        })
-      end,
-    })
+    -- use({
+    --   'klen/nvim-config-local',
+    --   config = function()
+    --     require('config-local').setup({
+    --       config_files = { '.localrc.lua', '.vimrc', '.vimrc.lua' },
+    --     })
+    --   end,
+    -- })
     use({
       'dstein64/vim-startuptime',
       cmd = 'StartupTime',
