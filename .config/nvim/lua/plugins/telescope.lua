@@ -53,13 +53,6 @@ function M.config()
         override_generic_sorter = true, -- override the generic sorter
         override_file_sorter = true, -- override the file sorter
       },
-      -- live_grep_args = {
-      --   mappings = {
-      --     i = {
-      --       ['<c-h>'] = lga_actions.quote_prompt(),
-      --     },
-      --   },
-      -- },
     },
     pickers = {
       buffers = themes.get_dropdown({
@@ -77,13 +70,13 @@ function M.config()
       git_files = {
         file_ignore_patterns = { 'vendor/' },
       },
-      live_grep = {
+      live_grep = themes.get_ivy({
         file_ignore_patterns = { '.git/' },
         on_input_filter_cb = function(prompt)
           -- AND operator for live_grep like how fzf handles spaces with wildcards in rg
           return { prompt = prompt:gsub('%s', '.*') }
         end,
-      },
+      }),
       current_buffer_fuzzy_find = themes.get_dropdown({
         previewer = false,
         shorten_path = false,
@@ -95,6 +88,7 @@ function M.config()
         hidden = true,
       },
       git_branches = themes.get_dropdown(),
+      grep_string = themes.get_ivy(),
       git_bcommits = {
         layout_config = {
           horizontal = {

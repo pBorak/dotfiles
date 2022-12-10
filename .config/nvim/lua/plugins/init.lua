@@ -204,7 +204,8 @@ packer.startup({
     -- UI
     ----------------------------------------------------------------------------
     use({
-      'folke/tokyonight.nvim',
+      'catppuccin/nvim',
+      as = 'catppuccin',
       config = conf('theme'),
     })
     use({
@@ -317,14 +318,6 @@ packer.startup({
     ----------------------------------------------------------------------------
     -- Utils
     ----------------------------------------------------------------------------
-    -- use({
-    --   'klen/nvim-config-local',
-    --   config = function()
-    --     require('config-local').setup({
-    --       config_files = { '.localrc.lua', '.vimrc', '.vimrc.lua' },
-    --     })
-    --   end,
-    -- })
     use({
       'dstein64/vim-startuptime',
       cmd = 'StartupTime',

@@ -16,7 +16,7 @@ return function()
 
   local config = {
     options = {
-      theme = 'auto',
+      theme = 'catppuccin',
       section_separators = { left = '', right = '' },
       component_separators = { left = '', right = '' },
       icons_enabled = true,
@@ -24,16 +24,7 @@ return function()
     },
     sections = {
       lualine_a = { 'mode' },
-      lualine_b = {
-        {
-          'b:gitsigns_head',
-          cond = window_wide_enough,
-          icon = icons.misc.git_branch,
-          color = {
-            gui = 'bold',
-          },
-        },
-      },
+      lualine_b = {},
       lualine_c = {
         {
           'filetype',
@@ -47,8 +38,15 @@ return function()
           color = { gui = 'italic,bold' },
         },
       },
-      lualine_x = {},
-      lualine_y = {
+      lualine_x = {
+        {
+          'b:gitsigns_head',
+          cond = window_wide_enough,
+          icon = icons.misc.git_branch,
+          color = {
+            gui = 'bold',
+          },
+        },
         {
           'diagnostics',
           cond = window_wide_enough,
@@ -58,9 +56,6 @@ return function()
             warn = icons.lsp.warn .. ' ',
             info = icons.lsp.info .. ' ',
             hint = icons.lsp.hint .. ' ',
-          },
-          color = {
-            bg = '#1e2030',
           },
         },
         {
@@ -72,11 +67,9 @@ return function()
             modified = icons.git.mod .. ' ',
             removed = icons.git.remove .. ' ',
           },
-          color = {
-            bg = '#1e2030',
-          },
         },
       },
+      lualine_y = {},
       lualine_z = {
         {
           '%l/%L',
