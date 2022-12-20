@@ -204,8 +204,7 @@ packer.startup({
     -- UI
     ----------------------------------------------------------------------------
     use({
-      'catppuccin/nvim',
-      as = 'catppuccin',
+      'folke/tokyonight.nvim',
       config = conf('theme'),
     })
     use({

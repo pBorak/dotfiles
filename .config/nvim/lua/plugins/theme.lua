@@ -1,61 +1,47 @@
 return function()
-  require('catppuccin').setup({
-    flavour = 'mocha', -- latte, frappe, macchiato, mocha
-    color_overrides = {
-      mocha = {
-        base = '#000000',
-      },
+  local tokyonight = require('tokyonight')
+  tokyonight.setup({
+    style = 'moon',
+    sidebars = {
+      'qf',
+      'packer',
+      'help',
+      'startuptime',
+      'fugitive',
+      'undotree',
     },
-    highlight_overrides = {
-      mocha = function(C)
-        return {
-          NeoTreeNormal = { bg = C.none },
-          CmpBorder = { fg = C.surface2 },
-          Pmenu = { bg = C.none },
-          NormalFloat = { bg = C.none },
-          TelescopeBorder = { link = 'FloatBorder' },
-        }
-      end,
-    },
-    integrations = {
-      cmp = true,
-      gitsigns = true,
-      leap = true,
-      markdown = true,
-      notify = true,
-      nvimtree = false,
-      telescope = true,
-      treesitter = true,
-      treesitter_context = true,
-      indent_blankline = {
-        enabled = true,
-        colored_indent_levels = false,
-      },
-      native_lsp = {
-        enabled = true,
-        virtual_text = {
-          errors = { 'italic' },
-          hints = { 'italic' },
-          warnings = { 'italic' },
-          information = { 'italic' },
-        },
-        underlines = {
-          errors = { 'undercurl' },
-          hints = { 'undercurl' },
-          warnings = { 'undercurl' },
-          information = { 'undercurl' },
-        },
-      },
-      neotree = {
-        enabled = true,
-        show_root = true, -- makes the root folder not transparent
-        transparent_panel = false, -- make the panel transparent
-      },
-      harpoon = true,
-      mason = true,
-      neotest = true,
-    },
+    on_highlights = function(hl, c)
+      -- borderless telescope
+      local prompt = '#2d3149'
+      hl.TelescopeNormal = {
+        bg = c.bg_dark,
+        fg = c.fg_dark,
+      }
+      hl.TelescopeBorder = {
+        bg = c.bg_dark,
+        fg = c.bg_dark,
+      }
+      hl.TelescopePromptNormal = {
+        bg = prompt,
+      }
+      hl.TelescopePromptBorder = {
+        bg = prompt,
+        fg = prompt,
+      }
+      hl.TelescopePromptTitle = {
+        bg = c.fg_gutter,
+        fg = c.orange,
+      }
+      hl.TelescopePreviewTitle = {
+        bg = c.bg_dark,
+        fg = c.bg_dark,
+      }
+      hl.TelescopeResultsTitle = {
+        bg = c.bg_dark,
+        fg = c.bg_dark,
+      }
+    end,
   })
-
-  vim.cmd.colorscheme('catppuccin')
+  vim.api.nvim_set_hl(0, '@label.ruby', { bold = true, fg = '#4fd6be' })
+  tokyonight.load()
 end
