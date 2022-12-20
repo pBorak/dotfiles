@@ -32,9 +32,7 @@ gh.augroup('AddNeotestMappings', {
   {
     event = 'FileType',
     pattern = { 'neotest-attach' },
-    command = function()
-      tnoremap('<esc>', [[<C-\><C-n>]], { silent = false, buffer = 0 })
-    end,
+    command = function() tnoremap('<esc>', [[<C-\><C-n>]], { silent = false, buffer = 0 }) end,
   },
 })
 --------------------------------------------------------------------------------
@@ -122,8 +120,6 @@ nnoremap('k', [[(v:count > 1 ? 'm`' . v:count : '') . 'gk']], { expr = true, sil
 -- Zero should go to the first non-blank character not to the first column (which could be blank)
 -- but if already at the first character then jump to the beginning
 nnoremap('0', "getline('.')[0 : col('.') - 2] =~# '^\\s\\+$' ? '0' : '^'", { expr = true })
--- when going to the end of the line in visual mode ignore whitespace characters
-vnoremap('$', 'g_')
 --------------------------------------------------------------------------------
 -- Toggle list
 --------------------------------------------------------------------------------

@@ -18,6 +18,8 @@ return function()
       'diff',
       'regex',
       'query',
+      'vim',
+      'help',
     },
     highlight = {
       enable = true,
@@ -49,19 +51,10 @@ return function()
         enable = true,
         set_jumps = true, -- whether to set jumps in the jumplist
         goto_next_start = {
-          [']m'] = '@function.outer',
           [']r'] = '@rspec.it',
         },
         goto_previous_start = {
-          ['[m'] = '@function.outer',
           ['[r'] = '@rspec.it',
-        },
-      },
-      lsp_interop = {
-        enable = true,
-        border = 'rounded',
-        peek_definition_code = {
-          ['<leader>df'] = '@function.outer',
         },
       },
     },
