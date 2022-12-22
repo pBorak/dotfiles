@@ -27,14 +27,6 @@ gh.augroup('AddTerminalMappings', {
     end,
   },
 })
-
-gh.augroup('AddNeotestMappings', {
-  {
-    event = 'FileType',
-    pattern = { 'neotest-attach' },
-    command = function() tnoremap('<esc>', [[<C-\><C-n>]], { silent = false, buffer = 0 }) end,
-  },
-})
 --------------------------------------------------------------------------------
 -- MACROS
 --------------------------------------------------------------------------------

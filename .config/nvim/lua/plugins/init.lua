@@ -55,12 +55,9 @@ packer.startup({
       config = conf('toggleterm'),
     })
     use({
-      'nvim-neotest/neotest',
-      keys = { '<leader>t' },
-      config = conf('neotest'),
-      requires = {
-        { 'olimorris/neotest-rspec' },
-      },
+      'vim-test/vim-test',
+      keys = { '<leader>tf', '<leader>ta', '<leader>tt' },
+      config = conf('vim-test'),
     })
     ----------------------------------------------------------------------------
     -- Navigation

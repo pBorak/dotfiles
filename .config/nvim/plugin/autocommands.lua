@@ -12,9 +12,6 @@ local smart_close_filetypes = {
   'qf',
   'startuptime',
   'lspinfo',
-  'neotest-summary',
-  'neotest-output',
-  'neotest-attach',
 }
 
 local function smart_close()
