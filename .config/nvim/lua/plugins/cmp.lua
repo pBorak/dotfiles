@@ -71,7 +71,6 @@ return function()
           path = '[Path]',
           luasnip = '[SN]',
           buffer = '[B]',
-          spell = '[SP]',
           cmdline = '[CMD]',
           rg = '[Rg]',
         })[name]
@@ -89,7 +88,6 @@ return function()
         keyword_length = 4,
         max_item_count = 5,
       },
-      { name = 'spell' },
     }),
   })
 
