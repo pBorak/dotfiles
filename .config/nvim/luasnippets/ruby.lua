@@ -85,28 +85,6 @@ local function assign_instance_variables(args, _, _)
   return sn(nil, nodes)
 end
 
-local function pass_ruby_args(args, _, _, opts)
-  local nodes = {}
-  local args_table = vim.split(args[1][1], ',', true)
-
-  for _, arg in ipairs(args_table) do
-    arg = arg:gsub(' ', '')
-
-    if arg and arg:match('^%a') then
-      local stripped_arg = arg:match(ruby_args_pattern)
-      local node = opts == 'keyword_args' and t({ stripped_arg .. ':' })
-        or t({ stripped_arg .. ': ' .. stripped_arg })
-
-      vim.list_extend(nodes, { node, t({ ', ' }) })
-    end
-  end
-
-  -- Hack to remove last floating semicolon
-  table.remove(nodes)
-
-  return sn(nil, nodes)
-end
-
 return {
   snippet(
     {
@@ -159,8 +137,8 @@ return {
     },
     fmt(
       [[
-            def self.call({})
-              new({}).call
+            def self.call(...)
+              new(...).call
             end
 
             def initialize({})
@@ -173,9 +151,7 @@ return {
         ]],
       {
         i(1),
-        d(2, pass_ruby_args, { 1 }),
-        d(3, pass_ruby_args, { 1 }, { user_args = { 'keyword_args' } }),
-        d(4, assign_instance_variables, { 1 }),
+        d(2, assign_instance_variables, { 1 }),
         i(0),
       }
     )
