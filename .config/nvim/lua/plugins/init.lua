@@ -245,7 +245,13 @@ packer.startup({
     use({
       'kevinhwang91/nvim-bqf',
       ft = 'qf',
-      config = function() require('bqf').setup({}) end,
+      config = function()
+        require('bqf').setup({
+          preview = {
+            auto_preview = false,
+          },
+        })
+      end,
     })
     use({
       'NvChad/nvim-colorizer.lua',
