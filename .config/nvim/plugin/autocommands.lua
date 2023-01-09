@@ -20,12 +20,6 @@ end
 
 gh.augroup('SmartClose', {
   {
-    -- Auto open grep quickfix window
-    event = 'QuickFixCmdPost',
-    pattern = { '*grep*' },
-    command = 'cwindow',
-  },
-  {
     -- Close certain filetypes by pressing q.
     event = 'FileType',
     pattern = '*',
@@ -37,25 +31,6 @@ gh.augroup('SmartClose', {
         or contains(smart_close_filetypes, vim.bo.filetype)
 
       if is_eligible then gh.nnoremap('q', smart_close, { buffer = 0, nowait = true }) end
-    end,
-  },
-  {
-    -- Close quick fix window if the file containing it was closed
-    event = 'BufEnter',
-    pattern = '*',
-    command = function()
-      if fn.winnr('$') == 1 and vim.bo.buftype == 'quickfix' then
-        api.nvim_buf_delete(0, { force = true })
-      end
-    end,
-  },
-  {
-    -- automatically close corresponding loclist when quitting a window
-    event = 'QuitPre',
-    pattern = '*',
-    nested = true,
-    command = function()
-      if vim.bo.filetype ~= 'qf' then vim.cmd.lclose({ mods = { silent = true } }) end
     end,
   },
 })
@@ -128,22 +103,6 @@ gh.augroup('CustomColorColumn', {
     -- Update the cursor column to match current window size
     event = { 'BufEnter', 'WinNew', 'WinClosed', 'FileType', 'VimResized' },
     command = check_color_column,
-  },
-})
-
-gh.augroup('QuickfixBehaviours', {
-  -- Automatically jump into the quickfix window on open
-  {
-    event = { 'QuickFixCmdPost' },
-    pattern = { '[^l]*' },
-    nested = true,
-    command = 'cwindow',
-  },
-  {
-    event = { 'QuickFixCmdPost' },
-    pattern = { 'l*' },
-    nested = true,
-    command = 'lwindow',
   },
 })
 
