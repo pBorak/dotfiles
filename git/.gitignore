@@ -21,3 +21,4 @@ solargraph.rb
 config/application.local.yml
 tags
 .localrc.lua
+neotest_docker_script.sh
