@@ -22,6 +22,10 @@ return function()
       unknown = '',
       skipped = '',
     },
+    quickfix = {
+      enabled = true,
+      open = false,
+    },
     floating = {
       border = 'single',
       max_height = 0.8,
