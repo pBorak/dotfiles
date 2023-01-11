@@ -37,16 +37,16 @@ return function()
   vim.keymap.set('i', '<c-l>', function()
     if ls.choice_active() then ls.change_choice(1) end
   end)
+  vim.keymap.set(
+    'i',
+    '<tab>',
+    function() return require('luasnip').jumpable(1) and '<Plug>luasnip-jump-next' or '<tab>' end,
+    { expr = true, silent = true }
+  )
+  vim.keymap.set('s', '<tab>', function() require('luasnip').jump(1) end)
+  vim.keymap.set({ 'i', 's' }, '<s-tab>', function() require('luasnip').jump(-1) end)
 
-  vim.keymap.set({ 's', 'i' }, '<c-j>', function()
-    if ls.expand_or_jumpable() then ls.expand_or_jump() end
-  end)
-
-  vim.keymap.set({ 's', 'i' }, '<c-k>', function()
-    if ls.jumpable(-1) then ls.jump(-1) end
-  end)
-
-  ls.filetype_extend("javascriptreact", {"javascript"})
+  ls.filetype_extend('javascriptreact', { 'javascript' })
   require('luasnip.loaders.from_lua').lazy_load()
   require('luasnip.loaders.from_vscode').lazy_load({ paths = './snippets' })
 end
