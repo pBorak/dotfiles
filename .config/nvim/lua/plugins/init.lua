@@ -42,14 +42,6 @@ packer.startup({
       config = function() require('Comment').setup() end,
     })
     use({
-      'AndrewRadev/splitjoin.vim',
-      keys = { 'gS', 'gJ' },
-      config = function()
-        vim.g.splitjoin_ruby_curly_braces = 0
-        vim.g.splitjoin_ruby_hanging_args = 0
-      end,
-    })
-    use({
       'akinsho/toggleterm.nvim',
       tag = '2.*',
       config = conf('toggleterm'),
@@ -318,6 +310,12 @@ packer.startup({
     use({
       'nvim-treesitter/playground',
       cmd = { 'TSPlaygroundToggle', 'TSHighlightCapturesUnderCursor' },
+    })
+    use({
+      'ckolkey/ts-node-action',
+      config = function() -- Optional
+        gh.nnoremap('K', require('ts-node-action').node_action)
+      end,
     })
     ----------------------------------------------------------------------------
     -- Utils
