@@ -52,10 +52,10 @@ return function()
           cond = window_wide_enough,
           sources = { 'nvim_diagnostic' },
           symbols = {
-            error = icons.lsp.error .. ' ',
-            warn = icons.lsp.warn .. ' ',
-            info = icons.lsp.info .. ' ',
-            hint = icons.lsp.hint .. ' ',
+            error = icons.lsp.error,
+            warn = icons.lsp.warn,
+            info = icons.lsp.info,
+            hint = icons.lsp.hint,
           },
         },
         {
@@ -63,9 +63,9 @@ return function()
           cond = window_wide_enough,
           source = diff_source,
           symbols = {
-            added = icons.git.add .. ' ',
-            modified = icons.git.mod .. ' ',
-            removed = icons.git.remove .. ' ',
+            added = icons.git.add,
+            modified = icons.git.mod,
+            removed = icons.git.remove,
           },
         },
       },
