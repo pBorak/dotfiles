@@ -11,29 +11,23 @@ local tnoremap = gh.tnoremap
 --------------------------------------------------------------------------------
 -- Terminal
 --------------------------------------------------------------------------------
-gh.augroup('AddTerminalMappings', {
-  {
-    event = 'TermOpen',
-    pattern = { 'term://*' },
-    command = function()
-      if vim.bo.filetype == '' or vim.bo.filetype == 'toggleterm' then
-        local opts = { silent = false, buffer = 0 }
-        tnoremap('<esc>', [[<C-\><C-n>]], opts)
-        tnoremap('<C-h>', '<Cmd>wincmd h<CR>', opts)
-        tnoremap('<C-j>', '<Cmd>wincmd j<CR>', opts)
-        tnoremap('<C-k>', '<Cmd>wincmd k<CR>', opts)
-        tnoremap('<C-l>', '<Cmd>wincmd l<CR>', opts)
-      end
-    end,
-  },
+vim.api.nvim_create_autocmd('TermOpen', {
+  pattern = { 'term://*' },
+  callback = function()
+    if vim.bo.filetype == '' or vim.bo.filetype == 'toggleterm' then
+      local opts = { silent = false, buffer = 0 }
+      tnoremap('<esc>', [[<C-\><C-n>]], opts)
+      tnoremap('<C-h>', '<Cmd>wincmd h<CR>', opts)
+      tnoremap('<C-j>', '<Cmd>wincmd j<CR>', opts)
+      tnoremap('<C-k>', '<Cmd>wincmd k<CR>', opts)
+      tnoremap('<C-l>', '<Cmd>wincmd l<CR>', opts)
+    end
+  end,
 })
 
-gh.augroup('AddNeotestMappings', {
-  {
-    event = 'FileType',
-    pattern = { 'neotest-attach' },
-    command = function() tnoremap('<esc>', [[<C-\><C-n>]], { silent = false, buffer = 0 }) end,
-  },
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = { 'neotest-attach' },
+  callback = function() tnoremap('<esc>', [[<C-\><C-n>]], { silent = false, buffer = 0 }) end,
 })
 --------------------------------------------------------------------------------
 -- MACROS

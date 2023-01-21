@@ -82,15 +82,9 @@ local function disable_relative_number()
   end
 end
 
-gh.augroup('ToggleRelativeLineNumbers', {
-  {
-    event = { 'BufEnter', 'FileType', 'FocusGained', 'InsertLeave' },
-    pattern = { '*' },
-    command = function() enable_relative_number() end,
-  },
-  {
-    event = { 'FocusLost', 'BufLeave', 'InsertEnter', 'TermOpen' },
-    pattern = { '*' },
-    command = function() disable_relative_number() end,
-  },
+vim.api.nvim_create_autocmd({ 'BufEnter', 'FileType', 'FocusGained', 'InsertLeave' }, {
+  callback = function() enable_relative_number() end,
+})
+vim.api.nvim_create_autocmd({ 'FocusLost', 'BufLeave', 'InsertEnter', 'TermOpen' }, {
+  callback = function() disable_relative_number() end,
 })
