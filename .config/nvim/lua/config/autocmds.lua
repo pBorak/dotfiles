@@ -1,3 +1,5 @@
+local Util = require('util')
+
 local smart_close_filetypes = {
   'help',
   'git-status',
@@ -26,7 +28,9 @@ vim.api.nvim_create_autocmd('FileType', {
       or vim.wo.previewwindow
       or vim.tbl_contains(smart_close_filetypes, vim.bo.filetype)
 
-    if is_eligible then gh.nnoremap('q', smart_close, { buffer = 0, nowait = true }) end
+    if is_eligible then
+      vim.keymap.set('n', 'q', smart_close, { buffer = 0, nowait = true, silent = true })
+    end
   end,
 })
 
@@ -54,12 +58,14 @@ local function check_color_column()
     local buffer = vim.bo[vim.api.nvim_win_get_buf(win)]
     local window = vim.wo[win]
     local is_current = win == vim.api.nvim_get_current_win()
-    if gh.empty(vim.fn.win_gettype()) and not vim.tbl_contains(column_exclude, buffer.filetype) then
+    if
+      Util.empty(vim.fn.win_gettype()) and not vim.tbl_contains(column_exclude, buffer.filetype)
+    then
       local too_small = vim.api.nvim_win_get_width(win) <= buffer.textwidth + 1
       local is_excluded = vim.tbl_contains(column_block_list, buffer.filetype)
       if is_excluded or too_small then
         window.colorcolumn = ''
-      elseif gh.empty(window.colorcolumn) and is_current then
+      elseif Util.empty(window.colorcolumn) and is_current then
         window.colorcolumn = '+1'
       end
     end
@@ -110,5 +116,17 @@ vim.api.nvim_create_autocmd('BufReadPre', {
         )
       end,
     })
+  end,
+})
+
+vim.api.nvim_create_autocmd('BufWritePre', {
+  group = vim.api.nvim_create_augroup('auto_create_dir', { clear = true }),
+  callback = function(event)
+    local file = vim.loop.fs_realpath(event.match) or event.match
+
+    vim.fn.mkdir(vim.fn.fnamemodify(file, ':p:h'), 'p')
+    local backup = vim.fn.fnamemodify(file, ':p:~:h')
+    backup = backup:gsub('[/\\]', '%%')
+    vim.go.backupext = backup
   end,
 })

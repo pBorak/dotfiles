@@ -1,3 +1,4 @@
+local Util = require('util')
 --------------------------------------------------------------------------------
 -- Terminal
 --------------------------------------------------------------------------------
@@ -120,26 +121,5 @@ vim.keymap.set(
   "getline('.')[0 : col('.') - 2] =~# '^\\s\\+$' ? '0' : '^'",
   { expr = true }
 )
---------------------------------------------------------------------------------
--- Toggle list
---------------------------------------------------------------------------------
---- Utility function to toggle the location or the quickfix list
----@param list_type '"quickfix"' | '"location"'
----@return string?
-function gh.toggle_list(list_type)
-  local is_location_target = list_type == 'location'
-  local cmd = is_location_target and { 'lclose', 'lopen' } or { 'cclose', 'copen' }
-  local is_open = gh.is_vim_list_open()
-  if is_open then return vim.cmd[cmd[1]]() end
-  local list = is_location_target and vim.fn.getloclist(0) or vim.fn.getqflist()
-  if vim.tbl_isempty(list) then
-    local msg_prefix = (is_location_target and 'Location' or 'QuickFix')
-    return vim.notify(msg_prefix .. ' List is Empty.', vim.log.levels.WARN)
-  end
 
-  local winnr = vim.fn.winnr()
-  vim.cmd[cmd[2]]()
-  if vim.fn.winnr() ~= winnr then vim.cmd.wincmd('p') end
-end
-
-vim.keymap.set('n', '<leader>cc', function() gh.toggle_list('quickfix') end)
+vim.keymap.set('n', '<leader>cc', function() Util.toggle_list('quickfix') end)

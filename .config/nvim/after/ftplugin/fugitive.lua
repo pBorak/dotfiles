@@ -1,1 +1,1 @@
-gh.nmap('<tab>', '=', { buffer = 0 })
+vim.keymap.set('n', '<tab>', '=', { buffer = 0, remap = true, silent = true })
