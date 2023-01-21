@@ -1,13 +1,3 @@
-local fn = vim.fn
-local noisy = { silent = false }
-
-local nnoremap = gh.nnoremap
-local xnoremap = gh.xnoremap
-local vnoremap = gh.vnoremap
-local onoremap = gh.onoremap
-local cnoremap = gh.cnoremap
-local tnoremap = gh.tnoremap
-
 --------------------------------------------------------------------------------
 -- Terminal
 --------------------------------------------------------------------------------
@@ -16,18 +6,18 @@ vim.api.nvim_create_autocmd('TermOpen', {
   callback = function()
     if vim.bo.filetype == '' or vim.bo.filetype == 'toggleterm' then
       local opts = { silent = false, buffer = 0 }
-      tnoremap('<esc>', [[<C-\><C-n>]], opts)
-      tnoremap('<C-h>', '<Cmd>wincmd h<CR>', opts)
-      tnoremap('<C-j>', '<Cmd>wincmd j<CR>', opts)
-      tnoremap('<C-k>', '<Cmd>wincmd k<CR>', opts)
-      tnoremap('<C-l>', '<Cmd>wincmd l<CR>', opts)
+      vim.keymap.set('t', '<esc>', [[<C-\><C-n>]], opts)
+      vim.keymap.set('t', '<C-h>', '<Cmd>wincmd h<CR>', opts)
+      vim.keymap.set('t', '<C-j>', '<Cmd>wincmd j<CR>', opts)
+      vim.keymap.set('t', '<C-k>', '<Cmd>wincmd k<CR>', opts)
+      vim.keymap.set('t', '<C-l>', '<Cmd>wincmd l<CR>', opts)
     end
   end,
 })
 
 vim.api.nvim_create_autocmd('FileType', {
   pattern = { 'neotest-attach' },
-  callback = function() tnoremap('<esc>', [[<C-\><C-n>]], { silent = false, buffer = 0 }) end,
+  callback = function() vim.keymap.set('t', '<esc>', [[<C-\><C-n>]], { silent = false, buffer = 0 }) end,
 })
 --------------------------------------------------------------------------------
 -- MACROS
@@ -39,81 +29,97 @@ vim.cmd([[
     execute ":'<,'>normal @".nr2char(getchar())
   endfunction
 ]])
-
-xnoremap('@', ':<C-u>call ExecuteMacroOverVisualRange()<CR>', noisy)
--- Map Q to replay q register
-nnoremap('Q', '@q')
+vim.keymap.set('x', '@', ':<C-u>call ExecuteMacroOverVisualRange()<CR>', { silent = false })
 --------------------------------------------------------------------------------
 -- Buffers
 --------------------------------------------------------------------------------
 -- Switch between the last two files
-nnoremap('<leader><leader>', [[<c-^>]])
+vim.keymap.set('n', '<leader><leader>', [[<c-^>]])
 --------------------------------------------------------------------------------
 -- Miscellaneous
 --------------------------------------------------------------------------------
 -- Capitalize word under the cursor
-nnoremap('<leader>U', 'gUiw`]')
+vim.keymap.set('n', '<leader>U', 'gUiw`]')
 
-nnoremap(';', ':', noisy)
-xnoremap(';', ':', noisy)
+vim.keymap.set({ 'n', 'x' }, ';', ':')
 -- Esc should clear hlsearch if there is one
-nnoremap('<ESC>', [[ v:hlsearch ? "\<ESC>:nohl\<CR>" : "\<ESC>" ]], { expr = true })
+vim.keymap.set('n', '<ESC>', [[ v:hlsearch ? "\<ESC>:nohl\<CR>" : "\<ESC>" ]], { expr = true })
 --------------------------------------------------------------------------------
 -- Moving lines/visual block
 --------------------------------------------------------------------------------
-xnoremap(']e', ":move'>+<CR>='[gv")
-xnoremap('[e', ":move-2<CR>='[gv")
-nnoremap(']e', '<cmd>move+<CR>==')
-nnoremap('[e', '<cmd>move-2<CR>==')
+vim.keymap.set('x', ']e', ":move'>+<CR>='[gv")
+vim.keymap.set('x', '[e', ":move-2<CR>='[gv")
+vim.keymap.set('n', ']e', '<cmd>move+<CR>==')
+vim.keymap.set('n', '[e', '<cmd>move-2<CR>==')
 --------------------------------------------------------------------------------
 -- Add Empty space above and below
 --------------------------------------------------------------------------------
-nnoremap('[<space>', [[<cmd>put! =repeat(nr2char(10), v:count1)<cr>'[]])
-nnoremap(']<space>', [[<cmd>put =repeat(nr2char(10), v:count1)<cr>]])
+vim.keymap.set('n', '[<space>', [[<cmd>put! =repeat(nr2char(10), v:count1)<cr>'[]])
+vim.keymap.set('n', ']<space>', [[<cmd>put =repeat(nr2char(10), v:count1)<cr>]])
 --------------------------------------------------------------------------------
 -- Quickfix Navigation
 --------------------------------------------------------------------------------
-nnoremap(']q', '<cmd>cnext<CR>zz')
-nnoremap('[q', '<cmd>cprev<CR>zz')
-nnoremap(']l', '<cmd>lnext<cr>zz')
-nnoremap('[l', '<cmd>lprev<cr>zz')
+vim.keymap.set('n', ']q', '<cmd>cnext<CR>zz')
+vim.keymap.set('n', '[q', '<cmd>cprev<CR>zz')
+vim.keymap.set('n', ']l', '<cmd>lnext<cr>zz')
+vim.keymap.set('n', '[l', '<cmd>lprev<cr>zz')
 --------------------------------------------------------------------------------
 -- Tab navigation
 --------------------------------------------------------------------------------
-nnoremap(']t', '<cmd>tprevious<CR>')
-nnoremap('[t', '<cmd>tnext<CR>')
+vim.keymap.set('n', ']t', '<cmd>tprevious<CR>')
+vim.keymap.set('n', '[t', '<cmd>tnext<CR>')
 --------------------------------------------------------------------------------
 -- Windows
 --------------------------------------------------------------------------------
 -- make . work with visually selected lines
-vnoremap('.', ':norm.<CR>')
+vim.keymap.set('v', '.', ':norm.<CR>')
 --------------------------------------------------------------------------------
 -- Quick find/replace
 --------------------------------------------------------------------------------
 -- Replace all occurrences under the cursor in buffer
-nnoremap('\\s', [[<cmd>let @s='\<'.expand('<cword>').'\>'<CR>:%s/<C-r>s//<Left>]], noisy)
-xnoremap('\\s', [["sy:%s/<C-r>s//<Left>]], noisy)
+vim.keymap.set(
+  'n',
+  '\\s',
+  [[<cmd>let @s='\<'.expand('<cword>').'\>'<CR>:%s/<C-r>s//<Left>]],
+  { silent = false }
+)
+vim.keymap.set('x', '\\s', [["sy:%s/<C-r>s//<Left>]], { silent = false })
 --------------------------------------------------------------------------------
 -- Commandline mappings
 --------------------------------------------------------------------------------
-cnoremap('<C-a>', '<Home>')
-cnoremap('<C-e>', '<End>')
-cnoremap('<C-b>', '<Left>')
-cnoremap('<C-f>', '<Right>')
+vim.keymap.set('c', '<C-a>', '<Home>')
+vim.keymap.set('c', '<C-e>', '<End>')
+vim.keymap.set('c', '<C-b>', '<Left>')
+vim.keymap.set('c', '<C-f>', '<Right>')
 -------------------------------------------------------------------------------
 -- ?ie | entire object
 -------------------------------------------------------------------------------
-xnoremap('ie', [[gg0oG$]])
-onoremap('ie', [[<cmd>execute "normal! m`"<Bar>keepjumps normal! ggVG<CR>]])
+vim.keymap.set('x', 'ie', [[gg0oG$]])
+vim.keymap.set('o', 'ie', [[<cmd>execute "normal! m`"<Bar>keepjumps normal! ggVG<CR>]])
 --------------------------------------------------------------------------------
 -- Core navigation
 --------------------------------------------------------------------------------
 -- Store relative line number jumps in the jumplist.
-nnoremap('j', [[(v:count > 1 ? 'm`' . v:count : '') . 'gj']], { expr = true, silent = true })
-nnoremap('k', [[(v:count > 1 ? 'm`' . v:count : '') . 'gk']], { expr = true, silent = true })
+vim.keymap.set(
+  'n',
+  'j',
+  [[(v:count > 1 ? 'm`' . v:count : '') . 'gj']],
+  { expr = true, silent = true }
+)
+vim.keymap.set(
+  'n',
+  'k',
+  [[(v:count > 1 ? 'm`' . v:count : '') . 'gk']],
+  { expr = true, silent = true }
+)
 -- Zero should go to the first non-blank character not to the first column (which could be blank)
 -- but if already at the first character then jump to the beginning
-nnoremap('0', "getline('.')[0 : col('.') - 2] =~# '^\\s\\+$' ? '0' : '^'", { expr = true })
+vim.keymap.set(
+  'n',
+  '0',
+  "getline('.')[0 : col('.') - 2] =~# '^\\s\\+$' ? '0' : '^'",
+  { expr = true }
+)
 --------------------------------------------------------------------------------
 -- Toggle list
 --------------------------------------------------------------------------------
@@ -125,15 +131,15 @@ function gh.toggle_list(list_type)
   local cmd = is_location_target and { 'lclose', 'lopen' } or { 'cclose', 'copen' }
   local is_open = gh.is_vim_list_open()
   if is_open then return vim.cmd[cmd[1]]() end
-  local list = is_location_target and fn.getloclist(0) or fn.getqflist()
+  local list = is_location_target and vim.fn.getloclist(0) or vim.fn.getqflist()
   if vim.tbl_isempty(list) then
     local msg_prefix = (is_location_target and 'Location' or 'QuickFix')
     return vim.notify(msg_prefix .. ' List is Empty.', vim.log.levels.WARN)
   end
 
-  local winnr = fn.winnr()
+  local winnr = vim.fn.winnr()
   vim.cmd[cmd[2]]()
-  if fn.winnr() ~= winnr then vim.cmd.wincmd('p') end
+  if vim.fn.winnr() ~= winnr then vim.cmd.wincmd('p') end
 end
 
-nnoremap('<leader>cc', function() gh.toggle_list('quickfix') end)
+vim.keymap.set('n', '<leader>cc', function() gh.toggle_list('quickfix') end)
