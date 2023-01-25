@@ -3,7 +3,7 @@ return {
   {
     'akinsho/toggleterm.nvim',
     version = '2.*',
-    event = 'VeryLazy',
+    event = 'BufReadPre',
     opts = {
       open_mapping = [[<c-\>]],
       shade_filetypes = { 'none' },
