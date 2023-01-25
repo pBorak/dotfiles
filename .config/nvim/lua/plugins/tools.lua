@@ -3,6 +3,7 @@ return {
   {
     'akinsho/toggleterm.nvim',
     version = '2.*',
+    event = 'VeryLazy',
     opts = {
       open_mapping = [[<c-\>]],
       shade_filetypes = { 'none' },
