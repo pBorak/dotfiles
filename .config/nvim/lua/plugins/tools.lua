@@ -3,9 +3,11 @@ return {
   {
     'akinsho/toggleterm.nvim',
     version = '2.*',
-    event = 'BufReadPre',
+    keys = {
+      { '<c-g>', '<cmd>ToggleTerm<CR>' },
+    },
     opts = {
-      open_mapping = [[<c-\>]],
+      open_mapping = '<c-g>',
       shade_filetypes = { 'none' },
       direction = 'horizontal',
       start_in_insert = true,
