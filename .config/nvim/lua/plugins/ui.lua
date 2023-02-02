@@ -106,7 +106,7 @@ return {
             },
           },
         },
-        extensions = { 'neo-tree', 'fugitive', 'toggleterm', 'quickfix' },
+        extensions = { 'fugitive', 'toggleterm', 'quickfix' },
       }
     end,
   },
@@ -130,7 +130,6 @@ return {
         'git',
         'TelescopePrompt',
         'undotree',
-        'neo-tree-popup',
         '', -- for all buffers without a file type
       },
       buftype_exclude = { 'terminal', 'nofile' },
