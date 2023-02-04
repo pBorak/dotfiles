@@ -138,8 +138,6 @@ return {
 
   { 'nvim-tree/nvim-web-devicons', lazy = true },
 
-  { 'MunifTanjim/nui.nvim', lazy = true },
-
   {
     'j-hui/fidget.nvim',
     event = 'VeryLazy',
