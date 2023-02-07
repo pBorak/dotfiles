@@ -22,6 +22,7 @@
 	ca = commit --amend
 	ce = commit --amend --no-edit
 	co = checkout
+  cp = cherry-pick
   continue = continue
 	d = diff
 	dc = diff --cached
