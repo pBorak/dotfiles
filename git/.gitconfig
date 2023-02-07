@@ -46,3 +46,5 @@
 	colorMoved = default
 [pull]
   ff = only
+[rerere]
+  enabled = true
