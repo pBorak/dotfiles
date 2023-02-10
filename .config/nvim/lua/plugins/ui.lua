@@ -106,7 +106,7 @@ return {
             },
           },
         },
-        extensions = { 'fugitive', 'toggleterm', 'quickfix' },
+        extensions = { 'neo-tree', 'fugitive', 'toggleterm', 'quickfix' },
       }
     end,
   },
@@ -130,6 +130,7 @@ return {
         'git',
         'TelescopePrompt',
         'undotree',
+        'neo-tree-popup',
         '', -- for all buffers without a file type
       },
       buftype_exclude = { 'terminal', 'nofile' },
@@ -137,6 +138,8 @@ return {
   },
 
   { 'nvim-tree/nvim-web-devicons', lazy = true },
+
+  { 'MunifTanjim/nui.nvim', lazy = true },
 
   {
     'j-hui/fidget.nvim',
