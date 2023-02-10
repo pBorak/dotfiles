@@ -168,6 +168,8 @@ return {
         })
       end
       vim.keymap.set({ 'n', 'v' }, 's', leap_all_windows)
+      vim.keymap.del({ 'x', 'o' }, 'x')
+      vim.keymap.del({ 'x', 'o' }, 'X')
     end,
   },
 
