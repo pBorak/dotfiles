@@ -11,7 +11,7 @@ return {
     opts = function()
       return {
         servers = {
-          sumneko_lua = {
+          lua_ls = {
             settings = {
               Lua = {
                 format = { enable = false },

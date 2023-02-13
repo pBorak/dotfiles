@@ -9,7 +9,7 @@ function M.format()
   local buf = vim.api.nvim_get_current_buf()
   local ft = vim.bo[buf].filetype
   local have_nls = #require('null-ls.sources').get_available(ft, 'NULL_LS_FORMATTING') > 0
-  local format_exclusions = { 'sumneko_lua', 'solargraph', 'dockerls', 'tsserver' }
+  local format_exclusions = { 'lua_ls', 'solargraph', 'dockerls', 'tsserver' }
 
   vim.lsp.buf.format({
     bufnr = buf,
