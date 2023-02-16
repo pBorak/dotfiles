@@ -29,6 +29,7 @@ return {
         'query',
         'vim',
         'help',
+        'gitcommit',
       },
       highlight = {
         enable = true,
