@@ -43,6 +43,7 @@ opt.expandtab = true
 opt.tabstop = 2
 opt.softtabstop = 2
 opt.cursorlineopt = 'screenline,number'
+opt.cursorline = true
 opt.pumheight = 15
 opt.completeopt = { 'menuone', 'noselect' }
 opt.clipboard = { 'unnamedplus' }

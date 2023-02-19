@@ -106,7 +106,7 @@ return {
             },
           },
         },
-        extensions = { 'neo-tree', 'fugitive', 'toggleterm', 'quickfix' },
+        extensions = { 'neo-tree', 'fugitive', 'quickfix' },
       }
     end,
   },
