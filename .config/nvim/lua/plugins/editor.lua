@@ -1,63 +1,17 @@
 return {
 
   {
-    'nvim-neo-tree/neo-tree.nvim',
-    cmd = { 'NeoTree' },
-    keys = { { '<leader>n', '<Cmd>Neotree toggle reveal<CR>' } },
-    opts = function()
-      local icons = require('config.icons')
-      vim.g.neo_tree_remove_legacy_commands = 1
-
-      return {
-        close_if_last_window = true,
-        sources = {
-          'filesystem',
-        },
-        filesystem = {
-          use_libuv_file_watcher = true,
-          group_empty_dirs = true,
-          follow_current_file = true,
-          filtered_items = {
-            visible = true,
-            hide_dotfiles = false,
-            hide_gitignored = true,
-            never_show = {
-              '.DS_Store',
-            },
-          },
-        },
-        default_component_configs = {
-          icon = {
-            folder_empty = '',
-          },
-          modified = {
-            symbol = icons.misc.circle,
-          },
-          git_status = {
-            symbols = {
-              added = icons.git.add,
-              deleted = icons.git.remove,
-              modified = icons.git.mod,
-              renamed = icons.git.rename,
-              untracked = '',
-              ignored = '',
-              unstaged = '',
-              staged = '',
-              conflict = '',
-            },
-          },
-        },
-        window = {
-          mappings = {
-            ['/'] = 'noop',
-            ['s'] = 'fuzzy_finder',
-            ['w'] = 'noop',
-            ['<space>'] = 'noop',
-            ['<tab>'] = 'toggle_node',
-          },
-        },
-      }
-    end,
+    'stevearc/oil.nvim',
+    keys = {
+      { '<leader>n', '<cmd>Oil<cr>' },
+    },
+    opts = {
+      keymaps = {
+        ['q'] = 'actions.close',
+        ['<C-p>'] = false,
+        ['<C-h>'] = false,
+      },
+    },
   },
 
   {
