@@ -115,8 +115,8 @@ return {
       telescope.load_extension('fzf')
       local builtins = require('telescope.builtin')
 
-      local function project_files(args)
-        if not pcall(builtins.git_files, args) then builtins.find_files(args) end
+      local function project_files()
+        if not pcall(builtins.git_files, { show_untracked = true }) then builtins.find_files() end
       end
 
       local function dotfiles()
