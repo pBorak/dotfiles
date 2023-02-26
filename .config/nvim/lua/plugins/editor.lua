@@ -68,7 +68,7 @@ return {
             },
           }),
           git_files = {
-            file_ignore_patterns = { 'vendor/' },
+            show_untracked = true,
           },
           live_grep = themes.get_ivy({
             file_ignore_patterns = { '.git/' },
@@ -116,7 +116,7 @@ return {
       local builtins = require('telescope.builtin')
 
       local function project_files()
-        if not pcall(builtins.git_files, { show_untracked = true }) then builtins.find_files() end
+        if not pcall(builtins.git_files) then builtins.find_files() end
       end
 
       local function dotfiles()
