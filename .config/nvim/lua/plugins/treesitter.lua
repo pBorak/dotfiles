@@ -72,6 +72,7 @@ return {
         enable = true,
       },
       autotag = { enable = true },
+      autopairs = { enable = true },
     },
     config = function(_, opts) require('nvim-treesitter.configs').setup(opts) end,
   },
