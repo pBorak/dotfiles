@@ -1,7 +1,6 @@
 local meh = { 'alt', 'ctrl', 'shift' }
 
 local apps = {
-  a = 'Alfred 5',
   j = 'Brave Browser',
   k = 'kitty',
   m = 'Spotify',
