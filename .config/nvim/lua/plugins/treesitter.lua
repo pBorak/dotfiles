@@ -30,6 +30,7 @@ return {
         'vim',
         'help',
         'gitcommit',
+        'embedded_template',
       },
       highlight = {
         enable = true,
