@@ -314,7 +314,7 @@ return {
           skipped = '',
         },
         quickfix = {
-          enabled = true,
+          enabled = false,
           open = false,
         },
         floating = {
