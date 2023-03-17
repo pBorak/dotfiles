@@ -28,7 +28,7 @@ function M.setup()
     severity_sort = true,
     float = {
       border = 'rounded',
-      focusable = false,
+      focusable = true,
       source = 'always',
       prefix = function(diag, i, _)
         local level = vim.diagnostic.severity[diag.severity]
