@@ -29,10 +29,10 @@ function M.setup()
     float = {
       border = 'rounded',
       focusable = true,
-      source = 'always',
-      prefix = function(diag, i, _)
+      source = 'if_many',
+      prefix = function(diag)
         local level = vim.diagnostic.severity[diag.severity]
-        local prefix = string.format('%d. %s ', i, icons[level:lower()])
+        local prefix = string.format('%s ', icons[level:lower()])
         return prefix, 'Diagnostic' .. level:gsub('^%l', string.upper)
       end,
     },
