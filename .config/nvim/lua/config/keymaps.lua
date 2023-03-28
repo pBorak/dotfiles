@@ -108,4 +108,4 @@ vim.keymap.set(
   { expr = true }
 )
 
-vim.keymap.set('n', '<leader>cc', function() Util.toggle_list('quickfix') end)
+vim.keymap.set('n', '<leader>cc', function() Util.toggle_quickfix() end)

@@ -13,22 +13,18 @@ end
 function M.is_vim_list_open()
   for _, win in ipairs(vim.api.nvim_list_wins()) do
     local buf = vim.api.nvim_win_get_buf(win)
-    local location_list = vim.fn.getloclist(0, { filewinid = 0 })
-    local is_loc_list = location_list.filewinid > 0
-    if vim.bo[buf].filetype == 'qf' or is_loc_list then return true end
+    if vim.bo[buf].filetype == 'qf' then return true end
   end
   return false
 end
 
-function M.toggle_list(list_type)
-  local is_location_target = list_type == 'location'
-  local cmd = is_location_target and { 'lclose', 'lopen' } or { 'cclose', 'copen' }
+function M.toggle_quickfix()
+  local cmd = { 'cclose', 'copen' }
   local is_open = M.is_vim_list_open()
   if is_open then return vim.cmd[cmd[1]]() end
-  local list = is_location_target and vim.fn.getloclist(0) or vim.fn.getqflist()
+  local list = vim.fn.getqflist()
   if vim.tbl_isempty(list) then
-    local msg_prefix = (is_location_target and 'Location' or 'QuickFix')
-    return vim.notify(msg_prefix .. ' List is Empty.', vim.log.levels.WARN)
+    return vim.notify('Quickfix list is empty.', vim.log.levels.WARN)
   end
 
   local winnr = vim.fn.winnr()
