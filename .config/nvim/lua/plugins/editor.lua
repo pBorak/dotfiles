@@ -142,7 +142,7 @@ return {
       vim.keymap.set('n', '<c-p>', project_files)
       vim.keymap.set('n', '<leader>fd', dotfiles)
       vim.keymap.set('n', '<leader>fg', builtins.git_status)
-      vim.keymap.set('n', '<leader>fc', builtins.git_commits)
+      vim.keymap.set('n', '<leader>fc', builtins.git_bcommits)
       vim.keymap.set('n', '<leader>fb', builtins.git_branches)
       vim.keymap.set('n', '<leader>fo', builtins.buffers)
       vim.keymap.set('n', '<leader>fr', builtins.resume)
