@@ -10,30 +10,41 @@ function M.get_signs()
   )
 end
 
-function M.column()
-  local sign, git_sign
+function M.statuscolumn()
+  local diagnostic_sign, git_sign
+
   for _, s in ipairs(M.get_signs()) do
     if s.name:find('GitSign') then
       git_sign = s
-    else
-      sign = s
+    elseif s.name:find('Diagnostic') then
+      diagnostic_sign = s
     end
   end
 
-  local nu = ' '
+  local diagnostic_column = diagnostic_sign
+      and ('%#' .. diagnostic_sign.texthl .. '#' .. diagnostic_sign.text:sub(1, -2) .. '%*')
+    or ' '
+  local git_column = git_sign
+      and ('%#' .. git_sign.texthl .. '#' .. git_sign.text:sub(1, -2) .. '%*')
+    or ' '
+
+  local number_text = ' '
   local number = vim.api.nvim_win_get_option(vim.g.statusline_winid, 'number')
   if number and vim.wo.relativenumber and vim.v.virtnum == 0 then
-    nu = vim.v.relnum == 0 and vim.v.lnum or vim.v.relnum
+    number_text = vim.v.relnum == 0 and vim.v.lnum or vim.v.relnum
   end
-  local components = {
-    sign and ('%#' .. sign.texthl .. '#' .. sign.text .. '%*') or ' ',
-    [[%=]],
-    nu .. ' ',
-    git_sign and ('%#' .. git_sign.texthl .. '#' .. git_sign.text .. '%*') or '  ',
+
+  local number_column = '%=' .. number_text .. ' '
+
+  local columns = {
+    diagnostic_column,
+    number_column,
+    git_column,
   }
-  return table.concat(components, '')
+
+  return table.concat(columns, '')
 end
 
-vim.opt.statuscolumn = [[%!v:lua.Status.column()]]
+vim.opt.statuscolumn = [[%!v:lua.Status.statuscolumn()]]
 
 return M
