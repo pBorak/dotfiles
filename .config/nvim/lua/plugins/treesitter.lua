@@ -83,15 +83,7 @@ return {
   {
     'nvim-treesitter/nvim-treesitter-context',
     event = 'BufReadPre',
-    config = function()
-      require('treesitter-context').setup({
-        patterns = {
-          ruby = {
-            'block',
-          },
-        },
-      })
-    end,
+    config = true,
   },
 
   { 'nvim-treesitter/playground', cmd = { 'TSPlaygroundToggle' } },
