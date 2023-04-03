@@ -67,5 +67,4 @@ opt.sidescrolloff = 15
 opt.sidescroll = 5
 opt.number = true -- Print line number
 opt.relativenumber = true -- Relative line numbers
-require('util.status')
 require('util.abbreviations')
