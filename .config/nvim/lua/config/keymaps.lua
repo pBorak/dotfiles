@@ -15,11 +15,6 @@ vim.api.nvim_create_autocmd('TermOpen', {
     end
   end,
 })
-
-vim.api.nvim_create_autocmd('FileType', {
-  pattern = { 'neotest-attach' },
-  callback = function() vim.keymap.set('t', '<esc>', [[<C-\><C-n>]], { silent = false, buffer = 0 }) end,
-})
 --------------------------------------------------------------------------------
 -- MACROS
 --------------------------------------------------------------------------------
