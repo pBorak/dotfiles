@@ -106,7 +106,7 @@ return {
             },
           },
         },
-        extensions = { 'fugitive', 'quickfix' },
+        extensions = { 'fugitive', 'quickfix', 'toggleterm' },
       }
     end,
   },
