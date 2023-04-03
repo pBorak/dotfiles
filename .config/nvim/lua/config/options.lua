@@ -15,6 +15,7 @@ opt.timeoutlen = 500
 opt.ttimeoutlen = 10
 opt.splitbelow = true
 opt.splitright = true
+opt.splitkeep = 'screen'
 opt.diffopt = opt.diffopt
   + {
     'vertical',
