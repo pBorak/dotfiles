@@ -118,7 +118,6 @@ return {
         sources = cmp.config.sources({
           { name = 'nvim_lsp' },
           { name = 'luasnip' },
-          { name = 'copilot' },
           { name = 'path' },
           { name = 'buffer' },
         }, {
@@ -145,18 +144,6 @@ return {
         }),
       })
     end,
-  },
-
-  {
-    'zbirenbaum/copilot-cmp',
-    event = 'InsertEnter',
-    dependencies = {
-      {
-        'zbirenbaum/copilot.lua',
-        opts = { suggestion = { enabled = false }, panel = { enabled = false } },
-      },
-    },
-    config = true,
   },
 
   {

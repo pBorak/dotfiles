@@ -44,7 +44,6 @@ M = {
     Event = ' ',
     Operator = ' ',
     TypeParameter = ' ',
-    Copilot = ' ',
   },
 }
 
