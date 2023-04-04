@@ -279,7 +279,6 @@ return {
       { 'nvim-treesitter/nvim-treesitter' },
     },
     keys = {
-      { '<leader>ts', function() require('neotest').summary.toggle() end },
       {
         '<leader>to',
         function() require('neotest').output.open({ enter = true, short = false }) end,
