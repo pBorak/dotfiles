@@ -272,21 +272,59 @@ return {
   },
 
   {
-    'vim-test/vim-test',
+    'nvim-neotest/neotest',
+    lazy = true,
     dependencies = {
-      'akinsho/toggleterm.nvim',
+      { 'olimorris/neotest-rspec' },
+      { 'nvim-treesitter/nvim-treesitter' },
     },
     keys = {
-      { '<leader>tf', '<cmd>TestFile<CR>' },
-      { '<leader>tl', '<cmd>TestLast<CR>' },
-      { '<leader>tt', '<cmd>TestNearest<CR>' },
+      { '<leader>ts', function() require('neotest').summary.toggle() end },
+      {
+        '<leader>to',
+        function() require('neotest').output.open({ enter = true, short = false }) end,
+      },
+      { '<leader>tt', function() require('neotest').run.run() end },
+      { '<leader>tf', function() require('neotest').run.run(vim.fn.expand('%')) end },
+      { '<leader>tl', function() require('neotest').run.run_last() end },
+      { '<leader>ta', function() require('neotest').run.attach() end },
     },
-    config = function()
-      vim.cmd(
-        [[ let test#ruby#rspec#executable = 'docker compose exec -it -e RAILS_ENV=test rails bin/rspec' ]]
-      )
-
-      vim.g['test#strategy'] = 'toggleterm'
+    opts = function()
+      return {
+        discovery = {
+          enabled = false,
+        },
+        diagnostic = {
+          enabled = true,
+        },
+        adapters = {
+          require('neotest-rspec')({
+            rspec_cmd = './neotest_docker_script.sh',
+          }),
+        },
+        icons = {
+          expanded = '',
+          child_prefix = '',
+          child_indent = '',
+          final_child_prefix = '',
+          non_collapsible = '',
+          collapsed = '',
+          passed = '',
+          running = '',
+          failed = '',
+          unknown = '',
+          skipped = '',
+        },
+        quickfix = {
+          enabled = false,
+          open = false,
+        },
+        floating = {
+          border = 'single',
+          max_height = 0.8,
+          max_width = 0.9,
+        },
+      }
     end,
   },
 }

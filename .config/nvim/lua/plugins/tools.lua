@@ -1,33 +1,6 @@
 return {
 
   {
-    'akinsho/toggleterm.nvim',
-    version = '2.*',
-    keys = {
-      { '<c-g>', '<cmd>ToggleTerm<CR>' },
-    },
-    opts = {
-      open_mapping = '<c-g>',
-      shade_filetypes = { 'none' },
-      direction = 'horizontal',
-      start_in_insert = true,
-      persist_mode = true,
-      float_opts = {
-        border = 'curved',
-        height = function() return math.floor(vim.o.lines * 0.6) end,
-        width = function() return math.floor(vim.o.columns * 0.7) end,
-      },
-      size = function(term)
-        if term.direction == 'horizontal' then
-          return 35
-        elseif term.direction == 'vertical' then
-          return math.floor(vim.o.columns * 0.4)
-        end
-      end,
-    },
-  },
-
-  {
     'mbbill/undotree',
     cmd = 'UndotreeToggle',
     keys = { { '<leader>u', '<cmd>UndotreeToggle<CR>' } },

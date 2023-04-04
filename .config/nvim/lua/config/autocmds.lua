@@ -10,6 +10,9 @@ local smart_close_filetypes = {
   'qf',
   'startuptime',
   'lspinfo',
+  'neotest-summary',
+  'neotest-output',
+  'neotest-attach',
 }
 
 local function smart_close()
@@ -110,18 +113,3 @@ vim.api.nvim_create_autocmd('BufWritePre', {
     vim.go.backupext = backup
   end,
 })
-
-local cursorline_exclude = { 'toggleterm' }
-
-local function should_show_cursorline(buf)
-  return vim.bo[buf].buftype ~= 'terminal'
-    and not vim.wo.previewwindow
-    and vim.wo.winhighlight == ''
-    and vim.bo[buf].filetype ~= ''
-    and not vim.tbl_contains(cursorline_exclude, vim.bo[buf].filetype)
-end
-
-vim.api.nvim_create_autocmd('BufEnter', {
-  callback = function(args) vim.wo.cursorline = should_show_cursorline(args.buf) end,
-})
-vim.api.nvim_create_autocmd('BufLeave', { callback = function() vim.wo.cursorline = false end })
