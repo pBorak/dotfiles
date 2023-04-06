@@ -1,47 +1,44 @@
 {
- "Rspec describe": {
+  "Rspec describe": {
     "prefix": "desc",
     "body": [
-      "describe \"$1\" do",
+      "describe '$1' do",
       "  $2",
       "end"
     ]
   },
- "Context block spec": {
+  "Context block spec": {
     "prefix": "cont",
     "body": [
-      "context \"$1\" do",
+      "context '$1' do",
       "  $2",
       "end"
     ]
   },
- "It block spec": {
+  "It block spec": {
     "prefix": "it",
     "body": [
-      "it \"$1\" do",
+      "it '$1' do",
       "  $2",
       "end"
     ]
   },
- "Aggregate failures": {
-    "prefix": "agg",
-    "body": [
-      "aggregate_failures \"$1\" do",
-      "  $2",
-      "end"
-    ]
-  },
- "Described class": {
+  "Described class": {
     "prefix": "dc",
-    "body": [ "described_class" ]
+    "body": [
+      "described_class"
+    ]
   },
- "Allow to receive": {
+  "Allow to receive": {
     "prefix": "all",
-    "body": [ "allow($1).to receive(${2::call})" ]
+    "body": [
+      "allow($1).to receive(${2::call})"
+    ]
   },
- "Rspec expect": {
+  "Rspec expect": {
     "prefix": "exp",
-    "body": [ "expect($1).to $2" ]
+    "body": [
+      "expect($1).to $2"
+    ]
   }
 }
-
