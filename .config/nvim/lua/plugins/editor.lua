@@ -48,6 +48,8 @@ return {
             },
           },
           file_ignore_patterns = { '%.jpg', '%.jpeg', '%.png', '%.otf', '%.ttf' },
+          layout_config = { prompt_position = 'top' },
+          sorting_strategy = 'ascending',
         },
         extensions = {
           fzf = {
