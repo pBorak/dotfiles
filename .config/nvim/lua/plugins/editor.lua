@@ -23,6 +23,7 @@ return {
       local actions = require('telescope.actions')
       local action_state = require('telescope.actions.state')
       local themes = require('telescope.themes')
+      local live_grep_actions = require('util.live_grep')
 
       ---@param prompt_bufnr number
       local open_in_diff_view = function(prompt_bufnr)
@@ -78,6 +79,11 @@ return {
               -- AND operator for live_grep like how fzf handles spaces with wildcards in rg
               return { prompt = prompt:gsub('%s', '.*') }
             end,
+            mappings = {
+              i = {
+                ['<c-h>'] = live_grep_actions.actions.set_iglob,
+              },
+            },
           }),
           find_files = {
             hidden = true,
