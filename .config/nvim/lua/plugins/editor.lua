@@ -23,7 +23,6 @@ return {
       local actions = require('telescope.actions')
       local action_state = require('telescope.actions.state')
       local themes = require('telescope.themes')
-      local lga_actions = require('telescope-live-grep-args.actions')
 
       ---@param prompt_bufnr number
       local open_in_diff_view = function(prompt_bufnr)
@@ -56,15 +55,6 @@ return {
           fzf = {
             override_generic_sorter = true, -- override the generic sorter
             override_file_sorter = true, -- override the file sorter
-          },
-          live_grep_args = {
-            mappings = {
-              i = {
-                ['<C-q>'] = lga_actions.quote_prompt(),
-                ['<C-i>'] = lga_actions.quote_prompt({ postfix = ' --iglob ' }),
-              },
-            },
-            theme = 'ivy',
           },
         },
         pickers = {
@@ -126,8 +116,6 @@ return {
       telescope.setup(opts)
       telescope.load_extension('fzf')
       local builtins = require('telescope.builtin')
-      local function live_grep_args() telescope.extensions.live_grep_args.live_grep_args() end
-      local live_grep_args_shortcuts = require('telescope-live-grep-args.shortcuts')
 
       local function project_files()
         if not pcall(builtins.git_files) then builtins.find_files() end
@@ -147,6 +135,12 @@ return {
         })
       end
 
+      local function grep_string()
+        builtins.grep_string({
+          word_match = '-w',
+        })
+      end
+
       vim.keymap.set('n', '<c-p>', project_files)
       vim.keymap.set('n', '<leader>fd', dotfiles)
       vim.keymap.set('n', '<leader>fg', builtins.git_status)
@@ -154,13 +148,12 @@ return {
       vim.keymap.set('n', '<leader>fb', builtins.git_branches)
       vim.keymap.set('n', '<leader>fo', builtins.buffers)
       vim.keymap.set('n', '<leader>fr', builtins.resume)
-      vim.keymap.set('n', '<leader>fs', live_grep_args)
-      vim.keymap.set('n', '<leader>ff', live_grep_args_shortcuts.grep_word_under_cursor)
+      vim.keymap.set('n', '<leader>fs', builtins.live_grep)
+      vim.keymap.set('n', '<leader>ff', grep_string)
       vim.keymap.set('n', '<leader>f.', find_in_current_directory)
     end,
     dependencies = {
       { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
-      { 'nvim-telescope/telescope-live-grep-args.nvim' },
     },
   },
 
