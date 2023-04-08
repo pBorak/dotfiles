@@ -55,12 +55,6 @@ return {
           layout_config = { prompt_position = 'top' },
           sorting_strategy = 'ascending',
         },
-        extensions = {
-          fzf = {
-            override_generic_sorter = true, -- override the generic sorter
-            override_file_sorter = true, -- override the file sorter
-          },
-        },
         pickers = {
           buffers = themes.get_dropdown({
             sort_mru = true,
