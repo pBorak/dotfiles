@@ -27,6 +27,17 @@ return {
       { '<leader>ff', '<Cmd>FzfLua grep_cword<CR>' },
       { '<leader>ff', '<Cmd>FzfLua grep_visual<CR>', mode = { 'v' } },
       { '<leader>fg', '<Cmd>FzfLua git_status<CR>' },
+      {
+        '<leader>fG',
+        function()
+          require('fzf-lua').fzf_live('git log --oneline --color=always -S <query>', {
+            fzf_opts = {
+              ['--no-sort'] = '',
+            },
+            preview = 'git show --color=always {1} | delta',
+          })
+        end,
+      },
       { '<leader>f.', function() require('fzf-lua').files({ cwd = '%:h' }) end },
       { '<leader>fd', function() require('fzf-lua').files({ cwd = vim.env.DOTFILES }) end },
     },
