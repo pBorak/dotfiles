@@ -18,7 +18,7 @@ return {
           'undotree',
         },
         on_colors = function(colors)
-          colors.bg = '#161616'
+          colors.bg = '#080808'
           colors.bg_dark = '#080808'
           colors.bg_float = '#080808'
           colors.bg_sidebar = '#080808'

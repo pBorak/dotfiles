@@ -12,10 +12,8 @@ M = {
     rename = ' ',
   },
   misc = {
-    telescope = ' ',
     git_branch = ' ',
     line = 'ℓ',
-    chevron_right = '» ',
     circle = ' ',
   },
   kinds = {

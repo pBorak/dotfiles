@@ -49,7 +49,6 @@ local column_block_list = {
   'DiffviewFileHistory',
   'help',
   'fugitive',
-  'TelescopePrompt',
 }
 
 ---Set or unset the color column depending on the filetype of the buffer and its eligibility

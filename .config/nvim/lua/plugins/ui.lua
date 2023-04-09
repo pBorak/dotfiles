@@ -106,7 +106,7 @@ return {
             },
           },
         },
-        extensions = { 'fugitive', 'quickfix' },
+        extensions = { 'fugitive', 'quickfix', 'fzf' },
       }
     end,
   },
@@ -128,7 +128,6 @@ return {
         'txt',
         'help',
         'git',
-        'TelescopePrompt',
         'undotree',
         '', -- for all buffers without a file type
       },

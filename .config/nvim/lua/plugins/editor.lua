@@ -15,148 +15,84 @@ return {
   },
 
   {
-    'nvim-telescope/telescope.nvim',
-    cmd = 'Telescope',
-    version = false,
-    keys = { '<c-p>', '<leader>f' },
-    opts = function()
-      local actions = require('telescope.actions')
-      local action_state = require('telescope.actions.state')
-      local themes = require('telescope.themes')
-      local live_grep_actions = require('util.live_grep')
-
-      ---@param prompt_bufnr number
-      local open_in_diff_view = function(prompt_bufnr)
-        actions.close(prompt_bufnr)
-        local value = action_state.get_selected_entry().value
-        local cmd = 'DiffviewOpen ' .. value .. '~1..' .. value
-        vim.cmd(cmd)
-      end
-
-      return {
-        defaults = {
-          prompt_prefix = require('config.icons').misc.telescope,
-          selection_caret = require('config.icons').misc.chevron_right,
-          mappings = {
-            i = {
-              ['<esc>'] = actions.close,
-              ['<c-j>'] = actions.cycle_history_next,
-              ['<c-k>'] = actions.cycle_history_prev,
-              ['<c-b>'] = actions.preview_scrolling_up,
-              ['<c-f>'] = actions.preview_scrolling_down,
-              ['<c-l>'] = actions.smart_send_to_qflist + actions.open_qflist,
-              ['<c-space>'] = actions.to_fuzzy_refine,
-              ['<c-a>'] = { '<home>', type = 'command' },
-              ['<c-e>'] = { '<end>', type = 'command' },
-              ['<c-u>'] = false,
-            },
-          },
-          file_ignore_patterns = { '%.jpg', '%.jpeg', '%.png', '%.otf', '%.ttf' },
-          layout_config = { prompt_position = 'top' },
-          sorting_strategy = 'ascending',
+    'ibhagwan/fzf-lua',
+    cmd = 'FzfLua',
+    keys = {
+      { '<c-p>', '<Cmd>FzfLua git_files<CR>' },
+      { '<leader>fr', '<Cmd>FzfLua resume<CR>' },
+      { '<leader>fo', '<Cmd>FzfLua buffers<CR>' },
+      { '<leader>fb', '<Cmd>FzfLua git_branches<CR>' },
+      { '<leader>fc', '<Cmd>FzfLua git_bcommits<CR>' },
+      { '<leader>fs', '<Cmd>FzfLua live_grep<CR>' },
+      { '<leader>ff', '<Cmd>FzfLua grep_cword<CR>' },
+      { '<leader>ff', '<Cmd>FzfLua grep_visual<CR>', mode = { 'v' } },
+      { '<leader>fg', '<Cmd>FzfLua git_status<CR>' },
+      { '<leader>f.', function() require('fzf-lua').files({ cwd = '%:h' }) end },
+      { '<leader>fd', function() require('fzf-lua').files({ cwd = vim.env.DOTFILES }) end },
+    },
+    opts = {
+      fzf_opts = {
+        ['--no-scrollbar'] = '',
+        ['--ellipsis'] = '…',
+      },
+      fzf_colors = {
+        ['fg'] = { 'fg', 'Normal' },
+        ['bg'] = { 'bg', 'Normal' },
+        ['hl'] = { 'fg', 'Special' },
+        ['fg+'] = { 'fg', 'Visual' },
+        ['bg+'] = { 'bg', 'Visual' },
+        ['hl+'] = { 'fg', 'Special' },
+        ['info'] = { 'fg', 'Comment', 'italic' },
+        ['prompt'] = { 'fg', 'Special' },
+        ['pointer'] = { 'fg', 'Visual' },
+        ['marker'] = { 'fg', 'MatchParen' },
+        ['spinner'] = { 'fg', 'Normal' },
+        ['header'] = { 'fg', 'Visual' },
+        ['gutter'] = { 'bg', 'Normal' },
+      },
+      file_icon_padding = ' ',
+      winopts = {
+        preview = {
+          vertical = 'up:45%',
+          horizontal = 'right:50%',
         },
-        pickers = {
-          buffers = themes.get_dropdown({
-            sort_mru = true,
-            sort_lastused = true,
-            show_all_buffers = true,
-            ignore_current_buffer = true,
-            previewer = false,
-            mappings = {
-              i = { ['<c-x>'] = 'delete_buffer' },
-              n = { ['<c-x>'] = 'delete_buffer' },
-            },
-          }),
-          git_files = {
-            show_untracked = true,
-          },
-          live_grep = themes.get_ivy({
-            file_ignore_patterns = { '.git/' },
-            on_input_filter_cb = function(prompt)
-              -- AND operator for live_grep like how fzf handles spaces with wildcards in rg
-              return { prompt = prompt:gsub('%s', '.*') }
-            end,
-            mappings = {
-              i = {
-                ['<c-h>'] = live_grep_actions.actions.set_iglob,
-              },
-            },
-          }),
-          find_files = {
-            hidden = true,
-          },
-          git_branches = themes.get_dropdown(),
-          grep_string = themes.get_ivy(),
-          git_bcommits = {
-            layout_config = {
-              horizontal = {
-                preview_width = 0.55,
-              },
-            },
-            mappings = {
-              i = {
-                ['<cr>'] = open_in_diff_view,
-              },
-            },
-          },
-          git_commits = {
-            layout_config = {
-              horizontal = {
-                preview_width = 0.55,
-              },
-            },
-            mappings = {
-              i = {
-                ['<cr>'] = open_in_diff_view,
-              },
-            },
+        hl = { border = 'FloatBorder' },
+      },
+      keymap = {
+        builtin = {
+          ['<c-f>'] = 'preview-page-down',
+          ['<c-b>'] = 'preview-page-up',
+        },
+        fzf = {
+          ['esc'] = 'abort',
+        },
+      },
+      buffers = {
+        winopts = {
+          width = 0.5,
+          height = 0.4,
+          preview = { hidden = 'hidden' },
+        },
+      },
+      grep = {
+        git_icons = false,
+        rg_glob = true,
+      },
+      git = {
+        files = {
+          git_icons = false,
+        },
+        branches = {
+          winopts = {
+            width = 0.5,
+            height = 0.4,
+            preview = { hidden = 'hidden' },
           },
         },
-      }
-    end,
-    config = function(_, opts)
-      local telescope = require('telescope')
-      telescope.setup(opts)
-      telescope.load_extension('fzf')
-      local builtins = require('telescope.builtin')
-
-      local function project_files()
-        if not pcall(builtins.git_files) then builtins.find_files() end
-      end
-
-      local function dotfiles()
-        builtins.find_files({
-          prompt_title = '~ dotfiles ~',
-          cwd = vim.env.DOTFILES,
-        })
-      end
-
-      local function find_in_current_directory()
-        builtins.find_files({
-          prompt_title = '~ current directory files ~',
-          cwd = '%:h',
-        })
-      end
-
-      local function grep_string()
-        builtins.grep_string({
-          word_match = '-w',
-        })
-      end
-
-      vim.keymap.set('n', '<c-p>', project_files)
-      vim.keymap.set('n', '<leader>fd', dotfiles)
-      vim.keymap.set('n', '<leader>fg', builtins.git_status)
-      vim.keymap.set('n', '<leader>fc', builtins.git_bcommits)
-      vim.keymap.set('n', '<leader>fb', builtins.git_branches)
-      vim.keymap.set('n', '<leader>fo', builtins.buffers)
-      vim.keymap.set('n', '<leader>fr', builtins.resume)
-      vim.keymap.set('n', '<leader>fs', builtins.live_grep)
-      vim.keymap.set('n', '<leader>ff', grep_string)
-      vim.keymap.set('n', '<leader>f.', find_in_current_directory)
-    end,
-    dependencies = {
-      { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
+        status = { preview_pager = 'delta' },
+        bcommits = { preview_pager = 'delta ' },
+        commits = { preview_pager = 'delta ' },
+      },
     },
   },
 
