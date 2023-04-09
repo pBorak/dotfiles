@@ -81,6 +81,7 @@ return {
       git = {
         files = {
           git_icons = false,
+          cmd = 'git ls-files -o -c --exclude-standard',
         },
         branches = {
           winopts = {
