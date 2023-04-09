@@ -50,6 +50,7 @@ return {
         ['header'] = { 'fg', 'Visual' },
         ['gutter'] = { 'bg', 'Normal' },
       },
+      file_icon_padding = ' ',
       winopts = {
         preview = {
           vertical = 'up:45%',
