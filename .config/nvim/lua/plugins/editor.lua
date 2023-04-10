@@ -34,7 +34,7 @@ return {
             fzf_opts = {
               ['--no-sort'] = '',
             },
-            preview = 'git show --color=always {1} | delta',
+            preview = 'git show --color=always {1} | delta  --width=$FZF_PREVIEW_COLUMNS',
           })
         end,
       },
@@ -101,9 +101,9 @@ return {
             preview = { hidden = 'hidden' },
           },
         },
-        status = { preview_pager = 'delta' },
-        bcommits = { preview_pager = 'delta ' },
-        commits = { preview_pager = 'delta ' },
+        status = { preview_pager = 'delta --width=$FZF_PREVIEW_COLUMNS' },
+        bcommits = { preview_pager = 'delta --width=$FZF_PREVIEW_COLUMNS' },
+        commits = { preview_pager = 'delta --width=$FZF_PREVIEW_COLUMNS' },
       },
     },
   },
