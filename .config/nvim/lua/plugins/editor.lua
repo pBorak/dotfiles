@@ -76,6 +76,7 @@ return {
         },
         fzf = {
           ['esc'] = 'abort',
+          ['ctrl-l'] = 'select-all+accept',
         },
       },
       buffers = {
