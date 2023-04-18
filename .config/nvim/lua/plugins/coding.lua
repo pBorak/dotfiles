@@ -90,7 +90,9 @@ return {
           documentation = cmp.config.window.bordered(),
         },
         experimental = {
-          ghost_text = true,
+          ghost_text = {
+            hl_group = 'LspCodeLens',
+          },
         },
         snippet = {
           expand = function(args) require('luasnip').lsp_expand(args.body) end,
