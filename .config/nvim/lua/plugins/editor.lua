@@ -67,6 +67,8 @@ return {
           vertical = 'up:45%',
           horizontal = 'right:50%',
         },
+        width = 0.7,
+        height = 0.7,
         hl = { border = 'FloatBorder' },
       },
       keymap = {
