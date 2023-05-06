@@ -28,7 +28,7 @@ return {
           solargraph = {
             mason = false,
           },
-          tsserver = {},
+          vtsls = {},
           eslint = {
             root_dir = require('lspconfig').util.root_pattern(
               '.eslintrc',
