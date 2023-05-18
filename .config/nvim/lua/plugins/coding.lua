@@ -160,9 +160,9 @@ return {
   { 'windwp/nvim-ts-autotag', event = 'VeryLazy' },
 
   {
-    'numToStr/Comment.nvim',
+    'echasnovski/mini.comment',
     event = 'VeryLazy',
-    config = true,
+    opts = {},
   },
 
   {
