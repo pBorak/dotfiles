@@ -2,14 +2,14 @@ local M = {}
 
 M.client_formatting_overrides = {
   eslint = function(client) client.server_capabilities.documentFormattingProvider = true end,
-  vtsls = function(client) client.server_capabilities.documentFormattingProvider = false end,
+  tsserver = function(client) client.server_capabilities.documentFormattingProvider = false end,
 }
 
 function M.format()
   local buf = vim.api.nvim_get_current_buf()
   local ft = vim.bo[buf].filetype
   local have_nls = #require('null-ls.sources').get_available(ft, 'NULL_LS_FORMATTING') > 0
-  local format_exclusions = { 'lua_ls', 'solargraph', 'dockerls', 'vtsls' }
+  local format_exclusions = { 'lua_ls', 'solargraph', 'dockerls', 'tsserver' }
 
   vim.lsp.buf.format({
     bufnr = buf,
