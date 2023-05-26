@@ -125,7 +125,6 @@ return {
           {
             name = 'rg',
             keyword_length = 4,
-            max_item_count = 5,
           },
         }),
       }
