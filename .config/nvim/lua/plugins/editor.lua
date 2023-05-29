@@ -3,7 +3,7 @@ return {
   {
     'stevearc/oil.nvim',
     keys = {
-      { '<leader>n', '<cmd>Oil<cr>' },
+      { '-', '<cmd>Oil<cr>' },
     },
     opts = {
       keymaps = {
