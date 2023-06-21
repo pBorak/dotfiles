@@ -112,23 +112,24 @@ return {
   },
 
   {
-    'ggandor/leap.nvim',
+    'folke/flash.nvim',
     event = 'VeryLazy',
-    dependencies = { { 'ggandor/flit.nvim', opts = { multiline = false } } },
-    config = function()
-      require('leap').add_default_mappings()
-      local function leap_all_windows()
-        require('leap').leap({
-          target_windows = vim.tbl_filter(
-            function(win) return require('util').empty(vim.fn.win_gettype(win)) end,
-            vim.api.nvim_tabpage_list_wins(0)
-          ),
-        })
-      end
-      vim.keymap.set({ 'n', 'v' }, 's', leap_all_windows)
-      vim.keymap.del({ 'x', 'o' }, 'x')
-      vim.keymap.del({ 'x', 'o' }, 'X')
-    end,
+    opts = {},
+    keys = {
+      {
+        's',
+        mode = { 'n', 'x', 'o' },
+        function()
+          -- default options: exact mode, multi window, all directions, with a backdrop
+          require('flash').jump()
+        end,
+      },
+      {
+        'S',
+        mode = { 'o', 'x' },
+        function() require('flash').treesitter() end,
+      },
+    },
   },
 
   {
