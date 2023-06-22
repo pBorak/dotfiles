@@ -126,7 +126,7 @@ return {
       },
       {
         'S',
-        mode = { 'o', 'x' },
+        mode = { 'n', 'o', 'x' },
         function() require('flash').treesitter() end,
       },
     },
