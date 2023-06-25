@@ -165,7 +165,7 @@ return {
   },
 
   {
-    'echasnovski/mini.nvim',
+    'echasnovski/mini.ai',
     event = 'VeryLazy',
     opts = {
       mappings = {
@@ -173,10 +173,6 @@ return {
         goto_right = '',
       },
     },
-    config = function(_, opts)
-      local ai = require('mini.ai')
-      ai.setup(opts)
-    end,
   },
 
   { 'vim-scripts/ReplaceWithRegister', event = 'VeryLazy' },
