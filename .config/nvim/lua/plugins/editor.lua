@@ -232,7 +232,7 @@ return {
   },
 
   {
-    'nvim-neotest/neotest',
+    dir = '~/code/neotest',
     lazy = true,
     dependencies = {
       { 'olimorris/neotest-rspec' },
