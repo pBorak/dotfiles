@@ -82,6 +82,7 @@ return {
       'lukas-reineke/cmp-rg',
     },
     opts = function()
+      vim.api.nvim_set_hl(0, 'CmpGhostText', { link = 'Comment', default = true })
       local cmp = require('cmp')
 
       return {
@@ -91,7 +92,7 @@ return {
         },
         experimental = {
           ghost_text = {
-            hl_group = 'LspCodeLens',
+            hl_group = 'CmpGhostText',
           },
         },
         snippet = {
