@@ -76,6 +76,10 @@ return {
         fzf = {
           ['esc'] = 'abort',
           ['ctrl-l'] = 'select-all+accept',
+          ['ctrl-j'] = 'previous-history',
+          ['ctrl-k'] = 'next-history',
+          ['ctrl-p'] = 'up',
+          ['ctrl-n'] = 'down',
         },
       },
       buffers = {
@@ -88,11 +92,17 @@ return {
       grep = {
         git_icons = false,
         rg_glob = true,
+        fzf_opts = {
+          ['--history'] = vim.fn.stdpath('data') .. '/fzf-lua-grep-history',
+        },
       },
       git = {
         files = {
           git_icons = false,
           cmd = 'git ls-files -o -c --exclude-standard',
+          fzf_opts = {
+            ['--history'] = vim.fn.stdpath('data') .. '/fzf-lua-gitfiles-history',
+          },
         },
         branches = {
           winopts = {
