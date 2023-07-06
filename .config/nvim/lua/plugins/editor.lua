@@ -257,6 +257,8 @@ return {
       { '<leader>tf', function() require('neotest').run.run(vim.fn.expand('%')) end },
       { '<leader>tl', function() require('neotest').run.run_last() end },
       { '<leader>ta', function() require('neotest').run.attach() end },
+      { ']t', function() require('neotest').jump.next({ status = 'failed' }) end },
+      { '[t', function() require('neotest').jump.prev({ status = 'failed' }) end },
     },
     opts = function()
       return {
