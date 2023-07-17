@@ -85,6 +85,30 @@ local function assign_instance_variables(args, _, _)
   return sn(nil, nodes)
 end
 
+local function assign_attribute_readers(args, _, _)
+  local nodes = {}
+  local args_table = vim.split(args[1][1], ',', true)
+
+  for index, arg in ipairs(args_table) do
+    arg = arg:gsub(' ', '')
+
+    if arg and arg:match('^%a') then
+      local stripped_arg = arg:match(ruby_args_pattern)
+      if index == 1 then vim.list_extend(nodes, {
+        t({ 'attr_reader ' }),
+      }) end
+      vim.list_extend(nodes, {
+        t({ ':' .. stripped_arg }),
+      })
+      if index < #args_table then vim.list_extend(nodes, {
+        t({ ', ' }),
+      }) end
+    end
+  end
+
+  return sn(nil, nodes)
+end
+
 return {
   snippet(
     {
@@ -122,10 +146,15 @@ return {
             def initialize({})
               {}
             end
+
+            private
+
+            {}
           ]],
       {
         i(1),
         d(2, assign_instance_variables, { 1 }),
+        d(3, assign_attribute_readers, { 1 }),
       }
     )
   ),
@@ -148,11 +177,16 @@ return {
             def call
               {}
             end
+
+            private
+
+            {}
         ]],
       {
         i(1),
         d(2, assign_instance_variables, { 1 }),
         i(0),
+        d(3, assign_attribute_readers, { 1 }),
       }
     )
   ),
