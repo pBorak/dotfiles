@@ -107,9 +107,7 @@ return {
       return {
         debounce = 150,
         sources = {
-          nls.builtins.formatting.prettier.with({
-            condition = function(_utils) return _utils.root_has_file('.prettierrc') end,
-          }),
+          nls.builtins.formatting.prettier,
           nls.builtins.formatting.stylua,
         },
       }
