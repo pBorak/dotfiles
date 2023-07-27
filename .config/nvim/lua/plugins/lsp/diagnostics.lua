@@ -1,22 +1,5 @@
 local M = {}
 
-function M.max_diagnostic(callback, namespace)
-  return function(_, bufnr, _, opts)
-    -- Get all diagnostics from the whole buffer rather than just the
-    -- diagnostics passed to the handler
-    local diagnostics = vim.diagnostic.get(bufnr)
-    -- Find the "worst" diagnostic per line
-    local max_severity_per_line = {}
-    for _, d in pairs(diagnostics) do
-      local m = max_severity_per_line[d.lnum]
-      if not m or d.severity < m.severity then max_severity_per_line[d.lnum] = d end
-    end
-    -- Pass the filtered diagnostics (with our custom namespace) to
-    -- the original handler
-    callback(namespace, bufnr, vim.tbl_values(max_severity_per_line), opts)
-  end
-end
-
 function M.setup()
   local icons = require('config.icons').diagnostics
 
@@ -54,13 +37,6 @@ function M.setup()
       linehl = string.format('%sLine', hl),
     }
   end, diagnostic_types))
-
-  local ns = vim.api.nvim_create_namespace('severe-diagnostics')
-  local signs_handler = vim.diagnostic.handlers.signs
-  vim.diagnostic.handlers.signs = {
-    show = M.max_diagnostic(signs_handler.show, ns),
-    hide = function(_, bufnr) signs_handler.hide(ns, bufnr) end,
-  }
 end
 
 return M
