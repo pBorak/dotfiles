@@ -28,7 +28,6 @@ return {
         'regex',
         'query',
         'vim',
-        'help',
         'gitcommit',
         'embedded_template',
       },
