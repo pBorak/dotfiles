@@ -33,3 +33,11 @@ fzf_git_branch() {
   sed 's/^..//' | cut -d' ' -f1 |
   sed 's#^remotes/##' | sed 's#^origin/##'
 }
+
+ fzf_github_prs() {
+   local selected_pr=$(gh pr list --state all --assignee pborak --limit 200 | fzf --height 50% | awk '{print $1}')
+
+   if [[ -n "$selected_pr" ]]; then
+     gh pr view "$selected_pr" -w
+   fi
+ }
