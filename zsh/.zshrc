@@ -28,7 +28,7 @@ source ~/.work_zshrc.zsh
 #  Init dependencies
 #-------------------------------------------------------------------------------
 eval "$(rbenv init -)"
-eval "$(zoxide init --cmd cd zsh)"
+eval "$(zoxide init zsh)"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
