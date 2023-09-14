@@ -54,7 +54,15 @@ return {
         },
         sections = {
           lualine_a = { 'mode' },
-          lualine_b = {},
+          lualine_b = {
+            {
+              'b:gitsigns_head',
+              icon = icons.misc.git_branch,
+              color = {
+                gui = 'bold',
+              },
+            },
+          },
           lualine_c = {
             {
               'filetype',
@@ -68,33 +76,7 @@ return {
               color = { gui = 'italic,bold' },
             },
           },
-          lualine_x = {
-            {
-              'b:gitsigns_head',
-              icon = icons.misc.git_branch,
-              color = {
-                gui = 'bold',
-              },
-            },
-            {
-              'diagnostics',
-              sources = { 'nvim_diagnostic' },
-              symbols = {
-                error = icons.diagnostics.error,
-                warn = icons.diagnostics.warn,
-                info = icons.diagnostics.info,
-                hint = icons.diagnostics.hint,
-              },
-            },
-            {
-              'diff',
-              symbols = {
-                added = icons.git.add,
-                modified = icons.git.mod,
-                removed = icons.git.remove,
-              },
-            },
-          },
+          lualine_x = {},
           lualine_y = {},
           lualine_z = {
             {
