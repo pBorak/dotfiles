@@ -5,28 +5,22 @@
   },
   "import react": {
     "prefix": "ir",
-    "body": [
-      "import * as React from 'react'"
-    ],
+    "body": ["import * as React from 'react'"],
     "description": "Import React"
   },
   "reactFunctionComponent": {
     "prefix": "rfc",
-    "body": "\nfunction ${TM_FILENAME_BASE}() {\n\treturn (\n\t\t<div>\n\t\t\t$0\n\t\t</div>\n\t)\n}\n\nexport default ${TM_FILENAME_BASE}",
+    "body": "\nfunction ${TM_FILENAME_BASE}() {\n\treturn (\n\t\t<div>\n\t\t\t$0\n\t\t</div>\n\t)\n}\n\nexport { ${TM_FILENAME_BASE} }",
     "description": "Creates a React function component without PropTypes"
   },
   "reactFunctionComponentWithCustomName": {
     "prefix": "rfcn",
-    "body": "\nfunction ${1:functionname} () {\n\treturn (\n\t\t<div>\n\t\t\t$0\n\t\t</div>\n\t)\n}\n\nexport default ${1:functionname}",
+    "body": "\nfunction ${1:functionname} () {\n\treturn (\n\t\t<div>\n\t\t\t$0\n\t\t</div>\n\t)\n}\n\nexport { ${1:functionname} }",
     "description": "Creates a React function component with custom name"
   },
   "useEffect": {
     "prefix": "ue",
-    "body": [
-      "React.useEffect(() => {",
-      "\t$1",
-      "}, [${3}])$0"
-    ],
+    "body": ["React.useEffect(() => {", "\t$1", "}, [${3}])$0"],
     "description": "React useEffect() hook"
   }
 }
