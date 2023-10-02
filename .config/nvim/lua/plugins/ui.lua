@@ -102,26 +102,28 @@ return {
 
   {
     'lukas-reineke/indent-blankline.nvim',
-    event = 'BufReadPost',
+    event = { 'BufReadPost', 'BufNewFile' },
     opts = {
-      char = '│',
-      context_char = '┃',
-      show_current_context = true,
-      filetype_exclude = {
-        'log',
-        'fugitive',
-        'gitcommit',
-        'packer',
-        'markdown',
-        'json',
-        'txt',
-        'help',
-        'git',
-        'undotree',
-        '', -- for all buffers without a file type
+      indent = { char = '│' },
+      scope = { enabled = false },
+      exclude = {
+        filetypes = {
+          'log',
+          'fugitive',
+          'gitcommit',
+          'lazy',
+          'markdown',
+          'json',
+          'notify',
+          'mason',
+          'txt',
+          'help',
+          'git',
+          'undotree',
+        },
       },
-      buftype_exclude = { 'terminal', 'nofile' },
     },
+    main = 'ibl',
   },
 
   { 'nvim-tree/nvim-web-devicons', lazy = true },
