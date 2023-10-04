@@ -10,6 +10,13 @@ return {
     },
     opts = function()
       return {
+        capabilities = {
+          workspace = {
+            didChangeWatchedFiles = {
+              dynamicRegistration = false,
+            },
+          },
+        },
         servers = {
           lua_ls = {
             settings = {
