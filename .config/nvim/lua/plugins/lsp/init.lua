@@ -42,11 +42,6 @@ return {
               '.eslintrc.js',
               '.eslintrc.json'
             ),
-            settings = {
-              format = {
-                enable = true,
-              },
-            },
           },
           dockerls = {},
           yamlls = {},
@@ -60,9 +55,9 @@ return {
     config = function(_, opts)
       require('plugins.lsp.diagnostics').setup()
       require('plugins.lsp.handlers').setup()
+      require('plugins.lsp.autoformat').setup()
 
       require('util').on_lsp_attach(function(client, buffer)
-        require('plugins.lsp.format').on_attach(client, buffer)
         require('plugins.lsp.highlights').on_attach(client, buffer)
         require('plugins.lsp.keymaps').on_attach(client, buffer)
         vim.bo[buffer].tagfunc = nil
@@ -106,18 +101,24 @@ return {
   },
 
   {
-    'nvimtools/none-ls.nvim',
-    event = 'BufReadPre',
-    opts = function()
-      local nls = require('null-ls')
-
-      return {
-        debounce = 150,
-        sources = {
-          nls.builtins.formatting.prettier,
-          nls.builtins.formatting.stylua,
-        },
-      }
-    end,
+    'stevearc/conform.nvim',
+    dependencies = { 'mason.nvim' },
+    event = 'BufWritePre',
+    lazy = true,
+    keys = {
+      {
+        '<leader>lf',
+        function() require('conform').format({ async = true, lsp_fallback = true }) end,
+      },
+    },
+    opts = {
+      formatters_by_ft = {
+        lua = { 'stylua' },
+        html = { 'prettier' },
+        javascript = { 'prettier' },
+        javascriptreact = { 'prettier' },
+      },
+    },
+    init = function() vim.o.formatexpr = "v:lua.require'conform'.formatexpr()" end,
   },
 }

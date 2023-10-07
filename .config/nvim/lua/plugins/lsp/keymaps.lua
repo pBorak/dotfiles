@@ -7,7 +7,6 @@ function M.on_attach(_, buffer)
   vim.keymap.set('i', '<C-h>', vim.lsp.buf.signature_help, { buffer = buffer })
   vim.keymap.set('n', '<leader>la', vim.lsp.buf.code_action, { silent = true, buffer = buffer })
   vim.keymap.set('n', '<leader>ln', vim.lsp.buf.rename, { silent = true, buffer = buffer })
-  vim.keymap.set('n', '<leader>lf', vim.lsp.buf.format, { silent = true, buffer = buffer })
   vim.keymap.set('n', '<leader>ls', vim.diagnostic.open_float, { silent = true, buffer = buffer })
 
   vim.keymap.set(
