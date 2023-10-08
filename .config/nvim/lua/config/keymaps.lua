@@ -4,7 +4,9 @@ local Util = require('util')
 --------------------------------------------------------------------------------
 vim.api.nvim_create_autocmd('FileType', {
   pattern = { 'neotest-attach' },
-  callback = function() vim.keymap.set('t', '<esc>', [[<C-\><C-n>]], { silent = false, buffer = 0 }) end,
+  callback = function()
+    vim.keymap.set('t', '<esc>', [[<C-\><C-n>]], { silent = false, buffer = 0 })
+  end,
 })
 --------------------------------------------------------------------------------
 -- MACROS
@@ -109,3 +111,5 @@ vim.keymap.set(
 )
 
 vim.keymap.set('n', '<leader>cc', function() Util.toggle_quickfix() end)
+
+vim.keymap.set('n', '<leader>lt', require('plugins.lsp.autoformat').toggle)
