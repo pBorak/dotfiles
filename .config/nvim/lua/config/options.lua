@@ -19,7 +19,6 @@ opt.splitkeep = 'screen'
 opt.diffopt = opt.diffopt
   + {
     'vertical',
-    'iwhite',
     'algorithm:histogram',
     'indent-heuristic',
     'linematch:60',
