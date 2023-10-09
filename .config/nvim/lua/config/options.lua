@@ -68,5 +68,5 @@ opt.sidescrolloff = 15
 opt.sidescroll = 5
 opt.number = true -- Print line number
 opt.relativenumber = true -- Relative line numbers
-require('util.status')
+opt.statuscolumn = [[%!v:lua.require'util.status'.statuscolumn()]]
 require('util.abbreviations')

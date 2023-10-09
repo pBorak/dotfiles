@@ -14,6 +14,7 @@ M = {
   misc = {
     git_branch = ' ',
     line = 'ℓ',
+    dots = '󰇘',
   },
   kinds = {
     Text = ' ',
