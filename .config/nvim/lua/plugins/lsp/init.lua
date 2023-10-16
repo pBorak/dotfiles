@@ -61,7 +61,6 @@ return {
         require('plugins.lsp.highlights').on_attach(client, buffer)
         require('plugins.lsp.keymaps').on_attach(client, buffer)
         vim.bo[buffer].tagfunc = nil
-        vim.bo[buffer].formatexpr = nil
       end)
 
       local servers = opts.servers
