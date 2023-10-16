@@ -80,20 +80,29 @@ return {
       'hrsh7th/cmp-buffer',
       'saadparwaiz1/cmp_luasnip',
       'lukas-reineke/cmp-rg',
+      {
+        'zbirenbaum/copilot-cmp',
+        dependencies = 'copilot.lua',
+        opts = {},
+        config = function(_, opts)
+          local copilot_cmp = require('copilot_cmp')
+          copilot_cmp.setup(opts)
+          require('util.init').on_lsp_attach(function(client)
+            if client.name == 'copilot' then copilot_cmp._on_insert_enter({}) end
+          end)
+        end,
+      },
     },
     opts = function()
       vim.api.nvim_set_hl(0, 'CmpGhostText', { link = 'Comment', default = true })
       local cmp = require('cmp')
-
       return {
         window = {
           completion = cmp.config.window.bordered(),
           documentation = cmp.config.window.bordered(),
         },
-        experimental = {
-          ghost_text = {
-            hl_group = 'CmpGhostText',
-          },
+        completion = {
+          completeopt = 'menu,menuone,noinsert',
         },
         snippet = {
           expand = function(args) require('luasnip').lsp_expand(args.body) end,
@@ -108,17 +117,10 @@ return {
             select = true,
           }),
         },
-        formatting = {
-          fields = { 'abbr', 'kind', 'menu' },
-          format = function(_, item)
-            local icons = require('config.icons').kinds
-            if icons[item.kind] then item.kind = icons[item.kind] .. item.kind end
-            return item
-          end,
-        },
         sources = cmp.config.sources({
           { name = 'nvim_lsp' },
           { name = 'luasnip' },
+          { name = 'copilot' },
           { name = 'path' },
           { name = 'buffer' },
         }, {
@@ -127,8 +129,32 @@ return {
             keyword_length = 4,
           },
         }),
+        formatting = {
+          fields = { 'abbr', 'kind', 'menu' },
+          format = function(_, item)
+            local icons = require('config.icons').kinds
+            if icons[item.kind] then item.kind = icons[item.kind] .. item.kind end
+            return item
+          end,
+        },
+        experimental = {
+          ghost_text = {
+            hl_group = 'CmpGhostText',
+          },
+        },
       }
     end,
+  },
+
+  {
+    'zbirenbaum/copilot.lua',
+    cmd = 'Copilot',
+    build = ':Copilot auth',
+    event = 'InsertEnter',
+    opts = {
+      suggestion = { enabled = false },
+      panel = { enabled = false },
+    },
   },
 
   {
