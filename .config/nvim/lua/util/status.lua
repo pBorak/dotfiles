@@ -26,7 +26,7 @@ function M.get_signs(buf, lnum)
   )
   for _, extmark in pairs(extmarks) do
     signs[#signs + 1] = {
-      name = extmark[4].sign_hl_group,
+      name = extmark[4].sign_hl_group or '',
       text = extmark[4].sign_text,
       texthl = extmark[4].sign_hl_group,
       priority = extmark[4].priority,
@@ -64,30 +64,52 @@ end
 
 function M.statuscolumn()
   local win = vim.g.statusline_winid
-  if vim.wo[win].signcolumn == 'no' then return '' end
   local buf = vim.api.nvim_win_get_buf(win)
+  local is_file = vim.bo[buf].buftype == ''
+  local show_signs = vim.wo[win].signcolumn ~= 'no'
 
-  ---@type Sign?,Sign?,Sign?
-  local left, right
-  for _, s in ipairs(M.get_signs(buf, vim.v.lnum)) do
-    if s.name:find('GitSign') then
-      right = s
-    else
-      left = s
+  local components = { '', '', '' } -- left, middle, right
+
+  if show_signs then
+    local left, right
+    for _, s in ipairs(M.get_signs(buf, vim.v.lnum)) do
+      if s.name and s.name:find('GitSign') then
+        right = s
+      else
+        left = s
+      end
     end
+    if vim.v.virtnum ~= 0 then left = nil end
+    -- Left: mark or non-git sign
+    components[1] = M.icon(M.get_mark(buf, vim.v.lnum) or left)
+    -- Right: git sign (only if file)
+    components[3] = is_file and M.icon(right) or ''
   end
 
-  local nu = ''
-  if vim.wo[win].number and vim.v.virtnum == 0 then
-    nu = vim.wo[win].relativenumber and vim.v.relnum ~= 0 and vim.v.relnum or vim.v.lnum
+  -- Numbers in Neovim are weird
+  -- They show when either number or relativenumber is true
+  local is_num = vim.wo[win].number
+  local is_relnum = vim.wo[win].relativenumber
+  if (is_num or is_relnum) and vim.v.virtnum == 0 then
+    if vim.v.relnum == 0 then
+      components[2] = is_num and '%l' or '%r' -- the current line
+    else
+      components[2] = is_relnum and '%r' or '%l' -- other lines
+    end
+    components[2] = '%=' .. components[2] .. ' ' -- right align
   end
 
-  return table.concat({
-    M.icon(M.get_mark(buf, vim.v.lnum) or left),
-    [[%=]],
-    nu .. ' ',
-    M.icon(right),
-  }, '')
+  return table.concat(components, '')
+end
+
+function M.fg(name)
+  ---@type {foreground?:number}?
+  ---@diagnostic disable-next-line: deprecated
+  local hl = vim.api.nvim_get_hl and vim.api.nvim_get_hl(0, { name = name })
+    or vim.api.nvim_get_hl_by_name(name, true)
+  ---@diagnostic disable-next-line: undefined-field
+  local fg = hl and (hl.fg or hl.foreground)
+  return fg and { fg = string.format('#%06x', fg) } or nil
 end
 
 return M
