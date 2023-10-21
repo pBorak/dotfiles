@@ -23,7 +23,6 @@
     ~/.gitmessage: git/.gitmessage
     ~/.gitignore: git/.gitignore
     ~/.tmux.conf: tmux/.tmux.conf
-    ~/.hammerspoon: hammerspoon
     ~/.config/kitty:
       force: true
       path: .config/kitty
