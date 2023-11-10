@@ -25,8 +25,13 @@ function M.setup()
         -- exit early if autoformat is not enabled
         return
       end
+      local extra_lang_args = {
+        javasciprt = { lsp_fallback = 'always', name = 'eslint' },
+        javascriptreact = { lsp_fallback = 'always', name = 'eslint' },
+      }
+      local extra_args = extra_lang_args[vim.bo[event.buf].filetype] or {}
 
-      require('conform').format({ bufnr = event.buf })
+      require('conform').format(vim.tbl_deep_extend('force', { bufnr = event.buf }, extra_args))
     end,
   })
 end
