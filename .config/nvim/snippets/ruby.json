@@ -2,7 +2,7 @@
   "Rspec describe": {
     "prefix": "desc",
     "body": [
-      "describe '$1' do",
+      "describe \"$1\" do",
       "  $2",
       "end"
     ]
@@ -10,7 +10,7 @@
   "Context block spec": {
     "prefix": "cont",
     "body": [
-      "context '$1' do",
+      "context \"$1\" do",
       "  $2",
       "end"
     ]
@@ -18,7 +18,7 @@
   "It block spec": {
     "prefix": "it",
     "body": [
-      "it '$1' do",
+      "it \"$1\" do",
       "  $2",
       "end"
     ]
