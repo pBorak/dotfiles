@@ -53,21 +53,6 @@ return {
         ['--no-scrollbar'] = '',
         ['--ellipsis'] = '…',
       },
-      fzf_colors = {
-        ['fg'] = { 'fg', 'Normal' },
-        ['bg'] = { 'bg', 'Normal' },
-        ['hl'] = { 'fg', 'Special' },
-        ['fg+'] = { 'fg', 'Visual' },
-        ['bg+'] = { 'bg', 'Visual' },
-        ['hl+'] = { 'fg', 'Special' },
-        ['info'] = { 'fg', 'Comment', 'italic' },
-        ['prompt'] = { 'fg', 'Special' },
-        ['pointer'] = { 'fg', 'Visual' },
-        ['marker'] = { 'fg', 'MatchParen' },
-        ['spinner'] = { 'fg', 'Normal' },
-        ['header'] = { 'fg', 'Visual' },
-        ['gutter'] = { 'bg', 'Normal' },
-      },
       file_icon_padding = ' ',
       winopts = {
         preview = {
@@ -213,6 +198,7 @@ return {
     'ThePrimeagen/harpoon',
     event = 'VeryLazy',
     branch = 'harpoon2',
+    commit = '61406ca0b4878f99db2104a2eda11fb2313900fc',
     dependencies = { 'nvim-lua/plenary.nvim' },
     config = function()
       local harpoon = require('harpoon')
