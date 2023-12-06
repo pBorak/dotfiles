@@ -114,6 +114,9 @@ return {
         char = {
           keys = { 'f', 'F', 't', 'T' },
         },
+        search = {
+          enabled = false,
+        },
       },
     },
     keys = {
