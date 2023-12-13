@@ -191,17 +191,6 @@ return {
     opts = {},
   },
 
-  {
-    'echasnovski/mini.ai',
-    event = 'VeryLazy',
-    opts = {
-      mappings = {
-        goto_left = '',
-        goto_right = '',
-      },
-    },
-  },
-
   { 'vim-scripts/ReplaceWithRegister', event = 'VeryLazy' },
 
   { 'tpope/vim-eunuch', event = 'VeryLazy' },
