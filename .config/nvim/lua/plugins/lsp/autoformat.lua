@@ -28,6 +28,8 @@ function M.setup()
       local extra_lang_args = {
         javasciprt = { lsp_fallback = 'always', name = 'eslint' },
         javascriptreact = { lsp_fallback = 'always', name = 'eslint' },
+        typescript = { lsp_fallback = 'always', name = 'eslint' },
+        typescriptreact = { lsp_fallback = 'always', name = 'eslint' },
       }
       local extra_args = extra_lang_args[vim.bo[event.buf].filetype] or {}
 

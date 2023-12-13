@@ -134,6 +134,8 @@ return {
         html = { 'prettier' },
         javascript = { 'prettier' },
         javascriptreact = { 'prettier' },
+        typescript = { 'prettier' },
+        typescriptreact = { 'prettier' },
       },
     },
     init = function() vim.o.formatexpr = "v:lua.require'conform'.formatexpr()" end,
