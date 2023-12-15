@@ -34,14 +34,6 @@ return {
       highlight = {
         enable = true,
       },
-      incremental_selection = {
-        enable = true,
-        keymaps = {
-          init_selection = '<CR>',
-          node_incremental = '<CR>',
-          node_decremental = '<BS>',
-        },
-      },
       indent = {
         enable = true,
         disable = { 'ruby' },
