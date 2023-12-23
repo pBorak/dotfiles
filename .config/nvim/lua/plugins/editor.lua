@@ -235,7 +235,7 @@ return {
   },
 
   {
-    dir = '~/code/neotest',
+    'nvim-neotest/neotest',
     lazy = true,
     dependencies = {
       { 'olimorris/neotest-rspec' },
