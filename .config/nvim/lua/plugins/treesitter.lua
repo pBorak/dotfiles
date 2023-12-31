@@ -28,6 +28,7 @@ return {
         'regex',
         'query',
         'vim',
+        'vimdoc',
         'gitcommit',
         'embedded_template',
       },
