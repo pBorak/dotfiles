@@ -7,12 +7,12 @@ local function split_path(path)
   local root = parts[1]
 
   if root == 'app' then
-    return { unpack(parts, 3) }
+    return { table.unpack(parts, 3) }
   elseif root == 'spec' then
     parts[#parts] = parts[#parts]:gsub('_spec', '')
-    return { unpack(parts, 3) }
+    return { table.unpack(parts, 3) }
   elseif root == 'lib' then
-    return { unpack(parts, 2, #parts) }
+    return { table.unpack(parts, 2, #parts) }
   else
     return parts
   end
@@ -116,22 +116,22 @@ return {
       name = 'rspec spec init',
       dscr = { 'Initialize rspec file' },
     },
-    fmt(
+    fmta(
       [[
             # frozen_string_literal: true
 
             require "spec_helper"
 
-            describe {} do
-              {}
+            describe <described_class> do
+              <finish>
             end
         ]],
       {
-        f(function(_, snip)
+        described_class = f(function(_, snip)
           local file_path = snip.env.RELATIVE_FILEPATH
           return spec_name(file_path)
         end, {}),
-        i(0),
+        finish = i(0),
       }
     )
   ),
@@ -141,20 +141,20 @@ return {
       name = 'Ruby `initialize` method',
       dscr = { 'Ruby initialize function' },
     },
-    fmt(
+    fmta(
       [[
-            def initialize({})
-              {}
+            def initialize(<args>)
+              <instance_variables>
             end
 
             private
 
-            {}
+            <attribute_readers>
           ]],
       {
-        i(1),
-        d(2, assign_instance_variables, { 1 }),
-        d(3, assign_attribute_readers, { 1 }),
+        args = i(1),
+        instance_variables = d(2, assign_instance_variables, { 1 }),
+        attribute_readers = d(3, assign_attribute_readers, { 1 }),
       }
     )
   ),
@@ -164,29 +164,29 @@ return {
       name = 'Ruby `self.call` method',
       dscr = { 'Ruby self.call function boilerplate' },
     },
-    fmt(
+    fmta(
       [[
             def self.call(...)
               new(...).call
             end
 
-            def initialize({})
-              {}
+            def initialize(<args>)
+              <instance_variables>
             end
 
             def call
-              {}
+              <finish>
             end
 
             private
 
-            {}
+            <attribute_readers>
         ]],
       {
-        i(1),
-        d(2, assign_instance_variables, { 1 }),
-        i(0),
-        d(3, assign_attribute_readers, { 1 }),
+        args = i(1),
+        instance_variables = d(2, assign_instance_variables, { 1 }),
+        finish = i(0),
+        attribute_readers = d(3, assign_attribute_readers, { 1 }),
       }
     )
   ),
@@ -196,16 +196,18 @@ return {
       name = 'ruby class',
       dscr = { 'Init Ruby class and modules based on the path' },
     },
-    fmt(
+    fmta(
       [[
             # frozen_string_literal: true
 
-            {}
+            <class_name>
           ]],
-      d(1, function(_, snip)
-        local file_path = snip.env.RELATIVE_FILEPATH
-        return ruby_class(file_path)
-      end, {})
+      {
+        class_name = d(1, function(_, snip)
+          local file_path = snip.env.RELATIVE_FILEPATH
+          return ruby_class(file_path)
+        end, {}),
+      }
     )
   ),
 }
