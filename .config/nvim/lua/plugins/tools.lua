@@ -37,9 +37,14 @@ return {
         end,
       },
     },
-    opts = {
-      mappings = '<leader>xl',
-    },
+    opts = function()
+      return {
+        mappings = '<leader>xl',
+        callbacks = {
+          ['gitlab.housecalldev.com'] = require('gitlinker.hosts').get_gitlab_type_url,
+        },
+      }
+    end,
   },
 
   {
