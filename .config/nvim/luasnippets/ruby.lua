@@ -7,12 +7,12 @@ local function split_path(path)
   local root = parts[1]
 
   if root == 'app' then
-    return { table.unpack(parts, 3) }
+    return { unpack(parts, 3) }
   elseif root == 'spec' then
     parts[#parts] = parts[#parts]:gsub('_spec', '')
-    return { table.unpack(parts, 3) }
+    return { unpack(parts, 2, #parts) }
   elseif root == 'lib' then
-    return { table.unpack(parts, 2, #parts) }
+    return { unpack(parts, 2, #parts) }
   else
     return parts
   end
@@ -120,9 +120,9 @@ return {
       [[
             # frozen_string_literal: true
 
-            require "spec_helper"
+            require "rails_helper"
 
-            describe <described_class> do
+            RSpec.describe <described_class> do
               <finish>
             end
         ]],
