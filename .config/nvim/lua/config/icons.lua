@@ -3,7 +3,7 @@ M = {
     error = ' ',
     warn = ' ',
     info = ' ',
-    hint = ' ',
+    hint = '󰌶 ',
   },
   git = {
     add = ' ',
@@ -12,7 +12,7 @@ M = {
     rename = ' ',
   },
   misc = {
-    git_branch = ' ',
+    git_branch = '',
     line = 'ℓ',
     dots = '󰇘',
   },
