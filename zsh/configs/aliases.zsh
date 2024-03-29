@@ -17,6 +17,7 @@ alias gpr='fzf_github_prs'
 alias l='ls -laFhG'
 alias ls='ls -G'
 alias rc='bundle exec rails c'
+alias rs='bundle exec rails s'
 alias tlog='tail -f log/test.log'
 alias vi='nvim'
 alias vim="nvim"
