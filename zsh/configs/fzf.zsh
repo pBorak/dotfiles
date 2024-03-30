@@ -22,7 +22,7 @@ fzf_git_log_pickaxe() {
              --preview "git show --color=always {1} | delta"
        )
      if [[ -n $selections ]]; then
-         git show $(echo "$selections" | cut -d' ' -f1 | tr '\n' ' ')
+         vim +"Gedit $(echo "$selections" | cut -d' ' -f1 | tr '\n' ' ')"
      fi
  }
 
