@@ -167,6 +167,17 @@ return {
   },
 
   {
+    'echasnovski/mini.ai',
+    event = 'VeryLazy',
+    opts = {
+      mappings = {
+        goto_left = '',
+        goto_right = '',
+      },
+    },
+  },
+
+  {
     'windwp/nvim-autopairs',
     event = 'InsertEnter',
     config = function()
