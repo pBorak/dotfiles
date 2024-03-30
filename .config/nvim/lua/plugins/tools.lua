@@ -12,6 +12,7 @@ return {
 
   {
     'tpope/vim-fugitive',
+    cmd = { 'Gedit', 'G blame', 'Gwrite', 'Gread', 'G' },
     event = 'BufReadPre',
     keys = {
       { '<leader>gs', '<cmd>G<CR>' },
