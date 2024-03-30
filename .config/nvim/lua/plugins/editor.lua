@@ -35,6 +35,9 @@ return {
               ['--no-sort'] = '',
             },
             preview = 'git show --color=always {1} | delta  --width=$FZF_PREVIEW_COLUMNS',
+            actions = {
+              ['default'] = function(selected) vim.cmd('Gedit ' .. selected[1]:match('[^ ]+')) end,
+            },
           })
         end,
       },
