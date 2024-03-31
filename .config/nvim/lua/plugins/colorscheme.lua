@@ -14,7 +14,6 @@ return {
           'packer',
           'help',
           'startuptime',
-          'fugitive',
           'undotree',
         },
         on_colors = function(colors)

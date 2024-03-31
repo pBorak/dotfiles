@@ -11,12 +11,22 @@ return {
   },
 
   {
-    'tpope/vim-fugitive',
-    cmd = { 'Gedit', 'G blame', 'Gwrite', 'Gread', 'G' },
-    event = 'BufReadPre',
+    'NeogitOrg/neogit',
+    branch = 'nightly',
+    cmd = 'Neogit',
     keys = {
-      { '<leader>gs', '<cmd>G<CR>' },
-      { '<leader>gb', '<cmd>G blame<CR>' },
+      { '<leader>gs', function() require('neogit').open() end },
+    },
+    dependencies = {
+      'nvim-lua/plenary.nvim',
+      'sindrets/diffview.nvim',
+      'ibhagwan/fzf-lua',
+    },
+    opts = {
+      integrations = {
+        diffview = true,
+        fzf_lua = true,
+      },
     },
   },
 
