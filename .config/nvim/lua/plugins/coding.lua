@@ -102,6 +102,11 @@ return {
           completion = cmp.config.window.bordered(),
           documentation = cmp.config.window.bordered(),
         },
+        view = {
+          entries = {
+            follow_cursor = true,
+          },
+        },
         completion = {
           completeopt = 'menu,menuone,noinsert',
         },

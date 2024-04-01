@@ -29,7 +29,7 @@
   "neotest-rspec": { "branch": "main", "commit": "1b6a43acf781785939628d524844dfc4fdfcde3e" },
   "nvim-autopairs": { "branch": "master", "commit": "dbfc1c34bed415906395db8303c71039b3a3ffb4" },
   "nvim-bqf": { "branch": "main", "commit": "52703d7adc3be3f7c09eea9a80c5b8caa615fb25" },
-  "nvim-cmp": { "branch": "main", "commit": "b9fd19fa160490609389cd45d552896ec4264a6d" },
+  "nvim-cmp": { "branch": "main", "commit": "2fb2a3cf78bbc1b0bea030e8c8728985af1cf302" },
   "nvim-colorizer.lua": { "branch": "master", "commit": "85855b38011114929f4058efc97af1059ab3e41d" },
   "nvim-lspconfig": { "branch": "master", "commit": "f4619ab31fc4676001ea05ae8200846e6e7700c7" },
   "nvim-notify": { "branch": "master", "commit": "5371f4bfc1f6d3adf4fe9d62cd3a9d44356bfd15" },
