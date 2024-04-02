@@ -25,3 +25,5 @@ git:
     pager: delta --dark --paging=never
 os:
   editPreset: "nvim"
+services:
+  gitlab.housecalldev.com: gitlab:gitlab.housecalldev.com

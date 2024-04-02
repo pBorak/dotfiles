@@ -27,6 +27,9 @@ return {
         diffview = true,
         fzf_lua = true,
       },
+      git_services = {
+        ['gitlab.housecalldev.com'] = 'https://gitlab.housecalldev.com/${owner}/${repository}/merge_requests/new?merge_request[source_branch]=${branch_name}',
+      },
     },
   },
 
