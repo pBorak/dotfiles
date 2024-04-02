@@ -118,6 +118,7 @@ return {
             height = 0.4,
             preview = { hidden = 'hidden' },
           },
+          cmd_add = { 'git', 'checkout', '-b' },
         },
         status = { preview_pager = 'delta --width=$FZF_PREVIEW_COLUMNS' },
         bcommits = { preview_pager = 'delta --width=$FZF_PREVIEW_COLUMNS' },
