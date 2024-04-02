@@ -1,6 +1,5 @@
 #!/usr/bin/zsh
-#
-export XDG_CONFIG_HOME="$HOME/.config"
+
 export DOTFILES=$HOME/.dotfiles
 export PROJECTS_DIR=$HOME/code
 export ZSH_PLUGINS_DIR=$HOME/.zsh/plugins

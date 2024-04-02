@@ -113,9 +113,3 @@ vim.keymap.set(
 vim.keymap.set('n', '<leader>cc', function() Util.toggle_quickfix() end)
 
 vim.keymap.set('n', '<leader>lt', require('plugins.lsp.autoformat').toggle)
-
-vim.keymap.set(
-  'n',
-  '<leader>gg',
-  function() require('util.terminal').open({ 'lazygit' }, { esc_esc = false, ctrl_hjkl = false }) end
-)

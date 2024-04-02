@@ -6,7 +6,6 @@ alias dbmt='bundle exec rails db:migrate RAILS_ENV=test'
 alias dbs='bundle exec rails db:migrate:status'
 alias dbst='bundle exec rails db:migrate:status RAILS_ENV=test'
 alias dlog='tail -f log/development.log'
-alias gg='lazygit'
 alias gb='fzf_git_branch | xargs git checkout'
 alias gcurrent="git rev-parse --abbrev-ref HEAD"
 alias glS='fzf_git_log_pickaxe'

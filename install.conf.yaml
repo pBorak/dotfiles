@@ -29,9 +29,6 @@
     ~/.config/nvim:
       force: true
       path: .config/nvim
-    ~/.config/lazygit:
-      force: true
-      path: .config/lazygit
 
 - shell:
   - [git submodule update --init --recursive, Installing submodules]
