@@ -245,6 +245,7 @@ return {
     lazy = true,
     dependencies = {
       { 'olimorris/neotest-rspec' },
+      { 'nvim-neotest/nvim-nio' },
       { 'nvim-treesitter/nvim-treesitter' },
     },
     keys = {
