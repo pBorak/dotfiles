@@ -23,12 +23,16 @@
     ~/.gitmessage: git/.gitmessage
     ~/.gitignore: git/.gitignore
     ~/.tmux.conf: tmux/.tmux.conf
+    ~/.irbrc: irb/.irbrc
     ~/.config/kitty:
       force: true
       path: .config/kitty
     ~/.config/nvim:
       force: true
       path: .config/nvim
+    ~/.config/ruby:
+      force: true
+      path: .config/ruby
 
 - shell:
   - [git submodule update --init --recursive, Installing submodules]
