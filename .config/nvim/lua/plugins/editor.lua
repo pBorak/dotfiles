@@ -220,7 +220,7 @@ return {
           save_on_toggle = true,
         },
       })
-      vim.keymap.set('n', '<localleader>m', function() harpoon:list():append() end)
+      vim.keymap.set('n', '<localleader>m', function() harpoon:list():add() end)
       vim.keymap.set(
         'n',
         '<localleader><localleader>',
