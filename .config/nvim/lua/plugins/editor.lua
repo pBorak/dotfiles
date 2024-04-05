@@ -37,7 +37,7 @@ return {
             fzf_opts = {
               ['--no-sort'] = '',
             },
-            preview = 'git show --color=always {1} | delta  --width=$FZF_PREVIEW_COLUMNS',
+            preview = 'git show --color=always {1} | delta',
             actions = {
               ['default'] = function(selected) vim.cmd('Gedit ' .. selected[1]:match('[^ ]+')) end,
             },
@@ -121,9 +121,9 @@ return {
           },
           cmd_add = { 'git', 'checkout', '-b' },
         },
-        status = { preview_pager = 'delta --width=$FZF_PREVIEW_COLUMNS' },
-        bcommits = { preview_pager = 'delta --width=$FZF_PREVIEW_COLUMNS' },
-        commits = { preview_pager = 'delta --width=$FZF_PREVIEW_COLUMNS' },
+        status = { preview_pager = 'delta' },
+        bcommits = { preview_pager = 'delta' },
+        commits = { preview_pager = 'delta' },
       },
     },
   },
