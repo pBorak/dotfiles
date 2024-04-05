@@ -11,25 +11,12 @@ return {
   },
 
   {
-    'NeogitOrg/neogit',
-    branch = 'nightly',
-    cmd = 'Neogit',
+    'tpope/vim-fugitive',
+    cmd = { 'Gedit', 'G blame', 'Gwrite', 'Gread', 'G' },
+    event = 'BufReadPre',
     keys = {
-      { '<leader>gs', function() require('neogit').open() end },
-    },
-    dependencies = {
-      'nvim-lua/plenary.nvim',
-      'sindrets/diffview.nvim',
-      'ibhagwan/fzf-lua',
-    },
-    opts = {
-      integrations = {
-        diffview = true,
-        fzf_lua = true,
-      },
-      git_services = {
-        ['gitlab.housecalldev.com'] = 'https://gitlab.housecalldev.com/${owner}/${repository}/merge_requests/new?merge_request[source_branch]=${branch_name}',
-      },
+      { '<leader>gs', '<cmd>G<CR>' },
+      { '<leader>gb', '<cmd>G blame<CR>' },
     },
   },
 

@@ -85,6 +85,7 @@ return {
           },
         },
         extensions = {
+          'fugitive',
           'quickfix',
           {
             sections = { lualine_a = { function() return 'FZF' end } },
@@ -107,6 +108,7 @@ return {
       exclude = {
         filetypes = {
           'log',
+          'fugitive',
           'gitcommit',
           'lazy',
           'markdown',

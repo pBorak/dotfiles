@@ -5,6 +5,8 @@ local smart_close_filetypes = {
   'git-status',
   'git-log',
   'gitcommit',
+  'fugitive',
+  'fugitiveblame',
   'qf',
   'startuptime',
   'lspinfo',
@@ -46,7 +48,7 @@ local column_exclude = { 'gitcommit' }
 local column_block_list = {
   'DiffviewFileHistory',
   'help',
-  'NeogitStatus',
+  'fugitive',
 }
 
 ---Set or unset the color column depending on the filetype of the buffer and its eligibility
