@@ -153,31 +153,40 @@ return {
   },
 
   {
-    'lewis6991/gitsigns.nvim',
-    event = 'BufReadPre',
-    opts = {
-      signs = {
-        add = { text = '▎' },
-        change = { text = '▎' },
-        delete = { text = '' },
-        topdelete = { text = '' },
-        changedelete = { text = '▎' },
-        untracked = { text = '▎' },
+    'echasnovski/mini.diff',
+    event = 'VeryLazy',
+    keys = {
+      {
+        '<leader>gw',
+        function() require('mini.diff').do_hunks(0, 'apply') end,
       },
-      on_attach = function(buffer)
-        local gs = package.loaded.gitsigns
-
-        local function map(mode, l, r) vim.keymap.set(mode, l, r, { buffer = buffer }) end
-
-        map('n', ']g', gs.next_hunk)
-        map('n', '[g', gs.prev_hunk)
-        map({ 'n', 'v' }, '<leader>hs', ':Gitsigns stage_hunk<CR>')
-        map({ 'n', 'v' }, '<leader>hr', ':Gitsigns reset_hunk<CR>')
-        map('n', '<leader>gw', gs.stage_buffer)
-        map('n', '<leader>gr', gs.reset_buffer)
-        map('n', '<leader>hu', gs.undo_stage_hunk)
-        map('n', '<leader>hh', gs.preview_hunk_inline)
-      end,
+      {
+        '<leader>gr',
+        function() require('mini.diff').do_hunks(0, 'reset') end,
+      },
+      {
+        '<leader>go',
+        function() require('mini.diff').toggle_overlay(0) end,
+      },
+    },
+    opts = {
+      view = {
+        style = 'sign',
+        signs = {
+          add = '▎',
+          change = '▎',
+          delete = '',
+        },
+      },
+      mappings = {
+        goto_first = '',
+        goto_prev = '[g',
+        goto_next = ']g',
+        goto_last = '',
+      },
+      options = {
+        wrap_goto = true,
+      },
     },
   },
 
