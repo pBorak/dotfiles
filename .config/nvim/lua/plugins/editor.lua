@@ -177,8 +177,7 @@ return {
         map('n', '<leader>gw', gs.stage_buffer)
         map('n', '<leader>gr', gs.reset_buffer)
         map('n', '<leader>hu', gs.undo_stage_hunk)
-        map('n', '<leader>hp', gs.preview_hunk_inline)
-        map('n', '<leader>hl', function() gs.setqflist('all') end)
+        map('n', '<leader>hh', gs.preview_hunk_inline)
       end,
     },
   },
