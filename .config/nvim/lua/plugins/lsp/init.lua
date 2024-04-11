@@ -102,29 +102,19 @@ return {
     'pmizio/typescript-tools.nvim',
     lazy = false,
     dependencies = { 'nvim-lua/plenary.nvim', 'neovim/nvim-lspconfig' },
-    config = function()
-      local definition_handler =
-        require('plugins.lsp.handlers').filter_definition_react_dtls_handler
-
-      local handlers = {
-        ['textDocument/definition'] = definition_handler,
-      }
-
-      require('typescript-tools').setup({
-        handlers = handlers,
-        settings = {
-          tsserver_file_preferences = {
-            includeInlayParameterNameHints = 'literal',
-            includeInlayParameterNameHintsWhenArgumentMatchesName = false,
-            includeInlayFunctionParameterTypeHints = true,
-            includeInlayVariableTypeHints = false,
-            includeInlayPropertyDeclarationTypeHints = true,
-            includeInlayFunctionLikeReturnTypeHints = true,
-            includeInlayEnumMemberValueHints = true,
-          },
+    opts = {
+      settings = {
+        tsserver_file_preferences = {
+          includeInlayParameterNameHints = 'literal',
+          includeInlayParameterNameHintsWhenArgumentMatchesName = false,
+          includeInlayFunctionParameterTypeHints = true,
+          includeInlayVariableTypeHints = false,
+          includeInlayPropertyDeclarationTypeHints = true,
+          includeInlayFunctionLikeReturnTypeHints = true,
+          includeInlayEnumMemberValueHints = true,
         },
-      })
-    end,
+      },
+    },
   },
 
   {

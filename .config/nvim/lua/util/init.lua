@@ -54,15 +54,4 @@ function M.on_attach_lsp_attach(on_attach)
   })
 end
 
-function M.filter(arr, fn)
-  if type(arr) ~= 'table' then return arr end
-
-  local filtered = {}
-  for k, v in pairs(arr) do
-    if fn(v, k, arr) then table.insert(filtered, v) end
-  end
-
-  return filtered
-end
-
 return M
