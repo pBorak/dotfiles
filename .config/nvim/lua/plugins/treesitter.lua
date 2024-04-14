@@ -68,7 +68,6 @@ return {
         enable = true,
         enable_close_on_slash = false,
       },
-      autopairs = { enable = true },
     },
     config = function(_, opts) require('nvim-treesitter.configs').setup(opts) end,
   },

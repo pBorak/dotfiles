@@ -183,20 +183,18 @@ return {
   },
 
   {
-    'windwp/nvim-autopairs',
-    event = 'InsertEnter',
-    config = function()
-      local autopairs = require('nvim-autopairs')
-      local Rule = require('nvim-autopairs.rule')
-      autopairs.setup({
-        check_ts = true,
-      })
-      autopairs.add_rules({
-        Rule('%(.*%)%s*%=$', '> {}', { 'javascriptreact', 'javascript' })
-          :use_regex(true)
-          :set_end_pair_length(1),
-      })
-    end,
+    'echasnovski/mini.pairs',
+    event = 'VeryLazy',
+    opts = {
+      mappings = {
+        ['`'] = {
+          action = 'closeopen',
+          pair = '``',
+          neigh_pattern = '[^\\`].',
+          register = { cr = false },
+        },
+      },
+    },
   },
 
   { 'windwp/nvim-ts-autotag', event = 'VeryLazy' },
