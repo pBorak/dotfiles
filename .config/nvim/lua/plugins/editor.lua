@@ -198,7 +198,6 @@ return {
     'ThePrimeagen/harpoon',
     event = 'VeryLazy',
     branch = 'harpoon2',
-    commit = '61406ca0b4878f99db2104a2eda11fb2313900fc',
     dependencies = { 'nvim-lua/plenary.nvim' },
     config = function()
       local harpoon = require('harpoon')
