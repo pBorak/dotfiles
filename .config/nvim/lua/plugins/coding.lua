@@ -193,22 +193,30 @@ return {
   {
     'echasnovski/mini.ai',
     event = 'VeryLazy',
-    opts = {
-      mappings = {
-        goto_left = '',
-        goto_right = '',
-      },
-      custom_textobjects = {
-        g = function()
-          local from = { line = 1, col = 1 }
-          local to = {
-            line = vim.fn.line('$'),
-            col = math.max(vim.fn.getline('$'):len(), 1),
-          }
-          return { from = from, to = to }
-        end,
-      },
-    },
+    opts = function()
+      local ai = require('mini.ai')
+
+      return {
+        mappings = {
+          goto_left = '',
+          goto_right = '',
+        },
+        custom_textobjects = {
+          o = ai.gen_spec.treesitter({
+            a = { '@block.outer', '@conditional.outer', '@loop.outer' },
+            i = { '@block.inner', '@conditional.inner', '@loop.inner' },
+          }, {}),
+          g = function()
+            local from = { line = 1, col = 1 }
+            local to = {
+              line = vim.fn.line('$'),
+              col = math.max(vim.fn.getline('$'):len(), 1),
+            }
+            return { from = from, to = to }
+          end,
+        },
+      }
+    end,
   },
 
   {
