@@ -32,7 +32,7 @@
   gone = "!f() { git fetch --all --prune; git branch -vv | awk '/: gone]/{print $1}' | xargs git branch -D; }; f"
   fa = fetch --all
 	l = log --oneline --decorate -20
-  ll  = "log --graph --date=human --format='%C(#e3c78a)%h%C(#ff5454)%d%C(reset) - %C(#36c692)(%ad)%C(reset) %s %C(#80a0ff){%an}%C(reset)'"
+  ll  = "log --graph --date=human --format='%C(#7a88cf)%h%C(#ff757f)%d%C(reset) - %C(#c3e88d)(%ad)%C(reset) %s %C(#82aaff){%an}%C(reset)'"
 	pl = pull
 	plr = pull --rebase
 	ps = push
