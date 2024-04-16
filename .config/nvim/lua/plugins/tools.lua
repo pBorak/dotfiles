@@ -68,10 +68,4 @@ return {
       },
     },
   },
-
-  {
-    'NvChad/nvim-colorizer.lua',
-    ft = { 'html', 'css', 'sass' },
-    config = true,
-  },
 }
