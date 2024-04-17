@@ -125,6 +125,44 @@ return {
     main = 'ibl',
   },
 
+  {
+    'echasnovski/mini.indentscope',
+    event = { 'BufReadPost', 'BufNewFile' },
+    opts = function()
+      return {
+        mappings = {
+          object_scope = 'ii',
+          object_scope_with_border = 'ai',
+          goto_top = '[i',
+          goto_bottom = ']i',
+        },
+        draw = { animation = require('mini.indentscope').gen_animation.none() },
+        symbol = '│',
+        options = { try_as_border = true },
+      }
+    end,
+    init = function()
+      vim.api.nvim_create_autocmd('FileType', {
+        pattern = {
+          'log',
+          'fugitive',
+          'gitcommit',
+          'lazy',
+          'markdown',
+          'json',
+          'notify',
+          'mason',
+          'txt',
+          'help',
+          'git',
+          'undotree',
+          'fzf',
+        },
+        callback = function() vim.b.miniindentscope_disable = true end,
+      })
+    end,
+  },
+
   { 'nvim-tree/nvim-web-devicons', lazy = true },
 
   {
