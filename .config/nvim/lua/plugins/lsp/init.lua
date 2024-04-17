@@ -99,25 +99,6 @@ return {
   },
 
   {
-    'pmizio/typescript-tools.nvim',
-    lazy = false,
-    dependencies = { 'nvim-lua/plenary.nvim', 'neovim/nvim-lspconfig' },
-    opts = {
-      settings = {
-        tsserver_file_preferences = {
-          includeInlayParameterNameHints = 'literal',
-          includeInlayParameterNameHintsWhenArgumentMatchesName = false,
-          includeInlayFunctionParameterTypeHints = true,
-          includeInlayVariableTypeHints = false,
-          includeInlayPropertyDeclarationTypeHints = true,
-          includeInlayFunctionLikeReturnTypeHints = true,
-          includeInlayEnumMemberValueHints = true,
-        },
-      },
-    },
-  },
-
-  {
     'stevearc/conform.nvim',
     dependencies = { 'mason.nvim' },
     event = 'BufWritePre',
