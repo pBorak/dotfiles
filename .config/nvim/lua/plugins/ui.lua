@@ -97,35 +97,6 @@ return {
   },
 
   {
-    'lukas-reineke/indent-blankline.nvim',
-    event = { 'BufReadPost', 'BufNewFile' },
-    opts = {
-      indent = {
-        char = '│',
-        tab_char = '│',
-      },
-      scope = { enabled = false },
-      exclude = {
-        filetypes = {
-          'log',
-          'fugitive',
-          'gitcommit',
-          'lazy',
-          'markdown',
-          'json',
-          'notify',
-          'mason',
-          'txt',
-          'help',
-          'git',
-          'undotree',
-        },
-      },
-    },
-    main = 'ibl',
-  },
-
-  {
     'echasnovski/mini.indentscope',
     event = { 'BufReadPost', 'BufNewFile' },
     opts = function()
