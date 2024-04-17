@@ -219,21 +219,6 @@ return {
     end,
   },
 
-  {
-    'echasnovski/mini.pairs',
-    event = 'VeryLazy',
-    opts = {
-      mappings = {
-        ['`'] = {
-          action = 'closeopen',
-          pair = '``',
-          neigh_pattern = '[^\\`].',
-          register = { cr = false },
-        },
-      },
-    },
-  },
-
   { 'windwp/nvim-ts-autotag', event = 'VeryLazy' },
 
   {
