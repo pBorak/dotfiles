@@ -50,10 +50,7 @@ return {
       { '<leader>fd', function() require('fzf-lua').files({ cwd = vim.env.DOTFILES }) end },
     },
     opts = {
-      fzf_opts = {
-        ['--no-scrollbar'] = '',
-        ['--ellipsis'] = '…',
-      },
+      'default-title',
       fzf_colors = {
         ['fg'] = { 'fg', 'Normal' },
         ['bg'] = { 'bg', 'Normal' },
