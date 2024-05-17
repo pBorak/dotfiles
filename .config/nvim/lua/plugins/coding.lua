@@ -220,12 +220,6 @@ return {
 
   { 'windwp/nvim-ts-autotag', event = 'VeryLazy' },
 
-  {
-    'echasnovski/mini.comment',
-    event = 'VeryLazy',
-    opts = {},
-  },
-
   { 'vim-scripts/ReplaceWithRegister', event = 'VeryLazy' },
 
   { 'tpope/vim-eunuch', event = 'VeryLazy' },
