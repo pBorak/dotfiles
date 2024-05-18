@@ -1,24 +1,36 @@
 local Util = require('util')
 
+local smart_close_filetypes = {
+  'help',
+  'git-status',
+  'git-log',
+  'gitcommit',
+  'fugitive',
+  'fugitiveblame',
+  'qf',
+  'startuptime',
+  'lspinfo',
+  'neotest-summary',
+  'neotest-output',
+  'neotest-attach',
+}
+
+local function smart_close()
+  if vim.fn.winnr('$') ~= 1 then vim.api.nvim_win_close(0, true) end
+end
+
 vim.api.nvim_create_autocmd('FileType', {
-  group = vim.api.nvim_create_augroup('close_with_q', { clear = true }),
-  pattern = {
-    'help',
-    'git-status',
-    'git-log',
-    'gitcommit',
-    'fugitive',
-    'fugitiveblame',
-    'qf',
-    'startuptime',
-    'lspinfo',
-    'neotest-summary',
-    'neotest-output',
-    'neotest-attach',
-  },
-  callback = function(event)
-    vim.bo[event.buf].buflisted = false
-    vim.keymap.set('n', 'q', '<cmd>close<cr>', { buffer = event.buf, silent = true })
+  pattern = '*',
+  callback = function()
+    local is_unmapped = vim.fn.hasmapto('q', 'n') == 0
+
+    local is_eligible = is_unmapped
+      or vim.wo.previewwindow
+      or vim.tbl_contains(smart_close_filetypes, vim.bo.filetype)
+
+    if is_eligible then
+      vim.keymap.set('n', 'q', smart_close, { buffer = 0, nowait = true, silent = true })
+    end
   end,
 })
 
