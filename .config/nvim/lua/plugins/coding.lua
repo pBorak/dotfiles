@@ -218,8 +218,6 @@ return {
     end,
   },
 
-  { 'windwp/nvim-ts-autotag', event = 'VeryLazy' },
-
   { 'vim-scripts/ReplaceWithRegister', event = 'VeryLazy' },
 
   { 'tpope/vim-eunuch', event = 'VeryLazy' },
