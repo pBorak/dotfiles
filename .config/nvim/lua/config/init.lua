@@ -35,4 +35,4 @@ else
   load('keymaps')
 end
 
-vim.cmd.colorscheme('catppuccin')
+require('tokyonight').load()

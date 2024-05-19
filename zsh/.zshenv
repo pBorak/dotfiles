@@ -8,7 +8,7 @@ export EDITOR="nvim"
 
 export LANG=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
-export BAT_THEME=catppuccin
+export BAT_THEME=tokyo
 
 export RIPGREP_CONFIG_PATH=$DOTFILES/rg/.ripgreprc
 
@@ -19,8 +19,8 @@ export FZF_DEFAULT_OPTS='
   --height 60% --multi --reverse --cycle
   --bind ctrl-f:preview-page-down,ctrl-b:preview-page-up
   --bind alt-a:toggle-all
-  --color=bg+:#313244,bg:#080808,spinner:#f5e0dc,hl:#f38ba8,gutter:#080808
-  --color=fg:#cdd6f4,header:#f38ba8,info:#cba6f7,pointer:#f5e0dc
-  --color=marker:#f5e0dc,fg+:#cdd6f4,prompt:#cba6f7,hl+:#f38ba8
+  --color=bg+:#3654a7,bg:#080808,spinner:#7a88cf,hl:#65bcff,gutter:#080808
+  --color=fg:#c8d3f5,header:#65bcff,info:#65bcff,pointer:#65bcff
+  --color=marker:#ff966c,fg+:#c8d3f5,prompt:#65bcff,hl+:#65bcff
 '
 export FZF_CTRL_T_OPTS="--preview 'bat --color=always --line-range :500 {}'"

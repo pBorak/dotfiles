@@ -51,6 +51,21 @@ return {
     },
     opts = {
       'default-title',
+      fzf_colors = {
+        ['fg'] = { 'fg', 'Normal' },
+        ['bg'] = { 'bg', 'Normal' },
+        ['hl'] = { 'fg', 'Special' },
+        ['fg+'] = { 'fg', 'Visual' },
+        ['bg+'] = { 'bg', 'Visual' },
+        ['hl+'] = { 'fg', 'Special' },
+        ['info'] = { 'fg', 'Comment', 'italic' },
+        ['prompt'] = { 'fg', 'Special' },
+        ['pointer'] = { 'fg', 'Visual' },
+        ['marker'] = { 'fg', 'MatchParen' },
+        ['spinner'] = { 'fg', 'Normal' },
+        ['header'] = { 'fg', 'Visual' },
+        ['gutter'] = { 'bg', 'Normal' },
+      },
       file_icon_padding = ' ',
       winopts = {
         preview = {

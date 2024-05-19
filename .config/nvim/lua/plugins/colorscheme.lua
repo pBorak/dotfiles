@@ -1,42 +1,29 @@
 return {
 
   {
-    'catppuccin/nvim',
-    lazy = true,
-    name = 'catppuccin',
+    'folke/tokyonight.nvim',
+    lazy = false,
     priority = 1000,
-    opts = {
-      color_overrides = {
-        mocha = {
-          base = '#080808',
-          mantle = '#080808',
-          crust = '#080808',
+    opts = function()
+      vim.api.nvim_set_hl(0, '@label.ruby', { bold = true, fg = '#4fd6be' })
+
+      return {
+        style = 'moon',
+        sidebars = {
+          'qf',
+          'packer',
+          'help',
+          'startuptime',
+          'fugitive',
+          'undotree',
         },
-      },
-      integrations = {
-        cmp = true,
-        gitsigns = true,
-        native_lsp = {
-          enabled = true,
-          underlines = {
-            errors = { 'undercurl' },
-            hints = { 'undercurl' },
-            warnings = { 'undercurl' },
-            information = { 'undercurl' },
-          },
-        },
-        diffview = true,
-        harpoon = true,
-        mason = true,
-        neotest = true,
-        notify = true,
-        semantic_tokens = true,
-        treesitter = true,
-        treesitter_context = true,
-        mini = {
-          enabled = true,
-        },
-      },
-    },
+        on_colors = function(colors)
+          colors.bg = '#080808'
+          colors.bg_dark = '#080808'
+          colors.bg_float = '#080808'
+          colors.bg_sidebar = '#080808'
+        end,
+      }
+    end,
   },
 }
