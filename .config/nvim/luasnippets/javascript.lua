@@ -1,4 +1,9 @@
----@diagnostic disable: undefined-global
+local ls = require('luasnip')
+
+local snippet = ls.snippet
+local i = ls.insert_node
+local l = require('luasnip.extras').lambda
+local fmta = require('luasnip.extras.fmt').fmta
 
 return {
   snippet(

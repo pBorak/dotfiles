@@ -1,5 +1,13 @@
----@diagnostic disable: undefined-global
---
+local ls = require('luasnip')
+
+local snippet = ls.snippet
+local t = ls.text_node
+local f = ls.function_node
+local d = ls.dynamic_node
+local i = ls.insert_node
+local sn = ls.snippet_node
+local fmta = require('luasnip.extras.fmt').fmta
+
 local ruby_args_pattern = '^%a[^=:,]*'
 
 local function split_path(path)
