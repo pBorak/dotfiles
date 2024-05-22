@@ -6,18 +6,12 @@ return {
     keys = {
       {
         '<c-k>',
-        function()
-          local ls = require('luasnip')
-          if ls.expand_or_jumpable() then ls.expand_or_jump() end
-        end,
+        function() return vim.snippet.active({ direction = 1 }) and vim.snippet.jump(1) end,
         mode = { 'i', 's' },
       },
       {
         '<c-j>',
-        function()
-          local ls = require('luasnip')
-          if ls.jumpable(-1) then ls.jump(-1) end
-        end,
+        function() return vim.snippet.active({ direction = -1 }) and vim.snippet.jump(-1) end,
         mode = { 'i', 's' },
       },
       {
@@ -31,6 +25,33 @@ return {
     config = function()
       local ls = require('luasnip')
       local types = require('luasnip.util.types')
+
+      vim.snippet.expand = ls.lsp_expand
+
+      vim.snippet.active = function(filter)
+        filter = filter or {}
+        filter.direction = filter.direction or 1
+
+        if filter.direction == 1 then
+          return ls.expand_or_jumpable()
+        else
+          return ls.jumpable(filter.direction)
+        end
+      end
+
+      vim.snippet.jump = function(direction)
+        if direction == 1 then
+          if ls.expandable() then
+            return ls.expand_or_jump()
+          else
+            return ls.jumpable(1) and ls.jump(1)
+          end
+        else
+          return ls.jumpable(-1) and ls.jump(-1)
+        end
+      end
+
+      vim.snippet.stop = ls.unlink_current
 
       ls.config.set_config({
         history = false,
@@ -96,7 +117,7 @@ return {
           completeopt = 'menu,menuone,noinsert',
         },
         snippet = {
-          expand = function(args) require('luasnip').lsp_expand(args.body) end,
+          expand = function(args) vim.snippet.expand(args.body) end,
         },
         mapping = {
           ['<C-p>'] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Select }),
