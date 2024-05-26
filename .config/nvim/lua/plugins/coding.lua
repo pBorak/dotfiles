@@ -170,6 +170,12 @@ return {
   },
 
   {
+    'folke/ts-comments.nvim',
+    opts = {},
+    event = 'VeryLazy',
+  },
+
+  {
     'echasnovski/mini.surround',
     event = 'VeryLazy',
     config = function()
