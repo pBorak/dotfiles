@@ -55,12 +55,7 @@ return {
       require('plugins.lsp.diagnostics').setup()
       require('plugins.lsp.handlers').setup()
       require('plugins.lsp.autoformat').setup()
-
-      require('util').on_lsp_attach(function(client, buffer)
-        require('plugins.lsp.highlights').on_attach(client, buffer)
-        require('plugins.lsp.keymaps').on_attach(client, buffer)
-        vim.bo[buffer].tagfunc = nil
-      end)
+      require('plugins.lsp.on_attach').setup()
 
       local servers = opts.servers
       local capabilities =
