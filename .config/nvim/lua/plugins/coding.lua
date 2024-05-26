@@ -232,6 +232,4 @@ return {
   },
 
   { 'vim-scripts/ReplaceWithRegister', event = 'VeryLazy' },
-
-  { 'tpope/vim-eunuch', event = 'VeryLazy' },
 }
