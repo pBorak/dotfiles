@@ -158,8 +158,8 @@ return {
   },
 
   {
-    url = 'https://gitlab.com/yorickpeterse/nvim-pqf',
-    event = 'BufReadPost',
+    'yorickpeterse/nvim-pqf',
+    event = 'VeryLazy',
     config = true,
   },
 }
