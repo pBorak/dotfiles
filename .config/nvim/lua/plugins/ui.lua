@@ -73,7 +73,17 @@ return {
               color = { gui = 'italic,bold' },
             },
           },
-          lualine_x = {},
+          lualine_x = {
+            {
+              'diagnostics',
+              symbols = {
+                error = icons.diagnostics.error,
+                warn = icons.diagnostics.warn,
+                info = icons.diagnostics.info,
+                hint = icons.diagnostics.hint,
+              },
+            },
+          },
           lualine_y = {},
           lualine_z = {
             {
