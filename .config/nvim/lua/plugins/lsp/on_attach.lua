@@ -7,7 +7,6 @@ function M.setup()
       local map = function(keys, func) vim.keymap.set('n', keys, func, { buffer = event.buf }) end
 
       map('<leader>ld', vim.lsp.buf.definition)
-      map('<leader>ld', vim.lsp.buf.definition)
       map('<leader>lr', vim.lsp.buf.references)
       map('<leader>lh', vim.lsp.buf.hover)
       map('<leader>la', vim.lsp.buf.code_action)
