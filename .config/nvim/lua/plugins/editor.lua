@@ -157,14 +157,6 @@ return {
     event = 'VeryLazy',
     keys = {
       {
-        '<leader>gw',
-        function() require('mini.diff').do_hunks(0, 'apply') end,
-      },
-      {
-        '<leader>gr',
-        function() require('mini.diff').do_hunks(0, 'reset') end,
-      },
-      {
         '<leader>go',
         function() require('mini.diff').toggle_overlay(0) end,
       },
