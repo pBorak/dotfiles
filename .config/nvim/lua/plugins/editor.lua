@@ -52,15 +52,18 @@ return {
     opts = {
       'default-title',
       fzf_colors = true,
+      fzf_opts = {
+        ['--no-scrollbar'] = true,
+      },
       file_icon_padding = ' ',
       winopts = {
         preview = {
           vertical = 'up:45%',
           horizontal = 'right:50%',
+          scrollchars = { '┃', '' },
         },
         width = 0.7,
         height = 0.7,
-        hl = { border = 'FloatBorder' },
       },
       keymap = {
         builtin = {
