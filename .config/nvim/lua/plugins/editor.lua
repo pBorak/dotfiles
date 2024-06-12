@@ -55,6 +55,9 @@ return {
       fzf_opts = {
         ['--no-scrollbar'] = true,
       },
+      defaults = {
+        formatter = 'path.hl',
+      },
       file_icon_padding = ' ',
       winopts = {
         preview = {
