@@ -58,12 +58,13 @@ return {
       file_icon_padding = ' ',
       winopts = {
         preview = {
-          vertical = 'up:45%',
           horizontal = 'right:50%',
           scrollchars = { '┃', '' },
         },
-        width = 0.7,
-        height = 0.7,
+        width = 0.8,
+        height = 0.8,
+        row = 0.5,
+        col = 0.5,
       },
       keymap = {
         builtin = {
