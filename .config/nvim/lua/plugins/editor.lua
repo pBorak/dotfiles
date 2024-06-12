@@ -56,7 +56,7 @@ return {
         ['--no-scrollbar'] = true,
       },
       defaults = {
-        formatter = 'path.hl',
+        formatter = 'path.dirname_first',
       },
       file_icon_padding = ' ',
       winopts = {
