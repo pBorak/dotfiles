@@ -93,6 +93,8 @@ return {
       grep = {
         git_icons = false,
         rg_glob = true,
+        rg_opts = [[--hidden --column --line-number --no-heading]]
+          .. [[ --color=always --smart-case -g "!.git" -e]],
         fzf_opts = {
           ['--history'] = vim.fn.stdpath('data') .. '/fzf-lua-grep-history',
         },
