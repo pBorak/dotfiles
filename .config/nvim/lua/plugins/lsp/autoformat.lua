@@ -26,10 +26,10 @@ function M.setup()
         return
       end
       local extra_lang_args = {
-        javasciprt = { lsp_fallback = 'always', name = 'eslint' },
-        javascriptreact = { lsp_fallback = 'always', name = 'eslint' },
-        typescript = { lsp_fallback = 'always', name = 'eslint' },
-        typescriptreact = { lsp_fallback = 'always', name = 'eslint' },
+        javasciprt = { lsp_format = 'fallback', name = 'eslint' },
+        javascriptreact = { lsp_format = 'fallback', name = 'eslint' },
+        typescript = { lsp_format = 'fallback', name = 'eslint' },
+        typescriptreact = { lsp_format = 'fallback', name = 'eslint' },
       }
       local extra_args = extra_lang_args[vim.bo[event.buf].filetype] or {}
 

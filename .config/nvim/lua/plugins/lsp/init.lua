@@ -101,7 +101,7 @@ return {
     keys = {
       {
         '<leader>lf',
-        function() require('conform').format({ async = true, lsp_fallback = true }) end,
+        function() require('conform').format({ async = true, lsp_format = 'fallback' }) end,
       },
     },
     opts = {
