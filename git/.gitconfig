@@ -33,6 +33,7 @@
   fa = fetch --all
 	l = log --oneline --decorate -20
   ll  = "log --graph --date=human --format='%C(#7a88cf)%h%C(#ff757f)%d%C(reset) - %C(#c3e88d)(%ad)%C(reset) %s %C(#82aaff){%an}%C(reset)'"
+  nuke="!git reset --hard HEAD && git clean -fd"
 	pl = pull
 	plr = pull --rebase
 	ps = push
