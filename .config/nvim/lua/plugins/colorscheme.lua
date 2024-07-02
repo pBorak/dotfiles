@@ -8,15 +8,6 @@ return {
       vim.api.nvim_set_hl(0, '@label.ruby', { bold = true, fg = '#4fd6be' })
 
       return {
-        style = 'moon',
-        sidebars = {
-          'qf',
-          'packer',
-          'help',
-          'startuptime',
-          'fugitive',
-          'undotree',
-        },
         on_colors = function(colors)
           colors.bg = '#080808'
           colors.bg_dark = '#080808'
