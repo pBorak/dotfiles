@@ -16,7 +16,6 @@ return {
     event = 'BufReadPre',
     keys = {
       { '<leader>gs', '<cmd>G<CR>' },
-      { '<leader>gb', '<cmd>G blame<CR>' },
     },
   },
 
