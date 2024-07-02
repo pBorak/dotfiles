@@ -53,7 +53,7 @@ return {
           lualine_a = { 'mode' },
           lualine_b = {
             {
-              'branch',
+              'b:gitsigns_head',
               icon = icons.misc.git_branch,
               color = {
                 gui = 'bold',
