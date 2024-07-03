@@ -157,7 +157,13 @@ return {
         delete = { text = '' },
         topdelete = { text = '' },
         changedelete = { text = '▎' },
-        untracked = { text = '▎' },
+      },
+      signs_staged = {
+        add = { text = '▎' },
+        change = { text = '▎' },
+        delete = { text = '' },
+        topdelete = { text = '' },
+        changedelete = { text = '▎' },
       },
       on_attach = function(buffer)
         local gs = package.loaded.gitsigns
@@ -172,7 +178,7 @@ return {
         map('n', '<leader>gr', gs.reset_buffer)
         map('n', '<leader>gb', gs.blame)
         map('n', '<leader>hu', gs.undo_stage_hunk)
-        map('n', '<leader>hh', gs.preview_hunk_inline)
+        map('n', '<leader>hp', gs.preview_hunk_inline)
       end,
     },
   },
