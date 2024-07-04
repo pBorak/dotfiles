@@ -58,7 +58,6 @@ return {
       defaults = {
         formatter = 'path.dirname_first',
       },
-      file_icon_padding = ' ',
       winopts = {
         preview = {
           horizontal = 'right:50%',
