@@ -191,7 +191,6 @@ return {
         map({ 'n', 'v' }, '<leader>hr', ':Gitsigns reset_hunk<CR>')
         map('n', '<leader>gw', gs.stage_buffer)
         map('n', '<leader>gr', gs.reset_buffer)
-        map('n', '<leader>gb', gs.blame)
         map('n', '<leader>hu', gs.undo_stage_hunk)
         map('n', '<leader>hp', gs.preview_hunk_inline)
       end,
