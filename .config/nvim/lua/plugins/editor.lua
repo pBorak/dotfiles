@@ -235,9 +235,26 @@ return {
   },
 
   {
-    'kevinhwang91/nvim-bqf',
-    ft = 'qf',
-    opts = { preview = { auto_preview = false } },
+    'stevearc/quicker.nvim',
+    lazy = false,
+    keys = {
+      {
+        '<leader>cc',
+        function() require('quicker').toggle() end,
+      },
+    },
+    opts = {
+      keys = {
+        {
+          '>',
+          function() require('quicker').expand({ before = 2, after = 2, add_to_existing = true }) end,
+        },
+        {
+          '<',
+          function() require('quicker').collapse() end,
+        },
+      },
+    },
   },
 
   {
