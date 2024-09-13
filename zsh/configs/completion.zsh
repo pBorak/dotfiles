@@ -1,8 +1,10 @@
-fpath=(~/.zsh/completion $fpath)
+if type brew &>/dev/null
+then
+  FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
+fi
 
-autoload -U compinit
-
-compinit
+  autoload -Uz compinit
+  compinit
 
 zstyle ':completion:*' list-colors ''
 zstyle ':completion:*' expand suffix
