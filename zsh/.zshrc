@@ -27,7 +27,7 @@ source ~/.work_zshrc.zsh
 #-------------------------------------------------------------------------------
 #  Init dependencies
 #-------------------------------------------------------------------------------
-eval "$(rbenv init -)"
+. /opt/homebrew/opt/asdf/libexec/asdf.sh
 eval "$(zoxide init zsh)"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
