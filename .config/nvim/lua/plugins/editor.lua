@@ -236,7 +236,7 @@ return {
 
   {
     'stevearc/quicker.nvim',
-    lazy = false,
+    event = 'FileType qf',
     keys = {
       {
         '<leader>cc',
