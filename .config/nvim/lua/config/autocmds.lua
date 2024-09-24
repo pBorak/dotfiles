@@ -7,7 +7,6 @@ local smart_close_filetypes = {
   'gitcommit',
   'fugitive',
   'fugitiveblame',
-  'gitsigns-blame',
   'qf',
   'startuptime',
   'lspinfo',
