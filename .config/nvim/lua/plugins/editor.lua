@@ -7,6 +7,7 @@ return {
       { '-', '<cmd>Oil<cr>' },
     },
     opts = {
+      skip_confirm_for_simple_edits = true,
       keymaps = {
         ['q'] = 'actions.close',
         ['<C-p>'] = false,
