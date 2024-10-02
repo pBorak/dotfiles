@@ -17,4 +17,4 @@ module ClipboardIO
   end
 end
 
-extend ClipboardIO if RUBY_PLATFORM.include?('darwin')
+include ClipboardIO if RUBY_PLATFORM.include?('darwin')
