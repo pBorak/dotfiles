@@ -3,7 +3,7 @@ module ClipboardIO
     `pbpaste`
   end
 
-  def copy(str)
+  def pbcopy(str)
     IO.popen('pbcopy', 'w') { |f| f << str.to_s }
     puts 'Copied to clipboard'
   end
