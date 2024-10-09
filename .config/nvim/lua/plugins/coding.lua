@@ -78,8 +78,8 @@ return {
   },
 
   {
-    'hrsh7th/nvim-cmp',
-    version = false, -- last release is way too old
+    'iguanacucumber/magazine.nvim',
+    name = 'nvim-cmp',
     event = { 'InsertEnter' },
     dependencies = {
       'hrsh7th/cmp-nvim-lsp',
