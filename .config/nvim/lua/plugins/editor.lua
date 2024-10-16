@@ -286,7 +286,7 @@ return {
           enabled = true,
         },
         adapters = {
-          require('neotest-rspec')({ spec_cmd = 'bin/rspec' }),
+          require('neotest-rspec')({ rspec_cmd = 'bin/rspec' }),
         },
         icons = {
           expanded = '',
