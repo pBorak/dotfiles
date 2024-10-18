@@ -24,7 +24,7 @@ return {
     'ibhagwan/fzf-lua',
     cmd = 'FzfLua',
     keys = {
-      { '<c-p>', '<Cmd>FzfLua git_files<CR>' },
+      { '<c-p>', '<Cmd>FzfLua files<CR>' },
       { '<leader>fr', '<Cmd>FzfLua resume<CR>' },
       { '<leader>fo', '<Cmd>FzfLua buffers<CR>' },
       { '<leader>fb', '<Cmd>FzfLua git_branches<CR>' },
