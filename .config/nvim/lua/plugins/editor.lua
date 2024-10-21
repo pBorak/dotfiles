@@ -83,6 +83,9 @@ return {
           ['ctrl-n'] = 'down',
         },
       },
+      files = {
+        git_icons = false,
+      },
       buffers = {
         winopts = {
           width = 0.5,
