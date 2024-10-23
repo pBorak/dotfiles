@@ -1,8 +1,8 @@
 [user]
 	name = Pawel Borak
 	email = borak.pawel@gmail.com
-[includeIf "gitdir:~/code/gitlab/"]
-  path = ~/code/gitlab/.gitconfig.gitlab
+[includeIf "gitdir:~/code/work/"]
+  path = ~/code/work/.gitconfig.work
 [core]
 	autocrlf = input
 	excludesfile = ~/.gitignore
