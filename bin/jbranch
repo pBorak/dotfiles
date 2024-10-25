@@ -1,0 +1,25 @@
+#!/bin/zsh
+
+function jira_call() {
+    curl --location --silent --request POST \
+        -u "$JIRA_USER_EMAIL:$JIRA_USER_API_KEY" \
+        --header "Content-Type: application/json" \
+        "$JIRA_WORKSPACE_URL/rest/api/2/search" \
+        -d '{"jql": "assignee=currentuser() AND status NOT IN (Done, Closed) AND type != Epic", "maxResults":50}' \
+        | jq -r '.issues[]|"\(.fields.issuetype.name)\t\(.key)\t\(.fields.summary)"'
+}
+
+TICKET=$(jira_call | column -t -s $'\t' | fzf --height 20% --reverse)
+
+if [[ -n $TICKET ]]; then
+    TICKET_NUMBER=$(echo "$TICKET" | awk '{print $2}')
+    DESC=$(echo "$TICKET" | \
+           sd '^.*?\s+\S+\s+(.*)$' '$1' | \
+           tr '[:upper:]' '[:lower:]' | \
+           sd '[^a-z0-9]+' '-' | \
+           sd '^-|-$' '')
+
+    if [[ -n "$TICKET_NUMBER" ]] && [[ -n "$DESC" ]]; then
+        git checkout -b "$TICKET_NUMBER/$DESC"
+    fi
+fi
