@@ -173,12 +173,25 @@ return {
 
         local function map(mode, l, r) vim.keymap.set(mode, l, r, { buffer = buffer }) end
 
-        map('n', ']g', gs.next_hunk)
-        map('n', '[g', gs.prev_hunk)
+        map('n', '<down>', function()
+          if vim.wo.diff then
+            vim.cmd.normal({ ']c', bang = true })
+          else
+            gs.nav_hunk('next')
+          end
+        end)
+        map('n', '<up>', function()
+          if vim.wo.diff then
+            vim.cmd.normal({ '[c', bang = true })
+          else
+            gs.nav_hunk('prev')
+          end
+        end)
         map({ 'n', 'v' }, '<leader>hs', ':Gitsigns stage_hunk<CR>')
         map({ 'n', 'v' }, '<leader>hr', ':Gitsigns reset_hunk<CR>')
         map('n', '<leader>gw', gs.stage_buffer)
         map('n', '<leader>gr', gs.reset_buffer)
+        map('n', '<leader>gb', gs.blame)
         map('n', '<leader>hu', gs.undo_stage_hunk)
         map('n', '<leader>hp', gs.preview_hunk_inline)
       end,
