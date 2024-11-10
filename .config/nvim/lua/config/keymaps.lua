@@ -34,24 +34,10 @@ vim.keymap.set({ 'n', 'x' }, ';', ':')
 -- Esc should clear hlsearch if there is one
 vim.keymap.set('n', '<ESC>', [[ v:hlsearch ? "\<ESC>:nohl\<CR>" : "\<ESC>" ]], { expr = true })
 --------------------------------------------------------------------------------
--- Moving lines/visual block
---------------------------------------------------------------------------------
-vim.keymap.set('x', ']e', ":move'>+<CR>='[gv")
-vim.keymap.set('x', '[e', ":move-2<CR>='[gv")
-vim.keymap.set('n', ']e', '<cmd>move+<CR>==')
-vim.keymap.set('n', '[e', '<cmd>move-2<CR>==')
---------------------------------------------------------------------------------
--- Add Empty space above and below
---------------------------------------------------------------------------------
-vim.keymap.set('n', '[<space>', [[<cmd>put! =repeat(nr2char(10), v:count1)<cr>'[]])
-vim.keymap.set('n', ']<space>', [[<cmd>put =repeat(nr2char(10), v:count1)<cr>]])
---------------------------------------------------------------------------------
 -- Quickfix Navigation
 --------------------------------------------------------------------------------
-vim.keymap.set('n', ']q', '<cmd>cnext<CR>zz')
-vim.keymap.set('n', '[q', '<cmd>cprev<CR>zz')
-vim.keymap.set('n', ']l', '<cmd>lnext<cr>zz')
-vim.keymap.set('n', '[l', '<cmd>lprev<cr>zz')
+vim.keymap.set('n', '<right>', '<cmd>cnext<CR>zz')
+vim.keymap.set('n', '<left>', '<cmd>cprev<CR>zz')
 --------------------------------------------------------------------------------
 -- Tab navigation
 --------------------------------------------------------------------------------
