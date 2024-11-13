@@ -81,6 +81,9 @@ return {
       quickfile = { enabled = true },
       statuscolumn = { enabled = true },
       words = { enabled = true },
+      notification = {
+        wo = { wrap = true },
+      },
     },
     keys = {
       { '<leader>N', function() Snacks.notifier.hide() end },
