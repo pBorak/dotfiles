@@ -227,5 +227,9 @@ return {
     end,
   },
 
-  { 'vim-scripts/ReplaceWithRegister', event = 'VeryLazy' },
+  {
+    'echasnovski/mini.operators',
+    event = 'VeryLazy',
+    config = true,
+  },
 }
