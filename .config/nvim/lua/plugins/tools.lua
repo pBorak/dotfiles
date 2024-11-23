@@ -87,7 +87,6 @@ return {
     },
     keys = {
       { '<leader>N', function() Snacks.notifier.hide() end },
-      { '<leader>gg', function() Snacks.lazygit() end },
     },
   },
 }
