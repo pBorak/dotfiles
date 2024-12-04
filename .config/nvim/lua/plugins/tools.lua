@@ -87,6 +87,8 @@ return {
     },
     keys = {
       { '<leader>N', function() Snacks.notifier.hide() end },
+      { '<leader>.', function() Snacks.scratch() end },
+      { '<leader>S', function() Snacks.scratch.select() end },
     },
   },
 }
