@@ -81,9 +81,9 @@ return {
     name = 'nvim-cmp',
     event = { 'InsertEnter' },
     dependencies = {
-      'hrsh7th/cmp-nvim-lsp',
-      'hrsh7th/cmp-path',
-      'hrsh7th/cmp-buffer',
+      { 'iguanacucumber/mag-nvim-lsp', name = 'cmp-nvim-lsp', opts = {} },
+      { 'https://codeberg.org/FelipeLema/cmp-async-path', name = 'async_path' },
+      { 'iguanacucumber/mag-buffer', name = 'cmp-buffer' },
       'saadparwaiz1/cmp_luasnip',
       'lukas-reineke/cmp-rg',
       {
@@ -129,7 +129,7 @@ return {
           { name = 'nvim_lsp' },
           { name = 'luasnip' },
           { name = 'copilot' },
-          { name = 'path' },
+          { name = 'async_path' },
           { name = 'buffer' },
         }, {
           {
