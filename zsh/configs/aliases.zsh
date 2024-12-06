@@ -22,4 +22,3 @@ alias rs='bundle exec rails s'
 alias tlog='tail -f log/test.log'
 alias vi='nvim'
 alias vim="nvim"
-alias ssh='TERM="xterm-256color" ssh'

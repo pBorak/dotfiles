@@ -25,9 +25,9 @@
     ~/.gitignore: git/.gitignore
     ~/.tmux.conf: tmux/.tmux.conf
     ~/.irbrc: irb/.irbrc
-    ~/.config/kitty:
+    ~/.config/ghostty:
       force: true
-      path: .config/kitty
+      path: .config/ghostty
     ~/.config/nvim:
       force: true
       path: .config/nvim
