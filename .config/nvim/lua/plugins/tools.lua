@@ -81,6 +81,8 @@ return {
         enabled = true,
         timeout = 3000,
       },
+      scope = { enabled = true },
+      indent = { enabled = true },
       quickfile = { enabled = true },
       statuscolumn = { enabled = true },
       words = { enabled = true },
