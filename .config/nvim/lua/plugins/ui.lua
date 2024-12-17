@@ -1,23 +1,6 @@
 return {
 
   {
-    'stevearc/dressing.nvim',
-    lazy = true,
-    init = function()
-      vim.ui.select = function(...)
-        ---@diagnostic disable-next-line
-        require('lazy').load({ plugins = { 'dressing.nvim' } })
-        return vim.ui.select(...)
-      end
-      vim.ui.input = function(...)
-        ---@diagnostic disable-next-line
-        require('lazy').load({ plugins = { 'dressing.nvim' } })
-        return vim.ui.input(...)
-      end
-    end,
-  },
-
-  {
     'nvim-lualine/lualine.nvim',
     event = 'VeryLazy',
     opts = function()

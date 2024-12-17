@@ -123,6 +123,18 @@ return {
         commits = { preview_pager = 'delta' },
       },
     },
+    init = function()
+      vim.api.nvim_create_autocmd('User', {
+        pattern = 'VeryLazy',
+        callback = function()
+          vim.ui.select = function(...)
+            require('lazy').load({ plugins = { 'fzf-lua' } })
+            require('fzf-lua').register_ui_select()
+            return vim.ui.select(...)
+          end
+        end,
+      })
+    end,
   },
 
   {
