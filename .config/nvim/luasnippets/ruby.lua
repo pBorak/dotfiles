@@ -20,7 +20,9 @@ local function split_path(path)
     parts[#parts] = parts[#parts]:gsub('_spec', '')
 
     --  NOTE: Project specific setup in which app/components have spec/components/**/*_spec.rb but components are not a module itself
-    if parts[2] == 'components' then return { unpack(parts, 3, #parts) } end
+    if parts[2] == 'components' or parts[2] == 'domains' then
+      return { unpack(parts, 3, #parts) }
+    end
 
     return { unpack(parts, 2, #parts) }
   elseif root == 'lib' then
