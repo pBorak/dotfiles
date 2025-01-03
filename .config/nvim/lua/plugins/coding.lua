@@ -116,7 +116,17 @@ return {
     build = ':Copilot auth',
     event = 'InsertEnter',
     opts = {
-      suggestion = { enabled = false },
+      suggestion = {
+        enabled = true,
+        keymap = {
+          accept = '<M-y>',
+          accept_word = false,
+          accept_line = false,
+          next = '<M-n>',
+          prev = '<M-p>',
+          dismiss = '<M-e>',
+        },
+      },
       panel = { enabled = false },
     },
   },
