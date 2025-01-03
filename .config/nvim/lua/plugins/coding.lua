@@ -2,6 +2,7 @@ return {
 
   {
     'L3MON4D3/LuaSnip',
+    version = 'v2.*',
     keys = {
       {
         '<c-k>',
@@ -77,81 +78,36 @@ return {
   },
 
   {
-    'iguanacucumber/magazine.nvim',
-    name = 'nvim-cmp',
-    event = { 'InsertEnter' },
-    dependencies = {
-      { 'iguanacucumber/mag-nvim-lsp', name = 'cmp-nvim-lsp', opts = {} },
-      { 'https://codeberg.org/FelipeLema/cmp-async-path', name = 'async_path' },
-      { 'iguanacucumber/mag-buffer', name = 'cmp-buffer' },
-      'saadparwaiz1/cmp_luasnip',
-      'lukas-reineke/cmp-rg',
-      {
-        'zbirenbaum/copilot-cmp',
-        dependencies = 'copilot.lua',
-        opts = {},
-        config = function(_, opts)
-          local copilot_cmp = require('copilot_cmp')
-          copilot_cmp.setup(opts)
+    'saghen/blink.cmp',
+    version = '*',
+    -- !Important! Make sure you're using the latest release of LuaSnip
+    -- `main` does not work at the moment
+    dependencies = { 'L3MON4D3/LuaSnip', version = 'v2.*' },
+    opts = {
+      appearance = {
+        use_nvim_cmp_as_default = false,
+        nerd_font_variant = 'mono',
+      },
+      keymap = {
+        preset = 'default',
+        ['<Tab>'] = {},
+        ['<S-Tab>'] = {},
+      },
+      snippets = {
+        expand = function(snippet) require('luasnip').lsp_expand(snippet) end,
+        active = function(filter)
+          if filter and filter.direction then
+            return require('luasnip').jumpable(filter.direction)
+          end
+          return require('luasnip').in_snippet()
         end,
+        jump = function(direction) require('luasnip').jump(direction) end,
+      },
+      sources = {
+        default = { 'lsp', 'path', 'luasnip', 'buffer' },
+        cmdline = {},
       },
     },
-    opts = function()
-      vim.api.nvim_set_hl(0, 'CmpGhostText', { link = 'Comment', default = true })
-      local cmp = require('cmp')
-      return {
-        window = {
-          completion = cmp.config.window.bordered(),
-          documentation = cmp.config.window.bordered(),
-        },
-        view = {
-          entries = {
-            follow_cursor = true,
-          },
-        },
-        completion = {
-          completeopt = 'menu,menuone,noinsert',
-        },
-        snippet = {
-          expand = function(args) vim.snippet.expand(args.body) end,
-        },
-        mapping = {
-          ['<C-p>'] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Select }),
-          ['<C-n>'] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Select }),
-          ['<C-d>'] = cmp.mapping.scroll_docs(-4),
-          ['<C-f>'] = cmp.mapping.scroll_docs(4),
-          ['<C-e>'] = cmp.mapping.abort(),
-          ['<c-y>'] = cmp.mapping.confirm({
-            select = true,
-          }),
-        },
-        sources = cmp.config.sources({
-          { name = 'nvim_lsp' },
-          { name = 'luasnip' },
-          { name = 'copilot' },
-          { name = 'async_path' },
-          { name = 'buffer' },
-        }, {
-          {
-            name = 'rg',
-            keyword_length = 4,
-          },
-        }),
-        formatting = {
-          fields = { 'abbr', 'kind', 'menu' },
-          format = function(_, item)
-            local icons = require('config.icons').kinds
-            if icons[item.kind] then item.kind = icons[item.kind] .. item.kind end
-            return item
-          end,
-        },
-        experimental = {
-          ghost_text = {
-            hl_group = 'CmpGhostText',
-          },
-        },
-      }
-    end,
   },
 
   {
