@@ -78,6 +78,7 @@ return {
 
   {
     'ckolkey/ts-node-action',
+    commit = 'adf1168021e9a0a4a3e17401ce538f8f9fc48f18',
     keys = { { 'K', '<cmd>NodeAction<cr>' } },
     config = true,
   },
