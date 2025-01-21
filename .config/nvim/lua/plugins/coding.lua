@@ -2,6 +2,7 @@ return {
 
   {
     'L3MON4D3/LuaSnip',
+    event = { 'InsertEnter' },
     version = 'v2.*',
     keys = {
       {
@@ -79,6 +80,7 @@ return {
 
   {
     'saghen/blink.cmp',
+    event = { 'InsertEnter' },
     version = '*',
     -- !Important! Make sure you're using the latest release of LuaSnip
     -- `main` does not work at the moment
