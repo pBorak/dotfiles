@@ -90,11 +90,37 @@ return {
       notification = {
         wo = { wrap = true },
       },
+      picker = {
+        win = {
+          input = {
+            keys = {
+              ['<c-j>'] = { 'history_forward', mode = { 'i', 'n' } },
+              ['<c-k>'] = { 'history_back', mode = { 'i', 'n' } },
+            },
+          },
+        },
+      },
     },
     keys = {
       { '<leader>N', function() Snacks.notifier.hide() end },
       { '<leader>.', function() Snacks.scratch() end },
       { '<leader>S', function() Snacks.scratch.select() end },
+      { '<c-p>', function() Snacks.picker.files() end },
+      { '<leader>fr', function() Snacks.picker.resume() end },
+      { '<leader>fo', function() Snacks.picker.buffers() end },
+      { '<leader>fs', function() Snacks.picker.grep() end },
+      { '<leader>ff', function() Snacks.picker.grep_word() end, mode = { 'n', 'x' } },
+      { '<leader>f.', function() Snacks.picker.files({ cwd = vim.fn.expand('%:p:h') }) end },
+      { '<leader>fd', function() Snacks.picker.files({ cwd = vim.env.DOTFILES }) end },
+      { '<leader>fu', function() Snacks.picker.undo() end },
+      { '<leader>fg', function() Snacks.picker.git_status() end },
+      { '<leader>fb', function() Snacks.picker.git_branches() end },
+      { '<leader>ld', function() Snacks.picker.lsp_definitions() end },
+      {
+        '<leader>lr',
+        function() Snacks.picker.lsp_references() end,
+        nowait = true,
+      },
     },
   },
 }

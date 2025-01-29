@@ -6,8 +6,6 @@ function M.setup()
     callback = function(event)
       local map = function(keys, func) vim.keymap.set('n', keys, func, { buffer = event.buf }) end
 
-      map('<leader>ld', '<cmd>FzfLua lsp_definitions ignore_current_line=true<cr>')
-      map('<leader>lr', '<cmd>FzfLua lsp_references ignore_current_line=true<cr>')
       map('<leader>lh', vim.lsp.buf.hover)
       map('<leader>la', vim.lsp.buf.code_action)
       map('<leader>ln', vim.lsp.buf.rename)
