@@ -6,7 +6,7 @@ mouse-hide-while-typing = true
 macos-option-as-alt = true
 confirm-close-surface = false
 
-theme = /Users/pawelborak/.config/ghostty/tokyonight_moon
+theme = /Users/pawelborak/.config/ghostty/moonfly
 
 keybind = clear
 keybind = super+shift+r=reload_config
