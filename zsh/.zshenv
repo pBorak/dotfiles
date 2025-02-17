@@ -9,7 +9,7 @@ export EDITOR="nvim"
 
 export LANG=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
-export BAT_THEME=tokyo
+export BAT_THEME=fly16
 
 export RIPGREP_CONFIG_PATH=$DOTFILES/rg/.ripgreprc
 
@@ -22,21 +22,19 @@ export FZF_DEFAULT_OPTS="\
   --ansi \
   --layout=reverse \
   --border=none
-  --color=bg+:#2d3f76 \
-  --color=bg:#080808 \
-  --color=border:#589ed7 \
-  --color=fg:#c8d3f5 \
-  --color=gutter:#080808 \
-  --color=header:#ff966c \
-  --color=hl+:#65bcff \
-  --color=hl:#65bcff \
-  --color=info:#545c7e \
-  --color=marker:#ff007c \
-  --color=pointer:#ff007c \
-  --color=prompt:#65bcff \
-  --color=query:#c8d3f5:regular \
-  --color=scrollbar:#589ed7 \
-  --color=separator:#ff966c \
-  --color=spinner:#ff007c \
+  --color bg:#080808 \
+  --color bg+:#262626 \
+  --color border:#2e2e2e \
+  --color fg:#b2b2b2 \
+  --color fg+:#e4e4e4 \
+  --color gutter:#262626 \
+  --color header:#80a0ff \
+  --color hl+:#f09479 \
+  --color hl:#f09479 \
+  --color info:#cfcfb0 \
+  --color marker:#f09479 \
+  --color pointer:#ff5189 \
+  --color prompt:#80a0ff \
+  --color spinner:#36c692
 "
 export FZF_CTRL_T_OPTS="--preview 'bat --color=always --line-range :500 {}'"

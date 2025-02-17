@@ -15,7 +15,7 @@ require('lazy').setup({
   spec = {
     { import = 'plugins' },
   },
-  install = { colorscheme = { 'tokyonight' } },
+  install = { colorscheme = { 'moonfly' } },
   performance = {
     rtp = {
       disabled_plugins = {

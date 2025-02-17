@@ -35,4 +35,4 @@ else
   load('keymaps')
 end
 
-require('tokyonight').load()
+vim.cmd.colorscheme('moonfly')
