@@ -58,6 +58,7 @@ return {
       },
       defaults = {
         formatter = 'path.dirname_first',
+        git_icons = false,
       },
       winopts = {
         preview = {
@@ -83,9 +84,6 @@ return {
           ['ctrl-n'] = 'down',
         },
       },
-      files = {
-        git_icons = false,
-      },
       buffers = {
         winopts = {
           width = 0.5,
@@ -94,17 +92,12 @@ return {
         },
       },
       grep = {
-        git_icons = false,
-        rg_glob = true,
-        rg_opts = [[--hidden --column --line-number --no-heading]]
-          .. [[ --color=always --smart-case -g "!.git" -e]],
         fzf_opts = {
           ['--history'] = vim.fn.stdpath('data') .. '/fzf-lua-grep-history',
         },
       },
       git = {
         files = {
-          git_icons = false,
           cmd = 'git ls-files -o -c --exclude-standard',
           fzf_opts = {
             ['--history'] = vim.fn.stdpath('data') .. '/fzf-lua-gitfiles-history',
