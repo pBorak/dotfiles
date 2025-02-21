@@ -27,7 +27,7 @@ source ~/.work_zshrc.zsh
 #-------------------------------------------------------------------------------
 #  Init dependencies
 #-------------------------------------------------------------------------------
-. /opt/homebrew/opt/asdf/libexec/asdf.sh
+export PATH="${ASDF_DATA_DIR:-$HOME/.asdf}/shims:$PATH"
 eval "$(zoxide init zsh)"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
