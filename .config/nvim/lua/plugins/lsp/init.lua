@@ -32,7 +32,7 @@ return {
               },
             },
           },
-          solargraph = {
+          ruby_lsp = {
             mason = false,
           },
           eslint = {
