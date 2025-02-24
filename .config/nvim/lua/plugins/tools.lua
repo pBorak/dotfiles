@@ -91,6 +91,11 @@ return {
         wo = { wrap = true },
       },
       picker = {
+        formatters = {
+          file = {
+            truncate = 80,
+          },
+        },
         win = {
           input = {
             keys = {
