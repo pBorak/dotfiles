@@ -108,9 +108,8 @@ return {
     },
     keys = {
       { '<leader>N', function() Snacks.notifier.hide() end },
-      { '<leader>.', function() Snacks.scratch() end },
-      { '<leader>S', function() Snacks.scratch.select() end },
       { '<c-p>', function() Snacks.picker.files() end },
+      { '<leader>fa', function() Snacks.picker.smart() end },
       { '<leader>fr', function() Snacks.picker.resume() end },
       { '<leader>fo', function() Snacks.picker.buffers() end },
       { '<leader>fs', function() Snacks.picker.grep() end },
