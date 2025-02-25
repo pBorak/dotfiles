@@ -1,5 +1,12 @@
 local M = {}
 
+local prefix = function(diagnostic)
+  local icons = require('config.icons').diagnostics
+  for d, icon in pairs(icons) do
+    if diagnostic.severity == vim.diagnostic.severity[d:upper()] then return icon end
+  end
+end
+
 function M.setup()
   local icons = require('config.icons').diagnostics
 
@@ -8,42 +15,25 @@ function M.setup()
     virtual_text = {
       spacing = 4,
       source = 'if_many',
-      prefix = function(d)
-        local level = vim.diagnostic.severity[d.severity]
-        return string.format('%s %s', icons[level:lower()], d.message)
-      end,
+      prefix = prefix,
     },
-    signs = true,
+    signs = {
+      text = {
+        [vim.diagnostic.severity.ERROR] = icons.error,
+        [vim.diagnostic.severity.WARN] = icons.warn,
+        [vim.diagnostic.severity.HINT] = icons.hint,
+        [vim.diagnostic.severity.INFO] = icons.info,
+      },
+    },
     update_in_insert = false,
     severity_sort = true,
     float = {
       border = 'rounded',
       focusable = true,
       source = 'if_many',
-      prefix = function(diag)
-        local level = vim.diagnostic.severity[diag.severity]
-        local prefix = string.format('%s ', icons[level:lower()])
-        return prefix, 'Diagnostic' .. level:gsub('^%l', string.upper)
-      end,
+      prefix = prefix,
     },
   })
-
-  local diagnostic_types = {
-    { 'Hint', icon = icons.hint },
-    { 'Error', icon = icons.error },
-    { 'Warn', icon = icons.warn },
-    { 'Info', icon = icons.info },
-  }
-
-  vim.fn.sign_define(vim.tbl_map(function(t)
-    local hl = 'DiagnosticSign' .. t[1]
-    return {
-      name = hl,
-      text = t.icon,
-      texthl = hl,
-      linehl = string.format('%sLine', hl),
-    }
-  end, diagnostic_types))
 end
 
 return M
