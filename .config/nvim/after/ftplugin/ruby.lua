@@ -4,7 +4,7 @@ vim.opt_local.formatoptions:remove('o')
 
 vim.keymap.set('n', 'gf', function()
   local line = vim.api.nvim_get_current_line()
-  local path = line:match('vcr_cassettes:%s*"(.-)"')
+  local path = line:match('vcr_cassette:%s*"(.-)"')
 
   if path then
     local full_path = 'spec/fixtures/vcr_cassettes/qbo/' .. path .. '.yml'
