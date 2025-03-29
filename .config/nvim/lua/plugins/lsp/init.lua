@@ -53,7 +53,6 @@ return {
     end,
     config = function(_, opts)
       require('plugins.lsp.diagnostics').setup()
-      require('plugins.lsp.handlers').setup()
       require('plugins.lsp.autoformat').setup()
       require('plugins.lsp.on_attach').setup()
 
