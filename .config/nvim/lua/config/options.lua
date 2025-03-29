@@ -67,4 +67,5 @@ opt.sidescrolloff = 15
 opt.sidescroll = 5
 opt.number = true -- Print line number
 opt.relativenumber = true -- Relative line numbers
+opt.messagesopt = 'wait:500,history:500'
 require('util.abbreviations')
