@@ -113,13 +113,14 @@ return {
     opts = {
       suggestion = {
         enabled = true,
+        auto_trigger = false,
         keymap = {
-          accept = '<M-y>',
+          accept = '<Tab>',
           accept_word = false,
           accept_line = false,
-          next = '<M-n>',
-          prev = '<M-p>',
-          dismiss = '<M-e>',
+          next = false,
+          prev = false,
+          dismiss = false,
         },
       },
       panel = { enabled = false },
