@@ -22,22 +22,6 @@ gui:
     showBottomLine: true
     commandLogSize: 8
     splitDiff: auto
-    theme:
-        activeBorderColor:
-           - "#ff966c"
-           - bold
-        inactiveBorderColor:
-            - "#589ed7"
-        optionsTextColor:
-            - blue
-        selectedLineBgColor:
-            - "#2f334d"
-        cherryPickedCommitBgColor:
-            - cyan
-        cherryPickedCommitFgColor:
-           - blue
-        unstagedChangesColor:
-           - red
 git:
     paging:
         colorArg: always
