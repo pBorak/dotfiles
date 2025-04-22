@@ -212,4 +212,107 @@ return {
       }
     end,
   },
+  {
+    'ibhagwan/fzf-lua',
+    cmd = 'FzfLua',
+    keys = {
+      { '<c-p>', '<Cmd>FzfLua files<CR>' },
+      { '<leader>fr', '<Cmd>FzfLua resume<CR>' },
+      { '<leader>fo', '<Cmd>FzfLua buffers<CR>' },
+      { '<leader>fb', '<Cmd>FzfLua git_branches<CR>' },
+      { '<leader>fc', '<Cmd>FzfLua git_bcommits<CR>' },
+      { '<leader>fs', '<Cmd>FzfLua live_grep<CR>' },
+      { '<leader>ff', '<Cmd>FzfLua grep_cword<CR>' },
+      { '<leader>ff', '<Cmd>FzfLua grep_visual<CR>', mode = { 'v' } },
+      { '<leader>fg', '<Cmd>FzfLua git_status<CR>' },
+      { '<leader>ld', '<cmd>FzfLua lsp_definitions<CR>' },
+      { '<leader>lr', '<cmd>FzfLua lsp_references<CR>' },
+      {
+        '<leader>fG',
+        function()
+          require('fzf-lua').fzf_live('git log --oneline --color=always -S <query>', {
+            fzf_opts = {
+              ['--no-sort'] = '',
+            },
+            preview = 'git show --color=always {1} | delta',
+            actions = {
+              ['default'] = function(selected) vim.cmd('Gedit ' .. selected[1]:match('[^ ]+')) end,
+            },
+          })
+        end,
+      },
+      { '<leader>f.', function() require('fzf-lua').files({ cwd = '%:h' }) end },
+      { '<leader>fd', function() require('fzf-lua').files({ cwd = vim.env.DOTFILES }) end },
+    },
+    opts = {
+      'default-title',
+      fzf_colors = true,
+      fzf_opts = {
+        ['--no-scrollbar'] = true,
+      },
+      defaults = {
+        formatter = 'path.dirname_first',
+        git_icons = false,
+      },
+      winopts = {
+        preview = {
+          horizontal = 'right:50%',
+          scrollchars = { '┃', '' },
+        },
+        width = 0.8,
+        height = 0.8,
+        row = 0.5,
+        col = 0.5,
+      },
+      keymap = {
+        builtin = {
+          ['<c-f>'] = 'preview-page-down',
+          ['<c-b>'] = 'preview-page-up',
+        },
+        fzf = {
+          ['esc'] = 'abort',
+          ['ctrl-l'] = 'select-all+accept',
+          ['ctrl-j'] = 'previous-history',
+          ['ctrl-k'] = 'next-history',
+          ['ctrl-p'] = 'up',
+          ['ctrl-n'] = 'down',
+          ['alt-a'] = 'toggle-all',
+        },
+      },
+      buffers = {
+        winopts = {
+          width = 0.5,
+          height = 0.4,
+          preview = { hidden = 'hidden' },
+        },
+      },
+      grep = {
+        fzf_opts = {
+          ['--history'] = vim.fn.stdpath('data') .. '/fzf-lua-grep-history',
+        },
+      },
+      git = {
+        branches = {
+          winopts = {
+            width = 0.5,
+            height = 0.4,
+            preview = { hidden = 'hidden' },
+          },
+          cmd_add = { 'git', 'checkout', '-b' },
+        },
+      },
+    },
+    init = function()
+      vim.api.nvim_create_autocmd('User', {
+        pattern = 'VeryLazy',
+        callback = function()
+          vim.ui.select = function(...)
+            require('lazy').load({ plugins = { 'fzf-lua' } })
+            require('fzf-lua').register_ui_select()
+            return vim.ui.select(...)
+          end
+        end,
+      })
+    end,
+  },
 }
