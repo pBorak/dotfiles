@@ -34,9 +34,6 @@ return {
           },
           ruby_lsp = {
             mason = false,
-            init_options = {
-              bundleGemfile = '/Users/pawelborak/code/CustomGemfile/Gemfile',
-            },
           },
           eslint = {
             root_dir = require('lspconfig').util.root_pattern(
