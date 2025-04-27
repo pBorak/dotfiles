@@ -245,7 +245,7 @@ return {
       { '<leader>fd', function() require('fzf-lua').files({ cwd = vim.env.DOTFILES }) end },
     },
     opts = {
-      'default-title',
+      { 'border-fused', 'hide' },
       fzf_colors = true,
       fzf_opts = {
         ['--no-scrollbar'] = true,
