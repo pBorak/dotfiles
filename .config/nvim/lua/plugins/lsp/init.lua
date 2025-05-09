@@ -5,18 +5,10 @@ return {
     event = 'BufReadPre',
     dependencies = {
       'mason.nvim',
-      'williamboman/mason-lspconfig.nvim',
       'saghen/blink.cmp',
     },
     opts = function()
       return {
-        capabilities = {
-          workspace = {
-            didChangeWatchedFiles = {
-              dynamicRegistration = false,
-            },
-          },
-        },
         servers = {
           lua_ls = {
             settings = {
@@ -32,22 +24,11 @@ return {
               },
             },
           },
-          ruby_lsp = {
-            mason = false,
-          },
-          eslint = {
-            root_dir = require('lspconfig').util.root_pattern(
-              '.eslintrc',
-              '.eslintrc.js',
-              '.eslintrc.json'
-            ),
-          },
+          ruby_lsp = {},
           dockerls = {},
           yamlls = {},
           jsonls = {},
           bashls = {},
-          cssls = {},
-          html = {},
         },
       }
     end,
@@ -67,21 +48,12 @@ return {
         require('lspconfig')[server].setup(server_opts)
       end
 
-      local ensure_installed = {}
       for server, server_opts in pairs(servers) do
         if server_opts then
           server_opts = server_opts == true and {} or server_opts
-          -- run manual setup if mason=false
-          if server_opts.mason == false then
-            setup(server)
-          else
-            ensure_installed[#ensure_installed + 1] = server
-          end
+          setup(server)
         end
       end
-
-      require('mason-lspconfig').setup({ ensure_installed = ensure_installed })
-      require('mason-lspconfig').setup_handlers({ setup })
     end,
   },
 
@@ -106,11 +78,6 @@ return {
     opts = {
       formatters_by_ft = {
         lua = { 'stylua' },
-        html = { 'prettier' },
-        javascript = { 'prettier' },
-        javascriptreact = { 'prettier' },
-        typescript = { 'prettier' },
-        typescriptreact = { 'prettier' },
       },
     },
     init = function() vim.o.formatexpr = "v:lua.require'conform'.formatexpr()" end,
