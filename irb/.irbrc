@@ -1,9 +1,9 @@
 IRB.conf[:USE_AUTOCOMPLETE] = false
 IRB.conf[:COMMAND_ALIASES].merge!(
-  e: :exit,
+  ex: :exit,
   l: :whereami,
   src: :show_source,
-  e!: :exit!,
+  ex!: :exit!,
   c: :continue
 )
 
