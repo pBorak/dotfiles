@@ -46,32 +46,49 @@ return {
   },
 
   {
-    'echasnovski/mini.diff',
-    event = 'VeryLazy',
-    keys = {
-      {
-        '<leader>go',
-        function() require('mini.diff').toggle_overlay(0) end,
-      },
-    },
+    'lewis6991/gitsigns.nvim',
+    event = 'BufReadPre',
     opts = {
-      view = {
-        style = 'sign',
-        signs = {
-          add = '▎',
-          change = '▎',
-          delete = '',
-        },
+      signs = {
+        add = { text = '▎' },
+        change = { text = '▎' },
+        delete = { text = '' },
+        topdelete = { text = '' },
+        changedelete = { text = '▎' },
       },
-      mappings = {
-        goto_first = '',
-        goto_prev = '<up>',
-        goto_next = '<down>',
-        goto_last = '',
+      signs_staged = {
+        add = { text = '▎' },
+        change = { text = '▎' },
+        delete = { text = '' },
+        topdelete = { text = '' },
+        changedelete = { text = '▎' },
       },
-      options = {
-        wrap_goto = true,
-      },
+      on_attach = function(buffer)
+        local gs = package.loaded.gitsigns
+
+        local function map(mode, l, r) vim.keymap.set(mode, l, r, { buffer = buffer }) end
+
+        map('n', '<down>', function()
+          if vim.wo.diff then
+            vim.cmd.normal({ ']c', bang = true })
+          else
+            gs.nav_hunk('next')
+          end
+        end)
+        map('n', '<up>', function()
+          if vim.wo.diff then
+            vim.cmd.normal({ '[c', bang = true })
+          else
+            gs.nav_hunk('prev')
+          end
+        end)
+        map({ 'n', 'v' }, '<leader>hs', ':Gitsigns stage_hunk<CR>')
+        map({ 'n', 'v' }, '<leader>hr', ':Gitsigns reset_hunk<CR>')
+        map('n', '<leader>hu', gs.undo_stage_hunk)
+        map('n', '<leader>gw', gs.stage_buffer)
+        map('n', '<leader>gr', gs.reset_buffer)
+        map('n', '<leader>go', gs.preview_hunk)
+      end,
     },
   },
 
