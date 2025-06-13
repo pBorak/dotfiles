@@ -92,3 +92,5 @@ vim.keymap.set(
 )
 
 vim.keymap.set('n', '<leader>lt', require('plugins.lsp.autoformat').toggle)
+
+vim.keymap.set('n', '<leader>C', Util.open_in_cursor)
