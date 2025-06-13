@@ -26,7 +26,7 @@ function M.setup()
         return
       end
       local extra_lang_args = {
-        javasciprt = { lsp_format = 'fallback', name = 'eslint' },
+        javascript = { lsp_format = 'fallback', name = 'eslint' },
         javascriptreact = { lsp_format = 'fallback', name = 'eslint' },
         typescript = { lsp_format = 'fallback', name = 'eslint' },
         typescriptreact = { lsp_format = 'fallback', name = 'eslint' },
