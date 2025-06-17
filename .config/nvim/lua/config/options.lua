@@ -25,6 +25,8 @@ opt.diffopt = opt.diffopt
   }
 opt.formatoptions = 'jcroqlnt' -- tcqj
 opt.foldenable = false
+opt.foldmethod = 'expr'
+opt.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
 opt.wildmode = 'longest:full,full' -- Shows a menu bar as opposed to an enormous list
 opt.conceallevel = 2
 opt.linebreak = true
