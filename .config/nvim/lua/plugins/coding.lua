@@ -106,25 +106,8 @@ return {
   },
 
   {
-    'zbirenbaum/copilot.lua',
-    cmd = 'Copilot',
-    build = ':Copilot auth',
-    event = 'InsertEnter',
-    opts = {
-      suggestion = {
-        enabled = true,
-        auto_trigger = false,
-        keymap = {
-          accept = '<Tab>',
-          accept_word = false,
-          accept_line = false,
-          next = false,
-          prev = false,
-          dismiss = false,
-        },
-      },
-      panel = { enabled = false },
-    },
+    'supermaven-inc/supermaven-nvim',
+    config = function() require('supermaven-nvim').setup({}) end,
   },
 
   {
