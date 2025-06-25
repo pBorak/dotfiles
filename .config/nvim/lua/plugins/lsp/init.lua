@@ -30,6 +30,9 @@ return {
           yamlls = {},
           jsonls = {},
           bashls = {},
+          cssls = {},
+          html = {},
+          vtsls = {},
         },
       }
     end,
