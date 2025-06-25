@@ -26,7 +26,6 @@ return {
           },
           ruby_lsp = {},
           dockerls = {},
-          typos_lsp = {},
           yamlls = {},
           jsonls = {},
           bashls = {},
