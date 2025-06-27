@@ -16,7 +16,7 @@ elif [[ -e "$GIT_REPO_ROOT/.git/rebase-apply" ]] ; then
     exec git rebase --abort "$@"
 elif [[ -e "$GIT_REPO_ROOT/.git/rebase-merge" ]] ; then
     exec git rebase --abort "$@"
-elif [[ -e "$GIT_REPO_ROOT/.git/MERGE_MODE" ]] ; then
+elif [[ -e "$GIT_REPO_ROOT/.git/MERGE_HEAD" ]] ; then
     exec git merge --abort "$@"
 else
     echo git-abort: unknown state

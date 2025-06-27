@@ -8,13 +8,17 @@ GIT_REPO_ROOT=$(git rev-parse --show-toplevel)
 
 if [[ -e "$GIT_REPO_ROOT/.git/CHERRY_PICK_HEAD" ]] ; then
     exec git cherry-pick --continue "$@"
+elif [[ -e "$GIT_REPO_ROOT/.git/REVERT_HEAD" ]] ; then
+    exec git revert --continue "$@"
 elif [[ -e "$GIT_REPO_ROOT/.git/rebase-apply/applying" ]] ; then
-    exec git rebase --continue "$@"
+    exec git am --continue "$@"
 elif [[ -e "$GIT_REPO_ROOT/.git/rebase-apply" ]] ; then
     exec git rebase --continue "$@"
 elif [[ -e "$GIT_REPO_ROOT/.git/rebase-merge" ]] ; then
     exec git rebase --continue "$@"
+elif [[ -e "$GIT_REPO_ROOT/.git/MERGE_HEAD" ]] ; then
+    exec git merge --continue "$@"
 else
-    echo git-abort: unknown state
+    echo git-continue: unknown state
     exit 1
 fi
