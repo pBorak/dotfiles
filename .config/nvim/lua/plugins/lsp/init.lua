@@ -5,7 +5,7 @@ return {
     event = 'BufReadPre',
     dependencies = {
       'mason.nvim',
-      'saghen/blink.cmp',
+      'hrsh7th/cmp-nvim-lsp',
     },
     opts = function()
       return {
@@ -42,7 +42,7 @@ return {
 
       local servers = opts.servers
       local capabilities =
-        require('blink.cmp').get_lsp_capabilities(vim.lsp.protocol.make_client_capabilities())
+        require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
 
       local function setup(server)
         local server_opts = vim.tbl_deep_extend('force', {

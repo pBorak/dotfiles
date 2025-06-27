@@ -79,30 +79,62 @@ return {
   },
 
   {
-    'saghen/blink.cmp',
+    'hrsh7th/nvim-cmp',
     event = { 'InsertEnter' },
-    version = '*',
-    -- !Important! Make sure you're using the latest release of LuaSnip
-    -- `main` does not work at the moment
-    dependencies = { 'L3MON4D3/LuaSnip', version = 'v2.*' },
-    opts = {
-      appearance = {
-        use_nvim_cmp_as_default = false,
-        nerd_font_variant = 'mono',
-      },
-      keymap = {
-        preset = 'default',
-        ['<Tab>'] = {},
-        ['<S-Tab>'] = {},
-      },
-      snippets = { preset = 'luasnip' },
-      sources = {
-        default = { 'lsp', 'path', 'snippets', 'buffer' },
-      },
-      cmdline = {
-        enabled = false,
-      },
+    dependencies = {
+      'hrsh7th/cmp-nvim-lsp',
+      'hrsh7th/cmp-path',
+      'hrsh7th/cmp-buffer',
+      'saadparwaiz1/cmp_luasnip',
+      'lukas-reineke/cmp-rg',
     },
+    opts = function()
+      local cmp = require('cmp')
+      return {
+        window = {
+          completion = cmp.config.window.bordered(),
+          documentation = false,
+        },
+        -- view = {
+        --   entries = {
+        --     follow_cursor = true,
+        --   },
+        -- },
+        snippet = {
+          expand = function(args) vim.snippet.expand(args.body) end,
+        },
+        mapping = {
+          ['<C-p>'] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Select }),
+          ['<C-n>'] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Select }),
+          ['<C-d>'] = cmp.mapping.scroll_docs(-4),
+          ['<C-f>'] = cmp.mapping.scroll_docs(4),
+          ['<C-e>'] = cmp.mapping.abort(),
+          ['<c-y>'] = cmp.mapping.confirm({
+            select = true,
+          }),
+        },
+        sources = cmp.config.sources({
+          { name = 'nvim_lsp' },
+          { name = 'luasnip' },
+          { name = 'copilot' },
+          { name = 'path' },
+          { name = 'buffer' },
+        }, {
+          {
+            name = 'rg',
+            keyword_length = 4,
+          },
+        }),
+        formatting = {
+          fields = { 'abbr', 'kind', 'menu' },
+          format = function(_, item)
+            local icons = require('config.icons').kinds
+            if icons[item.kind] then item.kind = icons[item.kind] .. item.kind end
+            return item
+          end,
+        },
+      }
+    end,
   },
 
   {
