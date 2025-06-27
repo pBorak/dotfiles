@@ -63,6 +63,10 @@ return {
         extensions = {
           'fugitive',
           'quickfix',
+          {
+            sections = { lualine_a = { function() return 'FZF' end } },
+            filetypes = { 'fzf' },
+          },
         },
       }
     end,
