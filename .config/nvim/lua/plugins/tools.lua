@@ -55,6 +55,11 @@ return {
       { '<leader>gd', '<Cmd>DiffviewOpen<CR>' },
       { '<leader>gh', '<Cmd>DiffviewFileHistory<CR>' },
       { '<leader>gh', [[:'<'>DiffviewFileHistory<CR>]], mode = 'v' },
+      { '<leader>gp', '<Cmd>DiffviewOpen origin/HEAD...HEAD --imply-local<CR>' },
+      {
+        '<leader>gP',
+        '<Cmd>:DiffviewFileHistory --range=origin/HEAD...HEAD --right-only --no-merges<CR>',
+      },
     },
     opts = {
       default_args = {
