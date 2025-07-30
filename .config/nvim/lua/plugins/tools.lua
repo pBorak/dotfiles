@@ -21,31 +21,23 @@ return {
   },
 
   {
-    'ruifm/gitlinker.nvim',
-    keys = {
-      {
-        '<leader>xl',
-        function() require('gitlinker').get_buf_range_url() end,
-        mode = { 'n', 'v' },
-      },
-      {
-        '<leader>xo',
-        function()
-          require('gitlinker').get_buf_range_url(
-            'n',
-            { action_callback = require('gitlinker.actions').open_in_browser }
-          )
-        end,
-      },
-    },
+    'linrongbin16/gitlinker.nvim',
     opts = function()
       return {
-        mappings = '<leader>xl',
-        callbacks = {
-          ['gitlab.housecalldev.com'] = require('gitlinker.hosts').get_gitlab_type_url,
+        router = {
+          browse = {
+            ['^gitlab%.housecalldev%.com'] = require('gitlinker.routers').gitlab_browse,
+          },
+          blame = {
+            ['^gitlab%.housecalldev%.com'] = require('gitlinker.routers').gitlab_blame,
+          },
         },
       }
     end,
+    keys = {
+      { '<leader>xl', '<cmd>GitLink<cr>', mode = { 'n', 'v' } },
+      { '<leader>xo', '<cmd>GitLink!<cr>', mode = { 'n', 'v' } },
+    },
   },
 
   {
