@@ -103,7 +103,7 @@ return {
     },
     keys = {
       { '<leader>N', function() Snacks.notifier.hide() end },
-      { '<c-p>', function() Snacks.picker.files() end },
+      { '<c-p>', function() Snacks.picker.smart() end },
       { '<leader>fa', function() Snacks.picker.smart() end },
       { '<leader>fr', function() Snacks.picker.resume() end },
       { '<leader>fo', function() Snacks.picker.buffers() end },
