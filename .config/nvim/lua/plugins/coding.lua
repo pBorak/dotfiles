@@ -117,7 +117,7 @@ return {
   },
 
   {
-    'echasnovski/mini.surround',
+    'nvim-mini/mini.surround',
     event = 'VeryLazy',
     config = function()
       require('mini.surround').setup({
@@ -144,7 +144,7 @@ return {
   },
 
   {
-    'echasnovski/mini.ai',
+    'nvim-mini/mini.ai',
     event = 'VeryLazy',
     opts = function()
       local ai = require('mini.ai')
@@ -173,7 +173,7 @@ return {
   },
 
   {
-    'echasnovski/mini.operators',
+    'nvim-mini/mini.operators',
     event = 'VeryLazy',
     config = true,
   },
