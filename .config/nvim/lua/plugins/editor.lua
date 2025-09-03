@@ -287,15 +287,16 @@ return {
         preview = {
           horizontal = 'right:50%',
         },
-        width = 0.8,
-        height = 0.8,
-        row = 0.5,
+        width = 0.7,
+        height = 0.6,
+        row = 0.4,
         col = 0.5,
       },
       keymap = {
         builtin = {
           ['<c-f>'] = 'preview-page-down',
           ['<c-b>'] = 'preview-page-up',
+          ['<C-i>'] = 'toggle-preview',
         },
         fzf = {
           ['esc'] = 'abort',
@@ -305,6 +306,11 @@ return {
           ['ctrl-p'] = 'up',
           ['ctrl-n'] = 'down',
           ['alt-a'] = 'toggle-all',
+        },
+      },
+      frecency = {
+        winopts = {
+          preview = { hidden = true },
         },
       },
       buffers = {
