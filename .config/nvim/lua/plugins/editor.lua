@@ -296,7 +296,7 @@ return {
         builtin = {
           ['<c-f>'] = 'preview-page-down',
           ['<c-b>'] = 'preview-page-up',
-          ['<C-i>'] = 'toggle-preview',
+          ['<m-p>'] = 'toggle-preview',
         },
         fzf = {
           ['esc'] = 'abort',
