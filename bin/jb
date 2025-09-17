@@ -1,0 +1,29 @@
+#!/bin/zsh
+
+function jira_call() {
+    curl --location --silent --request POST \
+        -u "$JIRA_USER_EMAIL:$JIRA_USER_API_KEY" \
+        --header "Content-Type: application/json" \
+        "$JIRA_WORKSPACE_URL/rest/api/3/search/jql" \
+        -d '{"jql": "assignee=currentuser() AND status NOT IN (Done, Closed) AND type != Epic AND sprint in openSprints()", "maxResults":10, "fields": ["issuetype", "key", "summary"]}' \
+        | jq -r '.issues[]|"\(.fields.issuetype.name)\t\(.key)\t\(.fields.summary)"'
+}
+
+TICKET=$(jira_call | column -t -s $'\t' | fzf --height 20% --reverse)
+
+if [[ -n $TICKET ]]; then
+    TICKET_NUMBER=$(echo "$TICKET" | awk '{print $2}' | tr '[:upper:]' '[:lower:]')
+    DESC=$(echo "$TICKET" | \
+           sd '^.*?\s+\S+\s+(.*)$' '$1' | \
+           tr '[:upper:]' '[:lower:]' | \
+           sd '[^a-z0-9]+' '-' | \
+           sd '^-|-$' '')
+
+    # Combine ticket number and description with dash
+    BRANCH_NAME="$TICKET_NUMBER-$DESC"
+
+    # Truncate to max 52 characters
+    BRANCH_NAME=${BRANCH_NAME:0:52}
+
+    git checkout -b "$BRANCH_NAME"
+fi

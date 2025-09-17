@@ -15,7 +15,7 @@
     /usr/local/bin/git-continue: bin/git-continue
     /usr/local/bin/tas: bin/tas
     /usr/local/bin/tat: bin/tat
-    /usr/local/bin/jbranch: bin/jbranch
+    /usr/local/bin/jb: bin/jb
     ~/.zshrc: zsh/.zshrc
     ~/.zshenv: zsh/.zshenv
     ~/.zsh/configs: zsh/configs
