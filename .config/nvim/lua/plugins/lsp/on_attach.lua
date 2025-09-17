@@ -14,9 +14,7 @@ local function on_attach(client, bufnr)
 
   map('<C-h>', vim.lsp.buf.signature_help, 'i')
 
-  -- NOTE: Folding is enabled for ruby_lsp to trigger an event required for indexing,
-  -- even though folding itself is not used by me.
-  if client:supports_method(methods.textDocument_foldingRange) and client.name == 'ruby_lsp' then
+  if client:supports_method(methods.textDocument_foldingRange) then
     local win = vim.api.nvim_get_current_win()
     vim.wo[win][0].foldexpr = 'v:lua.vim.lsp.foldexpr()'
   end
