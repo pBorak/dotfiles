@@ -91,7 +91,7 @@ vim.keymap.set(
   { expr = true }
 )
 
-vim.keymap.set('n', '<leader>lt', require('plugins.lsp.autoformat').toggle)
+vim.keymap.set('n', '<leader>lt', '<Cmd>ToggleFormat<CR>')
 
 vim.keymap.set('n', '<leader>C', Util.open_in_cursor)
 vim.keymap.set('n', '<leader>S', '<Cmd>SupermavenToggle<CR>')

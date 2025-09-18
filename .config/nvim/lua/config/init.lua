@@ -27,12 +27,14 @@ if vim.fn.argc() == 0 then
     callback = function()
       load('autocmds')
       load('keymaps')
+      load('lsp')
     end,
   })
 else
   -- load them now so they affect the opened buffers
   load('autocmds')
   load('keymaps')
+  load('lsp')
 end
 
 vim.cmd.colorscheme('moonfly')

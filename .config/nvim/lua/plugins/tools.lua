@@ -90,4 +90,38 @@ return {
       { '<leader>N', function() Snacks.notifier.hide() end },
     },
   },
+
+  {
+    'mason-org/mason.nvim',
+    cmd = 'Mason',
+    build = ':MasonUpdate',
+    config = true,
+  },
+
+  {
+    'stevearc/conform.nvim',
+    event = 'BufWritePre',
+    lazy = true,
+    keys = {
+      {
+        '<leader>lf',
+        function() require('conform').format({ async = true, lsp_format = 'fallback' }) end,
+      },
+    },
+    opts = {
+      formatters_by_ft = {
+        lua = { 'stylua' },
+      },
+      format_on_save = function()
+        -- Stop if we disabled auto-formatting.
+        if not vim.g.autoformat then return nil end
+        return {}
+      end,
+    },
+    init = function()
+      vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
+
+      vim.g.autoformat = true
+    end,
+  },
 }
