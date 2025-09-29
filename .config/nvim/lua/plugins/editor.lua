@@ -174,7 +174,6 @@ return {
 
   {
     'nvim-neotest/neotest',
-    commit = '3c81345c28',
     lazy = true,
     dependencies = {
       { 'olimorris/neotest-rspec' },
