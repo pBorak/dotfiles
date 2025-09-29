@@ -13,6 +13,7 @@ local smart_close_filetypes = {
   'neotest-summary',
   'neotest-output',
   'neotest-attach',
+  'grug-far',
 }
 
 local function smart_close()
