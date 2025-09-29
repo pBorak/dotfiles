@@ -22,8 +22,8 @@ if [[ -n $TICKET ]]; then
     # Combine ticket number and description with dash
     BRANCH_NAME="$TICKET_NUMBER-$DESC"
 
-    # Truncate to max 52 characters
-    BRANCH_NAME=${BRANCH_NAME:0:52}
+    # Truncate to max 40 characters
+    BRANCH_NAME=${BRANCH_NAME:0:40}
 
     git checkout -b "$BRANCH_NAME"
 fi
