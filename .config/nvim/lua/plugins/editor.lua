@@ -311,6 +311,7 @@ return {
         winopts = {
           preview = { hidden = true },
         },
+        line_query = true,
       },
       buffers = {
         winopts = {
