@@ -321,6 +321,7 @@ return {
         },
       },
       grep = {
+        hidden = true,
         fzf_opts = {
           ['--history'] = vim.fn.stdpath('data') .. '/fzf-lua-grep-history',
         },
