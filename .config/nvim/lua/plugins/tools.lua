@@ -17,6 +17,8 @@ return {
     keys = {
       { '<leader>gs', '<cmd>G<CR>' },
       { '<leader>gb', '<cmd>G blame<CR>' },
+      { '<leader>gr', '<cmd>Gread<CR>' },
+      { '<leader>gw', '<cmd>Gwrite<CR>' },
     },
   },
 
