@@ -38,3 +38,4 @@ export FZF_DEFAULT_OPTS="\
   --color spinner:#36c692
 "
 export FZF_CTRL_T_OPTS="--preview 'bat --color=always --line-range :500 {}'"
+export PATH="$HOME/.local/bin:$PATH"
