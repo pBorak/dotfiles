@@ -214,21 +214,9 @@ return {
   },
   {
     'ibhagwan/fzf-lua',
-    dependencies = {
-      'elanmed/fzf-lua-frecency.nvim',
-    },
     cmd = 'FzfLua',
     keys = {
-      {
-        '<C-p>',
-        function()
-          require('fzf-lua-frecency').frecency({
-            display_score = false,
-            cwd_only = true,
-            fzf_opts = { ['--no-sort'] = false },
-          })
-        end,
-      },
+      { '<C-p>', '<Cmd>FzfLua files<CR>' },
       { '<leader>fr', '<Cmd>FzfLua resume<CR>' },
       { '<leader>fo', '<Cmd>FzfLua buffers<CR>' },
       { '<leader>fb', '<Cmd>FzfLua git_branches<CR>' },
@@ -291,7 +279,7 @@ return {
           ['alt-a'] = 'toggle-all',
         },
       },
-      frecency = {
+      files = {
         winopts = {
           preview = { hidden = true },
         },
