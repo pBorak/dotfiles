@@ -22,3 +22,4 @@ config/application.local.yml
 tags
 .localrc.lua
 _typos.toml
+.claude/

@@ -1,6 +1,7 @@
 alias ..='cd ..'
 alias be='bundle exec'
 alias c='clear'
+alias cc='claude'
 alias dbm='bundle exec rails db:migrate'
 alias dbmt='bundle exec rails db:migrate RAILS_ENV=test'
 alias dbs='bundle exec rails db:migrate:status'
