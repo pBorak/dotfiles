@@ -95,8 +95,14 @@ return {
         win = {
           input = {
             keys = {
+              ['<Esc>'] = { 'close', mode = { 'n', 'i' } },
               ['<c-j>'] = { 'history_forward', mode = { 'i', 'n' } },
               ['<c-k>'] = { 'history_back', mode = { 'i', 'n' } },
+              ['<a-q>'] = { 'select_all', mode = { 'n', 'i' } },
+              -- Terminal-like line editing (readline bindings)
+              ['<c-a>'] = { '<Home>', mode = { 'i' }, expr = true },
+              ['<c-e>'] = { '<End>', mode = { 'i' }, expr = true },
+              ['<c-u>'] = { '<c-s-u>', mode = { 'i' }, expr = true },
             },
           },
         },
