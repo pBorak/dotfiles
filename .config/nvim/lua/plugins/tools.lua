@@ -1,16 +1,6 @@
 return {
 
   {
-    'mbbill/undotree',
-    cmd = 'UndotreeToggle',
-    keys = { { '<leader>u', '<cmd>UndotreeToggle<CR>' } },
-    config = function()
-      vim.g.undotree_TreeNodeShape = '◉'
-      vim.g.undotree_SetFocusWhenToggle = 1
-    end,
-  },
-
-  {
     'tpope/vim-fugitive',
     cmd = { 'Gedit', 'Gwrite', 'Gread', 'G' },
     event = 'BufReadPre',
