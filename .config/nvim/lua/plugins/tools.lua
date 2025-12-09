@@ -99,9 +99,6 @@ return {
         sources = {
           files = {
             hidden = true,
-            layout = {
-              hidden = { 'preview' },
-            },
           },
         },
       },
