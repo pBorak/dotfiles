@@ -37,4 +37,4 @@ else
   load('lsp')
 end
 
-vim.cmd.colorscheme('moonfly')
+vim.cmd.colorscheme('vague')

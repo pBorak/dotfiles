@@ -22,20 +22,20 @@ export FZF_DEFAULT_OPTS="\
   --ansi \
   --layout=reverse \
   --border=none
-  --color bg:#080808 \
-  --color bg+:#262626 \
-  --color border:#2e2e2e \
-  --color fg:#b2b2b2 \
-  --color fg+:#e4e4e4 \
-  --color gutter:#262626 \
-  --color header:#80a0ff \
-  --color hl+:#f09479 \
-  --color hl:#f09479 \
-  --color info:#cfcfb0 \
-  --color marker:#f09479 \
-  --color pointer:#ff5189 \
-  --color prompt:#80a0ff \
-  --color spinner:#36c692
+  --color=fg:#cdcdcd \
+  --color=bg:#141415 \
+  --color=hl:#f3be7c \
+  --color=fg+:#aeaed1 \
+  --color=bg+:#252530 \
+  --color=hl+:#f3be7c \
+  --color=border:#606079 \
+  --color=header:#6e94b2 \
+  --color=gutter:#141415 \
+  --color=spinner:#7fa563 \
+  --color=info:#f3be7c \
+  --color=pointer:#aeaed1 \
+  --color=marker:#d8647e \
+  --color=prompt:#bb9dbd
 "
 export FZF_CTRL_T_OPTS="--preview 'bat --color=always --line-range :500 {}'"
 export PATH="$HOME/.local/bin:$PATH"
