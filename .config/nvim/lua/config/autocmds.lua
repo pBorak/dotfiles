@@ -47,7 +47,6 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 
 local column_exclude = { 'gitcommit' }
 local column_block_list = {
-  'DiffviewFileHistory',
   'help',
   'fugitive',
 }

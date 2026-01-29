@@ -33,27 +33,47 @@ return {
   },
 
   {
-    'sindrets/diffview.nvim',
-    cmd = { 'DiffviewOpen', 'DiffviewFileHistory' },
+    'esmuellert/codediff.nvim',
     keys = {
-      { '<leader>gd', '<Cmd>DiffviewOpen<CR>' },
-      { '<leader>gh', '<Cmd>DiffviewFileHistory<CR>' },
-      { '<leader>gh', [[:'<'>DiffviewFileHistory<CR>]], mode = 'v' },
-      { '<leader>gp', '<Cmd>DiffviewOpen origin/HEAD...HEAD --imply-local<CR>' },
-      {
-        '<leader>gP',
-        '<Cmd>:DiffviewFileHistory --range=origin/HEAD...HEAD --right-only --no-merges<CR>',
-      },
+      { '<leader>gd', '<Cmd>CodeDiff<CR>' },
+      { '<leader>gh', '<Cmd>CodeDiff history<CR>' },
     },
+    dependencies = { 'MunifTanjim/nui.nvim' },
+    cmd = 'CodeDiff',
     opts = {
-      default_args = {
-        DiffviewFileHistory = { '%' },
-      },
-      enhanced_diff_hl = true,
       keymaps = {
-        view = { q = '<Cmd>DiffviewClose<CR>' },
-        file_panel = { q = '<Cmd>DiffviewClose<CR>' },
-        file_history_panel = { q = '<Cmd>DiffviewClose<CR>' },
+        view = {
+          quit = 'q',
+          toggle_explorer = '<leader>b',
+          next_hunk = '<down>',
+          prev_hunk = '<up>',
+          next_file = '<tab>',
+          prev_file = '<s-tab>',
+          open_in_prev_tab = 'gf',
+          toggle_stage = '-',
+        },
+        explorer = {
+          select = '<CR>',
+          hover = 'K',
+          toggle_view_mode = 'i', -- Toggle between 'list' and 'tree' views
+          stage_all = 'S',
+          unstage_all = 'U',
+          restore = 'X',
+        },
+        history = {
+          select = '<CR>',
+          toggle_view_mode = 'i',
+        },
+        conflict = {
+          accept_incoming = '<leader>ct',
+          accept_current = '<leader>co',
+          accept_both = '<leader>cb',
+          discard = '<leader>cx',
+          next_conflict = ']x',
+          prev_conflict = '[x',
+          diffget_incoming = '2do',
+          diffget_current = '3do',
+        },
       },
     },
   },
