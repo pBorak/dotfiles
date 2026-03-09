@@ -120,6 +120,18 @@ return {
           files = {
             hidden = true,
           },
+          grep = {
+            win = {
+              input = {
+                keys = {
+                  ['<C-o>'] = {
+                    function() vim.api.nvim_feedkeys(' -- -g ', 'n', false) end,
+                    mode = { 'i' },
+                  },
+                },
+              },
+            },
+          },
         },
       },
     },
